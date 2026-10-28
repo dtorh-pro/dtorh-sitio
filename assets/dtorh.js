@@ -122,16 +122,17 @@
     var mb2 = main.getBoundingClientRect(), top0 = mb2.top + scrollY, W = main.clientWidth;
     var margen = Math.max(18, (W - 1200)/2 + 14);
     var pts = ps.map(function(el, i){
-      var b = el.getBoundingClientRect();
+      /* dentro de un bloque fijo (sticky) se mide el bloque, no el título que se mueve con el scroll */
+      var fijo = el.closest('.relato'), b = (fijo || el).getBoundingClientRect();
       var lado = el.getAttribute('data-parada') === 'der' ? W - margen : margen;
-      return [lado, b.top + scrollY - top0 + 10];
+      return [lado, b.top + scrollY - top0 + (fijo ? 60 : 10)];
     });
     var d = 'M' + pts[0][0] + ' ' + pts[0][1];
     /* baja por el margen y solo cruza de lado en el espacio entre bloques */
     for (var i = 1; i < pts.length; i++){
       var a = pts[i-1], b = pts[i];
       if (a[0] === b[0]){ d += ' L' + b[0] + ' ' + b[1]; continue; }
-      var y1 = Math.max(a[1] + 40, b[1] - 170), y2 = b[1] - 50;
+      var y1 = Math.max(a[1] + 40, b[1] - 140), y2 = b[1] - 40;
       d += ' L' + a[0] + ' ' + y1 + ' C' + a[0] + ' ' + (y1 + (y2-y1)*.6) + ',' + b[0] + ' ' + (y1 + (y2-y1)*.4) + ',' + b[0] + ' ' + y2 + ' L' + b[0] + ' ' + b[1];
     }
     if (!ruta){

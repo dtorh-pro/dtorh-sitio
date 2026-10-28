@@ -151,7 +151,7 @@ FOOTER = f'''<footer>
 '''
 
 SCRIPTS = '''<script src="/assets/lenis.min.js?v=1.3.26" defer></script>
-<script src="/assets/dtorh.js?v=7" defer></script>
+<script src="/assets/dtorh.js?v=8" defer></script>
 '''
 
 LD = '''<script type="application/ld+json">
