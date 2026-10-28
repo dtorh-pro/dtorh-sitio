@@ -34,6 +34,8 @@ ICONOS = {
  'flecha':   '<path d="M5 12h14M13 6l6 6-6 6"/>',
  'mas':      '<path d="M12 5v14M5 12h14"/>',
  'pregunta': '<circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.5a2.5 2.5 0 0 1 4.8 1c0 1.6-2.4 2-2.4 3.5"/>'+P(12,17,1.3),
+ 'instagram':'<rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" style="fill:var(--ac,#7e3dff);stroke:none"/>',
+ 'facebook': '<path d="M14 20.5v-7h2.6l.4-3H14V8.8c0-.9.3-1.5 1.6-1.5H17V4.7c-.3 0-1.2-.2-2.3-.2-2.3 0-3.8 1.4-3.8 3.9v2.1H8.3v3H11v7"/>',
  'telefono': '<rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M10.5 18h3"/>'+P(12,6,.9),
  'whatsapp': '<path style="fill:currentColor;stroke:none" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.13c-1.53 0-3.03-.41-4.34-1.19l-.31-.18-3.23.85.86-3.15-.2-.32a8.16 8.16 0 01-1.25-4.36c0-4.54 3.7-8.23 8.24-8.23 4.54 0 8.23 3.7 8.23 8.24 0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29z"/>',
 }
@@ -41,6 +43,8 @@ SPRITE = '<svg width="0" height="0" style="position:absolute" aria-hidden="true"
 def I(n, cls='ic', extra=''):
     return f'<svg class="{cls}" aria-hidden="true"{extra}><use href="#i-{n}"/></svg>'
 
+IG = 'https://www.instagram.com/dtorh.click/'
+FB = 'https://www.facebook.com/dtorh.click/'
 WA = 'https://wa.me/573024135572?text='
 def wa(t):
     from urllib.parse import quote
@@ -76,7 +80,7 @@ def head(titulo, desc, url, extra=''):
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/fonts/inter-tight-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/inter-tight-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/dtorh.css?v=11">
+<link rel="stylesheet" href="/assets/dtorh.css?v=12">
 {extra}<script>
   document.documentElement.className+=" js";
   try{{var t=localStorage.getItem('dtorh-tema');if(t)document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}
@@ -119,6 +123,7 @@ def nav(actual=''):
   <a href="/#proceso">{I('ruta')}Cómo funciona</a>
   <a href="/laboratorio/">{I('catalogo')}Laboratorio</a>
   <a href="/#preguntas">{I('pregunta')}Preguntas</a>
+  <div class="hoja-redes"><a href="{IG}" target="_blank" rel="noopener" aria-label="Instagram de dtorh">{I('instagram')}Instagram</a><a href="{FB}" target="_blank" rel="noopener" aria-label="Facebook de dtorh">{I('facebook')}Facebook</a></div>
   <a class="btn lime" href="{wa('Hola, vengo de la página de dtorh')}" target="_blank" rel="noopener">{I('whatsapp')}Hablemos por WhatsApp</a>
 </div>
 '''
@@ -131,6 +136,8 @@ FOOTER = f'''<footer>
       <a href="/laboratorio/">{I('catalogo')}Laboratorio</a>
       <a href="https://wa.me/573024135572" target="_blank" rel="noopener">{I('whatsapp')}+57 302 413 5572</a>
       <a href="mailto:dtorh.ofc@gmail.com">{I('correo')}dtorh.ofc@gmail.com</a>
+      <a href="{IG}" target="_blank" rel="noopener" aria-label="Instagram de dtorh">{I('instagram')}@dtorh.click</a>
+      <a href="{FB}" target="_blank" rel="noopener" aria-label="Facebook de dtorh">{I('facebook')}/dtorh.click</a>
     </div>
     <p class="fine">{{ Los datos que nos compartas se usan solo para contactarte y preparar una propuesta. Puedes pedir que los eliminemos cuando quieras escribiendo a dtorh.ofc@gmail.com. Ley 1581 de 2012. }}</p>
     <div class="base"><span>© <span id="anio">2026</span> dtorh® · Estudio digital · Barranquilla, Colombia</span><a href="#top">Volver arriba ↑</a></div>
@@ -144,11 +151,11 @@ FOOTER = f'''<footer>
 '''
 
 SCRIPTS = '''<script src="/assets/lenis.min.js?v=1.3.26" defer></script>
-<script src="/assets/dtorh.js?v=6" defer></script>
+<script src="/assets/dtorh.js?v=7" defer></script>
 '''
 
 LD = '''<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ProfessionalService","name":"dtorh","url":"https://dtorh.click/","image":"https://dtorh.click/og.jpg","logo":"https://dtorh.click/apple-touch-icon.png","description":"Estudio digital: Google Business, Maps, página con catálogo, WhatsApp Business y redes montados en 14 días, sin mensualidad.","telephone":"+57 302 413 5572","email":"dtorh.ofc@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Barranquilla","addressRegion":"Atlántico","addressCountry":"CO"},"areaServed":{"@type":"City","name":"Barranquilla"},"makesOffer":{"@type":"Offer","name":"Arranque 360","description":"Montaje completo en 14 días, sin mensualidad."}}
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"dtorh","url":"https://dtorh.click/","image":"https://dtorh.click/og.jpg","logo":"https://dtorh.click/apple-touch-icon.png","description":"Estudio digital: Google Business, Maps, página con catálogo, WhatsApp Business y redes montados en 14 días, sin mensualidad.","telephone":"+57 302 413 5572","email":"dtorh.ofc@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Barranquilla","addressRegion":"Atlántico","addressCountry":"CO"},"areaServed":{"@type":"City","name":"Barranquilla"},"sameAs":["https://www.instagram.com/dtorh.click/","https://www.facebook.com/dtorh.click/"],"makesOffer":{"@type":"Offer","name":"Arranque 360","description":"Montaje completo en 14 días, sin mensualidad."}}
 </script>
 '''
 
@@ -470,6 +477,46 @@ HOME = f'''<body class="tono-noche">
       <div class="qa rv">{I('tienda')}<h3>Todavía no he abierto. ¿Sirve?</h3><p>Sí. Dejamos todo montado antes de abrir. Solo la ficha de Google espera a que tengas la dirección del local, porque Google lo exige.</p></div>
       <div class="qa rv">{I('pregunta')}<h3>¿Hacen publicidad pagada o logos?</h3><p>No. Tampoco vendemos seguidores. Nos dedicamos a que te encuentren y te puedan escribir, y lo hacemos completo.</p></div>
       <div class="qa rv">{I('escudo')}<h3>¿Y si no quedo conforme?</h3><p>Incluye una ronda de ajustes. Y si a los 14 días no están tu ficha de Google y tu catálogo de WhatsApp, te devolvemos el anticipo.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8b · REDES -->
+<section class="sec oscura redes" id="redes" data-tono="noche">
+  <div class="wrap">
+    <div class="cab">
+      <span class="brace rv" data-parada="der">dtorh en vivo</span>
+      <h2 class="rv">Míranos construir. <em>Sin humo.</em></h2>
+      <p class="lead rv">Publicamos hallazgos de negocios reales (con su permiso), los avances del laboratorio y trucos de 30 segundos para tu negocio. Lo mismo que hacemos aquí, contado allá.</p>
+    </div>
+    <div class="red-grid">
+      <a class="red-card ig rv" href="{IG}" target="_blank" rel="noopener" aria-label="Abrir el Instagram de dtorh, @dtorh.click">
+        <span class="brillo" aria-hidden="true"></span>
+        <div class="red-top">
+          <span class="anillo" aria-hidden="true"><span class="cara">dtorh<i>®</i></span></span>
+          <div class="red-id"><b>dtorh.click</b><small>{I('instagram')}Instagram · @dtorh.click</small></div>
+        </div>
+        <div class="red-mosaico" aria-hidden="true">
+          <span class="m1">{I('buscar')}<b>Hallazgos</b><small>3 cosas que le faltan a un negocio</small></span>
+          <span class="m2">{I('catalogo')}<b>Laboratorio</b><small>Así va cada proyecto</small></span>
+          <span class="m3">{I('rayo')}<b>Tips</b><small>Google, WhatsApp y reseñas</small></span>
+        </div>
+        <span class="red-cta"><span>Seguir en Instagram</span><span class="ar">↗</span></span>
+      </a>
+      <a class="red-card fb rv" href="{FB}" target="_blank" rel="noopener" aria-label="Abrir la página de Facebook de dtorh">
+        <span class="brillo" aria-hidden="true"></span>
+        <div class="red-portada" aria-hidden="true"><span class="calles"></span><span class="pin p1">{I('pin')}</span><span class="pin p2">{I('pin')}</span><span class="pin p3">{I('pin')}</span></div>
+        <div class="red-top">
+          <span class="anillo fb-anillo" aria-hidden="true"><span class="cara">dtorh<i>®</i></span></span>
+          <div class="red-id"><b>dtorh.click</b><small>{I('facebook')}Página de Facebook · Estudio digital</small></div>
+        </div>
+        <ul class="red-lista" aria-hidden="true">
+          <li>{I('chat')}Escríbenos por Messenger</li>
+          <li>{I('estrella')}Casos y opiniones de clientes</li>
+          <li>{I('mapa')}Barranquilla y la Costa</li>
+        </ul>
+        <span class="red-cta"><span>Seguir la página</span><span class="ar">↗</span></span>
+      </a>
     </div>
   </div>
 </section>

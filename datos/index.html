@@ -126,6 +126,9 @@ input[type=date]{min-height:28px}
 .final .codigo{display:inline-block;margin-top:14px;font-size:13px;color:var(--ash);background:var(--card);border:1px solid var(--hair);border-radius:8px;padding:4px 10px;font-variant-numeric:tabular-nums}
 .final .acciones{margin-top:22px;display:grid;gap:10px}
 .final .acciones .btn{width:100%}
+.siguenos{margin-top:10px;font-size:14px;color:var(--ash)}
+.redes-f{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.redes-f .btn svg{fill:none;width:20px;height:20px}
 .aviso{display:none;margin:4px 0 14px;font-size:14px;line-height:1.5;color:#7a3e05;background:#fff4e5;border:1px solid #f6d8ae;border-radius:14px;padding:12px 14px}
 @media (prefers-color-scheme:dark){.aviso{color:#f6c98f;background:#2a1f12;border-color:#4a3418}}
 .aviso.on{display:block}
@@ -266,7 +269,11 @@ footer a{color:inherit}
       <span class="codigo" id="codigo"></span>
       <div class="acciones">
         <a class="btn lime" id="waFinal" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.13c-1.53 0-3.03-.41-4.34-1.19l-.31-.18-3.23.85.86-3.15-.2-.32a8.16 8.16 0 01-1.25-4.36c0-4.54 3.7-8.23 8.24-8.23 4.54 0 8.23 3.7 8.23 8.24 0 4.54-3.7 8.23-8.24 8.23z"/></svg><span id="waFinalTxt">Escríbenos ya por WhatsApp</span></a>
-        <a class="btn ghost" href="https://dtorh.click/">Ver dtorh.click</a>
+        <p class="siguenos">Mientras preparamos tus hallazgos, míranos trabajar:</p>
+        <div class="redes-f">
+          <a class="btn ghost" href="https://www.instagram.com/dtorh.click/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/></svg>Instagram</a>
+          <a class="btn ghost" href="https://www.facebook.com/dtorh.click/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 20.5v-7h2.6l.4-3H14V8.8c0-.9.3-1.5 1.6-1.5H17V4.7c-.3 0-1.2-.2-2.3-.2-2.3 0-3.8 1.4-3.8 3.9v2.1H8.3v3H11v7"/></svg>Facebook</a>
+        </div>
       </div>
     </section>
 

@@ -265,3 +265,19 @@
 
   var an = document.getElementById('anio'); if (an) an.textContent = new Date().getFullYear();
 })();
+
+/* ===== tarjetas de redes: relieve que sigue el cursor ===== */
+(function(){
+  var cards = document.querySelectorAll('.red-card'); if (!cards.length) return;
+  if (!matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  cards.forEach(function(c){
+    c.addEventListener('pointermove', function(e){
+      var b = c.getBoundingClientRect(), x = (e.clientX - b.left) / b.width, y = (e.clientY - b.top) / b.height;
+      c.style.setProperty('--ry', ((x - .5) * 10).toFixed(2) + 'deg');
+      c.style.setProperty('--rx', ((.5 - y) * 8).toFixed(2) + 'deg');
+      c.style.setProperty('--gx', (x * 100).toFixed(1) + '%');
+      c.style.setProperty('--gy', (y * 100).toFixed(1) + '%');
+    });
+    c.addEventListener('pointerleave', function(){ c.style.setProperty('--rx','0deg'); c.style.setProperty('--ry','0deg'); });
+  });
+})();

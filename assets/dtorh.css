@@ -740,3 +740,59 @@ html:not(.js) h1 span > i{transform:none}
 @keyframes avance{from{width:35%}to{width:70%}}
 .t-etapas li.ahora span{color:var(--ink);font-weight:500}
 @media(max-width:700px){.t-next{padding-bottom:124px}.t-mapita{width:104px;height:78px}}
+
+/* ===== REDES: Instagram y Facebook ===== */
+.redes .cab{text-align:left}
+.red-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.4vw,28px);perspective:1200px}
+.red-card{--rx:0deg;--ry:0deg;--gx:50%;--gy:50%;position:relative;display:flex;flex-direction:column;gap:22px;padding:clamp(20px,2.6vw,30px);border-radius:28px;color:#fff;text-decoration:none;overflow:hidden;isolation:isolate;
+  background:linear-gradient(160deg,#171a2f,#0f1122);border:1px solid rgba(255,255,255,.09);
+  transform:rotateX(var(--rx)) rotateY(var(--ry));transform-style:preserve-3d;transition:transform .5s cubic-bezier(.22,1,.3,1),border-color .4s,box-shadow .4s}
+.red-card:hover{border-color:rgba(255,255,255,.2);box-shadow:0 40px 80px -40px rgba(126,61,255,.6)}
+.red-card .brillo{position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity .4s;background:radial-gradient(420px circle at var(--gx) var(--gy),rgba(126,61,255,.28),transparent 60%)}
+.red-card.fb .brillo{background:radial-gradient(420px circle at var(--gx) var(--gy),rgba(36,174,255,.24),transparent 60%)}
+.red-card:hover .brillo{opacity:1}
+.red-top{display:flex;align-items:center;gap:16px;transform:translateZ(30px)}
+.anillo{--g:conic-gradient(from var(--ang,0deg),#7e3dff,#c04aff,#ff5fa2,#ffb03b,#24aeff,#7e3dff);position:relative;flex:0 0 auto;width:74px;height:74px;border-radius:50%;padding:3px;background:var(--g);animation:anillo 6s linear infinite}
+.fb-anillo{--g:conic-gradient(from var(--ang,0deg),#24aeff,#7e3dff,#24aeff)}
+.anillo .cara{display:flex;align-items:center;justify-content:center;width:100%;height:100%;border-radius:50%;background:#0b0d1a;border:3px solid #0b0d1a;font-weight:600;font-size:15px;letter-spacing:-.05em}
+.anillo .cara i{font-style:normal;font-size:.5em;opacity:.6;transform:translateY(-.7em)}
+@property --ang{syntax:"<angle>";inherits:false;initial-value:0deg}
+@keyframes anillo{to{--ang:360deg}}
+.red-id b{display:block;font-size:20px;letter-spacing:-.03em;font-weight:600}
+.red-id small{display:inline-flex;align-items:center;gap:6px;margin-top:3px;font-size:13.5px;color:rgba(255,255,255,.62)}
+.red-id small .ic{width:15px;height:15px}
+.red-mosaico{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;transform:translateZ(18px)}
+.red-mosaico span{aspect-ratio:4/5;border-radius:16px;padding:12px;display:flex;flex-direction:column;justify-content:flex-end;gap:3px;position:relative;overflow:hidden;background:#1d2140;transition:transform .5s cubic-bezier(.22,1,.3,1)}
+.red-mosaico span::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.9}
+.red-mosaico .m1{background:linear-gradient(160deg,#5b2ed6,#2a1a6b)}
+.red-mosaico .m2{background:linear-gradient(160deg,#173f73,#13203f)}
+.red-mosaico .m3{background:linear-gradient(160deg,#8a2fb8,#311748)}
+.red-mosaico .ic{position:absolute;top:12px;left:12px;width:24px;height:24px;--ac:#fff;opacity:.95}
+.red-mosaico b{font-size:13.5px;font-weight:600;letter-spacing:-.02em}
+.red-mosaico small{font-size:11.5px;line-height:1.3;color:rgba(255,255,255,.7)}
+.red-card:hover .m1{transform:translateY(-4px)}.red-card:hover .m2{transform:translateY(-8px)}.red-card:hover .m3{transform:translateY(-4px)}
+.red-portada{position:relative;height:128px;margin:calc(-1*clamp(20px,2.6vw,30px)) calc(-1*clamp(20px,2.6vw,30px)) -58px;overflow:hidden;background:#11152a}
+.red-portada .calles{position:absolute;inset:-40%;transform:rotate(-14deg);background-image:linear-gradient(rgba(255,255,255,.07) 2px,transparent 2px),linear-gradient(90deg,rgba(255,255,255,.07) 2px,transparent 2px);background-size:56px 40px;animation:calles 18s linear infinite}
+@keyframes calles{to{background-position:56px 40px}}
+.red-portada::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,#15182c)}
+.red-portada .pin{position:absolute;width:26px;height:26px;color:#24aeff;--ac:#fff;animation:pin 3s ease-in-out infinite;z-index:1}
+.red-portada .pin svg{width:100%;height:100%}
+.red-portada .p1{left:58%;top:18%}.red-portada .p2{left:78%;top:44%;animation-delay:1s;color:#7e3dff}.red-portada .p3{left:40%;top:52%;animation-delay:2s}
+@keyframes pin{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.red-card.fb .red-top{margin-top:4px;z-index:2}
+.red-lista{list-style:none;display:grid;gap:10px;transform:translateZ(18px)}
+.red-lista li{display:flex;align-items:center;gap:12px;font-size:15px;color:rgba(255,255,255,.85);padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)}
+.red-lista .ic{width:20px;height:20px;--ac:#24aeff}
+.red-cta{margin-top:auto;display:flex;justify-content:space-between;align-items:center;padding:15px 18px;border-radius:14px;background:#fff;color:#0b0d1a;font-weight:500;font-size:15.5px;transform:translateZ(24px);transition:background .3s,color .3s}
+.red-card.ig:hover .red-cta{background:#7e3dff;color:#fff}
+.red-card.fb:hover .red-cta{background:#24aeff;color:#0b0d1a}
+.red-cta .ar{transition:transform .3s}.red-card:hover .red-cta .ar{transform:translate(3px,-3px)}
+.hoja-redes{display:flex;gap:10px;margin-top:6px}
+.hoja-redes a{flex:1;justify-content:center}
+@media (max-width:760px){
+  .red-grid{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:86%;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 18px 14px;margin:0 -18px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .red-grid::-webkit-scrollbar{display:none}
+  .red-card{scroll-snap-align:center}
+}
+@media (max-width:760px){.red-grid{align-items:start}.red-mosaico span{aspect-ratio:auto;min-height:132px;padding:10px}.red-mosaico small{display:none}.red-mosaico b{font-size:13px}.red-mosaico .ic{top:10px;left:10px;width:22px;height:22px}.red-card{gap:18px}}
+@media (prefers-reduced-motion:reduce){.anillo,.red-portada .calles,.red-portada .pin{animation:none}}
