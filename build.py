@@ -485,9 +485,9 @@ HOME = f'''<body class="tono-noche">
 <section class="sec oscura redes" id="redes" data-tono="noche">
   <div class="wrap">
     <div class="cab">
-      <span class="brace rv" data-parada="der">dtorh en vivo</span>
-      <h2 class="rv">Míranos construir. <em>Sin humo.</em></h2>
-      <p class="lead rv">Ahí contamos cómo trabajamos, los avances del laboratorio y consejos cortos para que te encuentren. También puedes escribirnos por ahí.</p>
+      <span class="brace rv" data-parada="der">@dtorh.click</span>
+      <h2 class="rv">Estamos donde están tus clientes. <em>Síguenos.</em></h2>
+      <p class="lead rv">En Instagram y Facebook, como dtorh.click. Síguenos, comenta o escríbenos por mensaje directo: te respondemos ahí mismo.</p>
     </div>
     <div class="red-grid">
       <div class="red-card ig rv">
