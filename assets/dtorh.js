@@ -68,14 +68,13 @@
   }
 
   /* ---------- WhatsApp desde el buscador y los atajos ---------- */
-  function aWhats(txt){
-    var base = txt && txt.trim() ? 'Hola, vengo de la página de dtorh. ' + txt.trim() : 'Hola, quiero contarles de mi negocio';
-    window.open('https://wa.me/' + TEL + '?text=' + encodeURIComponent(base), '_blank', 'noopener');
-  }
+  /* ---------- el buscador del hero lleva al formulario con lo que escribieron ---------- */
   var form = document.getElementById('buscador'), campo = document.getElementById('q');
   if (form){
-    form.addEventListener('submit', function(e){ e.preventDefault(); var v = campo.value.trim(); aWhats(v ? 'Vendo ' + v + '. Quiero mis 3 hallazgos gratis.' : ''); });
-    document.querySelectorAll('.chip[data-q]').forEach(function(c){ c.addEventListener('click', function(){ aWhats(c.dataset.q); }); });
+    form.addEventListener('submit', function(e){
+      e.preventDefault(); var v = campo.value.trim();
+      location.href = 'https://datos.dtorh.click/?ref=hero-buscador' + (v ? '&vende=' + encodeURIComponent(v.slice(0,140)) : '');
+    });
     if (!quieto){
       var ej = ['postres','ropa','repuestos','uñas y cejas','comida rápida','muebles','asesorías'], ie = 0, ic = 0, borrando = false;
       var base = innerWidth < 560 ? '¿Qué vendes? ' : '¿Qué vendes? Ej: ';

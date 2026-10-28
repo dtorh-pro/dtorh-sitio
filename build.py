@@ -46,6 +46,11 @@ def wa(t):
     from urllib.parse import quote
     return WA + quote(t)
 
+FORM = 'https://datos.dtorh.click/'
+def form(ref, **kw):
+    from urllib.parse import urlencode
+    return FORM + '?' + urlencode(dict(kw, ref=ref))
+
 def head(titulo, desc, url, extra=''):
     return f'''<!DOCTYPE html>
 <html lang="es" data-theme="light">
@@ -133,7 +138,7 @@ FOOTER = f'''<footer>
 </footer>
 
 <div class="float">
-  <a class="btn lime" href="{wa('Hola, quiero mis 3 hallazgos gratis')}" target="_blank" rel="noopener">{I('whatsapp')}Pedir mis 3 hallazgos gratis</a>
+  <a class="btn lime" href="{form('flotante')}">{I('reporte')}Pedir mis 3 hallazgos gratis</a>
 </div>
 <button class="guia" id="guia" type="button" aria-label="Bajar a la siguiente sección"><span class="raton"></span><span class="dedo"></span><b>Baja para descubrir</b></button>
 '''
@@ -168,16 +173,16 @@ HOME = f'''<body class="tono-noche">
   <div class="wrap" id="heroTxt">
     <span class="brace rv">dtorh® · Estudio digital · Barranquilla</span>
     <h1><span><i>Tu negocio existe.</i></span><span><i><em>En internet, no.</em></i></span></h1>
-    <p class="lead rv">Montamos en 14 días lo que hace falta para que <b>te encuentren en Google y te escriban por WhatsApp</b>. Tú no aprendes nada ni configuras nada.</p>
+    <p class="lead rv">Montamos en 14 días lo que hace falta para que <b>te encuentren en Google y te escriban por WhatsApp</b>. Nosotros hacemos toda la parte técnica; tú sigues atendiendo tu negocio.</p>
     <form class="buscador rv" id="buscador">
       {I('buscar')}
       <input id="q" type="text" autocomplete="off" enterkeyhint="send" placeholder="¿Qué vendes? Ej: postres, ropa, repuestos…" aria-label="¿Qué vendes?">
-      <button type="submit" aria-label="Escribirnos por WhatsApp"><span>Escríbenos</span>{I('flecha')}</button>
+      <button type="submit" aria-label="Pedir mis 3 hallazgos gratis"><span>Empezar</span>{I('flecha')}</button>
     </form>
     <div class="chips rv">
-      <button class="chip" type="button" data-q="Quiero mis 3 hallazgos gratis">Quiero mis 3 hallazgos gratis</button>
-      <button class="chip" type="button" data-q="Quiero que me encuentren en Google">Que me encuentren en Google</button>
-      <button class="chip" type="button" data-q="Voy a abrir un negocio y quiero llegar con todo listo">Voy a abrir un negocio</button>
+      <a class="chip" href="{form('hero')}">Quiero mis 3 hallazgos gratis</a>
+      <a class="chip" href="{form('hero-google', necesita='google')}">Que me encuentren en Google</a>
+      <a class="chip" href="{form('hero-apertura', apertura='pronto')}">Voy a abrir un negocio</a>
     </div>
     <div class="sellos rv">
       <span>{I('reloj')}Listo en 14 días</span>
@@ -237,21 +242,21 @@ HOME = f'''<body class="tono-noche">
             <h3>Que te encuentren</h3>
             <p class="lead">Que al buscarte aparezcas con dirección, horario, fotos y un botón para escribirte.</p>
             <ul class="lista"><li>{I('pin')}Ficha de Google Business completa</li><li>{I('ruta')}Apple Maps, Waze y Bing</li><li>{I('web')}Página web propia con tu catálogo</li></ul>
-            <a class="btn ghost" href="{wa('Hola, quiero que me encuentren en Google')}" target="_blank" rel="noopener">Quiero aparecer <span class="ar">→</span></a>
+            <a class="btn ghost" href="{form('servicio-presencia', necesita='google,web')}">Quiero aparecer <span class="ar">→</span></a>
           </div>
           <div class="ptxt" data-p="1">
             <span class="cat"><span class="ico">{I('chat')}</span>Contacto</span>
             <h3>Que te escriban y sepan qué comprar</h3>
             <p class="lead">Que vean precios sin preguntar y siempre reciban respuesta, aunque estés atendiendo.</p>
             <ul class="lista"><li>{I('catalogo')}WhatsApp Business con catálogo</li><li>{I('rayo')}Respuestas automáticas</li><li>{I('qr')}QR para el mostrador</li></ul>
-            <a class="btn ghost" href="{wa('Hola, quiero ordenar mi WhatsApp y mis redes')}" target="_blank" rel="noopener">Ordenar mi WhatsApp <span class="ar">→</span></a>
+            <a class="btn ghost" href="{form('servicio-contacto', necesita='whatsapp,redes')}">Ordenar mi WhatsApp <span class="ar">→</span></a>
           </div>
           <div class="ptxt" data-p="2" style="--ac:var(--lime-2)">
             <span class="cat"><span class="ico">{I('rayo')}</span>Sistemas</span>
             <h3>Que no dependa de tu memoria</h3>
             <p class="lead">Lo que hoy anotas en un papel queda guardado y te avisa solo.</p>
             <ul class="lista"><li>{I('hoja')}Clientes ordenados en una hoja, con aviso</li><li>{I('estrella')}Reseñas en Google con un QR</li><li>{I('chat')}Guion para responderlas</li></ul>
-            <a class="btn ghost" href="{wa('Hola, quiero automatizar algo de mi negocio')}" target="_blank" rel="noopener">Ver qué se automatiza <span class="ar">→</span></a>
+            <a class="btn ghost" href="{form('servicio-sistemas', necesita='whatsapp,resenas')}">Ver qué se automatiza <span class="ar">→</span></a>
           </div>
         </div>
       </div>
@@ -331,7 +336,7 @@ HOME = f'''<body class="tono-noche">
           </ul>
           <div class="garantia">{I('escudo')}<span><b>Garantía</b>Si a los 14 días de recibir tus fotos, tu lista de productos y el código de Google no está publicada tu ficha ni funcionando tu catálogo de WhatsApp, te devolvemos el anticipo completo.</span></div>
           <a class="btn lime" href="{wa('Hola, quiero el Arranque 360 con precio fundador')}" target="_blank" rel="noopener">Quiero mi Arranque 360 <span class="ar">→</span></a>
-          <p class="letra">Primero te mostramos 3 hallazgos gratis. Decides después.</p>
+          <p class="letra">¿Aún no estás seguro? <a href="{form('precio')}">Primero pide tus 3 hallazgos gratis</a> y decides después.</p>
         </div>
       </div>
     </div>
@@ -438,7 +443,7 @@ HOME = f'''<body class="tono-noche">
             <div class="met"><b>$0</b><span>al mes</span></div>
             <div class="met"><b>3 min</b><span>en llenarlo</span></div>
           </div>
-          <a class="link" href="https://datos.dtorh.click" target="_blank" rel="noopener">Ver el formulario <span class="ar">→</span></a>
+          <a class="link" href="{form('prueba')}" target="_blank" rel="noopener">Ver el formulario <span class="ar">→</span></a>
         </div>
         <div class="formu" aria-hidden="true" data-par="-.05">
           <label>Nombre<span class="c">Laura Martínez</span></label>
@@ -480,9 +485,9 @@ HOME = f'''<body class="tono-noche">
     </div>
     <span class="brace rv" data-parada="der">Siguiente paso</span>
     <h2 class="rv">Cuéntanos qué vendes. Te mostramos qué le falta.</h2>
-    <p class="lead rv">Una conversación por WhatsApp. Te mandamos tus 3 hallazgos, sin compromiso.</p>
-    <div class="hcta rv"><a class="btn lime" href="{wa('Hola, quiero mis 3 hallazgos gratis')}" target="_blank" rel="noopener">{I('whatsapp')}Pedir mis 3 hallazgos</a></div>
-    <p class="contacto-alt rv">¿Prefieres correo? <a href="mailto:dtorh.ofc@gmail.com">dtorh.ofc@gmail.com</a></p>
+    <p class="lead rv">Tres minutos de preguntas desde el celular. Te mandamos tus 3 hallazgos por WhatsApp, sin compromiso.</p>
+    <div class="hcta rv"><a class="btn lime" href="{form('cierre')}">{I('reporte')}Pedir mis 3 hallazgos</a></div>
+    <p class="contacto-alt rv">¿Prefieres hablar directo? <a href="{wa('Hola, vengo de la página de dtorh')}" target="_blank" rel="noopener">WhatsApp</a> o <a href="mailto:dtorh.ofc@gmail.com">dtorh.ofc@gmail.com</a></p>
   </div>
 </section>
 
@@ -581,7 +586,7 @@ addEventListener('DOMContentLoaded', function(){{
         '<ul class="t-hizo">' + x.piezas.map(function(h){{ return '<li>' + h + '</li>'; }}).join('') + '</ul>' +
         '<span class="t-ver">' + (x.etapa >= 4 ? 'Ver sitio' : 'Ver el avance') + ' ↗</span></div></a>';
     }}).join('') +
-    '<a class="t-card t-next" href="{wa('Hola, vi el laboratorio de dtorh y quiero que mi negocio sea el siguiente proyecto')}" target="_blank" rel="noopener">' +
+    '<a class="t-card t-next" href="{form('laboratorio')}">' +
       '<span class="mas">{I('mas').replace("'", "")}</span><h3>Tu negocio puede ser el siguiente proyecto</h3>' +
       '<p>Cuéntanos qué vendes. Te mostramos 3 cosas que le faltan en internet antes de pedirte nada.</p><span class="t-ver">Pedir mis 3 hallazgos →</span>' +
       '<span class="t-mapita" aria-hidden="true"><i></i><i></i><i></i><i class="tu">{I('pin').replace("'", "")}</i></span></a>';
