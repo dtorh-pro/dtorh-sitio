@@ -80,7 +80,7 @@ def head(titulo, desc, url, extra=''):
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/fonts/inter-tight-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/inter-tight-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/dtorh.css?v=12">
+<link rel="stylesheet" href="/assets/dtorh.css?v=13">
 {extra}<script>
   document.documentElement.className+=" js";
   try{{var t=localStorage.getItem('dtorh-tema');if(t)document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}
@@ -487,36 +487,35 @@ HOME = f'''<body class="tono-noche">
     <div class="cab">
       <span class="brace rv" data-parada="der">dtorh en vivo</span>
       <h2 class="rv">Míranos construir. <em>Sin humo.</em></h2>
-      <p class="lead rv">Publicamos hallazgos de negocios reales (con su permiso), los avances del laboratorio y trucos de 30 segundos para tu negocio. Lo mismo que hacemos aquí, contado allá.</p>
+      <p class="lead rv">Ahí contamos cómo trabajamos, los avances del laboratorio y consejos cortos para que te encuentren. También puedes escribirnos por ahí.</p>
     </div>
     <div class="red-grid">
-      <a class="red-card ig rv" href="{IG}" target="_blank" rel="noopener" aria-label="Abrir el Instagram de dtorh, @dtorh.click">
+      <div class="red-card ig rv">
         <span class="brillo" aria-hidden="true"></span>
+        <div class="red-portada" aria-hidden="true"><span class="calles"></span><span class="pin p1">{I('pin')}</span><span class="pin p2">{I('pin')}</span><span class="pin p3">{I('pin')}</span></div>
         <div class="red-top">
           <span class="anillo" aria-hidden="true"><span class="cara">dtorh<i>®</i></span></span>
-          <div class="red-id"><b>dtorh.click</b><small>{I('instagram')}Instagram · @dtorh.click</small></div>
+          <div class="red-id"><b>@dtorh.click</b><small>{I('instagram')}Instagram</small></div>
         </div>
-        <div class="red-mosaico" aria-hidden="true">
-          <span class="m1">{I('buscar')}<b>Hallazgos</b><small>3 cosas que le faltan a un negocio</small></span>
-          <span class="m2">{I('catalogo')}<b>Laboratorio</b><small>Así va cada proyecto</small></span>
-          <span class="m3">{I('rayo')}<b>Tips</b><small>Google, WhatsApp y reseñas</small></span>
+        <div class="red-acciones">
+          <a href="https://ig.me/m/dtorh.click" target="_blank" rel="noopener">{I('chat')}<span>Mándanos un mensaje directo</span><span class="ar">↗</span></a>
+          <a href="{IG}" target="_blank" rel="noopener">{I('instagram')}<span>Ver el perfil</span><span class="ar">↗</span></a>
         </div>
-        <span class="red-cta"><span>Seguir en Instagram</span><span class="ar">↗</span></span>
-      </a>
-      <a class="red-card fb rv" href="{FB}" target="_blank" rel="noopener" aria-label="Abrir la página de Facebook de dtorh">
+        <a class="red-cta" href="{IG}" target="_blank" rel="noopener"><span>Seguir en Instagram</span><span class="ar">↗</span></a>
+      </div>
+      <div class="red-card fb rv">
         <span class="brillo" aria-hidden="true"></span>
         <div class="red-portada" aria-hidden="true"><span class="calles"></span><span class="pin p1">{I('pin')}</span><span class="pin p2">{I('pin')}</span><span class="pin p3">{I('pin')}</span></div>
         <div class="red-top">
           <span class="anillo fb-anillo" aria-hidden="true"><span class="cara">dtorh<i>®</i></span></span>
-          <div class="red-id"><b>dtorh.click</b><small>{I('facebook')}Página de Facebook · Estudio digital</small></div>
+          <div class="red-id"><b>dtorh.click</b><small>{I('facebook')}Facebook</small></div>
         </div>
-        <ul class="red-lista" aria-hidden="true">
-          <li>{I('chat')}Escríbenos por Messenger</li>
-          <li>{I('estrella')}Casos y opiniones de clientes</li>
-          <li>{I('mapa')}Barranquilla y la Costa</li>
-        </ul>
-        <span class="red-cta"><span>Seguir la página</span><span class="ar">↗</span></span>
-      </a>
+        <div class="red-acciones">
+          <a href="https://m.me/dtorh.click" target="_blank" rel="noopener">{I('chat')}<span>Escríbenos por Messenger</span><span class="ar">↗</span></a>
+          <a href="{FB}" target="_blank" rel="noopener">{I('facebook')}<span>Ver la página</span><span class="ar">↗</span></a>
+        </div>
+        <a class="red-cta" href="{FB}" target="_blank" rel="noopener"><span>Seguir la página</span><span class="ar">↗</span></a>
+      </div>
     </div>
   </div>
 </section>
