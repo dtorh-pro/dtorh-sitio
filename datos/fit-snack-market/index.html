@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Datos del negocio · dtorh</title>
+<style>
+  :root{
+    --bg:#f7f6f3;
+    --surface:#ffffff;
+    --ink:#171614;
+    --soft:#77706a;
+    --line:#e8e4de;
+    --line-2:#d8d2ca;
+    --accent:#1f6b4a;
+    --accent-2:#25835a;
+    --accent-soft:#ecf5f0;
+    --r:16px;
+    --shadow:0 1px 2px rgba(23,22,20,.04), 0 8px 24px -12px rgba(23,22,20,.10);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#141311; --surface:#1e1d1a; --ink:#f2efea; --soft:#a09a93;
+      --line:#2c2a26; --line-2:#3a3733; --accent:#4ea77c; --accent-2:#5bb98b;
+      --accent-soft:#1c2a23;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+    }
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size:16px;line-height:1.5;
+    padding-bottom:calc(72px + env(safe-area-inset-bottom,0px));
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{
+    max-width:540px;margin:0 auto;
+    padding-left:calc(18px + env(safe-area-inset-left,0px));
+    padding-right:calc(18px + env(safe-area-inset-right,0px));
+  }
+
+  .brand{padding:30px 0 0;font-size:20px;font-weight:700;letter-spacing:-.03em}
+
+  header{padding:20px 0 22px}
+  h1{font-size:28px;line-height:1.15;margin:0 0 10px;letter-spacing:-.03em;font-weight:660}
+  .sub{color:var(--soft);font-size:15.5px;margin:0}
+  .meta{
+    margin-top:18px;font-size:13.5px;color:var(--soft);
+    background:var(--surface);border:1px solid var(--line);
+    border-radius:12px;padding:12px 14px;
+  }
+
+  .bar{position:sticky;top:0;z-index:9;background:var(--bg);padding:12px 0 12px}
+  .bar::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--line)}
+  .bar-inner{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--soft);-webkit-font-feature-settings:'tnum';font-feature-settings:'tnum';font-variant-numeric:tabular-nums}
+  .track{flex:1;height:5px;background:var(--line);border-radius:99px;overflow:hidden}
+  .fill{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:99px;transition:width .35s cubic-bezier(.22,1,.36,1)}
+
+  section{margin-top:30px}
+  .sec-label{
+    font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--soft);font-weight:650;margin:0 0 12px;padding-left:2px;
+  }
+
+  .field{
+    position:relative;background:var(--surface);border:1px solid var(--line);
+    border-radius:var(--r);padding:15px 17px;margin-bottom:11px;
+    transition:border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+  }
+  .field:focus-within{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+  .field.done{border-color:var(--line-2)}
+  .field.done::after{
+    content:"";position:absolute;top:16px;right:16px;width:18px;height:18px;
+    border-radius:50%;background:var(--accent) no-repeat center;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+    background-size:11px;
+    animation:pop .28s cubic-bezier(.34,1.56,.64,1);
+  }
+  @keyframes pop{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
+
+  .q{display:block;font-size:15.5px;font-weight:640;margin:0 0 3px;padding-right:26px;letter-spacing:-.01em}
+  .hint{display:block;font-size:13.5px;color:var(--soft);margin:0 0 9px;padding-right:26px}
+  input,textarea{
+    width:100%;border:0;background:transparent;color:var(--ink);
+    -webkit-text-fill-color:var(--ink);opacity:1;
+    font-family:inherit;font-size:16px;line-height:1.5;
+    padding:10px 0 6px;outline:none;resize:vertical;
+    -webkit-appearance:none;appearance:none;border-radius:0;
+  }
+  input::placeholder,textarea::placeholder{color:var(--soft);opacity:.55}
+  textarea{min-height:84px;line-height:1.55}
+
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .chip{
+    position:relative;display:inline-flex;align-items:center;gap:7px;
+    font-size:15px;font-weight:520;border:1px solid var(--line-2);border-radius:99px;
+    padding:9px 15px;cursor:pointer;background:var(--surface);color:var(--ink);
+    transition:all .18s ease;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;
+  }
+  .chip:active{transform:scale(.96)}
+  .chip input{position:absolute;opacity:0;width:0;height:0;pointer-events:none}
+  .chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .chip .dot{
+    width:16px;height:16px;border-radius:50%;border:1.5px solid var(--line-2);
+    flex:0 0 auto;transition:all .18s ease;
+  }
+  .chip.on .dot{
+    border-color:#fff;background:#fff no-repeat center;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%25231f6b4a' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+    background-size:11px;
+  }
+
+  .reveal{
+    max-height:0;overflow:hidden;opacity:0;margin-top:0;
+    transition:max-height .32s cubic-bezier(.22,1,.36,1), opacity .25s ease, margin-top .3s ease;
+  }
+  .reveal.open{max-height:900px;opacity:1;margin-top:10px}
+  .sub-field{
+    background:var(--bg);border:1px solid var(--line);border-radius:12px;
+    padding:11px 14px;margin-bottom:8px;
+  }
+  .sub-field:last-child{margin-bottom:0}
+  .pista{display:block;font-size:12.5px;color:var(--soft);margin:1px 0 4px}
+  .sub-field label{display:block;font-size:13px;font-weight:600;color:var(--soft);margin-bottom:1px}
+  .sub-field input{padding:3px 0 1px;font-size:16px}
+
+  input[type="date"]{
+    min-height:26px;color:var(--ink);-webkit-font-feature-settings:'tnum';font-feature-settings:'tnum';font-variant-numeric:tabular-nums;
+  }
+  input[type="date"]::-webkit-date-and-time-value{text-align:left;margin:0}
+  input[type="date"]::-webkit-calendar-picker-indicator{opacity:.45;cursor:pointer}
+  input[type="date"]:focus::-webkit-calendar-picker-indicator{opacity:.9}
+  #fechaFirmeza{margin-top:10px}
+  #fechaFirmeza.oculto{display:none}
+  .filas{margin-top:10px}
+  .fila{
+    display:grid;grid-template-columns:1fr 32px;gap:8px;align-items:center;
+    margin-bottom:8px;animation:entra .26s cubic-bezier(.22,1,.36,1);
+  }
+  @keyframes entra{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+  .fila .celda{
+    background:var(--bg);border:1px solid var(--line);border-radius:12px;
+    padding:11px 13px;transition:border-color .18s ease, box-shadow .18s ease;
+  }
+  .fila .celda:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+  .fila .celda input{padding:4px 0;font-size:16px}
+  .quitar{
+    width:32px;height:32px;padding:0;border-radius:50%;border:1px solid var(--line);
+    background:transparent;color:var(--soft);font-size:19px;line-height:1;
+    display:flex;align-items:center;justify-content:center;
+    opacity:0;pointer-events:none;transition:opacity .18s ease, color .18s ease;
+  }
+  .fila.llena .quitar{opacity:1;pointer-events:auto}
+  .quitar:active{color:var(--ink)}
+  .agregar{
+    width:auto;padding:10px 16px;font-size:14.5px;font-weight:600;border-radius:99px;
+    background:transparent;color:var(--accent);border:1px dashed var(--line-2);margin-top:2px;
+  }
+  /* area tactil: en iOS un input de 24px es dificil de acertar */
+  .field label, .field .q{cursor:default}
+  .fila .celda{position:relative}
+  .quitar{position:relative}
+  .quitar::before{content:"";position:absolute;top:-7px;right:-7px;bottom:-7px;left:-7px}
+  .chip{min-height:42px}
+  .permiso{
+    display:flex;gap:11px;align-items:flex-start;background:var(--surface);
+    border:1px solid var(--line);border-radius:var(--r);padding:15px 17px;margin-top:6px;
+    cursor:pointer;transition:border-color .18s ease;
+  }
+  .permiso.on{border-color:var(--accent)}
+  .permiso input{position:absolute;opacity:0;width:0;height:0}
+  .permiso .caja{
+    width:22px;height:22px;flex:0 0 auto;border-radius:7px;margin-top:1px;
+    border:1.5px solid var(--line-2);transition:all .18s ease;
+  }
+  .permiso.on .caja{
+    background:var(--accent) no-repeat center;border-color:var(--accent);
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+    background-size:13px;
+  }
+  .permiso .texto{font-size:13.5px;line-height:1.5;color:var(--soft)}
+  .permiso .texto b{color:var(--ink);font-weight:620}
+
+  .exito{
+    display:none;margin-top:26px;background:var(--surface);border:1px solid var(--line);
+    border-radius:var(--r);padding:26px 22px;text-align:center;box-shadow:var(--shadow);
+  }
+  .exito.show{display:block;animation:rise .45s cubic-bezier(.22,1,.36,1)}
+  .exito .sello{
+    width:54px;height:54px;border-radius:50%;margin:0 auto 14px;
+    background:var(--accent) no-repeat center;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+    background-size:27px;animation:pop .5s cubic-bezier(.34,1.56,.64,1);
+  }
+  .exito h2{font-size:20px;margin:0 0 8px;letter-spacing:-.02em}
+  .exito p{margin:0;color:var(--soft);font-size:14.5px}
+  .exito .actions{margin-top:20px}
+  .cargando{opacity:.6;pointer-events:none}
+  .alerta{
+    margin-top:14px;font-size:13.5px;line-height:1.5;color:#8a2f2f;background:#fdeeee;
+    border:1px solid #f2cccc;border-radius:12px;padding:12px 14px;display:none;
+  }
+  .alerta.show{display:block}
+  @media (prefers-color-scheme: dark){ .alerta{color:#f0a9a9;background:#2c1a1a;border-color:#432525} }
+  .actions{margin-top:28px;display:flex;flex-direction:column;gap:10px}
+  button, .btn{
+    display:block;text-align:center;text-decoration:none;
+    font-family:inherit;font-weight:640;font-size:16.5px;border-radius:14px;padding:16px 18px;
+    border:1px solid transparent;cursor:pointer;width:100%;transition:transform .12s ease, opacity .2s ease;
+    letter-spacing:-.01em;-webkit-appearance:none;appearance:none;
+  }
+  button:active, .btn:active{transform:scale(.985)}
+  .primary{background:var(--accent);color:#fff;box-shadow:var(--shadow)}
+  .ghost{background:transparent;color:var(--ink);border-color:var(--line-2)}
+
+  .warn{
+    margin-top:14px;font-size:13.5px;line-height:1.5;
+    color:#8a6410;background:#fdf7e7;border:1px solid #f2e6c4;
+    border-radius:12px;padding:12px 14px;
+  }
+  @media (prefers-color-scheme: dark){
+    .warn{color:#e8c97a;background:#2a2415;border-color:#3d3520}
+  }
+
+  .out{margin-top:26px;display:none}
+  .out.show{display:block;animation:rise .4s cubic-bezier(.22,1,.36,1)}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .out h2{font-size:16px;margin:0 0 10px;letter-spacing:-.01em}
+  .out textarea{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+    padding:15px;min-height:250px;font-size:13.5px;line-height:1.6;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;box-shadow:var(--shadow);
+  }
+  .note{font-size:13.5px;color:var(--soft);margin-top:12px}
+
+  .toast{
+    position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(24px);
+    background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:99px;
+    font-size:14.5px;font-weight:520;opacity:0;pointer-events:none;
+    transition:.28s cubic-bezier(.22,1,.36,1);z-index:30;
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  footer{margin-top:38px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;color:var(--soft)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="brand">dtorh</div>
+
+  <header>
+    <h1>Datos del negocio</h1>
+    <p class="sub">Nueve preguntas. Tres minutos desde el celular.</p>
+    <p class="meta">Si algún dato no lo tienes exacto, puedes poner un aproximado.</p>
+  </header>
+
+  <div class="bar">
+    <div class="bar-inner">
+      <div class="track"><div class="fill" id="fill"></div></div>
+      <span id="count">0 de 9</span>
+    </div>
+  </div>
+
+  <form id="f" autocomplete="off">
+
+    <section>
+      <p class="sec-label">Quién responde</p>
+
+      <div class="field" data-track="q1">
+        <span class="q">1. Tu nombre</span>
+        <input id="q1" data-q="Responde" placeholder="Nombre y apellido">
+      </div>
+
+      <div class="field" data-track="q2">
+        <span class="q">2. Tu WhatsApp</span>
+        <input id="q2" data-q="WhatsApp" inputmode="tel" placeholder="300 000 0000">
+      </div>
+    </section>
+
+    <section>
+      <p class="sec-label">El negocio</p>
+
+      <div class="field" data-track="q3">
+        <span class="q">3. Nombre del negocio</span>
+        <input id="q3" data-q="Nombre del negocio" placeholder="Como va en el aviso del local">
+      </div>
+
+      <div class="field" id="fechaField">
+        <span class="q">4. ¿Cuándo abre el negocio?</span>
+        <div class="chips" id="fechaModo">
+          <span class="chip" data-v="abiertos"><span class="dot"></span>Ya estamos abiertos</span>
+          <span class="chip" data-v="con-fecha"><span class="dot"></span>Ya tenemos fecha</span>
+          <span class="chip" data-v="sin-fecha"><span class="dot"></span>Todavía no la tenemos</span>
+        </div>
+        <div class="reveal" id="fechaReveal">
+          <div class="sub-field">
+            <label for="q4" id="fechaLabel">Día de apertura</label>
+            <span class="pista">Toca para elegir en el calendario</span>
+            <input type="date" id="q4">
+          </div>
+          <div class="chips" id="fechaFirmeza">
+            <span class="chip" data-v="confirmada"><span class="dot"></span>Confirmada</span>
+            <span class="chip" data-v="tentativa"><span class="dot"></span>Tentativa</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="field" id="redesField">
+        <span class="q">5. Redes sociales</span>
+        <span class="hint">Toca las que ya tengan, aunque estén vacías. Se abre un espacio para escribir el usuario de cada una</span>
+        <div class="chips" id="redes">
+          <span class="chip" data-red="Instagram" data-ph="@usuario"><span class="dot"></span>Instagram</span>
+          <span class="chip" data-red="Facebook" data-ph="Nombre de la página"><span class="dot"></span>Facebook</span>
+          <span class="chip" data-red="TikTok" data-ph="@usuario"><span class="dot"></span>TikTok</span>
+          <span class="chip" data-red="WhatsApp Business" data-ph="Número"><span class="dot"></span>WhatsApp Business</span>
+          <span class="chip" data-red="Google Maps" data-ph="Nombre con el que aparecen"><span class="dot"></span>Google Maps</span>
+          <span class="chip" data-red="Página web" data-ph="Link"><span class="dot"></span>Página web</span>
+          <span class="chip" data-red="Ninguna todavía" data-solo="1"><span class="dot"></span>Ninguna todavía</span>
+        </div>
+        <div class="reveal" id="redesReveal"><div id="redesInputs"></div></div>
+      </div>
+    </section>
+
+    <section>
+      <p class="sec-label">El producto</p>
+
+      <div class="field" id="productosField">
+        <span class="q">6. Los productos que van a vender</span>
+        <span class="hint">Los que van a vender. Con su presentación, si ya la tienen</span>
+        <div class="filas" id="filasProductos"></div>
+        <button type="button" class="agregar" id="agregarProducto">+ Agregar otro</button>
+      </div>
+
+      <div class="field" id="postresField">
+        <span class="q">7. Lo que venden, ¿lo hacen ustedes o lo compran?</span>
+        <span class="hint">Sirve para saber si hay algo propio que solo ustedes tengan</span>
+        <div class="chips" id="postres">
+          <span class="chip" data-v="Lo hacemos nosotros"><span class="dot"></span>Lo hacemos nosotros</span>
+          <span class="chip" data-v="Lo compramos ya hecho"><span class="dot"></span>Lo compramos ya hecho</span>
+          <span class="chip" data-v="Un poco de cada uno"><span class="dot"></span>Un poco de cada uno</span>
+          <span class="chip" data-v="Todavía no lo hemos definido"><span class="dot"></span>Todavía no lo definimos</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <p class="sec-label">Quién lo maneja</p>
+
+
+      <div class="field" id="horasField">
+        <span class="q">8. Horas a la semana para redes y contenido</span>
+        <span class="hint">Un estimado realista</span>
+        <div class="chips" id="horas">
+          <span class="chip" data-v="Menos de 2 horas"><span class="dot"></span>Menos de 2</span>
+          <span class="chip" data-v="Entre 2 y 5 horas"><span class="dot"></span>2 a 5</span>
+          <span class="chip" data-v="Más de 5 horas"><span class="dot"></span>Más de 5</span>
+          <span class="chip" data-v="Ninguna, necesitamos que alguien lo haga"><span class="dot"></span>Ninguna</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <p class="sec-label">Presencia digital</p>
+
+      <div class="field" id="necesitaField">
+        <span class="q">9. ¿Qué necesitan para su presencia digital?</span>
+        <span class="hint">Toca todo lo que crean que les hace falta. Si no están seguros, la última opción sirve</span>
+        <div class="chips" id="necesita">
+          <span class="chip" data-v="Página web"><span class="dot"></span>Página web</span>
+          <span class="chip" data-v="Tienda en línea"><span class="dot"></span>Tienda en línea</span>
+          <span class="chip" data-v="Contenido para redes"><span class="dot"></span>Contenido para redes</span>
+          <span class="chip" data-v="Que alguien publique y responda"><span class="dot"></span>Que alguien publique y responda</span>
+          <span class="chip" data-v="Aparecer en Google y Maps"><span class="dot"></span>Aparecer en Google y Maps</span>
+          <span class="chip" data-v="Catálogo digital"><span class="dot"></span>Catálogo digital</span>
+          <span class="chip" data-v="Pedidos por WhatsApp"><span class="dot"></span>Pedidos por WhatsApp</span>
+          <span class="chip" data-v="Diseño de marca (logo, empaque, aviso)"><span class="dot"></span>Diseño de marca</span>
+          <span class="chip" data-v="Fotos y video de producto"><span class="dot"></span>Fotos y video</span>
+          <span class="chip" data-v="Publicidad pagada"><span class="dot"></span>Publicidad pagada</span>
+          <span class="chip" data-v="Todavía no sabemos, queremos que nos recomienden" data-solo="1"><span class="dot"></span>No sabemos, recomiéndennos</span>
+        </div>
+      </div>
+
+    </section>
+
+    <section>
+      <p class="sec-label">Opcional</p>
+      <div class="field">
+        <span class="q">Algo más que quieras agregar</span>
+        <span class="hint">Cualquier detalle que consideres importante</span>
+        <textarea id="q10" data-q="Notas"></textarea>
+      </div>
+    </section>
+
+
+    <label class="permiso" id="permiso">
+      <input type="checkbox" id="permisoCheck">
+      <span class="caja"></span>
+      <span class="texto"><b>Autorizo el tratamiento de mis datos.</b> dtorh puede guardar y usar esta información para preparar una propuesta y contactarme. Puedo pedir que la eliminen cuando quiera. Ley 1581 de 2012.</span>
+    </label>
+
+    <div class="actions">
+      <button type="button" class="primary" id="gen">Enviar formulario</button>
+    </div>
+    <p class="alerta" id="alerta">No se pudo enviar. Revisa tu conexión y vuelve a intentar, o mándanoslo por WhatsApp con el botón de abajo.</p>
+  </form>
+
+  <div class="exito" id="exito">
+    <div class="sello"></div>
+    <h2>Recibido</h2>
+    <p>Gracias. Ya tenemos tus datos y te escribimos pronto.</p>
+    <div class="actions">
+      <a class="btn ghost" id="wa" href="#" rel="noopener">Enviar también por WhatsApp</a>
+    </div>
+  </div>
+
+  <div class="out" id="out">
+    <h2>Este es el resumen de tus respuestas</h2>
+    <textarea id="txt" readonly></textarea>
+    <div class="actions">
+      <a class="btn primary" id="wa2" href="#" rel="noopener">Enviar por WhatsApp</a>
+      <button type="button" class="ghost" id="copy">Copiar el texto</button>
+    </div>
+    <p class="note">Opcional: puedes adjuntar también fotos o un video del negocio.</p>
+  </div>
+
+  <footer>
+    Tus respuestas se guardan en una hoja privada de dtorh y solo se usan para este proyecto.
+    Puedes pedir que las borremos escribiendo a dtorh.ofc@gmail.com. Ley 1581 de 2012.
+  </footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// Tu número con indicativo, sin espacios ni signos. Ej: "573001234567"
+// Si queda vacío, WhatsApp le pregunta al usuario a quién enviarle el mensaje.
+var DESTINO = "573024135572";
+
+// Pega aqui la URL de la app web de Google Apps Script (termina en /exec).
+// Ver guia-publicacion.md. Si queda vacia, el formulario solo ofrece WhatsApp.
+var ENDPOINT = "https://script.google.com/macros/s/AKfycbyheilDjQzsEUT_lNjKCAW2_Lc38_b4qdfuy1inlChNSPek61tz31dOwI6lwlZWoKKW/exec";
+
+var TOTAL = 9;
+
+/* ---------- redes: selección múltiple con campo dinámico ---------- */
+var redes = document.getElementById('redes');
+var redesInputs = document.getElementById('redesInputs');
+var redesReveal = document.getElementById('redesReveal');
+
+function pintarRedes(){
+  var activas = [].slice.call(redes.querySelectorAll('.chip.on'))
+    .filter(function(c){ return !c.dataset.solo; });
+
+  // conservar lo ya escrito
+  var previo = {};
+  redesInputs.querySelectorAll('input').forEach(function(i){ previo[i.dataset.red] = i.value; });
+
+  redesInputs.innerHTML = '';
+  activas.forEach(function(c){
+    var nombre = c.dataset.red;
+    var box = document.createElement('div');
+    box.className = 'sub-field';
+    var lb = document.createElement('label');
+    lb.textContent = nombre;
+    var inp = document.createElement('input');
+    inp.dataset.red = nombre;
+    inp.placeholder = c.dataset.ph || '';
+    inp.value = previo[nombre] || '';
+    box.appendChild(lb); box.appendChild(inp);
+    redesInputs.appendChild(box);
+  });
+  redesReveal.classList.toggle('open', activas.length > 0);
+}
+
+redes.addEventListener('click', function(e){
+  var chip = e.target.closest('.chip');
+  if (!chip) return;
+  var solo = chip.dataset.solo;
+  if (solo){
+    var on = chip.classList.toggle('on');
+    if (on) redes.querySelectorAll('.chip').forEach(function(c){ if (c!==chip) c.classList.remove('on'); });
+  } else {
+    chip.classList.toggle('on');
+    var ninguna = redes.querySelector('.chip[data-solo]');
+    if (ninguna) ninguna.classList.remove('on');
+  }
+  pintarRedes();
+  contar();
+});
+
+/* ---------- chips de opción única ---------- */
+function unica(id){
+  var cont = document.getElementById(id);
+  cont.addEventListener('click', function(e){
+    var chip = e.target.closest('.chip');
+    if (!chip) return;
+    var yaEstaba = chip.classList.contains('on');
+    cont.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('on'); });
+    if (!yaEstaba) chip.classList.add('on');
+    contar();
+  });
+}
+unica('postres');
+unica('horas');
+
+/* ---------- chips de selección múltiple con opción excluyente ---------- */
+function multiple(id){
+  var cont = document.getElementById(id);
+  cont.addEventListener('click', function(e){
+    var chip = e.target.closest('.chip');
+    if (!chip) return;
+    if (chip.dataset.solo){
+      var on = chip.classList.toggle('on');
+      if (on) cont.querySelectorAll('.chip').forEach(function(c){ if (c!==chip) c.classList.remove('on'); });
+    } else {
+      chip.classList.toggle('on');
+      var solo = cont.querySelector('.chip[data-solo]');
+      if (solo) solo.classList.remove('on');
+    }
+    contar();
+  });
+}
+multiple('necesita');
+
+function valorMultiple(id){
+  var chips = [].slice.call(document.getElementById(id).querySelectorAll('.chip.on'));
+  if (!chips.length) return '';
+  return chips.map(function(c){ return c.dataset.v; }).join(', ');
+}
+
+/* ---------- fecha de apertura ---------- */
+var MESES = ['enero','febrero','marzo','abril','mayo','junio','julio',
+             'agosto','septiembre','octubre','noviembre','diciembre'];
+var campoFecha = document.getElementById('q4');
+var fechaLabel = document.getElementById('fechaLabel');
+var fechaFirmeza = document.getElementById('fechaFirmeza');
+
+unica('fechaModo');
+unica('fechaFirmeza');
+
+document.getElementById('fechaModo').addEventListener('click', function(){
+  var modo = valorUnico('fechaModo');
+  var abre = (modo === 'abiertos' || modo === 'con-fecha');
+  document.getElementById('fechaReveal').classList.toggle('open', abre);
+  if (modo === 'abiertos'){
+    fechaLabel.textContent = 'Desde cuándo';
+    campoFecha.removeAttribute('min');
+    campoFecha.max = hoy();
+    fechaFirmeza.classList.add('oculto');
+  } else if (modo === 'con-fecha'){
+    fechaLabel.textContent = 'Día de apertura';
+    campoFecha.removeAttribute('max');
+    campoFecha.min = hoy();
+    fechaFirmeza.classList.remove('oculto');
+  }
+  contar();
+});
+
+function hoy(){
+  var d = new Date();
+  return d.getFullYear() + '-' +
+         String(d.getMonth()+1).padStart(2,'0') + '-' +
+         String(d.getDate()).padStart(2,'0');
+}
+function textoFecha(){
+  var modo = valorUnico('fechaModo');
+  if (modo === 'sin-fecha') return 'Todavía no tienen fecha definida';
+  if (!modo) return '';
+  var v = campoFecha.value;
+  if (!v) return '';
+  var p = v.split('-');
+  var t = parseInt(p[2],10) + ' de ' + MESES[parseInt(p[1],10)-1] + ' de ' + p[0];
+  if (modo === 'abiertos') return 'Abiertos desde el ' + t;
+  var f = valorUnico('fechaFirmeza');
+  return t + (f ? ' (' + f + ')' : '');
+}
+
+/* ---------- productos: filas dinamicas ---------- */
+var MAX_FILAS = 8;
+var contenedorFilas = document.getElementById('filasProductos');
+
+function nuevaFila(){
+  var f = document.createElement('div');
+  f.className = 'fila';
+  f.innerHTML =
+    '<div class="celda"><input class="pnombre" placeholder="Nombre del producto"></div>' +
+    '<button type="button" class="quitar" aria-label="Quitar">&times;</button>';
+  contenedorFilas.appendChild(f);
+  return f;
+}
+function estadoFilas(){
+  var filas = contenedorFilas.querySelectorAll('.fila');
+  filas.forEach(function(f){
+    f.classList.toggle('llena', !!f.querySelector('.pnombre').value.trim());
+  });
+  // siempre dejar una fila vacia al final, hasta el maximo
+  var ultima = filas[filas.length - 1];
+  if (ultima && ultima.classList.contains('llena') && filas.length < MAX_FILAS) nuevaFila();
+  var boton = document.getElementById('agregarProducto');
+  boton.style.display = contenedorFilas.querySelectorAll('.fila').length >= MAX_FILAS ? 'none' : '';
+}
+contenedorFilas.addEventListener('input', estadoFilas);
+contenedorFilas.addEventListener('click', function(e){
+  var b = e.target.closest('.quitar');
+  if (!b) return;
+  var filas = contenedorFilas.querySelectorAll('.fila');
+  if (filas.length > 1) b.parentNode.remove(); 
+  else { b.parentNode.querySelectorAll('input').forEach(function(i){ i.value = ''; }); }
+  estadoFilas();
+  contar();
+});
+document.getElementById('agregarProducto').addEventListener('click', function(){
+  if (contenedorFilas.querySelectorAll('.fila').length < MAX_FILAS) nuevaFila();
+  estadoFilas();
+  var ins = contenedorFilas.querySelectorAll('.fila .pnombre');
+  if (ins.length) ins[ins.length - 1].focus();
+});
+function valorProductos(){
+  var out = [];
+  contenedorFilas.querySelectorAll('.fila').forEach(function(f){
+    var n = f.querySelector('.pnombre').value.trim();
+    if (n) out.push(n);
+  });
+  return out.join('\n');
+}
+nuevaFila(); nuevaFila(); nuevaFila();
+
+function valorUnico(id){
+  var el = document.getElementById(id).querySelector('.chip.on');
+  return el ? el.dataset.v : '';
+}
+function valorRedes(){
+  var chips = [].slice.call(redes.querySelectorAll('.chip.on'));
+  if (!chips.length) return '';
+  if (chips.length === 1 && chips[0].dataset.solo) return 'Ninguna todavía';
+  return chips.filter(function(c){ return !c.dataset.solo; }).map(function(c){
+    var inp = redesInputs.querySelector('input[data-red="'+c.dataset.red+'"]');
+    var v = inp && inp.value.trim();
+    return v ? (c.dataset.red + ': ' + v) : c.dataset.red;
+  }).join('\n');
+}
+
+/* ---------- progreso ---------- */
+function estados(){
+  return [
+    {q:'Responde',                v: document.getElementById('q1').value.trim()},
+    {q:'WhatsApp',                v: document.getElementById('q2').value.trim()},
+    {q:'Nombre del negocio',      v: document.getElementById('q3').value.trim()},
+    {q:'Apertura',                v: textoFecha()},
+    {q:'Lo que ya tienen',        v: valorRedes()},
+    {q:'Productos principales',  v: valorProductos()},
+    {q:'Producción',              v: valorUnico('postres')},
+    {q:'Horas para redes',        v: valorUnico('horas')},
+    {q:'Qué necesitan',           v: valorMultiple('necesita')},
+    {q:'Notas',                   v: document.getElementById('q10').value.trim()}
+  ];
+}
+function marcar(){
+  document.querySelectorAll('.field[data-track]').forEach(function(f){
+    var inp = f.querySelector('input,textarea');
+    f.classList.toggle('done', !!(inp && inp.value.trim()));
+  });
+  document.getElementById('redesField').classList.toggle('done', !!valorRedes());
+  document.getElementById('fechaField').classList.toggle('done', !!textoFecha());
+  document.getElementById('productosField').classList.toggle('done', !!valorProductos());
+  document.getElementById('postresField').classList.toggle('done', !!valorUnico('postres'));
+  document.getElementById('horasField').classList.toggle('done', !!valorUnico('horas'));
+  document.getElementById('necesitaField').classList.toggle('done', !!valorMultiple('necesita'));
+}
+function contar(){
+  var n = 0;
+  estados().forEach(function(x){ if (x.q !== 'Notas' && x.v) n++; });
+  if (n > TOTAL) n = TOTAL;
+  document.getElementById('count').textContent = n + ' de ' + TOTAL;
+  document.getElementById('fill').style.width = (n/TOTAL*100) + '%';
+  marcar();
+}
+document.addEventListener('input', contar);
+document.addEventListener('change', contar);
+
+/* ---------- salida ---------- */
+function armar(){
+  var l = ['Datos del negocio', ''];
+  estados().forEach(function(x){
+    if (!x.v) return;
+    if (x.v.indexOf('\n') > -1) l.push(x.q + ':', x.v, '');
+    else l.push(x.q + ': ' + x.v);
+  });
+  l.push('', '(Enviado desde el formulario de dtorh)');
+  return l.join('\n');
+}
+function linkWa(){
+  var t = encodeURIComponent(document.getElementById('txt').value);
+  return DESTINO ? 'https://wa.me/'+DESTINO+'?text='+t : 'https://wa.me/?text='+t;
+}
+
+/* ---------- permiso de datos ---------- */
+var permiso = document.getElementById('permiso');
+var permisoCheck = document.getElementById('permisoCheck');
+permisoCheck.addEventListener('change', function(){
+  permiso.classList.toggle('on', permisoCheck.checked);
+});
+
+/* ---------- envio ---------- */
+function datos(){
+  var d = {};
+  estados().forEach(function(x){ if (x.v) d[x.q] = x.v; });
+  d['Enviado'] = new Date().toLocaleString('es-CO');
+  return d;
+}
+function mostrarResumen(){
+  document.getElementById('txt').value = armar();
+  var url = linkWa();
+  document.getElementById('wa').setAttribute('href', url);
+  document.getElementById('wa2').setAttribute('href', url);
+}
+function faltantes(){
+  var n = 0;
+  estados().forEach(function(x){ if (x.q !== 'Notas' && x.v) n++; });
+  return TOTAL - Math.min(n, TOTAL);
+}
+
+var boton = document.getElementById('gen');
+boton.addEventListener('click', function(){
+  if (!permisoCheck.checked){
+    permiso.scrollIntoView({block:'center'});
+    permiso.animate(
+      [{transform:'translateX(0)'},{transform:'translateX(-6px)'},{transform:'translateX(6px)'},{transform:'translateX(0)'}],
+      {duration:280});
+    toast('Falta autorizar el uso de los datos');
+    return;
+  }
+  var f = faltantes();
+  if (f > 0 && !boton.dataset.insistio){
+    boton.dataset.insistio = '1';
+    boton.textContent = 'Enviar así (faltan ' + f + ')';
+    toast(f === 1 ? 'Falta 1 respuesta' : 'Faltan ' + f + ' respuestas');
+    return;
+  }
+  mostrarResumen();
+  enviar();
+});
+
+function terminar(ok){
+  boton.classList.remove('cargando');
+  boton.textContent = 'Enviar formulario';
+  if (ok){
+    document.getElementById('f').style.display = 'none';
+    document.getElementById('exito').classList.add('show');
+    document.getElementById('exito').scrollIntoView({block:'start'});
+  } else {
+    document.getElementById('alerta').classList.add('show');
+    var out = document.getElementById('out');
+    out.classList.add('show');
+    out.scrollIntoView({block:'start'});
+  }
+}
+
+function enviar(){
+  if (!ENDPOINT){ terminar(false); return; }
+  boton.classList.add('cargando');
+  boton.textContent = 'Enviando...';
+  var listo = false;
+  var reloj = setTimeout(function(){ if (!listo){ listo = true; terminar(false); } }, 12000);
+  fetch(ENDPOINT, {
+    method: 'POST',
+    headers: {'Content-Type': 'text/plain;charset=utf-8'},
+    body: JSON.stringify(datos())
+  }).then(function(){
+    if (listo) return; listo = true; clearTimeout(reloj); terminar(true);
+  }).catch(function(){
+    if (listo) return; listo = true; clearTimeout(reloj); terminar(false);
+  });
+}
+
+function toast(m){
+  var el = document.getElementById('toast');
+  el.textContent = m; el.classList.add('show');
+  setTimeout(function(){ el.classList.remove('show'); }, 1900);
+}
+function copiarViejo(ta){
+  // iOS no permite select() sobre un campo readonly: se quita el atributo,
+  // se usa contentEditable y se restaura el rango a mano.
+  var eraReadonly = ta.hasAttribute('readonly');
+  ta.removeAttribute('readonly');
+  ta.contentEditable = true;
+  var rango = document.createRange();
+  rango.selectNodeContents(ta);
+  var sel = window.getSelection();
+  sel.removeAllRanges(); sel.addRange(rango);
+  ta.setSelectionRange(0, 999999);
+  var ok = false;
+  try { ok = document.execCommand('copy'); } catch(e){ ok = false; }
+  ta.contentEditable = false;
+  if (eraReadonly) ta.setAttribute('readonly','readonly');
+  sel.removeAllRanges();
+  return ok;
+}
+document.getElementById('copy').addEventListener('click', function(){
+  var ta = document.getElementById('txt');
+  if (navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(ta.value).then(
+      function(){ toast('Texto copiado'); },
+      function(){ toast(copiarViejo(ta) ? 'Texto copiado' : 'Selecciónalo y cópialo a mano'); }
+    );
+  } else {
+    toast(copiarViejo(ta) ? 'Texto copiado' : 'Selecciónalo y cópialo a mano');
+  }
+});
+
+
+/* ---------- tocar la tarjeta enfoca su campo ---------- */
+document.addEventListener('click', function(e){
+  if (e.target.closest('input, textarea, button, .chip, a')) return;
+  var caja = e.target.closest('.celda, .sub-field, .field');
+  if (!caja) return;
+  var campo = caja.querySelector('input, textarea');
+  if (campo) campo.focus();
+});
+
+contar();
+</script>
+</body>
+</html>
