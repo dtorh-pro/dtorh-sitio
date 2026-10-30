@@ -794,3 +794,10 @@ html:not(.js) h1 span > i{transform:none}
   .red-acciones a{padding:12px;font-size:14.5px}
 }
 @media (prefers-reduced-motion:reduce){.anillo,.red-portada .calles,.red-portada .pin{animation:none}}
+
+/* ===== página legal ===== */
+.legal h2{font-size:22px;letter-spacing:-.025em;margin:34px 0 10px}
+.legal p,.legal li{color:var(--ash);font-size:16px;line-height:1.65}
+.legal ul{padding-left:20px;display:grid;gap:10px}
+.legal a{text-decoration:underline;text-underline-offset:3px}
+.legal b{color:var(--ink);font-weight:500}

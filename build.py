@@ -74,13 +74,14 @@ def head(titulo, desc, url, extra=''):
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0b0d1a">
+<meta name="facebook-domain-verification" content="ghpkvj3cz5f3zkrufb8k3a1q03miha">
 <link rel="canonical" href="{url}">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/fonts/inter-tight-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/inter-tight-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/dtorh.css?v=13">
+<link rel="stylesheet" href="/assets/dtorh.css?v=14">
 {extra}<script>
   document.documentElement.className+=" js";
   try{{var t=localStorage.getItem('dtorh-tema');if(t)document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}
@@ -139,7 +140,7 @@ FOOTER = f'''<footer>
       <a href="{IG}" target="_blank" rel="noopener" aria-label="Instagram de dtorh">{I('instagram')}@dtorh.click</a>
       <a href="{FB}" target="_blank" rel="noopener" aria-label="Facebook de dtorh">{I('facebook')}/dtorh.click</a>
     </div>
-    <p class="fine">{{ Los datos que nos compartas se usan solo para contactarte y preparar una propuesta. Puedes pedir que los eliminemos cuando quieras escribiendo a dtorh.ofc@gmail.com. Ley 1581 de 2012. }}</p>
+    <p class="fine">{{ Los datos que nos compartas se usan solo para contactarte y preparar una propuesta. Puedes pedir que los eliminemos cuando quieras escribiendo a dtorh.ofc@gmail.com. Ley 1581 de 2012. <a href="/privacidad/">Privacidad y cookies</a> }}</p>
     <div class="base"><span>© <span id="anio">2026</span> dtorh® · Estudio digital · Barranquilla, Colombia</span><a href="#top">Volver arriba ↑</a></div>
   </div>
 </footer>
@@ -152,6 +153,7 @@ FOOTER = f'''<footer>
 
 SCRIPTS = '''<script src="/assets/lenis.min.js?v=1.3.26" defer></script>
 <script src="/assets/dtorh.js?v=8" defer></script>
+<script src="/assets/medir.js?v=1" defer></script>
 '''
 
 LD = '''<script type="application/ld+json">
@@ -649,4 +651,39 @@ addEventListener('DOMContentLoaded', function(){{
 trab = head('Laboratorio — dtorh®', 'Proyectos en obra de dtorh, a la vista: qué necesita cada negocio, qué le estamos montando y en qué etapa va. Estudio digital en Barranquilla.', 'https://dtorh.click/laboratorio/') + LABP
 os.makedirs('laboratorio', exist_ok=True)
 open('laboratorio/index.html','w').write(trab)
-print('ok', len(home), len(trab))
+PRIV = f'''<body class="tono-claro">
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+{SPRITE}
+{nav()}
+<main id="contenido">
+<section class="sec legal" data-tono="claro">
+  <div class="wrap" style="max-width:760px">
+    <span class="brace">Privacidad y cookies</span>
+    <h1 style="font-size:clamp(34px,5vw,56px);margin:14px 0 26px">Cómo cuidamos tus datos.</h1>
+    <p class="lead">Actualizado el 30 de octubre de 2026. Aplica a dtorh.click, datos.dtorh.click y a los mensajes que nos envíes por WhatsApp, Instagram o Facebook.</p>
+    <h2>Quién es el responsable</h2>
+    <p>dtorh®, estudio digital de Barranquilla, Colombia. Contacto: <a href="mailto:dtorh.ofc@gmail.com">dtorh.ofc@gmail.com</a> · WhatsApp +57 302 413 5572.</p>
+    <h2>Qué datos recogemos y para qué</h2>
+    <ul>
+      <li><b>Formulario de los 3 hallazgos:</b> tu nombre, tu WhatsApp, el nombre y los datos públicos de tu negocio y lo que nos cuentes. Los usamos solo para preparar tus hallazgos, contactarte y, si quieres, hacerte una propuesta. Se guardan en una hoja privada de dtorh.</li>
+      <li><b>Mensajes</b> por WhatsApp, Instagram o Facebook: para responderte.</li>
+      <li><b>Medición con cookies de Meta (píxel):</b> solo si aceptas en el aviso. Sirve para saber qué publicaciones y anuncios nos traen clientes y para mostrar anuncios de dtorh a personas parecidas. Si no aceptas, no se carga nada de Meta en tu visita.</li>
+    </ul>
+    <p>No vendemos ni compartimos tus datos con terceros para que te contacten.</p>
+    <h2>Tus derechos (Ley 1581 de 2012)</h2>
+    <p>Puedes conocer, actualizar, corregir o pedir que borremos tus datos, y retirar tu autorización en cualquier momento. Escríbenos a <a href="mailto:dtorh.ofc@gmail.com">dtorh.ofc@gmail.com</a> y te respondemos en máximo 15 días hábiles. Si no quedas conforme, puedes acudir a la Superintendencia de Industria y Comercio.</p>
+    <h2>Cookies</h2>
+    <p>Guardamos tu decisión sobre las cookies durante un año. Puedes cambiarla cuando quieras:</p>
+    <p><button class="btn ghost" type="button" onclick="window.dtorhCookies && window.dtorhCookies()">Cambiar mi decisión sobre cookies</button></p>
+  </div>
+</section>
+</main>
+{FOOTER}
+{SCRIPTS}
+</body>
+</html>
+'''
+priv = head('Privacidad y cookies — dtorh®', 'Cómo trata dtorh tus datos: formulario, mensajes y cookies de Meta con tu consentimiento. Ley 1581 de 2012.', 'https://dtorh.click/privacidad/') + PRIV
+os.makedirs('privacidad', exist_ok=True)
+open('privacidad/index.html','w').write(priv)
+print('ok', len(home), len(trab), len(priv))

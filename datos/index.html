@@ -278,7 +278,7 @@ footer a{color:inherit}
     </section>
 
     <footer>
-      { Tus respuestas se guardan en una hoja privada de dtorh y solo se usan para preparar tus hallazgos y contactarte. Puedes pedir que las borremos escribiendo a <a href="mailto:dtorh.ofc@gmail.com">dtorh.ofc@gmail.com</a>. Ley 1581 de 2012. }
+      { Tus respuestas se guardan en una hoja privada de dtorh y solo se usan para preparar tus hallazgos y contactarte. Puedes pedir que las borremos escribiendo a <a href="mailto:dtorh.ofc@gmail.com">dtorh.ofc@gmail.com</a>. Ley 1581 de 2012. <a href="https://dtorh.click/privacidad/">Privacidad y cookies</a> }
     </footer>
   </div>
 </main>
@@ -489,6 +489,7 @@ footer a{color:inherit}
   }
   function terminar(id, d, guardado){
     try{ localStorage.removeItem(CLAVE); localStorage.setItem('dtorh-datos-enviado', id); }catch(e){}
+    if (window.dtorhEvento) window.dtorhEvento(guardado ? 'Lead' : 'Contact', { content_name: '3 hallazgos', content_category: ORIGEN });
     f.classList.add('oculto'); $('barra').classList.add('oculto');
     document.querySelector('.cab p').classList.add('oculto');
     $('final').classList.add('on');
@@ -540,5 +541,6 @@ footer a{color:inherit}
   });
 })();
 </script>
+<script src="/assets/medir.js?v=1" defer></script>
 </body>
 </html>
