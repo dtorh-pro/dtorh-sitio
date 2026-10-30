@@ -297,6 +297,7 @@ footer a{color:inherit}
   /* ===== configuración ===== */
   var DESTINO  = '573024135572';   // WhatsApp de dtorh
   var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyheilDjQzsEUT_lNjKCAW2_Lc38_b4qdfuy1inlChNSPek61tz31dOwI6lwlZWoKKW/exec';
+  var CAZADOR  = 'https://motor-dtorh.dtorh-ofc.workers.dev/api/formulario';   // el Cazador de dtorh (ficha, estudio y respuesta)
   var VERSION  = 'dtorh v2';
   var CLAVE    = 'dtorh-datos-borrador';
 
@@ -440,6 +441,8 @@ footer a{color:inherit}
 
   /* ===== llegar con datos desde un enlace (cazador, WhatsApp, sitio) ===== */
   var hubo = restaurar();
+  var PID  = (params.get('p') || '').slice(0, 200);                 // ficha del Cazador, si el enlace viene de un mensaje
+  var MODO = params.get('prueba') === '1' ? 'prueba' : 'real';      // ?prueba=1 manda a la cartera de pruebas y no toca la hoja
   if (params.get('negocio') && !$('negocio').value) $('negocio').value = params.get('negocio').slice(0,90);
   if (params.get('nombre') && !$('nombre').value) $('nombre').value = params.get('nombre').slice(0,80);
   if (params.get('ciudad') && !$('ciudad').value) $('ciudad').value = params.get('ciudad').slice(0,90);
@@ -510,18 +513,26 @@ footer a{color:inherit}
     var d = datos(), id = idNuevo();
     var paquete = Object.assign({}, d, { 'ID': id, 'Origen': ORIGEN, 'Formulario': VERSION, 'Enviado': new Date().toLocaleString('es-CO'), 'Segundos llenando': Math.round((Date.now()-inicio)/1000) });
     cargando(true); $('aviso').classList.remove('on');
-    var listo = false;
-    var reloj = setTimeout(function(){ if (!listo){ listo = true; fallo(); } }, 15000);
     function fallo(){ cargando(false); $('seguirTxt').textContent = 'Intentar de nuevo'; $('aviso').classList.add('on'); $('aviso').scrollIntoView({ block:'center' });
       seguir.onclick = null; mostrarPlanB(d, id); }
-    fetch(ENDPOINT, { method:'POST', headers:{ 'Content-Type':'text/plain;charset=utf-8' }, body: JSON.stringify(paquete) })
-      .then(function(r){ return r.text().then(function(t){ var j = null; try{ j = JSON.parse(t); }catch(e){} return { ok: r.ok, j: j }; }); })
-      .then(function(x){
-        if (listo) return; listo = true; clearTimeout(reloj);
-        if (x.j && x.j.ok === false){ fallo(); return; }
-        terminar(id, d, true);                    // ok:true, o respuesta sin JSON de Google (se guardó igual)
-      })
-      .catch(function(){ if (listo) return; listo = true; clearTimeout(reloj); fallo(); });
+    function post(url, cuerpo, ms){
+      return Promise.race([
+        fetch(url, { method:'POST', headers:{ 'Content-Type':'text/plain;charset=utf-8' }, body: JSON.stringify(cuerpo) })
+          .then(function(r){ return r.text().then(function(t){ var j = null; try{ j = JSON.parse(t); }catch(e){} return { ok: r.ok, j: j }; }); }),
+        new Promise(function(res){ setTimeout(function(){ res({ ok:false, tarde:true }); }, ms); })
+      ]).catch(function(){ return { ok:false }; });
+    }
+    // 1) el Cazador crea o une la ficha y la estudia; 2) la hoja de Google guarda el respaldo con el número de ficha
+    var aCazador = Object.assign({}, paquete, { p: PID, Modo: MODO });
+    post(CAZADOR, aCazador, 10000).then(function(c){
+      var okC = !!(c.j && c.j.ok);
+      if (MODO === 'prueba') return { okC: okC, okG: false };
+      var hoja = Object.assign({}, paquete, { 'Ficha Cazador': (c.j && c.j.ficha) || (okC ? 'sí' : 'no llegó') });
+      return post(ENDPOINT, hoja, 15000).then(function(g){
+        var okG = !g.tarde && g.ok !== false && !(g.j && g.j.ok === false);   // Google a veces responde sin JSON y sí guardó
+        return { okC: okC, okG: okG };
+      });
+    }).then(function(r){ if (r.okC || r.okG) terminar(id, d, true); else fallo(); });
   }
   function mostrarPlanB(d, id){
     var a = $('planB');
