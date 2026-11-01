@@ -1,7 +1,11 @@
-// datos.dtorh.click -> sirve la carpeta /datos del mismo sitio.
-// Lo que no exista dentro de /datos (fuentes, favicon) se sirve desde la raíz.
+// 1) www.dtorh.click y dtorh-sitio.pages.dev → dtorh.click (una sola dirección para Google: evita contenido duplicado).
+// 2) datos.dtorh.click -> sirve la carpeta /datos del mismo sitio.
+//    Lo que no exista dentro de /datos (fuentes, favicon) se sirve desde la raíz.
 export async function onRequest(ctx) {
   const url = new URL(ctx.request.url);
+  if (url.hostname === 'www.dtorh.click' || url.hostname === 'dtorh-sitio.pages.dev') {
+    return Response.redirect('https://dtorh.click' + url.pathname + url.search, 301);
+  }
   if (!url.hostname.startsWith('datos.')) return ctx.next();
   if (url.pathname.startsWith('/datos/')) return ctx.next();
   const dentro = new URL(url);
