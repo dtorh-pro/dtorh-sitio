@@ -336,16 +336,18 @@ HOME = f'''<body class="tono-noche">
           <div class="pie"><span><b>14 entregables</b></span><span><b>14 días</b> desde que nos mandas lo necesario</span><span><b>$0</b> de mensualidad</span></div>
         </div>
         <div class="precio rv">
-          <span class="tag">Precio fundador · 3 primeros negocios</span>
-          <div class="monto">$0000<small>COP</small></div>
-          <p class="antes">Después sube a <s>$0000</s> · +IVA si aplica</p>
+          <span class="tag">Cotización gratis · según lo que te falta</span>
+          <div class="monto" style="font-size:clamp(34px,4vw,48px)">Pagas solo lo que te falta</div>
+          <p class="antes">Primero revisamos tu negocio y te mandamos 3 hallazgos. Con eso te cotizamos el paquete completo o solo las piezas que necesitas.</p>
           <ul>
+            <li>{I('reporte')}Diagnóstico de 3 hallazgos sin costo</li>
+            <li>{I('moneda')}Precio fijo y por escrito antes de empezar</li>
             <li>{I('moneda')}50% para empezar, 50% al entregar</li>
-            <li>{I('catalogo')}A cambio, nos dejas mostrar tu caso</li>
+            <li>{I('escudo')}Hosting de la web gratis, sin renovaciones sorpresa</li>
           </ul>
           <div class="garantia">{I('escudo')}<span><b>Garantía</b>Si a los 14 días de recibir tus fotos, tu lista de productos y el código de Google no está publicada tu ficha ni funcionando tu catálogo de WhatsApp, te devolvemos el anticipo completo.</span></div>
-          <a class="btn lime" href="{wa('Hola, quiero el Arranque 360 con precio fundador')}" target="_blank" rel="noopener">Quiero mi Arranque 360 <span class="ar">→</span></a>
-          <p class="letra">¿Aún no estás seguro? <a href="{form('precio')}">Primero pide tus 3 hallazgos gratis</a> y decides después.</p>
+          <a class="btn lime" href="{form('precio')}">Cotiza gratis con tus 3 hallazgos <span class="ar">→</span></a>
+          <p class="letra">¿Prefieres hablar primero? <a href="{wa('Hola, quiero cotizar con dtorh')}" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>.</p>
         </div>
       </div>
     </div>
