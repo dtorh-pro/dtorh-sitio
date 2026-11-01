@@ -156,6 +156,7 @@ FOOTER = f'''<footer>
 SCRIPTS = '''<script src="/assets/lenis.min.js?v=1.3.26" defer></script>
 <script src="/assets/dtorh.js?v=8" defer></script>
 <script src="/assets/medir.js?v=2" defer></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "c61f2bddfe9c47a0b9a67eb3e39e592b"}'></script>
 '''
 
 LD = '''<script type="application/ld+json">
@@ -670,13 +671,14 @@ PRIV = f'''<body class="tono-claro">
   <div class="wrap" style="max-width:760px">
     <span class="brace">Privacidad y cookies</span>
     <h1 style="font-size:clamp(34px,5vw,56px);margin:14px 0 26px">Cómo cuidamos tus datos.</h1>
-    <p class="lead">Actualizado el 30 de octubre de 2026. Aplica a dtorh.click, datos.dtorh.click y a los mensajes que nos envíes por WhatsApp, Instagram o Facebook.</p>
+    <p class="lead">Actualizado el 1 de noviembre de 2026. Aplica a dtorh.click, datos.dtorh.click y a los mensajes que nos envíes por WhatsApp, Instagram o Facebook.</p>
     <h2>Quién es el responsable</h2>
     <p>dtorh®, estudio digital de Barranquilla, Colombia. Contacto: <a href="mailto:dtorh.ofc@gmail.com">dtorh.ofc@gmail.com</a> · WhatsApp +57 302 413 5572.</p>
     <h2>Qué datos recogemos y para qué</h2>
     <ul>
       <li><b>Formulario de los 3 hallazgos:</b> tu nombre, tu WhatsApp, el nombre y los datos públicos de tu negocio y lo que nos cuentes. Los usamos solo para preparar tus hallazgos, contactarte y, si quieres, hacerte una propuesta. Se guardan en una hoja privada de dtorh.</li>
       <li><b>Mensajes</b> por WhatsApp, Instagram o Facebook: para responderte.</li>
+      <li><b>Conteo de visitas sin cookies (Cloudflare Web Analytics):</b> cuenta cuántas personas visitan cada página y desde qué tipo de dispositivo, de forma anónima. No usa cookies ni te identifica.</li>
       <li><b>Medición con cookies de Meta (píxel):</b> solo si aceptas en el aviso. Sirve para saber qué publicaciones y anuncios nos traen clientes y para mostrar anuncios de dtorh a personas parecidas. Si no aceptas, no se carga nada de Meta en tu visita.</li>
     </ul>
     <p>No vendemos ni compartimos tus datos con terceros para que te contacten.</p>
