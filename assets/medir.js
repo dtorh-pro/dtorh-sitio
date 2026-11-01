@@ -49,7 +49,7 @@
     document.head.appendChild(css);
     var d = document.createElement('div');
     d.className = 'dt-aviso'; d.setAttribute('role','dialog'); d.setAttribute('aria-label','Aviso de cookies');
-    d.innerHTML = '<p>Usamos cookies de Meta solo para saber qué publicaciones y anuncios nos traen clientes. ¿Nos dejas medir tu visita? <a href="https://dtorh.click/privacidad/">Más información</a></p>' +
+    d.innerHTML = '<p>Usamos cookies de Meta solo para saber qué publicaciones y anuncios nos traen clientes. ¿Nos dejas medir tu visita? <a href="https://dtorh.click/privacidad/" style="text-decoration:underline">Lee cómo cuidamos tus datos</a></p>' +
       '<div class="b"><button type="button" class="no">No, gracias</button><button type="button" class="si">Acepto</button></div>';
     document.body.appendChild(d);
     document.documentElement.classList.add('con-aviso');

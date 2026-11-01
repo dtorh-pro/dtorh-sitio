@@ -81,7 +81,7 @@ def head(titulo, desc, url, extra=''):
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/fonts/inter-tight-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/inter-tight-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/dtorh.css?v=14">
+<link rel="stylesheet" href="/assets/dtorh.css?v=15">
 {extra}<script>
   document.documentElement.className+=" js";
   try{{var t=localStorage.getItem('dtorh-tema');if(t)document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}
@@ -119,7 +119,7 @@ def nav(actual=''):
   </div>
 </nav>
 <div class="hoja" id="hoja">
-  <a href="/#soluciones">{I('mapa')}Qué montamos</a>
+  <a href="/servicios/">{I('mapa')}Servicios</a>
   <a href="/#arranque">{I('moneda')}Precio</a>
   <a href="/#proceso">{I('ruta')}Cómo funciona</a>
   <a href="/laboratorio/">{I('catalogo')}Laboratorio</a>
@@ -133,13 +133,15 @@ FOOTER = f'''<footer>
   <div class="wrap">
     <div class="cols">
       <span class="mark">dtorh<i>®</i></span>
-      <a href="/#arranque">{I('moneda')}Arranque 360</a>
+      <a href="/servicios/">{I('mapa')}Servicios</a>
+      <a href="/como-trabajamos/">{I('ruta')}Cómo trabajamos</a>
       <a href="/laboratorio/">{I('catalogo')}Laboratorio</a>
       <a href="https://wa.me/573024135572" target="_blank" rel="noopener">{I('whatsapp')}+57 302 413 5572</a>
       <a href="mailto:dtorh.ofc@gmail.com">{I('correo')}dtorh.ofc@gmail.com</a>
       <a href="{IG}" target="_blank" rel="noopener" aria-label="Instagram de dtorh">{I('instagram')}@dtorh.click</a>
       <a href="{FB}" target="_blank" rel="noopener" aria-label="Facebook de dtorh">{I('facebook')}/dtorh.click</a>
     </div>
+    <div class="pie-serv"><a href="/servicios/arranque-360/">Arranque 360</a><a href="/servicios/perfil-de-empresa-google/">Ficha de Google</a><a href="/servicios/pagina-web-con-catalogo/">Página web con catálogo</a><a href="/servicios/whatsapp-business-catalogo/">WhatsApp Business</a><a href="/servicios/mejorar-pagina-web/">Mejorar tu web</a><a href="/servicios/instagram-facebook-negocio/">Instagram y Facebook</a></div>
     <p class="fine">{{ Los datos que nos compartas se usan solo para contactarte y preparar una propuesta. Puedes pedir que los eliminemos cuando quieras escribiendo a dtorh.ofc@gmail.com. Ley 1581 de 2012. <a href="/privacidad/">Privacidad y cookies</a> }}</p>
     <div class="base"><span>© <span id="anio">2026</span> dtorh® · Estudio digital · Barranquilla, Colombia</span><a href="#top">Volver arriba ↑</a></div>
   </div>
@@ -153,11 +155,14 @@ FOOTER = f'''<footer>
 
 SCRIPTS = '''<script src="/assets/lenis.min.js?v=1.3.26" defer></script>
 <script src="/assets/dtorh.js?v=8" defer></script>
-<script src="/assets/medir.js?v=1" defer></script>
+<script src="/assets/medir.js?v=2" defer></script>
 '''
 
 LD = '''<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ProfessionalService","name":"dtorh","url":"https://dtorh.click/","image":"https://dtorh.click/og.jpg","logo":"https://dtorh.click/apple-touch-icon.png","description":"Estudio digital: Google Business, Maps, página con catálogo, WhatsApp Business y redes montados en 14 días, sin mensualidad.","telephone":"+57 302 413 5572","email":"dtorh.ofc@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Barranquilla","addressRegion":"Atlántico","addressCountry":"CO"},"areaServed":{"@type":"City","name":"Barranquilla"},"sameAs":["https://www.instagram.com/dtorh.click/","https://www.facebook.com/dtorh.click/"],"makesOffer":{"@type":"Offer","name":"Arranque 360","description":"Montaje completo en 14 días, sin mensualidad."}}
+{"@context":"https://schema.org","@type":"ProfessionalService","@id":"https://dtorh.click/#org","name":"dtorh","alternateName":"dtorh estudio digital","url":"https://dtorh.click/","image":"https://dtorh.click/og.jpg","logo":"https://dtorh.click/icon-512.png","description":"Estudio digital en Barranquilla: ficha de Google y Maps, página web con catálogo, WhatsApp Business y redes para negocios pequeños, montados en 14 días, sin mensualidad.","telephone":"+57 302 413 5572","email":"dtorh.ofc@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Barranquilla","addressRegion":"Atlántico","addressCountry":"CO"},"areaServed":[{"@type":"City","name":"Barranquilla"},{"@type":"City","name":"Santa Marta"},{"@type":"City","name":"Cartagena"},{"@type":"Country","name":"Colombia"}],"knowsLanguage":"es","sameAs":["https://www.instagram.com/dtorh.click/","https://www.facebook.com/dtorh.click/"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Servicios de dtorh","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Arranque 360","url":"https://dtorh.click/servicios/arranque-360/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Ficha de Google para negocios","url":"https://dtorh.click/servicios/perfil-de-empresa-google/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Página web con catálogo","url":"https://dtorh.click/servicios/pagina-web-con-catalogo/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"WhatsApp Business con catálogo","url":"https://dtorh.click/servicios/whatsapp-business-catalogo/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Mejora de páginas web","url":"https://dtorh.click/servicios/mejorar-pagina-web/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Instagram y Facebook para negocios","url":"https://dtorh.click/servicios/instagram-facebook-negocio/"}}]}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","@id":"https://dtorh.click/#web","url":"https://dtorh.click/","name":"dtorh","inLanguage":"es-CO","publisher":{"@id":"https://dtorh.click/#org"}}
 </script>
 '''
 
@@ -252,6 +257,7 @@ HOME = f'''<body class="tono-noche">
             <p class="lead">Que al buscarte aparezcas con dirección, horario, fotos y un botón para escribirte.</p>
             <ul class="lista"><li>{I('pin')}Ficha de Google Business completa</li><li>{I('ruta')}Apple Maps, Waze y Bing</li><li>{I('web')}Página web propia con tu catálogo</li></ul>
             <a class="btn ghost" href="{form('servicio-presencia', necesita='google,web')}">Quiero aparecer <span class="ar">→</span></a>
+            <p class="detalle">Detalle: <a href="/servicios/perfil-de-empresa-google/">ficha de Google</a> · <a href="/servicios/pagina-web-con-catalogo/">página web con catálogo</a></p>
           </div>
           <div class="ptxt" data-p="1">
             <span class="cat"><span class="ico">{I('chat')}</span>Contacto</span>
@@ -259,6 +265,7 @@ HOME = f'''<body class="tono-noche">
             <p class="lead">Que vean precios sin preguntar y siempre reciban respuesta, aunque estés atendiendo.</p>
             <ul class="lista"><li>{I('catalogo')}WhatsApp Business con catálogo</li><li>{I('rayo')}Respuestas automáticas</li><li>{I('qr')}QR para el mostrador</li></ul>
             <a class="btn ghost" href="{form('servicio-contacto', necesita='whatsapp,redes')}">Ordenar mi WhatsApp <span class="ar">→</span></a>
+            <p class="detalle">Detalle: <a href="/servicios/whatsapp-business-catalogo/">WhatsApp Business</a> · <a href="/servicios/instagram-facebook-negocio/">Instagram y Facebook</a></p>
           </div>
           <div class="ptxt" data-p="2" style="--ac:var(--lime-2)">
             <span class="cat"><span class="ico">{I('rayo')}</span>Sistemas</span>
@@ -266,6 +273,7 @@ HOME = f'''<body class="tono-noche">
             <p class="lead">Lo que hoy anotas en un papel queda guardado y te avisa solo.</p>
             <ul class="lista"><li>{I('hoja')}Clientes ordenados en una hoja, con aviso</li><li>{I('estrella')}Reseñas en Google con un QR</li><li>{I('chat')}Guion para responderlas</li></ul>
             <a class="btn ghost" href="{form('servicio-sistemas', necesita='whatsapp,resenas')}">Ver qué se automatiza <span class="ar">→</span></a>
+            <p class="detalle">Detalle: <a href="/servicios/arranque-360/">Arranque 360, todo junto</a></p>
           </div>
         </div>
       </div>
@@ -324,13 +332,13 @@ HOME = f'''<body class="tono-noche">
       <div class="oferta">
         <div class="incluye rv">
           <div class="grupos">
-            <div class="grupo" style="--c:var(--cyan)"><h4><s></s>Que te encuentren</h4>
+            <div class="grupo" style="--c:var(--cyan)"><h3 class="gt"><s></s>Que te encuentren</h3>
               <ul class="lista"><li>{I('web')}Página web con catálogo</li><li>{I('pin')}Google Business y Maps</li><li>{I('ruta')}Apple Maps, Waze y Bing</li><li>{I('directorio')}Directorios locales</li></ul></div>
-            <div class="grupo" style="--c:var(--lime)"><h4><s></s>Que te escriban</h4>
+            <div class="grupo" style="--c:var(--lime)"><h3 class="gt"><s></s>Que te escriban</h3>
               <ul class="lista"><li>{I('catalogo')}WhatsApp Business con catálogo</li><li>{I('rayo')}Respuestas automáticas</li><li>{I('qr')}QR impreso para el local</li><li>{I('hoja')}Formulario conectado a una hoja</li></ul></div>
-            <div class="grupo" style="--c:var(--lime-2)"><h4><s></s>Redes</h4>
+            <div class="grupo" style="--c:var(--lime-2)"><h3 class="gt"><s></s>Redes</h3>
               <ul class="lista"><li>{I('redes')}Instagram y Facebook montados</li><li>{I('plantillas')}10 plantillas editables</li><li>{I('calendario')}Calendario de los primeros 30 días</li></ul></div>
-            <div class="grupo" style="--c:var(--azul)"><h4><s></s>Reputación y cierre</h4>
+            <div class="grupo" style="--c:var(--azul)"><h3 class="gt"><s></s>Reputación y cierre</h3>
               <ul class="lista"><li>{I('estrella')}Sistema de reseñas con QR</li><li>{I('chat')}Guion para responderlas</li><li>{I('reporte')}Reporte de entrega</li><li>{I('ajustes')}Una ronda de ajustes</li></ul></div>
           </div>
           <div class="pie"><span><b>14 entregables</b></span><span><b>14 días</b> desde que nos mandas lo necesario</span><span><b>$0</b> de mensualidad</span></div>
@@ -549,7 +557,7 @@ HOME = f'''<body class="tono-noche">
 '''
 
 home = head('dtorh® — Tu negocio existe. En internet, no.',
- 'Estudio digital en Barranquilla. Montamos en 14 días lo que tu negocio necesita para que lo encuentren y le escriban: Google y Maps, página con catálogo, WhatsApp Business y redes. Sin mensualidad.',
+ 'Estudio digital en Barranquilla: ficha de Google y Maps, página web con catálogo, WhatsApp Business y redes para tu negocio, en 14 días y sin mensualidad.',
  'https://dtorh.click/', LD) + HOME
 open('index.html','w').write(home)
 
@@ -689,3 +697,6 @@ priv = head('Privacidad y cookies — dtorh®', 'Cómo trata dtorh tus datos: fo
 os.makedirs('privacidad', exist_ok=True)
 open('privacidad/index.html','w').write(priv)
 print('ok', len(home), len(trab), len(priv))
+
+# ======================= SERVICIOS, CÓMO TRABAJAMOS Y SITEMAP =======================
+exec(open('servicios.py').read())
