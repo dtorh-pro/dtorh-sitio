@@ -1,5 +1,5 @@
 /* =====================================================================
-   dtorh® — Medición con consentimiento (Meta Pixel)
+   dtorh™ — Medición con consentimiento (Meta Pixel)
    · El píxel solo se carga si la persona acepta. Sin respuesta, no se mide.
    · La decisión se guarda en una cookie de .dtorh.click: vale para
      dtorh.click y datos.dtorh.click, se pregunta una sola vez.

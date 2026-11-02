@@ -71,7 +71,7 @@ def head(titulo, desc, url, extra=''):
 <meta property="og:description" content="{desc}">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{url}">
-<meta property="og:site_name" content="dtorh®">
+<meta property="og:site_name" content="dtorh™">
 <meta property="og:locale" content="es_CO">
 <meta property="og:image" content="https://dtorh.click/og.jpg">
 <meta property="og:image:width" content="1200">
@@ -100,7 +100,7 @@ def nav(actual=''):
     return f'''<div class="progreso" aria-hidden="true"></div>
 <nav id="nav" class="sobre-oscuro" aria-label="Principal">
   <div class="bar">
-    <a class="mark" href="/#top" aria-label="dtorh, inicio">dtorh<i>®</i></a>
+    <a class="mark" href="/#top" aria-label="dtorh, inicio">dtorh<i>™</i></a>
     <div class="links" id="links">
       <span class="ind" id="ind"></span>
       {l('/servicios/','Servicios','serv')}
@@ -136,7 +136,7 @@ def nav(actual=''):
 FOOTER = f'''<footer>
   <div class="wrap">
     <div class="cols">
-      <span class="mark">dtorh<i>®</i></span>
+      <span class="mark">dtorh<i>™</i></span>
       <a href="/servicios/">{I('mapa')}Servicios</a>
       <a href="/como-trabajamos/">{I('ruta')}Cómo trabajamos</a>
       <a href="/laboratorio/">{I('catalogo')}Laboratorio</a>
@@ -147,7 +147,7 @@ FOOTER = f'''<footer>
     </div>
     <div class="pie-serv"><a href="/servicios/arranque-360/">Arranque 360</a><a href="/servicios/perfil-de-empresa-google/">Google al día</a><a href="/servicios/pagina-web-con-catalogo/">Web con catálogo</a><a href="/servicios/whatsapp-business-catalogo/">WhatsApp que vende</a><a href="/servicios/mejorar-pagina-web/">Web al día</a><a href="/servicios/instagram-facebook-negocio/">Redes en orden</a></div>
     <p class="fine">{{ Los datos que nos compartas se usan solo para contactarte y preparar una propuesta. Puedes pedir que los eliminemos cuando quieras escribiendo a dtorh.ofc@gmail.com. Ley 1581 de 2012. <a href="/privacidad/">Privacidad y cookies</a> }}</p>
-    <div class="base"><span>© <span id="anio">2026</span> dtorh® · Estudio digital · Barranquilla, Colombia</span><a href="#top">Volver arriba ↑</a></div>
+    <div class="base"><span>© <span id="anio">2026</span> dtorh™ · Estudio digital · Barranquilla, Colombia</span><a href="#top">Volver arriba ↑</a></div>
   </div>
 </footer>
 
@@ -189,7 +189,7 @@ HOME = f'''<body class="tono-noche">
   <div class="capa-mapa" aria-hidden="true"><canvas id="mapa"></canvas></div>
   <div class="velo" aria-hidden="true"></div>
   <div class="wrap" id="heroTxt">
-    <span class="brace rv">dtorh® · Estudio digital · Barranquilla</span>
+    <span class="brace rv">dtorh™ · Estudio digital · Barranquilla</span>
     <h1><span><i>Tu negocio existe.</i></span><span><i><em>En internet, no.</em></i></span></h1>
     <p class="lead rv">Montamos en 14 días lo que hace falta para que <b>te encuentren en Google y te escriban por WhatsApp</b>. Nosotros hacemos toda la parte técnica; tú sigues atendiendo tu negocio.</p>
     <form class="buscador rv" id="buscador">
@@ -510,7 +510,7 @@ HOME = f'''<body class="tono-noche">
         <span class="brillo" aria-hidden="true"></span>
         <div class="red-portada" aria-hidden="true"><span class="calles"></span><span class="pin p1">{I('pin')}</span><span class="pin p2">{I('pin')}</span><span class="pin p3">{I('pin')}</span></div>
         <div class="red-top">
-          <span class="anillo" aria-hidden="true"><span class="cara">dtorh<i>®</i></span></span>
+          <span class="anillo" aria-hidden="true"><span class="cara">dtorh<i>™</i></span></span>
           <div class="red-id"><b>@dtorh.click</b><small>{I('instagram')}Instagram</small></div>
         </div>
         <div class="red-acciones">
@@ -523,7 +523,7 @@ HOME = f'''<body class="tono-noche">
         <span class="brillo" aria-hidden="true"></span>
         <div class="red-portada" aria-hidden="true"><span class="calles"></span><span class="pin p1">{I('pin')}</span><span class="pin p2">{I('pin')}</span><span class="pin p3">{I('pin')}</span></div>
         <div class="red-top">
-          <span class="anillo fb-anillo" aria-hidden="true"><span class="cara">dtorh<i>®</i></span></span>
+          <span class="anillo fb-anillo" aria-hidden="true"><span class="cara">dtorh<i>™</i></span></span>
           <div class="red-id"><b>dtorh.click</b><small>{I('facebook')}Facebook</small></div>
         </div>
         <div class="red-acciones">
@@ -560,7 +560,7 @@ HOME = f'''<body class="tono-noche">
 </html>
 '''
 
-home = head('Google, página web y WhatsApp para tu negocio | dtorh® Barranquilla',
+home = head('Google, página web y WhatsApp para tu negocio | dtorh™ Barranquilla',
  'Estudio digital en Barranquilla: ficha de Google y Maps, página web con catálogo, WhatsApp Business y redes para tu negocio, en 14 días y sin mensualidad.',
  'https://dtorh.click/', LD) + HOME
 open('index.html','w').write(home)
@@ -595,7 +595,7 @@ LABP = f'''<body class="tono-claro">
   <div class="plano" aria-hidden="true"></div>
   <div class="wrap lab-grid">
     <div>
-      <span class="brace rv">Laboratorio dtorh®</span>
+      <span class="brace rv">Laboratorio dtorh™</span>
       <h1><span><i>Proyectos en obra,</i></span><span><i><em>a la vista.</em></i></span></h1>
       <p class="lead rv">Aquí ves lo que estamos construyendo para cada negocio: qué necesita, qué le estamos montando y en qué etapa va. Sin maquillaje.</p>
       <div class="etapas-ley rv"><span><s class="e1"></s>Diagnóstico</span><span><s class="e2"></s>Diseño</span><span><s class="e3"></s>Desarrollo</span><span><s class="e4"></s>Lanzamiento</span></div>
@@ -662,7 +662,7 @@ addEventListener('DOMContentLoaded', function(){{
 </body>
 </html>
 '''
-trab = head('Laboratorio: proyectos web en obra para negocios | dtorh®', 'Proyectos en obra de dtorh, a la vista: qué necesita cada negocio, qué le estamos montando y en qué etapa va. Estudio digital en Barranquilla.', 'https://dtorh.click/laboratorio/') + LABP
+trab = head('Laboratorio: proyectos web en obra para negocios | dtorh™', 'Proyectos en obra de dtorh, a la vista: qué necesita cada negocio, qué le estamos montando y en qué etapa va. Estudio digital en Barranquilla.', 'https://dtorh.click/laboratorio/') + LABP
 os.makedirs('laboratorio', exist_ok=True)
 open('laboratorio/index.html','w').write(trab)
 PRIV = f'''<body class="tono-claro">
@@ -676,7 +676,7 @@ PRIV = f'''<body class="tono-claro">
     <h1 style="font-size:clamp(34px,5vw,56px);margin:14px 0 26px">Cómo cuidamos tus datos.</h1>
     <p class="lead">Actualizado el 1 de noviembre de 2026. Aplica a dtorh.click, datos.dtorh.click y a los mensajes que nos envíes por WhatsApp, Instagram o Facebook.</p>
     <h2>Quién es el responsable</h2>
-    <p>David Ricardo Torres Hernández, persona natural que opera la marca dtorh, estudio digital de Barranquilla, Colombia. Contacto: <a href="mailto:dtorh.ofc@gmail.com">dtorh.ofc@gmail.com</a> · WhatsApp +57 302 413 5572.</p>
+    <p>dtorh, estudio digital de Barranquilla, Colombia. Contacto: <a href="mailto:dtorh.ofc@gmail.com">dtorh.ofc@gmail.com</a> · WhatsApp +57 302 413 5572.</p>
     <h2>Qué datos recogemos y para qué</h2>
     <ul>
       <li><b>Formulario de los 3 hallazgos:</b> tu nombre, tu WhatsApp, el nombre y los datos públicos de tu negocio y lo que nos cuentes. Los usamos solo para preparar tus hallazgos, contactarte y, si quieres, hacerte una propuesta. Se registran en el sistema de dtorh (alojado en Cloudflare) y en una hoja privada de Google como respaldo.</li>
@@ -701,7 +701,7 @@ PRIV = f'''<body class="tono-claro">
 </body>
 </html>
 '''
-priv = head('Privacidad y cookies — dtorh®', 'Cómo trata dtorh tus datos: formulario, mensajes y cookies de Meta con tu consentimiento. Ley 1581 de 2012.', 'https://dtorh.click/privacidad/') + PRIV
+priv = head('Privacidad y cookies — dtorh™', 'Cómo trata dtorh tus datos: formulario, mensajes y cookies de Meta con tu consentimiento. Ley 1581 de 2012.', 'https://dtorh.click/privacidad/') + PRIV
 os.makedirs('privacidad', exist_ok=True)
 open('privacidad/index.html','w').write(priv)
 print('ok', len(home), len(trab), len(priv))

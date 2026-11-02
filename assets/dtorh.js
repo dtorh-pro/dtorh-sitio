@@ -1,5 +1,5 @@
 /* =====================================================================
-   dtorh® — comportamiento compartido
+   dtorh™ — comportamiento compartido
    Scroll suave (Lenis en mouse/trackpad, nativo en táctil), parallax,
    ruta entre bloques, cambio de fondo por sección y guía de scroll.
    ===================================================================== */

@@ -1,5 +1,5 @@
 /* =====================================================================
-   dtorh® — Mapa digital del hero
+   dtorh™ — Mapa digital del hero
    Una ciudad en cuadrícula (al estilo de Barranquilla, con el Magdalena).
    ○ Negocios que existen pero nadie ve  ·  ● Negocios que aparecen
    • Clientes que salen a buscar y llegan solo a los negocios visibles.

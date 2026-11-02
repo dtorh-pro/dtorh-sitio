@@ -1,6 +1,6 @@
 # dtorh.click
 
-Sitio de **dtorh®**, estudio digital (Barranquilla, Colombia).
+Sitio de **dtorh™**, estudio digital (Barranquilla, Colombia).
 Publicado con **Cloudflare Pages** (proyecto `dtorh-sitio`), conectado a este repositorio.
 
 - **Publicar = hacer push a `main`.** Cloudflare lo publica solo en ~1 minuto (plan gratis: 500 publicaciones/mes).
