@@ -6,9 +6,6 @@
 (function(){
   var raiz = document.documentElement, body = document.body;
   var quieto = raiz.classList.contains('quieto');
-  /* calma = el sistema pidió menos movimiento y nadie eligió otra cosa: se apagan solo el scroll suave, el parallax y la inclinación; el resto de las animaciones corre igual que en el celular */
-  var calma = raiz.classList.contains('calma');
-  var sinPar = quieto || calma;
   var tactil = matchMedia('(pointer: coarse)').matches || ('ontouchstart' in window && !matchMedia('(pointer: fine)').matches);
   if (tactil) raiz.classList.add('tactil');
   var TEL = '573024135572';
@@ -16,7 +13,7 @@
 
   /* ---------- scroll suave ---------- */
   var lenis = null;
-  if (!sinPar && window.Lenis){
+  if (!quieto && window.Lenis){
     lenis = new Lenis({ lerp: .095, smoothWheel: true, syncTouch: false, wheelMultiplier: 1, autoRaf: true });
   }
   function irA(dest, extra){
@@ -40,10 +37,10 @@
   /* ---------- animaciones: respeta el sistema, pero cada persona puede elegir ---------- */
   var movBtn = document.getElementById('mov');
   if (movBtn){
-    var pintaMov = function(){ var q = raiz.classList.contains('quieto'), c = raiz.classList.contains('calma'); movBtn.textContent = q ? 'Animaciones: reducidas · activar' : c ? 'Animaciones: calmadas · activar todas' : 'Animaciones: activas · reducir'; movBtn.setAttribute('aria-pressed', (q || c) ? 'false' : 'true'); };
+    var pintaMov = function(){ var q = raiz.classList.contains('quieto'); movBtn.textContent = q ? 'Animaciones: reducidas · activar' : 'Animaciones: activas · reducir'; movBtn.setAttribute('aria-pressed', q ? 'false' : 'true'); };
     pintaMov();
     movBtn.addEventListener('click', function(){
-      var q = raiz.classList.contains('quieto') || raiz.classList.contains('calma');
+      var q = raiz.classList.contains('quieto');
       try{ localStorage.setItem('dtorh-mov', q ? 'full' : 'reduced'); }catch(e){}
       location.reload();
     });
@@ -189,14 +186,14 @@
     ultimoY = y;
 
     /* hero: el texto sube más rápido que el mapa (profundidad) */
-    if (heroTxt && y < vh*1.2 && !sinPar){
+    if (heroTxt && y < vh*1.2 && !quieto){
       heroTxt.style.transform = 'translate3d(0,' + (y*.32) + 'px,0)';
       heroTxt.style.opacity = Math.max(0, 1 - y/(vh*.75));
       if (heroMapa) heroMapa.style.transform = 'translate3d(0,' + (y*.5) + 'px,0) scale(' + (1 + y/vh*.06) + ')';
     }
 
     /* parallax de ilustraciones, celulares y tarjetas */
-    if (!sinPar) pars.forEach(function(el){
+    if (!quieto) pars.forEach(function(el){
       var p = el.parentElement.getBoundingClientRect();
       if (p.bottom < -200 || p.top > vh + 200) return;
       var s = +el.getAttribute('data-par'), c = p.top + p.height/2 - vh/2;
@@ -285,7 +282,7 @@
 /* ===== tarjetas de redes: relieve que sigue el cursor ===== */
 (function(){
   var cards = document.querySelectorAll('.red-card'); if (!cards.length) return;
-  if (!matchMedia('(hover: hover) and (pointer: fine)').matches || document.documentElement.classList.contains('quieto') || document.documentElement.classList.contains('calma')) return;
+  if (!matchMedia('(hover: hover) and (pointer: fine)').matches || document.documentElement.classList.contains('quieto')) return;
   cards.forEach(function(c){
     c.addEventListener('pointermove', function(e){
       var b = c.getBoundingClientRect(), x = (e.clientX - b.left) / b.width, y = (e.clientY - b.top) / b.height;

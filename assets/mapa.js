@@ -7,8 +7,8 @@
 (function(){
   var cv = document.getElementById('mapa'); if (!cv || !cv.getContext) return;
   var hero = cv.closest('.hero'), ctx = cv.getContext('2d');
-  /* el mapa siempre se mueve; si se pide menos movimiento, va más calmado */
-  var quieto = false, calma = document.documentElement.classList.contains('quieto') || document.documentElement.classList.contains('calma');
+  /* el mapa siempre se mueve; si el sistema pide menos movimiento, va más calmado */
+  var quieto = false, calma = document.documentElement.classList.contains('quieto');
   var cuenta = document.getElementById('cuenta');
 
   var BG = '#0b0d1a', MANZANA = '#141729', MANZANA_2 = '#171a2f', PARQUE = '#11201e', RIO = '#0d1a2e';
