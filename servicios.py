@@ -33,7 +33,7 @@ SERVICIOS = [
           ('¿Hay que pagar mensualidad?', 'No. Es un pago único: 50 % para empezar y 50 % al entregar. La web queda alojada sin costo y todo queda a tu nombre. Si después quieres que la mantengamos al día, hay un plan mensual opcional que se cotiza aparte.'),
           ('¿Desde cuándo cuentan los 14 días?', 'Desde que confirmamos el anticipo y tenemos tu material: fotos, lista de productos con precios y el código de verificación que Google te envía.'),
           ('¿Y si no funciona lo que me entregan?', 'Si en el plazo acordado no está funcionando lo que te entregamos, te devolvemos el anticipo completo.')]),
-  dict(slug='perfil-de-empresa-google', id='google', icono='pin', nombre='Google al día',
+  dict(slug='perfil-de-empresa-google', id='google', icono='pin', nombre='Google completo',
     titulo='Ficha de Google para tu negocio, completa y verificada',
     desc='Creamos o reclamamos la ficha de Google de tu negocio y la dejamos completa: fotos, horario, servicios y WhatsApp. También Apple Maps, Waze y Bing. En 7 días.',
     h1='Que al buscarte en Google y en el mapa aparezcas completo.',
@@ -56,11 +56,11 @@ SERVICIOS = [
     faqs=[('¿Tengo que pagar algo todos los meses?', 'No. El alojamiento de la web no tiene costo. El dominio va incluido el primer año y desde el segundo lo renuevas tú directamente con el proveedor, porque queda a tu nombre. Si quieres que nosotros lo mantengamos al día, hay un plan mensual opcional que se cotiza aparte.'),
           ('¿La página sirve para cobrar en línea?', 'Esta web muestra tu catálogo y lleva el pedido a tu WhatsApp. Si necesitas cobrar en línea con tarjeta o PSE, lo cotizamos aparte.'),
           ('¿Qué tengo que enviar?', 'Fotos de tus productos, la lista con precios (puede ser una foto de tu menú) y tus datos. Todo se envía desde un enlace, por partes y desde el celular.'),
-          ('Ya tengo una web vieja. ¿Me sirve este servicio?', 'Si ya tienes web, no te vendemos otra: revisamos si conviene mejorarla con Web al día.')]),
+          ('Ya tengo una web vieja. ¿Me sirve este servicio?', 'Si ya tienes web, no te vendemos otra: revisamos si conviene mejorarla con Web más rápida.')]),
   dict(slug='whatsapp-business-catalogo', id='whatsapp', icono='chat', nombre='WhatsApp que vende',
     titulo='WhatsApp Business con catálogo para tu negocio',
     desc='Tu WhatsApp Business con catálogo de fotos y precios, mensajes de bienvenida y ausencia, respuestas rápidas y QR para el mostrador. Listo en 5 días.',
-    h1='Que vean tus productos y precios sin preguntar, y siempre reciban respuesta.',
+    h1='Que vean tus productos y precios sin preguntar, y reciban una respuesta enseguida.',
     lead='Dejamos tu WhatsApp Business ordenado: catálogo con fotos y precios, mensajes automáticos y un QR para tu mostrador. Listo en 5 días.',
     plazo='5 días', tipo='Configuración de WhatsApp Business',
     para=['Te escriben “¿precio?” todo el día y respondes lo mismo una y otra vez.', 'Se te quedan mensajes sin contestar mientras atiendes.', 'Tu catálogo está en fotos sueltas y no en WhatsApp.'],
@@ -69,7 +69,7 @@ SERVICIOS = [
           ('¿Esto es un bot de inteligencia artificial?', 'No. Usamos la aplicación gratuita WhatsApp Business: mensajes automáticos de bienvenida y ausencia, respuestas rápidas y catálogo. Tú sigues respondiendo como siempre, pero más rápido.'),
           ('¿Cuántos productos caben en el catálogo?', 'Cargamos los que nos envíes en tu lista con precios. Si son muchos, los organizamos por categorías.'),
           ('¿Sirve si no tengo página web?', 'Sí. El catálogo vive dentro de WhatsApp. Si además quieres página web, la cotizamos junto.')]),
-  dict(slug='mejorar-pagina-web', id='webaldia', icono='ajustes', nombre='Web al día',
+  dict(slug='mejorar-pagina-web', id='webaldia', icono='ajustes', nombre='Web más rápida',
     titulo='Mejorar tu página web: rápida en celular y lista para Google',
     desc='Arreglamos tu web actual: velocidad en celular, WhatsApp y contacto visibles, descripción para Google y SEO básico, con medición antes y después. En 7 días.',
     h1='Arreglamos la web que ya tienes para que cargue rápido y te escriban.',
@@ -220,7 +220,7 @@ CT = f'''<body class="tono-claro sv">
   <ol class="sv-pasos">{''.join(paso(i + 1, t, d) for i, (t, d) in enumerate(PASOS))}</ol>
 </div></section>
 <section class="sv-bloque"><div class="wrap sv-wrap">
-  <h2>Lo que siempre vas a tener</h2>
+  <h2>Lo que vas a tener</h2>
   <div class="sv-datos"><span>{I('reporte')}Diagnóstico gratis con pruebas</span><span>{I('hoja')}Precio fijo por escrito</span><span>{I('moneda')}50 % al empezar, 50 % al entregar</span><span>{I('escudo')}Garantía de devolución del anticipo</span><span>{I('llave')}Todo a tu nombre</span><span>{I('web')}Alojamiento de la web sin costo</span></div>
 </div></section>
 <section class="sv-bloque"><div class="wrap sv-wrap">
