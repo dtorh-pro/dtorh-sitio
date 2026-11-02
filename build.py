@@ -89,7 +89,6 @@ def head(titulo, desc, url, extra=''):
 {extra}<script>
   document.documentElement.className+=" js";
   try{{var t=localStorage.getItem('dtorh-tema');if(t)document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}
-  try{{if(/[?&]animaciones=1/.test(location.search))localStorage.setItem('dtorh-mov','full');var m=localStorage.getItem('dtorh-mov'),s=matchMedia('(prefers-reduced-motion: reduce)').matches;if(m==='reduced'||(s&&m!=='full'))document.documentElement.className+=' quieto';}}catch(e){{if(matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.className+=' quieto';}}
 </script>
 </head>
 '''
@@ -148,7 +147,7 @@ FOOTER = f'''<footer>
     </div>
     <div class="pie-serv"><a href="/servicios/arranque-360/">Arranque 360</a><a href="/servicios/perfil-de-empresa-google/">Google completo</a><a href="/servicios/pagina-web-con-catalogo/">Web con catálogo</a><a href="/servicios/whatsapp-business-catalogo/">WhatsApp que vende</a><a href="/servicios/mejorar-pagina-web/">Web más rápida</a><a href="/servicios/instagram-facebook-negocio/">Redes en orden</a></div>
     <p class="fine">{{ Los datos que nos compartas se usan solo para contactarte y preparar una propuesta. Puedes pedir que los eliminemos cuando quieras escribiendo a dtorh.ofc@gmail.com. Ley 1581 de 2012. <a href="/privacidad/">Privacidad y cookies</a> }}</p>
-    <div class="base"><button type="button" class="mov-btn" id="mov" aria-pressed="false"></button><span>© <span id="anio">2026</span> dtorh™ · Estudio digital · Barranquilla, Colombia</span><a href="#top">Volver arriba ↑</a></div>
+    <div class="base"><span>© <span id="anio">2026</span> dtorh™ · Estudio digital · Barranquilla, Colombia</span><a href="#top">Volver arriba ↑</a></div>
   </div>
 </footer>
 
@@ -556,7 +555,7 @@ HOME = f'''<body class="tono-noche">
 
 </main>
 {FOOTER}
-{SCRIPTS}<script src="/assets/mapa.js?v=6" defer></script>
+{SCRIPTS}<script src="/assets/mapa.js?v=5" defer></script>
 </body>
 </html>
 '''

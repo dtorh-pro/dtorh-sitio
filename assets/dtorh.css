@@ -539,7 +539,11 @@ footer .base{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 
 html:not(.js) .rv{opacity:1;transform:none}
 html:not(.js) h1 span > i{transform:none}
 [data-par]{will-change:transform}
-html.quieto h1 span > i{transform:none!important;animation:none!important}html.quieto.js .rv{transform:none;transition:opacity .4s ease}html.quieto .vitrina .orbita,html.quieto .m-pin,html.quieto .s-tabla div.nueva,html.quieto .guia .raton::after,html.quieto .guia .dedo::before{animation:none}
+@media (prefers-reduced-motion: reduce){
+  h1 span > i{transform:none!important;animation:none!important}
+  .js .rv{transform:none;transition:opacity .4s ease}
+  .vitrina .orbita,.m-pin,.s-tabla div.nueva,.guia .raton::after,.guia .dedo::before{animation:none}
+}
 
 /* ===== personas: solo en avatar circular (siempre completas) ===== */
 .avatar{position:relative;display:block;width:100%;aspect-ratio:1;border-radius:50%;overflow:hidden;background:var(--fondo,#efe7ff);box-shadow:inset 0 0 0 1px rgba(20,10,60,.06)}
@@ -594,7 +598,7 @@ html.quieto h1 span > i{transform:none!important;animation:none!important}html.q
 .enlace .viajero{position:absolute;top:50%;left:0;width:10px;height:10px;margin-top:-5px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 5px rgba(36,174,255,.2);animation:viaja 3.6s var(--ease) infinite}
 @keyframes viaja{0%{left:0;opacity:0}10%{opacity:1}90%{opacity:1}100%{left:calc(100% - 10px);opacity:0}}
 @media(max-width:560px){.enlace .nodo{width:34px;height:34px}.enlace .n3{display:none}}
-html.quieto .enlace .viajero,html.quieto .vx.listo .a2{animation:none}
+@media (prefers-reduced-motion: reduce){.enlace .viajero,.vx.listo .a2{animation:none}}
 
 /* ===== /trabajos/: tarjeta "el siguiente" ===== */
 .t-mapita{position:absolute;right:18px;bottom:18px;width:120px;height:90px;border-radius:14px;background:var(--canvas-2);overflow:hidden;border:1px solid var(--hair)}
@@ -723,7 +727,7 @@ html.quieto .enlace .viajero,html.quieto .vx.listo .a2{animation:none}
   .obra{height:min(300px,74vw);margin-top:8px}
   .cota.cy{display:none}
 }
-html.quieto .plano{animation:none}html.quieto .ob-b,html.quieto .ob-b .ic{animation:none;opacity:1;background:var(--f);border-color:transparent}html.quieto .ob-tag,html.quieto .ob-cursor{animation:none;display:none}
+@media (prefers-reduced-motion: reduce){.plano{animation:none}.ob-b,.ob-b .ic{animation:none;opacity:1;background:var(--f);border-color:transparent}.ob-tag,.ob-cursor{animation:none;display:none}}
 
 /* tarjetas del laboratorio */
 .t-estado.en-obra s{background:var(--lime-2);box-shadow:0 0 0 3px rgba(192,74,255,.22)}
@@ -789,7 +793,7 @@ html.quieto .plano{animation:none}html.quieto .ob-b,html.quieto .ob-b .ic{animat
   .red-id b{font-size:18px}
   .red-acciones a{padding:12px;font-size:14.5px}
 }
-html.quieto .anillo,html.quieto .red-portada .calles,html.quieto .red-portada .pin{animation:none}
+@media (prefers-reduced-motion:reduce){.anillo,.red-portada .calles,.red-portada .pin{animation:none}}
 
 /* ===== página legal ===== */
 .legal h2{font-size:22px;letter-spacing:-.025em;margin:34px 0 10px}
@@ -831,6 +835,3 @@ html.quieto .anillo,html.quieto .red-portada .calles,html.quieto .red-portada .p
 .sv-otro .ic{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.7;flex:0 0 24px}.sv-otro small{display:block;color:var(--ash);font-size:13px}
 .sv-card{flex-direction:column;align-items:flex-start;padding:20px}.sv-card b,.sv-card .sv-card-t{font-size:19px;margin:0;font-weight:600;letter-spacing:-.01em;line-height:1.25}.sv-card p{margin:0;color:var(--ash);font-size:15px;line-height:1.5}.sv-card small{color:var(--lime);font-weight:500}
 .sv-ic .ic{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.7}
-
-/* interruptor de animaciones (pie de página) */
-.mov-btn{background:none;border:1px solid var(--borde,rgba(120,120,160,.3));color:inherit;font:inherit;font-size:13px;padding:6px 12px;border-radius:999px;cursor:pointer;opacity:.85}.mov-btn:hover,.mov-btn:focus-visible{opacity:1}

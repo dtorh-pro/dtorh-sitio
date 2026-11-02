@@ -5,7 +5,7 @@
    ===================================================================== */
 (function(){
   var raiz = document.documentElement, body = document.body;
-  var quieto = raiz.classList.contains('quieto');
+  var quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var tactil = matchMedia('(pointer: coarse)').matches || ('ontouchstart' in window && !matchMedia('(pointer: fine)').matches);
   if (tactil) raiz.classList.add('tactil');
   var TEL = '573024135572';
@@ -33,18 +33,6 @@
     irA(url.hash === '#top' ? 0 : el);
     history.replaceState(null, '', url.hash === '#top' ? location.pathname : url.hash);
   });
-
-  /* ---------- animaciones: respeta el sistema, pero cada persona puede elegir ---------- */
-  var movBtn = document.getElementById('mov');
-  if (movBtn){
-    var pintaMov = function(){ var q = raiz.classList.contains('quieto'); movBtn.textContent = q ? 'Animaciones: reducidas · activar' : 'Animaciones: activas · reducir'; movBtn.setAttribute('aria-pressed', q ? 'false' : 'true'); };
-    pintaMov();
-    movBtn.addEventListener('click', function(){
-      var q = raiz.classList.contains('quieto');
-      try{ localStorage.setItem('dtorh-mov', q ? 'full' : 'reduced'); }catch(e){}
-      location.reload();
-    });
-  }
 
   /* ---------- tema ---------- */
   var tema = document.getElementById('tema');
@@ -282,7 +270,7 @@
 /* ===== tarjetas de redes: relieve que sigue el cursor ===== */
 (function(){
   var cards = document.querySelectorAll('.red-card'); if (!cards.length) return;
-  if (!matchMedia('(hover: hover) and (pointer: fine)').matches || document.documentElement.classList.contains('quieto')) return;
+  if (!matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   cards.forEach(function(c){
     c.addEventListener('pointermove', function(e){
       var b = c.getBoundingClientRect(), x = (e.clientX - b.left) / b.width, y = (e.clientY - b.top) / b.height;

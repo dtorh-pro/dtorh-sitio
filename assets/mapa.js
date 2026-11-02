@@ -8,7 +8,7 @@
   var cv = document.getElementById('mapa'); if (!cv || !cv.getContext) return;
   var hero = cv.closest('.hero'), ctx = cv.getContext('2d');
   /* el mapa siempre se mueve; si el sistema pide menos movimiento, va más calmado */
-  var quieto = false, calma = document.documentElement.classList.contains('quieto');
+  var quieto = false, calma = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var cuenta = document.getElementById('cuenta');
 
   var BG = '#0b0d1a', MANZANA = '#141729', MANZANA_2 = '#171a2f', PARQUE = '#11201e', RIO = '#0d1a2e';
