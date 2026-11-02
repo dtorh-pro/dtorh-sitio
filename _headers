@@ -3,7 +3,8 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: SAMEORIGIN
-  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), browsing-topics=(), payment=(), usb=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.facebook.com; connect-src 'self' https://cloudflareinsights.com https://motor-dtorh.dtorh-ofc.workers.dev https://script.google.com https://script.googleusercontent.com https://www.facebook.com https://connect.facebook.net; frame-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
   Cross-Origin-Opener-Policy: same-origin-allow-popups
 
 # Archivos internos: que no los indexe nadie
@@ -12,6 +13,8 @@
 /servicios.py
   X-Robots-Tag: noindex
 /README.md
+  X-Robots-Tag: noindex
+/lastmod.json
   X-Robots-Tag: noindex
 
 # Recursos con versión en la URL: caché larga

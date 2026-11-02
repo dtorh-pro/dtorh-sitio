@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-CO">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -105,6 +105,7 @@ input[type=date]{min-height:28px}
 .permiso.on .caja svg{opacity:1}
 .permiso b{color:var(--ink);font-weight:500}
 .permiso.mal{border-color:var(--err)}
+.permiso:focus-within{outline:3px solid var(--lime);outline-offset:2px}
 .trampa{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .barra{position:fixed;left:0;right:0;bottom:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--hair);padding:12px 0 calc(12px + env(safe-area-inset-bottom,0px))}
 .barra .wrap{display:flex;gap:10px}
@@ -174,13 +175,13 @@ footer a{color:inherit}
       <section class="paso on" data-paso="0" aria-label="Paso 1 de 3: tú">
         <div class="campo" data-req>
           <label for="nombre">Tu nombre</label>
-          <input id="nombre" name="Responde" autocomplete="name" placeholder="Nombre y apellido" maxlength="80">
-          <span class="error">Escribe tu nombre para saber a quién le escribimos.</span>
+          <input id="nombre" name="Responde" aria-required="true" aria-describedby="err-nombre" autocomplete="name" placeholder="Nombre y apellido" maxlength="80">
+          <span class="error" id="err-nombre">Escribe tu nombre para saber a quién le escribimos.</span>
         </div>
         <div class="campo" data-req data-tipo="tel">
           <label for="whatsapp">Tu WhatsApp</label>
-          <div class="tel"><b>+57</b><input id="whatsapp" name="WhatsApp" inputmode="tel" autocomplete="tel-national" placeholder="300 000 0000" maxlength="16"></div>
-          <span class="error">Revisa el número: deben ser 10 dígitos, empezando por 3.</span>
+          <div class="tel"><b>+57</b><input id="whatsapp" name="WhatsApp" type="tel" inputmode="tel" aria-required="true" aria-describedby="err-whatsapp" autocomplete="tel-national" placeholder="300 000 0000" maxlength="16"></div>
+          <span class="error" id="err-whatsapp">Revisa el número: deben ser 10 dígitos, empezando por 3.</span>
         </div>
       </section>
 
@@ -188,8 +189,8 @@ footer a{color:inherit}
       <section class="paso" data-paso="1" aria-label="Paso 2 de 3: tu negocio">
         <div class="campo" data-req>
           <label for="negocio">Nombre del negocio</label>
-          <input id="negocio" name="Nombre del negocio" autocomplete="organization" placeholder="Como aparece en el aviso" maxlength="90">
-          <span class="error">Necesitamos el nombre para buscarte en Google.</span>
+          <input id="negocio" name="Nombre del negocio" aria-required="true" aria-describedby="err-negocio" autocomplete="organization" placeholder="Como aparece en el aviso" maxlength="90">
+          <span class="error" id="err-negocio">Necesitamos el nombre para buscarte en Google.</span>
         </div>
         <div class="campo">
           <label for="ciudad">Ciudad y barrio <small>· o centro comercial</small></label>
@@ -256,7 +257,7 @@ footer a{color:inherit}
         <label class="permiso" id="permiso">
           <input type="checkbox" id="permisoCheck">
           <span class="caja"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>
-          <span><b>Autorizo a dtorh a guardar estos datos</b> para preparar mis hallazgos y contactarme por WhatsApp. Puedo pedir que los borren cuando quiera. Ley 1581 de 2012.</span>
+          <span><b>Autorizo a dtorh a tratar estos datos</b> para preparar mis hallazgos y contactarme por WhatsApp, según la <a href="https://dtorh.click/privacidad/" target="_blank" rel="noopener">política de privacidad</a> (incluye los proveedores que nos ayudan a procesarlos). Puedo pedir que los borren cuando quiera. Ley 1581 de 2012.</span>
         </label>
         <p class="aviso" id="aviso">No pudimos enviarlo (puede ser la conexión). Tus respuestas siguen guardadas en este celular: vuelve a intentar o mándanoslas por WhatsApp.</p>
       </section>
@@ -278,7 +279,7 @@ footer a{color:inherit}
     </section>
 
     <footer>
-      { Tus respuestas se guardan en una hoja privada de dtorh y solo se usan para preparar tus hallazgos y contactarte. Puedes pedir que las borremos escribiendo a <a href="mailto:dtorh.ofc@gmail.com">dtorh.ofc@gmail.com</a>. Ley 1581 de 2012. <a href="https://dtorh.click/privacidad/">Privacidad y cookies</a> }
+      { Tus respuestas se registran en el sistema de dtorh (Cloudflare) y en una hoja privada de Google, y solo se usan para preparar tus hallazgos y contactarte. Puedes pedir que las borremos escribiendo a <a href="mailto:dtorh.ofc@gmail.com">dtorh.ofc@gmail.com</a>. Ley 1581 de 2012. <a href="https://dtorh.click/privacidad/">Privacidad y cookies</a> }
     </footer>
   </div>
 </main>
@@ -349,7 +350,8 @@ footer a{color:inherit}
     var activas = [].slice.call(document.querySelectorAll('[data-redes] .chip[aria-pressed="true"]:not([data-solo])'));
     redesCaja.innerHTML = activas.map(function(c){
       var r = c.getAttribute('data-v');
-      return '<div class="sub"><label>' + r + '</label><input data-red="' + r + '" placeholder="' + c.getAttribute('data-ph') + '" maxlength="120"></div>';
+      var rid = 'red-' + r.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      return '<div class="sub"><label for="' + rid + '">' + r + '</label><input id="' + rid + '" data-red="' + r + '" placeholder="' + c.getAttribute('data-ph') + '" maxlength="120"></div>';
     }).join('');
     redesCaja.querySelectorAll('input').forEach(function(i){ i.value = previos[i.getAttribute('data-red')] || ''; });
     redesCaja.classList.toggle('oculto', !activas.length);
@@ -371,6 +373,7 @@ footer a{color:inherit}
     var i = campo.querySelector('input'), v = i.value.trim(), ok = !!v;
     if (campo.getAttribute('data-tipo') === 'tel') ok = /^3\d{9}$/.test(soloDigitos(v));
     campo.classList.toggle('mal', !ok);
+    i.setAttribute('aria-invalid', ok ? 'false' : 'true');
     return ok;
   }
   document.querySelectorAll('[data-req] input').forEach(function(i){
@@ -552,6 +555,6 @@ footer a{color:inherit}
   });
 })();
 </script>
-<script src="/assets/medir.js?v=1" defer></script>
+<script src="/assets/medir.js?v=d7ad3217" defer></script>
 </body>
 </html>

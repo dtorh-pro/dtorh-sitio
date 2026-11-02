@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /fit-snack-market/
 
 Sitemap: https://dtorh.click/sitemap.xml

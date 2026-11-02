@@ -52,11 +52,11 @@ SERVICIOS = [
     lead='Tu página web, hecha para celular, con tu catálogo, tus precios y un botón de WhatsApp. Lista en 10 días, con dominio a tu nombre y sin mensualidad.',
     plazo='10 días', tipo='Diseño de página web',
     para=['Vendes por Instagram o WhatsApp y te toca mandar fotos y precios a cada persona.', 'Al buscar tu negocio en Google no sale una página tuya.', 'Quieres una web sencilla y rápida, sin pagar todos los meses.'],
-    incluye=['Página web adaptada a celular con hasta 30 productos o servicios', 'Botón de WhatsApp, mapa, horario y redes', 'Dominio .com o .co el primer año, a tu nombre', 'Hosting gratis para siempre: sin renovaciones sorpresa'],
+    incluye=['Página web adaptada a celular con hasta 30 productos o servicios', 'Botón de WhatsApp, mapa, horario y redes', 'Dominio .com o .co el primer año, a tu nombre', 'Alojamiento de la web sin costo mensual: sin renovaciones sorpresa'],
     faqs=[('¿Tengo que pagar algo todos los meses?', 'No. El alojamiento de la web no tiene costo. El dominio va incluido el primer año y desde el segundo lo renuevas tú directamente con el proveedor, porque queda a tu nombre.'),
           ('¿La página sirve para cobrar en línea?', 'Esta web muestra tu catálogo y lleva el pedido a tu WhatsApp. Si necesitas cobrar en línea con tarjeta o PSE, lo cotizamos aparte.'),
           ('¿Qué tengo que enviar?', 'Fotos de tus productos, la lista con precios (puede ser una foto de tu menú) y tus datos. Todo se envía desde un enlace, por partes y desde el celular.'),
-          ('¿Ya tengo una web vieja. ¿Me sirve este servicio?', 'Si ya tienes web, no te vendemos otra: revisamos si conviene mejorarla con Web al día.')]),
+          ('Ya tengo una web vieja. ¿Me sirve este servicio?', 'Si ya tienes web, no te vendemos otra: revisamos si conviene mejorarla con Web al día.')]),
   dict(slug='whatsapp-business-catalogo', id='whatsapp', icono='chat', nombre='WhatsApp que vende',
     titulo='WhatsApp Business con catálogo para tu negocio',
     desc='Tu WhatsApp Business con catálogo de fotos y precios, mensajes de bienvenida y ausencia, respuestas rápidas y QR para el mostrador. Listo en 5 días.',
@@ -113,7 +113,7 @@ def cuerpo_servicio(s):
     return f'''<body class="tono-claro sv">
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 {SPRITE}
-{nav()}
+{nav('serv')}
 <main id="contenido">
 <section class="sec sv-hero" data-tono="claro">
   <div class="wrap sv-wrap">
@@ -159,7 +159,7 @@ def cuerpo_servicio(s):
 def ld_servicio(s):
     url = f'{BASE}/servicios/{s["slug"]}/'
     return ld({'@context': 'https://schema.org', '@type': 'Service', '@id': url + '#servicio', 'name': s['nombre'], 'serviceType': s['tipo'], 'description': s['desc'], 'url': url,
-               'provider': {'@id': ORG_ID}, 'areaServed': [{'@type': 'City', 'name': z} if z != 'Colombia' else {'@type': 'Country', 'name': z} for z in ZONAS],
+               'provider': {'@type': 'Organization', '@id': ORG_ID, 'name': 'dtorh', 'url': BASE + '/'}, 'areaServed': [{'@type': 'City', 'name': z} if z != 'Colombia' else {'@type': 'Country', 'name': z} for z in ZONAS],
                'hasOfferCatalog': {'@type': 'OfferCatalog', 'name': s['nombre'], 'itemListElement': [{'@type': 'Offer', 'itemOffered': {'@type': 'Service', 'name': x}} for x in s['incluye']]}},
               faq_ld(s['faqs']), migas([('Inicio', '/'), ('Servicios', '/servicios/'), (s['nombre'], f'/servicios/{s["slug"]}/')]))
 
@@ -174,7 +174,7 @@ for s in SERVICIOS:
 HUB = f'''<body class="tono-claro sv">
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 {SPRITE}
-{nav()}
+{nav('serv')}
 <main id="contenido">
 <section class="sec sv-hero" data-tono="claro"><div class="wrap sv-wrap">
   <div class="sv-migas" role="navigation" aria-label="Estás en"><a href="/">Inicio</a> › <span>Servicios</span></div>
@@ -184,7 +184,7 @@ HUB = f'''<body class="tono-claro sv">
   <div class="sv-cta"><a class="btn lime" href="{form('servicios')}">{I('reporte')}Cotiza gratis con tus 3 hallazgos</a></div>
 </div></section>
 <section class="sv-bloque"><div class="wrap sv-wrap"><div class="sv-grid">
-{''.join(f'<a class="sv-card" href="/servicios/{s["slug"]}/"><span class="sv-ic">{I(s["icono"])}</span><b>{s["nombre"]}</b><p>{s["lead"]}</p><small>Listo en {s["plazo"]} →</small></a>' for s in SERVICIOS)}
+{''.join(f'<a class="sv-card" href="/servicios/{s["slug"]}/"><span class="sv-ic">{I(s["icono"])}</span><h2 class="sv-card-t">{s["nombre"]}</h2><p>{s["lead"]}</p><small>Listo en {s["plazo"]} →</small></a>' for s in SERVICIOS)}
 </div>
 <p class="sv-nota">¿No sabes cuál necesitas? <a href="{form('servicios-nosabe')}">Pide tus 3 hallazgos gratis</a> y te decimos qué te falta, con pruebas.</p>
 </div></section>
@@ -243,8 +243,16 @@ open('como-trabajamos/index.html', 'w').write(head('Cómo trabajamos: diagnósti
 
 # ── sitemap con fecha de hoy ──
 sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+import hashlib
+try: LM = json.load(open('lastmod.json'))
+except Exception: LM = {}
 for u, pr in PAGINAS:
-    sm.append(f'  <url><loc>{BASE}{u}</loc><lastmod>{HOY}</lastmod><priority>{pr}</priority></url>')
+    f = (u.strip('/') + '/index.html') if u != '/' else 'index.html'
+    try: hsh = hashlib.sha1(open(f, 'rb').read()).hexdigest()
+    except Exception: hsh = ''
+    if LM.get(u, {}).get('h') != hsh: LM[u] = {'h': hsh, 'f': HOY}
+    sm.append(f'  <url><loc>{BASE}{u}</loc><lastmod>{LM[u]["f"]}</lastmod><priority>{pr}</priority></url>')
+json.dump(LM, open('lastmod.json', 'w'), indent=1)
 sm.append('</urlset>')
 open('sitemap.xml', 'w').write('\n'.join(sm) + '\n')
 print('servicios ok', len(SERVICIOS), 'páginas; sitemap', len(PAGINAS), 'URL')

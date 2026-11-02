@@ -55,9 +55,13 @@ def form(ref, **kw):
     from urllib.parse import urlencode
     return FORM + '?' + urlencode(dict(kw, ref=ref))
 
+import hashlib
+def V(ruta):
+    return hashlib.sha1(open(ruta,'rb').read()).hexdigest()[:8]
+
 def head(titulo, desc, url, extra=''):
     return f'''<!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es-CO" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -81,7 +85,7 @@ def head(titulo, desc, url, extra=''):
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/fonts/inter-tight-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/inter-tight-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/dtorh.css?v=15">
+<link rel="stylesheet" href="/assets/dtorh.css?v={V("assets/dtorh.css")}">
 {extra}<script>
   document.documentElement.className+=" js";
   try{{var t=localStorage.getItem('dtorh-tema');if(t)document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}
@@ -99,9 +103,9 @@ def nav(actual=''):
     <a class="mark" href="/#top" aria-label="dtorh, inicio">dtorh<i>®</i></a>
     <div class="links" id="links">
       <span class="ind" id="ind"></span>
-      {l('/#soluciones','Qué montamos','sol')}
+      {l('/servicios/','Servicios','serv')}
       {l('/#arranque','Precio','pre')}
-      {l('/#proceso','Cómo funciona','pro')}
+      {l('/como-trabajamos/','Cómo funciona','pro')}
       {l('/laboratorio/','Laboratorio','lab')}
       {l('/#preguntas','Preguntas','faq')}
     </div>
@@ -141,7 +145,7 @@ FOOTER = f'''<footer>
       <a href="{IG}" target="_blank" rel="noopener" aria-label="Instagram de dtorh">{I('instagram')}@dtorh.click</a>
       <a href="{FB}" target="_blank" rel="noopener" aria-label="Facebook de dtorh">{I('facebook')}/dtorh.click</a>
     </div>
-    <div class="pie-serv"><a href="/servicios/arranque-360/">Arranque 360</a><a href="/servicios/perfil-de-empresa-google/">Ficha de Google</a><a href="/servicios/pagina-web-con-catalogo/">Página web con catálogo</a><a href="/servicios/whatsapp-business-catalogo/">WhatsApp Business</a><a href="/servicios/mejorar-pagina-web/">Mejorar tu web</a><a href="/servicios/instagram-facebook-negocio/">Instagram y Facebook</a></div>
+    <div class="pie-serv"><a href="/servicios/arranque-360/">Arranque 360</a><a href="/servicios/perfil-de-empresa-google/">Google al día</a><a href="/servicios/pagina-web-con-catalogo/">Web con catálogo</a><a href="/servicios/whatsapp-business-catalogo/">WhatsApp que vende</a><a href="/servicios/mejorar-pagina-web/">Web al día</a><a href="/servicios/instagram-facebook-negocio/">Redes en orden</a></div>
     <p class="fine">{{ Los datos que nos compartas se usan solo para contactarte y preparar una propuesta. Puedes pedir que los eliminemos cuando quieras escribiendo a dtorh.ofc@gmail.com. Ley 1581 de 2012. <a href="/privacidad/">Privacidad y cookies</a> }}</p>
     <div class="base"><span>© <span id="anio">2026</span> dtorh® · Estudio digital · Barranquilla, Colombia</span><a href="#top">Volver arriba ↑</a></div>
   </div>
@@ -153,14 +157,13 @@ FOOTER = f'''<footer>
 <button class="guia" id="guia" type="button" aria-label="Bajar a la siguiente sección"><span class="raton"></span><span class="dedo"></span><b>Baja para descubrir</b></button>
 '''
 
-SCRIPTS = '''<script src="/assets/lenis.min.js?v=1.3.26" defer></script>
-<script src="/assets/dtorh.js?v=8" defer></script>
-<script src="/assets/medir.js?v=2" defer></script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "c61f2bddfe9c47a0b9a67eb3e39e592b"}'></script>
-'''
+SCRIPTS = ('<script src="/assets/lenis.min.js?v=1.3.26" defer></script>\n'
+  + '<script src="/assets/dtorh.js?v=' + V('assets/dtorh.js') + '" defer></script>\n'
+  + '<script src="/assets/medir.js?v=' + V('assets/medir.js') + '" defer></script>\n'
+  + '<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon=\'{"token": "c61f2bddfe9c47a0b9a67eb3e39e592b"}\'></script>\n')
 
 LD = '''<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ProfessionalService","@id":"https://dtorh.click/#org","name":"dtorh","alternateName":"dtorh estudio digital","url":"https://dtorh.click/","image":"https://dtorh.click/og.jpg","logo":"https://dtorh.click/icon-512.png","description":"Estudio digital en Barranquilla: ficha de Google y Maps, página web con catálogo, WhatsApp Business y redes para negocios pequeños, montados en 14 días, sin mensualidad.","telephone":"+57 302 413 5572","email":"dtorh.ofc@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Barranquilla","addressRegion":"Atlántico","addressCountry":"CO"},"areaServed":[{"@type":"City","name":"Barranquilla"},{"@type":"City","name":"Santa Marta"},{"@type":"City","name":"Cartagena"},{"@type":"Country","name":"Colombia"}],"knowsLanguage":"es","sameAs":["https://www.instagram.com/dtorh.click/","https://www.facebook.com/dtorh.click/"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Servicios de dtorh","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Arranque 360","url":"https://dtorh.click/servicios/arranque-360/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Ficha de Google para negocios","url":"https://dtorh.click/servicios/perfil-de-empresa-google/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Página web con catálogo","url":"https://dtorh.click/servicios/pagina-web-con-catalogo/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"WhatsApp Business con catálogo","url":"https://dtorh.click/servicios/whatsapp-business-catalogo/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Mejora de páginas web","url":"https://dtorh.click/servicios/mejorar-pagina-web/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Instagram y Facebook para negocios","url":"https://dtorh.click/servicios/instagram-facebook-negocio/"}}]}}
+{"@context":"https://schema.org","@type":"Organization","@id":"https://dtorh.click/#org","name":"dtorh","alternateName":"dtorh estudio digital","url":"https://dtorh.click/","image":"https://dtorh.click/og.jpg","logo":"https://dtorh.click/icon-512.png","description":"Estudio digital en Barranquilla: ficha de Google y Maps, página web con catálogo, WhatsApp Business y redes para negocios pequeños, montados en 14 días, sin mensualidad.","telephone":"+57 302 413 5572","email":"dtorh.ofc@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Barranquilla","addressRegion":"Atlántico","addressCountry":"CO"},"areaServed":[{"@type":"City","name":"Barranquilla"},{"@type":"City","name":"Santa Marta"},{"@type":"City","name":"Cartagena"},{"@type":"Country","name":"Colombia"}],"knowsLanguage":"es","sameAs":["https://www.instagram.com/dtorh.click/","https://www.facebook.com/dtorh.click/"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Servicios de dtorh","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Arranque 360","url":"https://dtorh.click/servicios/arranque-360/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Google al día","url":"https://dtorh.click/servicios/perfil-de-empresa-google/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Web con catálogo","url":"https://dtorh.click/servicios/pagina-web-con-catalogo/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"WhatsApp que vende","url":"https://dtorh.click/servicios/whatsapp-business-catalogo/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Web al día","url":"https://dtorh.click/servicios/mejorar-pagina-web/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Redes en orden","url":"https://dtorh.click/servicios/instagram-facebook-negocio/"}}]}}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","@id":"https://dtorh.click/#web","url":"https://dtorh.click/","name":"dtorh","inLanguage":"es-CO","publisher":{"@id":"https://dtorh.click/#org"}}
@@ -192,7 +195,7 @@ HOME = f'''<body class="tono-noche">
     <form class="buscador rv" id="buscador">
       {I('buscar')}
       <input id="q" type="text" autocomplete="off" enterkeyhint="send" placeholder="¿Qué vendes? Ej: postres, ropa, repuestos…" aria-label="¿Qué vendes?">
-      <button type="submit" aria-label="Pedir mis 3 hallazgos gratis"><span>Empezar</span>{I('flecha')}</button>
+      <button type="submit" aria-label="Empezar: pedir mis 3 hallazgos gratis"><span>Empezar</span>{I('flecha')}</button>
     </form>
     <div class="chips rv">
       <a class="chip" href="{form('hero')}">Quiero mis 3 hallazgos gratis</a>
@@ -312,7 +315,7 @@ HOME = f'''<body class="tono-noche">
         </div>
         <div class="flota f1" data-p="0"><span class="ico" style="--ac:var(--cyan)">{I('pin')}</span><div><b>Apareces en Maps</b><small>Con fotos y horario</small></div></div>
         <div class="flota f2" data-p="0"><span class="ico">{I('ruta')}</span><div><b>Te piden la ruta</b><small>Waze · Apple Maps</small></div></div>
-        <div class="flota f1" data-p="1"><span class="ico">{I('rayo')}</span><div><b>Respondió solo</b><small>A las 10:24 p. m.</small></div></div>
+        <div class="flota f1" data-p="1"><span class="ico">{I('rayo')}</span><div><b>Respondió solo</b><small>A las 10:24 a. m.</small></div></div>
         <div class="flota f2" data-p="1"><span class="ico">{I('qr')}</span><div><b>QR en el mostrador</b><small>Escanean y escriben</small></div></div>
         <div class="flota f1" data-p="2"><span class="ico" style="--ac:var(--lime-2)">{I('hoja')}</span><div><b>Llegó a tu hoja</b><small>Con aviso al correo</small></div></div>
         <div class="flota f2" data-p="2"><span class="ico" style="--ac:#e7a20a">{I('estrella')}</span><div><b>Nueva reseña</b><small>Desde el QR</small></div></div>
@@ -326,7 +329,7 @@ HOME = f'''<body class="tono-noche">
   <div class="wrap">
     <div class="cab">
       <span class="brace rv" data-parada="izq">Arranque 360</span>
-      <h2 class="rv">Todo montado de una vez. <em>Pagas una sola vez.</em></h2>
+      <h2 class="rv">Todo montado de una vez. <em>Sin mensualidad.</em></h2>
       <p class="lead rv">Un solo paquete con principio y fin. Te lo entregamos funcionando y queda a tu nombre.</p>
     </div>
     <div class="oferta-wrap">
@@ -342,7 +345,7 @@ HOME = f'''<body class="tono-noche">
             <div class="grupo" style="--c:var(--azul)"><h3 class="gt"><s></s>Reputación y cierre</h3>
               <ul class="lista"><li>{I('estrella')}Sistema de reseñas con QR</li><li>{I('chat')}Guion para responderlas</li><li>{I('reporte')}Reporte de entrega</li><li>{I('ajustes')}Una ronda de ajustes</li></ul></div>
           </div>
-          <div class="pie"><span><b>14 entregables</b></span><span><b>14 días</b> desde que nos mandas lo necesario</span><span><b>$0</b> de mensualidad</span></div>
+          <div class="pie"><span><b>15 entregables</b></span><span><b>14 días</b> desde que nos mandas lo necesario</span><span><b>$0</b> de mensualidad</span></div>
         </div>
         <div class="precio rv">
           <span class="tag">Cotización gratis · según lo que te falta</span>
@@ -354,7 +357,7 @@ HOME = f'''<body class="tono-noche">
             <li>{I('moneda')}50% para empezar, 50% al entregar</li>
             <li>{I('escudo')}Hosting de la web gratis, sin renovaciones sorpresa</li>
           </ul>
-          <div class="garantia">{I('escudo')}<span><b>Garantía</b>Si a los 14 días de recibir tus fotos, tu lista de productos y el código de Google no está publicada tu ficha ni funcionando tu catálogo de WhatsApp, te devolvemos el anticipo completo.</span></div>
+          <div class="garantia">{I('escudo')}<span><b>Garantía</b>Si a los 14 días de recibir tus fotos, tu lista de productos y la verificación de Google no está publicada tu ficha ni funcionando tu catálogo de WhatsApp, te devolvemos el anticipo completo.</span></div>
           <a class="btn lime" href="{form('precio')}">Cotiza gratis con tus 3 hallazgos <span class="ar">→</span></a>
           <p class="letra">¿Prefieres hablar primero? <a href="{wa('Hola, quiero cotizar con dtorh')}" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>.</p>
         </div>
@@ -388,10 +391,10 @@ HOME = f'''<body class="tono-noche">
       <li class="paso rv">
         <div class="num"><span>Lo único que haces tú</span><b>02</b></div>
         <h3>Nos mandas tres cosas</h3>
-        <p>El código de verificación de Google, entre 8 y 15 fotos, y la lista de productos con precios. Nada de reuniones largas.</p>
+        <p>La verificación que pida Google, entre 8 y 15 fotos, y la lista de productos con precios. Nada de reuniones largas.</p>
         <div class="ilus" aria-hidden="true">
           <div class="vx tres" data-par="-.04">
-            <div class="vx-item" style="--ac:var(--cyan)"><span class="ico">{I('llave')}</span><span><b>Código de Google</b><small>Llega por correo o carta</small></span>{I('check','ic ok')}</div>
+            <div class="vx-item" style="--ac:var(--cyan)"><span class="ico">{I('llave')}</span><span><b>Código de Google</b><small>La verificación que pida Google</small></span>{I('check','ic ok')}</div>
             <div class="vx-item"><span class="ico">{I('camara')}</span><span><b>8 a 15 fotos</b><small>Del local y los productos</small></span>{I('check','ic ok')}</div>
             <div class="vx-item" style="--ac:var(--lime-2)"><span class="ico">{I('lista')}</span><span><b>Productos y precios</b><small>Una lista sencilla</small></span>{I('check','ic ok')}</div>
           </div>
@@ -557,7 +560,7 @@ HOME = f'''<body class="tono-noche">
 </html>
 '''
 
-home = head('dtorh® — Tu negocio existe. En internet, no.',
+home = head('Google, página web y WhatsApp para tu negocio | dtorh® Barranquilla',
  'Estudio digital en Barranquilla: ficha de Google y Maps, página web con catálogo, WhatsApp Business y redes para tu negocio, en 14 días y sin mensualidad.',
  'https://dtorh.click/', LD) + HOME
 open('index.html','w').write(home)
@@ -659,7 +662,7 @@ addEventListener('DOMContentLoaded', function(){{
 </body>
 </html>
 '''
-trab = head('Laboratorio — dtorh®', 'Proyectos en obra de dtorh, a la vista: qué necesita cada negocio, qué le estamos montando y en qué etapa va. Estudio digital en Barranquilla.', 'https://dtorh.click/laboratorio/') + LABP
+trab = head('Laboratorio: proyectos web en obra para negocios | dtorh®', 'Proyectos en obra de dtorh, a la vista: qué necesita cada negocio, qué le estamos montando y en qué etapa va. Estudio digital en Barranquilla.', 'https://dtorh.click/laboratorio/') + LABP
 os.makedirs('laboratorio', exist_ok=True)
 open('laboratorio/index.html','w').write(trab)
 PRIV = f'''<body class="tono-claro">
@@ -673,20 +676,23 @@ PRIV = f'''<body class="tono-claro">
     <h1 style="font-size:clamp(34px,5vw,56px);margin:14px 0 26px">Cómo cuidamos tus datos.</h1>
     <p class="lead">Actualizado el 1 de noviembre de 2026. Aplica a dtorh.click, datos.dtorh.click y a los mensajes que nos envíes por WhatsApp, Instagram o Facebook.</p>
     <h2>Quién es el responsable</h2>
-    <p>dtorh®, estudio digital de Barranquilla, Colombia. Contacto: <a href="mailto:dtorh.ofc@gmail.com">dtorh.ofc@gmail.com</a> · WhatsApp +57 302 413 5572.</p>
+    <p>David Ricardo Torres Hernández, persona natural que opera la marca dtorh, estudio digital de Barranquilla, Colombia. Contacto: <a href="mailto:dtorh.ofc@gmail.com">dtorh.ofc@gmail.com</a> · WhatsApp +57 302 413 5572.</p>
     <h2>Qué datos recogemos y para qué</h2>
     <ul>
-      <li><b>Formulario de los 3 hallazgos:</b> tu nombre, tu WhatsApp, el nombre y los datos públicos de tu negocio y lo que nos cuentes. Los usamos solo para preparar tus hallazgos, contactarte y, si quieres, hacerte una propuesta. Se guardan en una hoja privada de dtorh.</li>
+      <li><b>Formulario de los 3 hallazgos:</b> tu nombre, tu WhatsApp, el nombre y los datos públicos de tu negocio y lo que nos cuentes. Los usamos solo para preparar tus hallazgos, contactarte y, si quieres, hacerte una propuesta. Se registran en el sistema de dtorh (alojado en Cloudflare) y en una hoja privada de Google como respaldo.</li>
+      <li><b>Si aceptas una propuesta:</b> tu nombre, documento, celular y correo para el acuerdo y la cuenta de cobro, y el material que nos envíes (fotos, productos, horario), que se guarda en el Google Drive de dtorh. Los pagos en línea los procesa Wompi (Bancolombia): dtorh nunca ve los datos de tu tarjeta.</li>
       <li><b>Mensajes</b> por WhatsApp, Instagram o Facebook: para responderte.</li>
       <li><b>Conteo de visitas sin cookies (Cloudflare Web Analytics):</b> cuenta cuántas personas visitan cada página y desde qué tipo de dispositivo, de forma anónima. No usa cookies ni te identifica.</li>
       <li><b>Medición con cookies de Meta (píxel):</b> solo si aceptas en el aviso. Sirve para saber qué publicaciones y anuncios nos traen clientes y para mostrar anuncios de dtorh a personas parecidas. Si no aceptas, no se carga nada de Meta en tu visita.</li>
     </ul>
     <p>No vendemos ni compartimos tus datos con terceros para que te contacten.</p>
+    <h2>Quién procesa tus datos por nosotros</h2>
+    <p>Para prestar el servicio usamos proveedores que guardan o procesan datos por encargo de dtorh: <b>Cloudflare</b> (alojamiento del sitio y del sistema), <b>Google</b> (hoja de respaldo, Drive, y consultas de Maps y velocidad web), <b>Groq</b> y <b>Tavily</b> (inteligencia artificial y búsqueda: reciben los datos públicos de tu negocio y tu nombre para redactar el diagnóstico), <b>Meta</b> (solo si aceptas sus cookies) y <b>Wompi</b> (pagos). Varios de ellos tienen servidores fuera de Colombia, principalmente en Estados Unidos; al enviarnos tus datos autorizas esa transferencia para estas finalidades.</p>
     <h2>Tus derechos (Ley 1581 de 2012)</h2>
-    <p>Puedes conocer, actualizar, corregir o pedir que borremos tus datos, y retirar tu autorización en cualquier momento. Escríbenos a <a href="mailto:dtorh.ofc@gmail.com">dtorh.ofc@gmail.com</a> y te respondemos en máximo 15 días hábiles. Si no quedas conforme, puedes acudir a la Superintendencia de Industria y Comercio.</p>
+    <p>Puedes conocer, actualizar, corregir o pedir que borremos tus datos, y retirar tu autorización en cualquier momento. Escríbenos a <a href="mailto:dtorh.ofc@gmail.com">dtorh.ofc@gmail.com</a> Respondemos las consultas en máximo 10 días hábiles y los reclamos en máximo 15 días hábiles (artículos 14 y 15 de la Ley 1581). Si no quedas conforme, puedes acudir a la Superintendencia de Industria y Comercio.</p>
     <h2>Cookies</h2>
     <p>Guardamos tu decisión sobre las cookies durante un año. Puedes cambiarla cuando quieras:</p>
-    <p><button class="btn ghost" type="button" onclick="window.dtorhCookies && window.dtorhCookies()">Cambiar mi decisión sobre cookies</button></p>
+    <p><button class="btn ghost" type="button" data-cookies>Cambiar mi decisión sobre cookies</button></p>
   </div>
 </section>
 </main>
@@ -702,3 +708,11 @@ print('ok', len(home), len(trab), len(priv))
 
 # ======================= SERVICIOS, CÓMO TRABAJAMOS Y SITEMAP =======================
 exec(open('servicios.py').read())
+
+# ── versiones de los recursos en las páginas que no se generan aquí (404 y formulario) ──
+import re as _re
+for _f in ('404.html', 'datos/index.html'):
+    _t = open(_f).read()
+    _t = _re.sub(r'/assets/dtorh\.css\?v=[\w]+', '/assets/dtorh.css?v=' + V('assets/dtorh.css'), _t)
+    _t = _re.sub(r'/assets/medir\.js\?v=[\w]+', '/assets/medir.js?v=' + V('assets/medir.js'), _t)
+    open(_f, 'w').write(_t)

@@ -120,8 +120,8 @@ nav.sobre-oscuro:not(.isla) .ind{background:rgba(255,255,255,.14)}
 .menu-btn .x{display:none}
 .menu-abierto .menu-btn .x{display:block}
 .menu-abierto .menu-btn .h{display:none}
-.hoja{position:fixed;left:12px;right:12px;top:76px;z-index:99;background:var(--card);border:1px solid var(--hair);border-radius:24px;padding:10px;box-shadow:0 30px 60px -30px rgba(20,10,60,.6);opacity:0;transform:translateY(-10px) scale(.98);pointer-events:none;transition:opacity .3s ease,transform .4s var(--ease)}
-.menu-abierto .hoja{opacity:1;transform:none;pointer-events:auto}
+.hoja{position:fixed;left:12px;right:12px;top:76px;z-index:99;background:var(--card);border:1px solid var(--hair);border-radius:24px;padding:10px;box-shadow:0 30px 60px -30px rgba(20,10,60,.6);opacity:0;transform:translateY(-10px) scale(.98);pointer-events:none;visibility:hidden;transition:opacity .3s ease,transform .4s var(--ease),visibility 0s .4s}
+.menu-abierto .hoja{opacity:1;transform:none;pointer-events:auto;visibility:visible;transition-delay:0s}
 .hoja a{display:flex;align-items:center;gap:14px;padding:13px 12px;border-radius:14px;font-size:17px;font-weight:500}
 .hoja a .ic{width:20px;height:20px;color:var(--ash)}
 .hoja a:hover{background:var(--suave)}
@@ -833,5 +833,5 @@ html:not(.js) h1 span > i{transform:none}
 .sv-otro,.sv-card{display:flex;gap:12px;align-items:center;border:1px solid var(--hair);border-radius:14px;padding:14px 16px;color:var(--ink);transition:border-color .3s,transform .3s}
 .sv-otro:hover,.sv-card:hover{border-color:var(--lime);transform:translateY(-2px)}
 .sv-otro .ic{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.7;flex:0 0 24px}.sv-otro small{display:block;color:var(--ash);font-size:13px}
-.sv-card{flex-direction:column;align-items:flex-start;padding:20px}.sv-card b{font-size:19px}.sv-card p{margin:0;color:var(--ash);font-size:15px;line-height:1.5}.sv-card small{color:var(--lime);font-weight:500}
+.sv-card{flex-direction:column;align-items:flex-start;padding:20px}.sv-card b,.sv-card .sv-card-t{font-size:19px;margin:0;font-weight:600;letter-spacing:-.01em;line-height:1.25}.sv-card p{margin:0;color:var(--ash);font-size:15px;line-height:1.5}.sv-card small{color:var(--lime);font-weight:500}
 .sv-ic .ic{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.7}

@@ -49,7 +49,7 @@
     body.classList.toggle('menu-abierto', abrir);
     mb.setAttribute('aria-expanded', abrir);
     mb.setAttribute('aria-label', abrir ? 'Cerrar menú' : 'Abrir menú');
-    if (abrir){ nav.classList.add('isla'); nav.classList.remove('oculta'); if (lenis) lenis.stop(); }
+    if (abrir){ nav.classList.add('isla'); nav.classList.remove('oculta'); if (lenis) lenis.stop(); var pa = hoja && hoja.querySelector('a'); if (pa) setTimeout(function(){ pa.focus(); }, 60); }
     else if (lenis) lenis.start();
     pedir();
   }
@@ -282,3 +282,5 @@
     c.addEventListener('pointerleave', function(){ c.style.setProperty('--rx','0deg'); c.style.setProperty('--ry','0deg'); });
   });
 })();
+/* botón de privacidad: cambiar decisión de cookies (sin onclick en línea) */
+document.addEventListener('click', function(e){ var b = e.target.closest && e.target.closest('[data-cookies]'); if (b && window.dtorhCookies) window.dtorhCookies(); });
