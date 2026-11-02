@@ -89,7 +89,7 @@ def head(titulo, desc, url, extra=''):
 {extra}<script>
   document.documentElement.className+=" js";
   try{{var t=localStorage.getItem('dtorh-tema');if(t)document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}
-  try{{if(/[?&]animaciones=1/.test(location.search))localStorage.setItem('dtorh-mov','full');var m=localStorage.getItem('dtorh-mov'),s=matchMedia('(prefers-reduced-motion: reduce)').matches;if(m==='reduced'||(s&&m!=='full'))document.documentElement.className+=' quieto';}}catch(e){{if(matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.className+=' quieto';}}
+  try{{if(/[?&]animaciones=1/.test(location.search))localStorage.setItem('dtorh-mov','full');var m=localStorage.getItem('dtorh-mov'),s=matchMedia('(prefers-reduced-motion: reduce)').matches;if(m==='reduced')document.documentElement.className+=' quieto';else if(s&&m!=='full')document.documentElement.className+=' calma';}}catch(e){{if(matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.className+=' calma';}}
 </script>
 </head>
 '''
@@ -556,7 +556,7 @@ HOME = f'''<body class="tono-noche">
 
 </main>
 {FOOTER}
-{SCRIPTS}<script src="/assets/mapa.js?v=6" defer></script>
+{SCRIPTS}<script src="/assets/mapa.js?v=7" defer></script>
 </body>
 </html>
 '''
