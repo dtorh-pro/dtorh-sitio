@@ -163,7 +163,7 @@ SCRIPTS = ('<script src="/assets/lenis.min.js?v=1.3.26" defer></script>\n'
   + '<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon=\'{"token": "c61f2bddfe9c47a0b9a67eb3e39e592b"}\'></script>\n')
 
 LD = '''<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","@id":"https://dtorh.click/#org","name":"dtorh","alternateName":"dtorh estudio digital","url":"https://dtorh.click/","image":"https://dtorh.click/og.jpg","logo":"https://dtorh.click/icon-512.png","description":"Estudio digital en Barranquilla: ficha de Google y Maps, página web con catálogo, WhatsApp Business y redes para negocios pequeños, montados en 14 días, sin mensualidad.","telephone":"+57 302 413 5572","email":"dtorh.ofc@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Barranquilla","addressRegion":"Atlántico","addressCountry":"CO"},"areaServed":[{"@type":"City","name":"Barranquilla"},{"@type":"City","name":"Santa Marta"},{"@type":"City","name":"Cartagena"},{"@type":"Country","name":"Colombia"}],"knowsLanguage":"es","sameAs":["https://www.instagram.com/dtorh.click/","https://www.facebook.com/dtorh.click/"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Servicios de dtorh","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Arranque 360","url":"https://dtorh.click/servicios/arranque-360/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Google al día","url":"https://dtorh.click/servicios/perfil-de-empresa-google/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Web con catálogo","url":"https://dtorh.click/servicios/pagina-web-con-catalogo/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"WhatsApp que vende","url":"https://dtorh.click/servicios/whatsapp-business-catalogo/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Web al día","url":"https://dtorh.click/servicios/mejorar-pagina-web/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Redes en orden","url":"https://dtorh.click/servicios/instagram-facebook-negocio/"}}]}}
+{"@context":"https://schema.org","@type":"Organization","@id":"https://dtorh.click/#org","name":"dtorh","alternateName":"dtorh estudio digital","url":"https://dtorh.click/","image":"https://dtorh.click/og.jpg","logo":"https://dtorh.click/icon-512.png","description":"Estudio digital en Barranquilla: ficha de Google y Maps, página web con catálogo, WhatsApp Business y redes para negocios pequeños, montados en 14 días, con pago único.","telephone":"+57 302 413 5572","email":"dtorh.ofc@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Barranquilla","addressRegion":"Atlántico","addressCountry":"CO"},"areaServed":[{"@type":"City","name":"Barranquilla"},{"@type":"City","name":"Santa Marta"},{"@type":"City","name":"Cartagena"},{"@type":"Country","name":"Colombia"}],"knowsLanguage":"es","sameAs":["https://www.instagram.com/dtorh.click/","https://www.facebook.com/dtorh.click/"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Servicios de dtorh","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Arranque 360","url":"https://dtorh.click/servicios/arranque-360/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Google al día","url":"https://dtorh.click/servicios/perfil-de-empresa-google/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Web con catálogo","url":"https://dtorh.click/servicios/pagina-web-con-catalogo/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"WhatsApp que vende","url":"https://dtorh.click/servicios/whatsapp-business-catalogo/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Web al día","url":"https://dtorh.click/servicios/mejorar-pagina-web/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Redes en orden","url":"https://dtorh.click/servicios/instagram-facebook-negocio/"}}]}}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","@id":"https://dtorh.click/#web","url":"https://dtorh.click/","name":"dtorh","inLanguage":"es-CO","publisher":{"@id":"https://dtorh.click/#org"}}
@@ -204,7 +204,7 @@ HOME = f'''<body class="tono-noche">
     </div>
     <div class="sellos rv">
       <span>{I('reloj')}Listo en 14 días</span>
-      <span>{I('moneda')}Sin mensualidad</span>
+      <span>{I('moneda')}Pago único</span>
       <span>{I('escudo')}Garantía de devolución</span>
     </div>
   </div>
@@ -329,7 +329,7 @@ HOME = f'''<body class="tono-noche">
   <div class="wrap">
     <div class="cab">
       <span class="brace rv" data-parada="izq">Arranque 360</span>
-      <h2 class="rv">Todo montado de una vez. <em>Sin mensualidad.</em></h2>
+      <h2 class="rv">Todo montado de una vez. <em>Pagas una sola vez.</em></h2>
       <p class="lead rv">Un solo paquete con principio y fin. Te lo entregamos funcionando y queda a tu nombre.</p>
     </div>
     <div class="oferta-wrap">
@@ -345,7 +345,7 @@ HOME = f'''<body class="tono-noche">
             <div class="grupo" style="--c:var(--azul)"><h3 class="gt"><s></s>Reputación y cierre</h3>
               <ul class="lista"><li>{I('estrella')}Sistema de reseñas con QR</li><li>{I('chat')}Guion para responderlas</li><li>{I('reporte')}Reporte de entrega</li><li>{I('ajustes')}Una ronda de ajustes</li></ul></div>
           </div>
-          <div class="pie"><span><b>15 entregables</b></span><span><b>14 días</b> desde que nos mandas lo necesario</span><span><b>$0</b> de mensualidad</span></div>
+          <div class="pie"><span><b>15 entregables</b></span><span><b>14 días</b> desde que nos mandas lo necesario</span><span><b>1 solo pago</b> por el montaje</span></div>
         </div>
         <div class="precio rv">
           <span class="tag">Cotización gratis · según lo que te falta</span>
@@ -487,7 +487,7 @@ HOME = f'''<body class="tono-noche">
       <h2 class="rv">Lo que nos preguntan antes de empezar.</h2>
     </div>
     <div class="faq">
-      <div class="qa rv">{I('moneda')}<h3>¿Tengo que pagar cada mes?</h3><p>No. El Arranque 360 se paga una vez. Lo que montamos queda a tu nombre y es tuyo aunque no volvamos a trabajar juntos.</p></div>
+      <div class="qa rv">{I('moneda')}<h3>¿Tengo que pagar cada mes?</h3><p>No. El Arranque 360 se paga una vez y lo que montamos queda a tu nombre, aunque no volvamos a trabajar juntos. Si después quieres que lo mantengamos al día (cambios de precios, revisiones y reseñas), hay un plan mensual opcional que se cotiza aparte.</p></div>
       <div class="qa rv">{I('redes')}<h3>¿Ustedes manejan mis redes?</h3><p>No. Te dejamos las cuentas listas, 10 plantillas y el calendario de los primeros 30 días. Publicas tú o quien tú digas.</p></div>
       <div class="qa rv">{I('reloj')}<h3>¿Cuánto tiempo me toca dedicarle?</h3><p>Casi nada. Nos mandas tres cosas: el código de Google, las fotos y la lista de productos con precios. El resto lo hacemos nosotros.</p></div>
       <div class="qa rv">{I('tienda')}<h3>Todavía no he abierto. ¿Sirve?</h3><p>Sí. Dejamos todo montado antes de abrir. Solo la ficha de Google espera a que tengas la dirección del local, porque Google lo exige.</p></div>
@@ -561,7 +561,7 @@ HOME = f'''<body class="tono-noche">
 '''
 
 home = head('Google, página web y WhatsApp para tu negocio | dtorh™ Barranquilla',
- 'Estudio digital en Barranquilla: ficha de Google y Maps, página web con catálogo, WhatsApp Business y redes para tu negocio, en 14 días y sin mensualidad.',
+ 'Estudio digital en Barranquilla: ficha de Google y Maps, página web con catálogo, WhatsApp Business y redes para tu negocio, en 14 días y con pago único.',
  'https://dtorh.click/', LD) + HOME
 open('index.html','w').write(home)
 

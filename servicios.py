@@ -23,14 +23,14 @@ def faq_ld(faqs):
 SERVICIOS = [
   dict(slug='arranque-360', id='360', icono='rayo', nombre='Arranque 360',
     titulo='Arranque 360: Google, web, WhatsApp y redes en 14 días',
-    desc='Ficha de Google, página web con catálogo, WhatsApp Business, redes y reseñas para tu negocio, montados de una vez en 14 días. Pago único, sin mensualidad.',
+    desc='Ficha de Google, página web con catálogo, WhatsApp Business, redes y reseñas para tu negocio, montados de una vez en 14 días. Pago único.',
     h1='Todo lo que tu negocio necesita en internet, montado de una vez.',
-    lead='Para el negocio al que le falta más de una pieza: que lo encuentren en Google, que vean qué vende y que le escriban. En 14 días, sin mensualidad y todo a tu nombre.',
+    lead='Para el negocio al que le falta más de una pieza: que lo encuentren en Google, que vean qué vende y que le escriban. En 14 días, con pago único y todo a tu nombre.',
     plazo='14 días', tipo='Presencia digital para negocios',
     para=['Tienes local o vendes en tu ciudad y casi nadie te encuentra buscando en Google.', 'Te falta más de una cosa: la ficha de Google, una página propia, el catálogo de WhatsApp o tus redes en orden.', 'Quieres resolverlo una sola vez, sin pagar mensualidades.'],
     incluye=['Página web propia con catálogo, botón de WhatsApp, mapa y horario', 'Ficha de Google Business completa, con fotos y horario', 'Apple Maps, Waze y Bing', 'WhatsApp Business con catálogo, respuestas automáticas y QR para el local', 'Formulario de clientes conectado a una hoja, con aviso', 'Instagram y Facebook en orden, 10 plantillas y calendario de 30 días', 'Sistema de reseñas con QR y guion para responderlas', 'Reporte de entrega y una ronda de ajustes'],
     faqs=[('¿Qué diferencia hay entre el Arranque 360 y contratar las piezas por separado?', 'El Arranque 360 junta todas las piezas en un solo montaje y un solo plazo de 14 días. Si a tu negocio le falta solo una o dos cosas, te cotizamos solo esas: no tienes que tomar el paquete completo.'),
-          ('¿Hay que pagar mensualidad?', 'No. Es un pago único: 50 % para empezar y 50 % al entregar. La web queda alojada sin costo y todo queda a tu nombre.'),
+          ('¿Hay que pagar mensualidad?', 'No. Es un pago único: 50 % para empezar y 50 % al entregar. La web queda alojada sin costo y todo queda a tu nombre. Si después quieres que la mantengamos al día, hay un plan mensual opcional que se cotiza aparte.'),
           ('¿Desde cuándo cuentan los 14 días?', 'Desde que confirmamos el anticipo y tenemos tu material: fotos, lista de productos con precios y el código de verificación que Google te envía.'),
           ('¿Y si no funciona lo que me entregan?', 'Si en el plazo acordado no está funcionando lo que te entregamos, te devolvemos el anticipo completo.')]),
   dict(slug='perfil-de-empresa-google', id='google', icono='pin', nombre='Google al día',
@@ -46,14 +46,14 @@ SERVICIOS = [
           ('Alguien ya creó una ficha de mi negocio. ¿Se puede recuperar?', 'Sí. Se pide la propiedad de la ficha a Google y, cuando la aprueba, queda a tu nombre.'),
           ('¿Me prometen salir de primeros en Google?', 'No. Nadie puede prometer eso con honestidad. Lo que sí hacemos es dejar tu ficha completa y verificada, que es lo que Google usa para mostrar negocios cercanos.')]),
   dict(slug='pagina-web-con-catalogo', id='web', icono='web', nombre='Web con catálogo',
-    titulo='Página web con catálogo para negocios, sin mensualidad',
+    titulo='Página web con catálogo para negocios, con pago único',
     desc='Página web propia para celular con hasta 30 productos, botón de WhatsApp, mapa y horario. Dominio el primer año y alojamiento sin costo. Lista en 10 días.',
     h1='Una página propia donde ven qué vendes y te escriben de una.',
-    lead='Tu página web, hecha para celular, con tu catálogo, tus precios y un botón de WhatsApp. Lista en 10 días, con dominio a tu nombre y sin mensualidad.',
+    lead='Tu página web, hecha para celular, con tu catálogo, tus precios y un botón de WhatsApp. Lista en 10 días, con dominio a tu nombre y pago único.',
     plazo='10 días', tipo='Diseño de página web',
     para=['Vendes por Instagram o WhatsApp y te toca mandar fotos y precios a cada persona.', 'Al buscar tu negocio en Google no sale una página tuya.', 'Quieres una web sencilla y rápida, sin pagar todos los meses.'],
     incluye=['Página web adaptada a celular con hasta 30 productos o servicios', 'Botón de WhatsApp, mapa, horario y redes', 'Dominio .com o .co el primer año, a tu nombre', 'Alojamiento de la web sin costo mensual: sin renovaciones sorpresa'],
-    faqs=[('¿Tengo que pagar algo todos los meses?', 'No. El alojamiento de la web no tiene costo. El dominio va incluido el primer año y desde el segundo lo renuevas tú directamente con el proveedor, porque queda a tu nombre.'),
+    faqs=[('¿Tengo que pagar algo todos los meses?', 'No. El alojamiento de la web no tiene costo. El dominio va incluido el primer año y desde el segundo lo renuevas tú directamente con el proveedor, porque queda a tu nombre. Si quieres que nosotros lo mantengamos al día, hay un plan mensual opcional que se cotiza aparte.'),
           ('¿La página sirve para cobrar en línea?', 'Esta web muestra tu catálogo y lleva el pedido a tu WhatsApp. Si necesitas cobrar en línea con tarjeta o PSE, lo cotizamos aparte.'),
           ('¿Qué tengo que enviar?', 'Fotos de tus productos, la lista con precios (puede ser una foto de tu menú) y tus datos. Todo se envía desde un enlace, por partes y desde el celular.'),
           ('Ya tengo una web vieja. ¿Me sirve este servicio?', 'Si ya tienes web, no te vendemos otra: revisamos si conviene mejorarla con Web al día.')]),
@@ -180,7 +180,7 @@ HUB = f'''<body class="tono-claro sv">
   <div class="sv-migas" role="navigation" aria-label="Estás en"><a href="/">Inicio</a> › <span>Servicios</span></div>
   <span class="brace">Servicios de dtorh</span>
   <h1>Solo lo que a tu negocio le falta en internet.</h1>
-  <p class="lead">Ficha de Google, página web con catálogo, WhatsApp Business y redes. Por piezas o todo junto en el Arranque 360. Pago único, sin mensualidad y todo a tu nombre.</p>
+  <p class="lead">Ficha de Google, página web con catálogo, WhatsApp Business y redes. Por piezas o todo junto en el Arranque 360. Pago único y todo a tu nombre.</p>
   <div class="sv-cta"><a class="btn lime" href="{form('servicios')}">{I('reporte')}Cotiza gratis con tus 3 hallazgos</a></div>
 </div></section>
 <section class="sv-bloque"><div class="wrap sv-wrap"><div class="sv-grid">
@@ -195,12 +195,12 @@ HUB = f'''<body class="tono-claro sv">
 </html>
 '''
 os.makedirs('servicios', exist_ok=True)
-open('servicios/index.html', 'w').write(head('Servicios de presencia digital para negocios | dtorh', 'Ficha de Google, página web con catálogo, WhatsApp Business y redes para negocios en Barranquilla y Colombia. Por piezas o todo junto, sin mensualidad.', BASE + '/servicios/',
+open('servicios/index.html', 'w').write(head('Servicios de presencia digital para negocios | dtorh', 'Ficha de Google, página web con catálogo, WhatsApp Business y redes para negocios en Barranquilla y Colombia. Por piezas o todo junto, con pago único.', BASE + '/servicios/',
   ld({'@context': 'https://schema.org', '@type': 'ItemList', 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'url': f'{BASE}/servicios/{s["slug"]}/', 'name': s['nombre']} for i, s in enumerate(SERVICIOS)]}, migas([('Inicio', '/'), ('Servicios', '/servicios/')]))) + HUB)
 
 # ── /como-trabajamos/ ──
 FAQ_CT = [('¿Atienden solo en Barranquilla?', 'No. dtorh está en Barranquilla, pero trabajamos en remoto con negocios de toda Colombia: el diagnóstico, la propuesta, el envío de material y la entrega se hacen por internet y WhatsApp.'),
-          ('¿Cuánto cuesta?', 'Depende de lo que le falte a tu negocio. Primero te enviamos tus 3 hallazgos gratis y luego una propuesta con precio fijo por escrito. Pagas 50 % al empezar y 50 % al entregar, sin mensualidad.'),
+          ('¿Cuánto cuesta?', 'Depende de lo que le falte a tu negocio. Primero te enviamos tus 3 hallazgos gratis y luego una propuesta con precio fijo por escrito. Pagas 50 % al empezar y 50 % al entregar. La mensualidad solo existe si después eliges el plan opcional de mantenimiento.'),
           ('¿Qué pasa si no entregan a tiempo?', 'Si en el plazo acordado no está funcionando lo que te entregamos, te devolvemos el anticipo completo. El plazo corre desde que tenemos el anticipo y tu material.'),
           ('¿A nombre de quién quedan las cuentas?', 'A tu nombre: ficha de Google, dominio, perfiles y contenidos. Al terminar te entregamos los accesos.')]
 CT = f'''<body class="tono-claro sv">
@@ -212,7 +212,7 @@ CT = f'''<body class="tono-claro sv">
   <div class="sv-migas" role="navigation" aria-label="Estás en"><a href="/">Inicio</a> › <span>Cómo trabajamos</span></div>
   <span class="brace">Cómo trabajamos</span>
   <h1>Primero te mostramos qué te falta. Después lo montamos.</h1>
-  <p class="lead">Somos un estudio digital de Barranquilla. Trabajamos con negocios pequeños y emprendedores de la Costa y de toda Colombia, en remoto, con precio fijo y sin mensualidad.</p>
+  <p class="lead">Somos un estudio digital de Barranquilla. Trabajamos con negocios pequeños y emprendedores de la Costa y de toda Colombia, en remoto, con precio fijo y pago único.</p>
   <div class="sv-cta"><a class="btn lime" href="{form('como-trabajamos')}">{I('reporte')}Pedir mis 3 hallazgos gratis</a></div>
 </div></section>
 <section class="sv-bloque"><div class="wrap sv-wrap">
