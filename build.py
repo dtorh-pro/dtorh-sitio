@@ -624,6 +624,16 @@ var PROYECTOS = [
     resumen: 'Tienda para vender por WhatsApp: catálogo con filtros, arma tu propio mix y pago en tres pasos. La estamos terminando antes de su apertura.',
     piezas: ['Tienda en línea', 'Pedido por WhatsApp', 'Pagos Nequi y PSE', 'Hecha para celular'],
     url: '/fit-snack-market/'
+  }},
+  {{
+    nombre: 'dtorh™ Carta',
+    tipo: 'Carta digital',
+    rubro: 'Restaurantes, comidas rápidas y cafés',
+    ciudad: 'Barranquilla',
+    etapa: 3,
+    resumen: 'Carta para pedir desde el celular con un QR: te ayuda a elegir, sugiere lo que combina y manda el pedido listo al WhatsApp del restaurante. Tres estilos de muestra para gourmet, comida rápida y café.',
+    piezas: ['Pedido por WhatsApp', 'Pago con Bre-B, Nequi y Daviplata', 'QR por mesa', 'Domicilio por barrio'],
+    url: '/carta/'
   }}
 ];
 var ETAPAS = ['Diagnóstico','Diseño','Desarrollo','Lanzamiento'];
