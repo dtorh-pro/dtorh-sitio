@@ -684,22 +684,29 @@ PRIV = f'''<body class="tono-claro">
   <div class="wrap" style="max-width:760px">
     <span class="brace">Privacidad y cookies</span>
     <h1 style="font-size:clamp(34px,5vw,56px);margin:14px 0 26px">Cómo cuidamos tus datos.</h1>
-    <p class="lead">Actualizado el 1 de noviembre de 2026. Aplica a dtorh.click, datos.dtorh.click y a los mensajes que nos envíes por WhatsApp, Instagram o Facebook.</p>
+    <p class="lead">Actualizado el 9 de noviembre de 2026. Aplica a dtorh.click, datos.dtorh.click y a los mensajes que nos envíes por WhatsApp, Instagram o Facebook.</p>
     <h2>Quién es el responsable</h2>
     <p>dtorh, estudio digital de Barranquilla, Colombia. Contacto: <a href="mailto:dtorh.ofc@gmail.com">dtorh.ofc@gmail.com</a> · WhatsApp +57 302 413 5572.</p>
     <h2>Qué datos recogemos y para qué</h2>
     <ul>
       <li><b>Formulario de los 3 hallazgos:</b> tu nombre, tu WhatsApp, el nombre y los datos públicos de tu negocio y lo que nos cuentes. Los usamos solo para preparar tus hallazgos, contactarte y, si quieres, hacerte una propuesta. Se registran en el sistema de dtorh (alojado en Cloudflare) y en una hoja privada de Google como respaldo.</li>
       <li><b>Si aceptas una propuesta:</b> tu nombre, documento, celular y correo para el acuerdo y la cuenta de cobro, y el material que nos envíes (fotos, productos, horario), que se guarda en el Google Drive de dtorh. Los pagos en línea los procesa Wompi (Bancolombia): dtorh nunca ve los datos de tu tarjeta.</li>
-      <li><b>Mensajes</b> por WhatsApp, Instagram o Facebook: para responderte.</li>
+      <li><b>Mensajes por WhatsApp, Instagram o Facebook</b> (también cuando comentas una publicación con la palabra clave y te escribimos por mensaje privado): te responde primero un <b>asistente con inteligencia artificial</b> de dtorh, que siempre se presenta como tal, y una persona del equipo cuando lo pides o hace falta. Guardamos el texto de la conversación (los últimos 60 mensajes), tu nombre de perfil y lo que nos cuentes de tu negocio, para responderte, darte seguimiento y, si quieres, prepararte una propuesta. No usamos tus mensajes para nada más.</li>
       <li><b>Conteo de visitas sin cookies (Cloudflare Web Analytics):</b> cuenta cuántas personas visitan cada página y desde qué tipo de dispositivo, de forma anónima. No usa cookies ni te identifica.</li>
       <li><b>Medición con cookies de Meta (píxel):</b> solo si aceptas en el aviso. Sirve para saber qué publicaciones y anuncios nos traen clientes y para mostrar anuncios de dtorh a personas parecidas. Si no aceptas, no se carga nada de Meta en tu visita.</li>
     </ul>
     <p>No vendemos ni compartimos tus datos con terceros para que te contacten.</p>
     <h2>Quién procesa tus datos por nosotros</h2>
-    <p>Para prestar el servicio usamos proveedores que guardan o procesan datos por encargo de dtorh: <b>Cloudflare</b> (alojamiento del sitio y del sistema), <b>Google</b> (hoja de respaldo, Drive, y consultas de Maps y velocidad web), <b>Groq</b> y <b>Tavily</b> (inteligencia artificial y búsqueda: reciben los datos públicos de tu negocio y tu nombre para redactar el diagnóstico), <b>Meta</b> (solo si aceptas sus cookies) y <b>Wompi</b> (pagos). Varios de ellos tienen servidores fuera de Colombia, principalmente en Estados Unidos; al enviarnos tus datos autorizas esa transferencia para estas finalidades.</p>
+    <p>Para prestar el servicio usamos proveedores que guardan o procesan datos por encargo de dtorh: <b>Cloudflare</b> (alojamiento del sitio y del sistema), <b>Google</b> (hoja de respaldo, Drive, y consultas de Maps y velocidad web), <b>Groq</b> y <b>Tavily</b> (inteligencia artificial y búsqueda: reciben los datos públicos de tu negocio y tu nombre para redactar el diagnóstico; Groq también recibe el texto de tus mensajes para redactar la respuesta del asistente), <b>Meta</b> (solo si aceptas sus cookies) y <b>Wompi</b> (pagos). Varios de ellos tienen servidores fuera de Colombia, principalmente en Estados Unidos; al enviarnos tus datos autorizas esa transferencia para estas finalidades.</p>
     <h2>Tus derechos (Ley 1581 de 2012)</h2>
     <p>Puedes conocer, actualizar, corregir o pedir que borremos tus datos, y retirar tu autorización en cualquier momento. Escríbenos a <a href="mailto:dtorh.ofc@gmail.com">dtorh.ofc@gmail.com</a> Respondemos las consultas en máximo 10 días hábiles y los reclamos en máximo 15 días hábiles (artículos 14 y 15 de la Ley 1581). Si no quedas conforme, puedes acudir a la Superintendencia de Industria y Comercio.</p>
+    <h2 id="eliminar-datos">Cómo pedir que borremos tus datos</h2>
+    <ol>
+      <li>Escríbenos a <a href="mailto:dtorh.ofc@gmail.com">dtorh.ofc@gmail.com</a> o por el mismo chat de WhatsApp, Instagram o Facebook: "Quiero que borren mis datos". Dinos tu nombre y el número o usuario con el que nos escribiste.</li>
+      <li>Borramos la conversación, tu ficha de contacto y lo que nos hayas enviado, en máximo 15 días hábiles, y te confirmamos por el mismo medio.</li>
+      <li>Solo guardamos lo que la ley nos obliga a conservar (por ejemplo, cuentas de cobro de un servicio que ya pagaste).</li>
+    </ol>
+    <p>Los mensajes también quedan en tu propia app de WhatsApp, Instagram o Facebook: esos los borras tú desde la app.</p>
     <h2>Cookies</h2>
     <p>Guardamos tu decisión sobre las cookies durante un año. Puedes cambiarla cuando quieras:</p>
     <p><button class="btn ghost" type="button" data-cookies>Cambiar mi decisión sobre cookies</button></p>
