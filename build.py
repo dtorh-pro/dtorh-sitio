@@ -355,7 +355,7 @@ HOME = f'''<body class="tono-noche">
             <li>{I('reporte')}Diagnóstico de 3 hallazgos sin costo</li>
             <li>{I('moneda')}Precio fijo y por escrito antes de empezar</li>
             <li>{I('moneda')}50% para empezar, 50% al entregar</li>
-            <li>{I('escudo')}Hosting de la web gratis, sin renovaciones sorpresa</li>
+            <li>{I('escudo')}Alojamiento de la web gratis y a tu nombre (el dominio lo pagas tú, a su precio)</li>
           </ul>
           <div class="garantia">{I('escudo')}<span><b>Garantía</b>Si a los 14 días de recibir tus fotos, tu lista de productos y la verificación de Google no está publicada tu ficha ni funcionando tu catálogo de WhatsApp, te devolvemos el anticipo completo.</span></div>
           <a class="btn lime" href="{form('precio')}">Cotiza gratis con tus 3 hallazgos <span class="ar">→</span></a>
