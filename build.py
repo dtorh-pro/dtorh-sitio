@@ -489,7 +489,7 @@ HOME = f'''<body class="tono-noche">
     <div class="faq">
       <div class="qa rv">{I('moneda')}<h3>¿Tengo que pagar cada mes?</h3><p>No. El Arranque 360 se paga una vez y lo que montamos queda a tu nombre, aunque no volvamos a trabajar juntos. Si después quieres que lo mantengamos al día (cambios de precios, revisiones y reseñas), hay un plan mensual opcional que se cotiza aparte.</p></div>
       <div class="qa rv">{I('redes')}<h3>¿Ustedes manejan mis redes?</h3><p>No. Te dejamos las cuentas listas, 10 plantillas y el calendario de los primeros 30 días. Publicas tú o quien tú digas.</p></div>
-      <div class="qa rv">{I('reloj')}<h3>¿Cuánto tiempo me toca dedicarle?</h3><p>Casi nada. Nos mandas tres cosas: el código de Google, las fotos y la lista de productos con precios. El resto lo hacemos nosotros.</p></div>
+      <div class="qa rv">{I('reloj')}<h3>¿Cuánto tiempo me toca dedicarle?</h3><p>Casi nada. Nos mandas tres cosas: la verificación que pida Google (un código o un video corto del local), las fotos y la lista de productos con precios. El resto lo hacemos nosotros.</p></div>
       <div class="qa rv">{I('tienda')}<h3>Todavía no he abierto. ¿Sirve?</h3><p>Sí. Dejamos todo montado antes de abrir. Solo la ficha de Google espera a que tengas la dirección del local, porque Google lo exige.</p></div>
       <div class="qa rv">{I('pregunta')}<h3>¿Hacen publicidad pagada o logos?</h3><p>No. Tampoco vendemos seguidores. Nos dedicamos a que te encuentren y te puedan escribir, y lo hacemos completo.</p></div>
       <div class="qa rv">{I('escudo')}<h3>¿Y si no quedo conforme?</h3><p>Incluye una ronda de ajustes. Y si a los 14 días no están tu ficha de Google y tu catálogo de WhatsApp, te devolvemos el anticipo.</p></div>
