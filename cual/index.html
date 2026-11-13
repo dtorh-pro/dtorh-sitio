@@ -585,17 +585,108 @@ html{scroll-snap-type:y proximity;scroll-padding-top:66px}
 .b-inicio .fono{cursor:pointer}
 
 
+
+/* ================= Portada: elegir Equipo A vs Equipo B ================= */
+.aurora{display:none!important} /* fondo animado con desenfoque: caro en celulares y no aporta */
+.portada{display:none}
+.en-portada .portada{display:block}
+.en-portada main,.en-portada .dock,.en-portada .indice,.en-portada .donde{display:none!important}
+.en-portada .top nav a{display:none}
+.en-portada{scroll-snap-type:none}
+.po-in{max-width:1120px;margin:0 auto;padding:10px 14px 150px;display:flex;flex-direction:column;gap:16px}
+.po-hero{text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;padding-top:6px}
+.po-hero h1{margin:0;font-weight:800;letter-spacing:-.05em;line-height:1;font-size:clamp(38px,8vw,76px);color:var(--tinta)}
+.po-hero p{margin:0;color:var(--piedra);font-size:clamp(15px,2vw,18px);max-width:46ch;text-wrap:balance}
+.po-pop{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px 0;justify-content:safe center;-webkit-overflow-scrolling:touch}
+.po-pop::-webkit-scrollbar{display:none}
+.po-pop button{flex:none;display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--linea);border-radius:100px;padding:6px 14px 6px 6px;font:inherit;font-size:13px;font-weight:600;color:var(--tinta);cursor:pointer;transition:transform .2s var(--ease),box-shadow .2s}
+.po-pop button:hover{transform:translateY(-1px);box-shadow:0 8px 18px -10px rgba(0,0,0,.3)}
+.po-pop img{width:30px;height:30px;object-fit:contain;margin-right:-8px}
+.po-pop em{font-style:normal;color:var(--niebla);font-size:11px;font-weight:700}
+.po-filtros{display:flex;flex-direction:column;gap:10px;position:sticky;top:66px;z-index:20;box-shadow:0 -40px 0 #fff;background:linear-gradient(#fff 82%,rgba(255,255,255,0));padding:8px 0 12px}
+.po-filtros .marcas{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.po-filtros .marcas::-webkit-scrollbar{display:none}
+.po-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (min-width:640px){.po-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}}
+@media (min-width:900px){.po-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (min-width:1100px){.po-grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.po-card{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center;background:var(--porcelana);border:2px solid transparent;border-radius:24px;padding:10px 10px 14px;font:inherit;color:var(--tinta);cursor:pointer;transition:transform .25s var(--ease),border-color .2s,background .2s;-webkit-tap-highlight-color:transparent;min-width:0}
+.po-card:hover{transform:translateY(-2px)}
+.po-card:active{transform:scale(.98)}
+.po-card:focus-visible,.po-slot:focus-visible,.po-ir:focus-visible,.po-pop button:focus-visible{outline:3px solid var(--tinta);outline-offset:2px}
+.po-card img{width:100%;height:auto;aspect-ratio:1;object-fit:contain;filter:drop-shadow(0 10px 12px rgba(0,0,0,.14))}
+.po-card .marca{height:14px;opacity:.75}
+.po-card .marca .marca-logo{height:12px}.po-card .marca .marca-logo[aria-label="Samsung"]{height:10px;width:62px}
+.po-card .marca .marca-txt{font-size:10.5px}
+.po-card b{font-size:15px;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.po-card small{font-size:11.5px;color:var(--piedra)}
+.po-card .p{font-family:var(--mono);font-size:12.5px;color:var(--grafito);margin-top:2px}
+.po-card .po-tag{position:absolute;left:10px;top:10px;min-width:26px;height:26px;border-radius:100px;display:none;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:800;padding:0 8px}
+.po-card[data-en="a"]{border-color:var(--a);background:#fff}.po-card[data-en="b"]{border-color:var(--b);background:#fff}
+.po-card[data-en] .po-tag{display:inline-flex}
+.po-card[data-en="a"] .po-tag{background:var(--a)}.po-card[data-en="b"] .po-tag{background:var(--b)}
+.po-vacio{grid-column:1/-1;text-align:center;color:var(--piedra);padding:30px 0}
+.po-nota{text-align:center;color:var(--piedra);font-size:12.5px;margin:6px 0 0}
+.po-nota a{color:inherit}
+/* barra fija: tu comparación */
+.po-barra{position:fixed;left:0;right:0;bottom:0;z-index:45;padding:10px 12px calc(10px + env(safe-area-inset-bottom));pointer-events:none}
+.po-barra-in{pointer-events:auto;max-width:760px;margin:0 auto;background:rgba(18,20,28,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:28px;padding:8px;display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;box-shadow:0 18px 40px -14px rgba(0,0,0,.5)}
+.po-slot{display:flex;align-items:center;gap:8px;min-width:0;height:54px;border-radius:20px;border:1.5px dashed rgba(255,255,255,.28);background:transparent;color:#fff;font:inherit;padding:4px 10px 4px 6px;cursor:pointer;text-align:left;transition:background .2s,border-color .2s}
+.po-slot.lleno{border-style:solid;background:rgba(255,255,255,.08)}
+.po-slot.sa.lleno{border-color:var(--a)}.po-slot.sb.lleno{border-color:var(--b)}
+.po-slot.toca{animation:toca 1.6s ease-in-out infinite}
+@keyframes toca{50%{border-color:#fff;background:rgba(255,255,255,.1)}}
+.po-slot img{width:42px;height:42px;object-fit:contain;flex:none}
+.po-slot i{flex:none;width:42px;height:42px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:800;font-size:15px;color:#fff}
+.po-slot.sa i{background:var(--a)}.po-slot.sb i{background:var(--b)}
+.po-slot span{display:flex;flex-direction:column;min-width:0;line-height:1.2}
+.po-slot small{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.65}
+.po-slot b{font-size:13.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.po-slot u{margin-left:auto;text-decoration:none;opacity:.6;font-size:17px;flex:none;padding:0 2px}
+.po-vs{color:rgba(255,255,255,.55);font-size:11px;font-weight:800}
+.po-ir{grid-column:1/-1;height:50px;border:0;border-radius:20px;background:var(--lima);color:#101400;font:inherit;font-size:16px;font-weight:800;cursor:pointer;transition:transform .2s var(--spring),opacity .2s}
+.po-ir:disabled{background:rgba(255,255,255,.12);color:rgba(255,255,255,.5);cursor:default}
+.po-ir:not(:disabled):hover{transform:scale(1.015)}
+@media (min-width:720px){.po-barra-in{grid-template-columns:1fr auto 1fr auto}.po-ir{grid-column:auto;padding:0 28px;height:54px}}
+@media (prefers-reduced-motion:reduce){.po-slot.toca{animation:none}}
+
+/* ================= Comparación en celular: sin huecos, sin imán de scroll, nada tapado ================= */
+@media (max-width:1023px){
+  html{scroll-snap-type:none}
+  .bloque{min-height:0;padding-top:28px;padding-bottom:28px}
+  .bloque:not(.b-inicio){padding-top:44px}
+  main{padding-bottom:104px}
+  .donde{display:none}
+}
+@media (max-width:719px){
+  .b-inicio{padding-bottom:20px}
+  .b-inicio .b-in{height:auto;min-height:0}
+  .b-inicio .escena{flex:none}
+  .b-inicio .balanza{flex:none;height:calc(46vw + 84px);min-height:0;container-type:normal}
+  .b-inicio .fono{width:46vw}
+  .b-inicio .marcador{top:0}
+  .b-inicio .ficha .cambiar{padding:8px 12px;font-size:12.5px}
+}
+
+@media (max-width:719px){
+  .po-hero .chip-vivo{display:none}
+  .po-hero{gap:6px;padding-top:0}
+  .po-hero p{font-size:14.5px}
+  .po-in{gap:12px}
+  .po-card b{font-size:14px}
+}
+@media (max-width:420px){.ficha .cambiar .eq{display:none}}
 </style>
 </head>
 <body>
-<script>document.documentElement.classList.add('js')</script>
+<script>(function(){var d=document.documentElement;d.classList.add('js');var q=new URLSearchParams(location.search);if(!(q.get('a')&&q.get('b')))d.classList.add('en-portada');})()</script>
 <div class="aurora" aria-hidden="true"><i class="x1"></i><i class="x2"></i><i class="x3"></i></div>
 
 <header class="top">
   <div class="top-in">
-    <a class="logo" href="#arriba" aria-label="Cuál, inicio"><i></i><span>cuál<small>.click</small></span></a>
+    <a class="logo" href="/" id="logoInicio" aria-label="Cuál, inicio"><i></i><span>cuál<small>.click</small></span></a>
     <nav aria-label="Secciones">
-      <button type="button" data-abrir="a">Elegir equipos</button>
+      <button type="button" id="navElegir">Elegir equipos</button>
       <a href="#reales">Diseño real</a>
       <a href="#rondas">Ronda por ronda</a>
       <a href="#precios">Precios</a>
@@ -603,6 +694,31 @@ html{scroll-snap-type:y proximity;scroll-padding-top:66px}
     <a class="cta-top" id="waTop" target="_blank" rel="noopener"><s></s><span>Para tu tienda</span></a>
   </div>
 </header>
+
+<section class="portada" id="portada" aria-labelledby="poT">
+  <div class="po-in">
+    <div class="po-hero">
+      <span class="chip-vivo"><b>Gratis</b>Sin registrarte</span>
+      <h1 id="poT">¿Cuál te <span class="ga-txt">llevas</span><span class="gb-txt">?</span></h1>
+      <p>Elige dos celulares. Te decimos cuál te conviene, ronda por ronda, con el precio de hoy en Colombia.</p>
+    </div>
+    <div class="po-pop" id="poPop" aria-label="Comparaciones populares"></div>
+    <div class="po-filtros">
+      <input class="buscar" id="poBuscar" type="search" placeholder="Busca por marca o modelo" autocomplete="off" aria-label="Buscar equipo">
+      <div class="marcas" id="poMarcas" role="group" aria-label="Marca"></div>
+    </div>
+    <div class="po-grid" id="poGrid"></div>
+    <p class="po-nota">Cuál no vende equipos: te ayuda a decidir. Un producto de <a href="https://dtorh.click/" target="_blank" rel="noopener">dtorh™</a>.</p>
+  </div>
+  <div class="po-barra" role="group" aria-label="Tu comparación">
+    <div class="po-barra-in">
+      <button class="po-slot sa" type="button" data-s="a" id="poA"></button>
+      <span class="po-vs" aria-hidden="true">VS</span>
+      <button class="po-slot sb" type="button" data-s="b" id="poB"></button>
+      <button class="po-ir" type="button" id="poIr" disabled>Comparar</button>
+    </div>
+  </div>
+</section>
 
 <main id="arriba">
 <section class="bloque b-inicio" id="inicio" data-n="Frente a frente">
@@ -629,7 +745,7 @@ html{scroll-snap-type:y proximity;scroll-padding-top:66px}
         <span class="lado ga-txt">Equipo A <b>Gana</b></span>
         <span class="marca" id="marcaA"></span><h2 id="nomA"></h2>
         <span class="precio" id="preA"></span>
-        <button class="cambiar" type="button" data-abrir="a"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4 3 8l4 4"/><path d="M3 8h14"/><path d="m17 20 4-4-4-4"/><path d="M21 16H7"/></svg>Cambiar equipo</button>
+        <button class="cambiar" type="button" data-abrir="a"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4 3 8l4 4"/><path d="M3 8h14"/><path d="m17 20 4-4-4-4"/><path d="M21 16H7"/></svg>Cambiar<span class="eq">&nbsp;equipo</span></button>
       </div>
       <div class="mid">
         <button class="redondo" type="button" id="cruzar" aria-label="Intercambiar equipos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4 3 8l4 4"/><path d="M3 8h14"/><path d="m17 20 4-4-4-4"/><path d="M21 16H7"/></svg></button>
@@ -639,7 +755,7 @@ html{scroll-snap-type:y proximity;scroll-padding-top:66px}
         <span class="lado gb-txt">Equipo B <b>Gana</b></span>
         <span class="marca" id="marcaB"></span><h2 id="nomB"></h2>
         <span class="precio" id="preB"></span>
-        <button class="cambiar" type="button" data-abrir="b"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4 3 8l4 4"/><path d="M3 8h14"/><path d="m17 20 4-4-4-4"/><path d="M21 16H7"/></svg>Cambiar equipo</button>
+        <button class="cambiar" type="button" data-abrir="b"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4 3 8l4 4"/><path d="M3 8h14"/><path d="m17 20 4-4-4-4"/><path d="M21 16H7"/></svg>Cambiar<span class="eq">&nbsp;equipo</span></button>
       </div>
     </div>
     <div class="cinta" aria-hidden="true"><div id="cinta"></div></div>
@@ -759,20 +875,20 @@ var PRECIOS = {}; var VIDEOS = {};
 /* ---------- Equipos. pts = puntaje propio 0-100 por ronda (estimado). precio en COP (referencia).
    m1/m2 = color del marco · c1/c2 = fondo de pantalla ---------- */
 var EQUIPOS = [
- {id:'ip18pm',img:'img/equipos/ip18pm.webp?v=2',alto:163.4,k:'pro3',m:'Apple',n:'iPhone 18 Pro Max',precio:6100000,pant:'6,9″ · 120 Hz',chip:'A20 Pro',cam:'48 + 48 + 48 MP',bat:5391,carga:60,peso:249,f:['#B5525E','#5A1E27'],d:['#A8424F','#6E2630'],c:['#FF8A98','#2E0A10'],pts:{pant:97,rend:100,cam:97,bat:94}},
- {id:'ip17pm',img:'img/equipos/ip17pm.webp?v=2',alto:163.4,k:'pro3',m:'Apple',n:'iPhone 17 Pro Max',precio:5700000,pant:'6,9″ · 120 Hz',chip:'A19 Pro',cam:'48 + 48 + 48 MP',bat:4823,carga:40,peso:233,f:['#F4B183','#B8622F'],d:['#F09A5C','#C9672D'],c:['#FF9B57','#3B1C0E'],pts:{pant:96,rend:98,cam:96,bat:90}},
- {id:'ip17',img:'img/equipos/ip17.webp?v=2',alto:149.6,k:'dual',m:'Apple',n:'iPhone 17',precio:4200000,pant:'6,3″ · 120 Hz',chip:'A19',cam:'48 + 48 MP',bat:3692,carga:40,peso:177,f:['#E3D8F5','#9A8CC0'],d:['#D8CCF2','#B3A4DB'],c:['#C9B6FF','#2B2160'],pts:{pant:90,rend:93,cam:86,bat:74}},
- {id:'ip16',img:'img/equipos/ip16.webp?v=2',alto:147.6,k:'dual',m:'Apple',n:'iPhone 16',precio:3300000,pant:'6,1″ · 60 Hz',chip:'A18',cam:'48 + 12 MP',bat:3561,carga:25,peso:170,f:['#8EA4F2','#3A52B8'],d:['#7D93F0','#4A63CF'],c:['#7FB2FF','#14205C'],pts:{pant:74,rend:88,cam:82,bat:70}},
- {id:'s26u',img:'img/equipos/s26u.webp?v=2',alto:163.6,k:'trio',m:'Samsung',n:'Galaxy S26 Ultra',precio:4500000,pant:'6,9″ · 120 Hz',chip:'Snapdragon 8 Elite Gen 5',cam:'200 + 50 + 50 + 10 MP',bat:5000,carga:60,peso:214,f:['#8E7CC3','#3B2D6E'],d:['#7E6BB8','#4A3A86'],c:['#B9A6FF','#170F3A'],pts:{pant:98,rend:99,cam:96,bat:88}},
- {id:'s25u',img:'img/equipos/s25u.webp?v=2',alto:162.8,k:'trio',m:'Samsung',n:'Galaxy S25 Ultra',precio:4000000,pant:'6,9″ · 120 Hz',chip:'Snapdragon 8 Elite',cam:'200 + 50 + 50 + 10 MP',bat:5000,carga:45,peso:218,f:['#D3DAE4','#707B8C'],d:['#B9C3D1','#8C97A8'],c:['#9FC0E8','#0F1B33'],pts:{pant:97,rend:96,cam:95,bat:86}},
- {id:'s25',img:'img/equipos/s25.webp?v=2',alto:146.9,k:'trio',m:'Samsung',n:'Galaxy S25',precio:3200000,pant:'6,2″ · 120 Hz',chip:'Snapdragon 8 Elite',cam:'50 + 12 + 10 MP',bat:4000,carga:25,peso:162,f:['#CDE6F5','#6E97B2'],d:['#BFDDF0','#8DB6D1'],c:['#7FD7FF','#0B2A44'],pts:{pant:90,rend:95,cam:85,bat:72}},
- {id:'a56',img:'img/equipos/a56.webp?v=2',alto:162.2,k:'trio',m:'Samsung',n:'Galaxy A56',precio:2100000,pant:'6,7″ · 120 Hz',chip:'Exynos 1580',cam:'50 + 12 + 5 MP',bat:5000,carga:45,peso:198,f:['#6B7280','#2B2F38'],d:['#4B515D','#2E333C'],c:['#8AB4FF','#0B1530'],pts:{pant:84,rend:70,cam:74,bat:82}},
- {id:'x17t',img:'img/equipos/x17t.webp?v=2',alto:157.6,k:'cuad',m:'Xiaomi',n:'Xiaomi 17T',precio:4000000,pant:'6,59″ · 120 Hz',chip:'Dimensity 8500 Ultra',cam:'50 + 50 + 12 MP',bat:6500,carga:67,peso:200,f:['#2A2C31','#0E0F12'],d:['#3A3D44','#1C1E22'],c:['#9FD3FF','#1A2F5A'],pts:{pant:90,rend:88,cam:88,bat:92}},
- {id:'rn15p',img:'img/equipos/rn15p.webp?v=2',alto:163.6,k:'redmi',m:'Xiaomi',n:'Redmi Note 15 Pro 5G',precio:1150000,pant:'6,83″ · 120 Hz',chip:'Dimensity 7400 Ultra',cam:'200 + 8 MP',bat:6580,carga:45,peso:210,f:['#C9C2B6','#7A7266'],d:['#BEB6A8','#8F877A'],c:['#E8DCC4','#2E2A22'],pts:{pant:86,rend:66,cam:78,bat:92}},
- {id:'rn14',img:'img/equipos/rn14.webp?v=2',alto:163.25,k:'redmi',m:'Xiaomi',n:'Redmi Note 14',precio:950000,pant:'6,67″ · 120 Hz',chip:'Helio G99 Ultra',cam:'108 + 2 MP',bat:5500,carga:33,peso:196,f:['#8CC4A8','#2F6B50'],d:['#7FB89B','#3F7D5F'],c:['#9BE8C2','#0E3B2A'],pts:{pant:78,rend:50,cam:62,bat:88}},
- {id:'px8p',img:'img/equipos/px8p.webp?v=2',alto:157.53,k:'poco',m:'POCO',n:'POCO X8 Pro',precio:1650000,pant:'6,59″ · 120 Hz',chip:'Dimensity 8500 Ultra',cam:'50 + 8 MP',bat:6500,carga:100,peso:201,f:['#A9D8C0','#3E7A5E'],d:['#9CCFB5','#4F8B6F'],c:['#B8F2D4','#0F3324'],pts:{pant:88,rend:88,cam:72,bat:94}},
- {id:'e70f',img:'img/equipos/e70f.webp?v=2',alto:162.8,k:'moto',m:'Motorola',n:'Edge 70 Fusion',precio:2000000,pant:'6,78″ · 144 Hz',chip:'Snapdragon 7s Gen 3',cam:'50 + 13 MP',bat:5200,carga:68,peso:177,f:['#3D6E9E','#16324F'],d:['#356391','#1E4166'],c:['#8EC5FF','#0A1B30'],pts:{pant:88,rend:66,cam:74,bat:82}},
- {id:'g56',img:'img/equipos/g56.webp?v=2',alto:165.75,k:'moto',m:'Motorola',n:'Moto G56',precio:850000,pant:'6,72″ · 120 Hz',chip:'Dimensity 7060',cam:'50 + 8 MP',bat:5200,carga:30,peso:200,f:['#9DB07A','#4C5A33'],d:['#90A46C','#5D6B40'],c:['#D2E8A8','#1F2812'],pts:{pant:76,rend:52,cam:62,bat:82}}
+ {id:'ip18pm',img:'img/equipos/ip18pm.webp?v=3',alto:163.4,k:'pro3',m:'Apple',n:'iPhone 18 Pro Max',precio:6100000,pant:'6,9″ · 120 Hz',chip:'A20 Pro',cam:'48 + 48 + 48 MP',bat:5391,carga:60,peso:249,f:['#B5525E','#5A1E27'],d:['#A8424F','#6E2630'],c:['#FF8A98','#2E0A10'],pts:{pant:97,rend:100,cam:97,bat:94}},
+ {id:'ip17pm',img:'img/equipos/ip17pm.webp?v=3',alto:163.4,k:'pro3',m:'Apple',n:'iPhone 17 Pro Max',precio:5700000,pant:'6,9″ · 120 Hz',chip:'A19 Pro',cam:'48 + 48 + 48 MP',bat:4823,carga:40,peso:233,f:['#F4B183','#B8622F'],d:['#F09A5C','#C9672D'],c:['#FF9B57','#3B1C0E'],pts:{pant:96,rend:98,cam:96,bat:90}},
+ {id:'ip17',img:'img/equipos/ip17.webp?v=3',alto:149.6,k:'dual',m:'Apple',n:'iPhone 17',precio:4200000,pant:'6,3″ · 120 Hz',chip:'A19',cam:'48 + 48 MP',bat:3692,carga:40,peso:177,f:['#E3D8F5','#9A8CC0'],d:['#D8CCF2','#B3A4DB'],c:['#C9B6FF','#2B2160'],pts:{pant:90,rend:93,cam:86,bat:74}},
+ {id:'ip16',img:'img/equipos/ip16.webp?v=3',alto:147.6,k:'dual',m:'Apple',n:'iPhone 16',precio:3300000,pant:'6,1″ · 60 Hz',chip:'A18',cam:'48 + 12 MP',bat:3561,carga:25,peso:170,f:['#8EA4F2','#3A52B8'],d:['#7D93F0','#4A63CF'],c:['#7FB2FF','#14205C'],pts:{pant:74,rend:88,cam:82,bat:70}},
+ {id:'s26u',img:'img/equipos/s26u.webp?v=3',alto:163.6,k:'trio',m:'Samsung',n:'Galaxy S26 Ultra',precio:4500000,pant:'6,9″ · 120 Hz',chip:'Snapdragon 8 Elite Gen 5',cam:'200 + 50 + 50 + 10 MP',bat:5000,carga:60,peso:214,f:['#8E7CC3','#3B2D6E'],d:['#7E6BB8','#4A3A86'],c:['#B9A6FF','#170F3A'],pts:{pant:98,rend:99,cam:96,bat:88}},
+ {id:'s25u',img:'img/equipos/s25u.webp?v=3',alto:162.8,k:'trio',m:'Samsung',n:'Galaxy S25 Ultra',precio:4000000,pant:'6,9″ · 120 Hz',chip:'Snapdragon 8 Elite',cam:'200 + 50 + 50 + 10 MP',bat:5000,carga:45,peso:218,f:['#D3DAE4','#707B8C'],d:['#B9C3D1','#8C97A8'],c:['#9FC0E8','#0F1B33'],pts:{pant:97,rend:96,cam:95,bat:86}},
+ {id:'s25',img:'img/equipos/s25.webp?v=3',alto:146.9,k:'trio',m:'Samsung',n:'Galaxy S25',precio:3200000,pant:'6,2″ · 120 Hz',chip:'Snapdragon 8 Elite',cam:'50 + 12 + 10 MP',bat:4000,carga:25,peso:162,f:['#CDE6F5','#6E97B2'],d:['#BFDDF0','#8DB6D1'],c:['#7FD7FF','#0B2A44'],pts:{pant:90,rend:95,cam:85,bat:72}},
+ {id:'a56',img:'img/equipos/a56.webp?v=3',alto:162.2,k:'trio',m:'Samsung',n:'Galaxy A56',precio:2100000,pant:'6,7″ · 120 Hz',chip:'Exynos 1580',cam:'50 + 12 + 5 MP',bat:5000,carga:45,peso:198,f:['#6B7280','#2B2F38'],d:['#4B515D','#2E333C'],c:['#8AB4FF','#0B1530'],pts:{pant:84,rend:70,cam:74,bat:82}},
+ {id:'x17t',img:'img/equipos/x17t.webp?v=3',alto:157.6,k:'cuad',m:'Xiaomi',n:'Xiaomi 17T',precio:4000000,pant:'6,59″ · 120 Hz',chip:'Dimensity 8500 Ultra',cam:'50 + 50 + 12 MP',bat:6500,carga:67,peso:200,f:['#2A2C31','#0E0F12'],d:['#3A3D44','#1C1E22'],c:['#9FD3FF','#1A2F5A'],pts:{pant:90,rend:88,cam:88,bat:92}},
+ {id:'rn15p',img:'img/equipos/rn15p.webp?v=3',alto:163.6,k:'redmi',m:'Xiaomi',n:'Redmi Note 15 Pro 5G',precio:1150000,pant:'6,83″ · 120 Hz',chip:'Dimensity 7400 Ultra',cam:'200 + 8 MP',bat:6580,carga:45,peso:210,f:['#C9C2B6','#7A7266'],d:['#BEB6A8','#8F877A'],c:['#E8DCC4','#2E2A22'],pts:{pant:86,rend:66,cam:78,bat:92}},
+ {id:'rn14',img:'img/equipos/rn14.webp?v=3',alto:163.25,k:'redmi',m:'Xiaomi',n:'Redmi Note 14',precio:950000,pant:'6,67″ · 120 Hz',chip:'Helio G99 Ultra',cam:'108 + 2 MP',bat:5500,carga:33,peso:196,f:['#8CC4A8','#2F6B50'],d:['#7FB89B','#3F7D5F'],c:['#9BE8C2','#0E3B2A'],pts:{pant:78,rend:50,cam:62,bat:88}},
+ {id:'px8p',img:'img/equipos/px8p.webp?v=3',alto:157.53,k:'poco',m:'POCO',n:'POCO X8 Pro',precio:1650000,pant:'6,59″ · 120 Hz',chip:'Dimensity 8500 Ultra',cam:'50 + 8 MP',bat:6500,carga:100,peso:201,f:['#A9D8C0','#3E7A5E'],d:['#9CCFB5','#4F8B6F'],c:['#B8F2D4','#0F3324'],pts:{pant:88,rend:88,cam:72,bat:94}},
+ {id:'e70f',img:'img/equipos/e70f.webp?v=3',alto:162.8,k:'moto',m:'Motorola',n:'Edge 70 Fusion',precio:2000000,pant:'6,78″ · 144 Hz',chip:'Snapdragon 7s Gen 3',cam:'50 + 13 MP',bat:5200,carga:68,peso:177,f:['#3D6E9E','#16324F'],d:['#356391','#1E4166'],c:['#8EC5FF','#0A1B30'],pts:{pant:88,rend:66,cam:74,bat:82}},
+ {id:'g56',img:'img/equipos/g56.webp?v=3',alto:165.75,k:'moto',m:'Motorola',n:'Moto G56',precio:850000,pant:'6,72″ · 120 Hz',chip:'Dimensity 7060',cam:'50 + 8 MP',bat:5200,carga:30,peso:200,f:['#9DB07A','#4C5A33'],d:['#90A46C','#5D6B40'],c:['#D2E8A8','#1F2812'],pts:{pant:76,rend:52,cam:62,bat:82}}
 ];
 function porId(id){ for(var i=0;i<EQUIPOS.length;i++) if(EQUIPOS[i].id===id) return EQUIPOS[i]; return null; }
 function fmt(n){ return n.toLocaleString('es-CO'); }
@@ -915,12 +1031,15 @@ function pintarReales(A,B){
   $('reales').hidden=!hay;
 }
 function cargarPrecios(){
-  fetch(MOTOR+'/cual/precios').then(function(r){return r.json()}).then(function(j){
+  var aplicar=function(j){ aplicarPrecios(j); };
+  try{ var c=JSON.parse(localStorage.getItem('cual:precios')||'null'); if(c) aplicar(c); }catch(e){}
+  fetch(MOTOR+'/cual/precios').then(function(r){return r.json()}).then(function(j){ try{ localStorage.setItem('cual:precios',JSON.stringify({precios:j.precios,videos:j.videos})); }catch(e){} aplicar(j); }).catch(function(){});
+}
+function aplicarPrecios(j){
     PRECIOS=(j&&j.precios)||{}; VIDEOS=(j&&j.videos)||{};
 
     EQUIPOS.forEach(function(e){ var d=PRECIOS[e.id]; if(d&&d.min){ e.ref=e.ref||e.precio; e.precio=d.min; e.tienda=d.tiendas[0].tienda; } });
-    pintar(); if(!$('hoja').hidden) pintarLista();
-  }).catch(function(){});
+    pintar(); if(!$('hoja').hidden) pintarLista(); pintarPortada();
 }
 
 /* ---------- Pintar ---------- */
@@ -1013,7 +1132,7 @@ function pintar(){
   [].forEach.call(document.querySelectorAll('#usos button'),function(b){b.setAttribute('aria-pressed',b.dataset.k===est.perfil)});
   [].forEach.call(document.querySelectorAll('#preg button'),function(b,i){b.setAttribute('aria-pressed',i===est.preg)});
   escribir(est.preg>=0 ? PREGUNTAS[est.preg].f(A,B) : veredicto(p), p);
-  var comp='https://wa.me/?text='+encodeURIComponent('Comparé el '+A.n+' con el '+B.n+' en Cuál. '+veredicto(p)+' Compara tú: https://cual.click/');
+  var comp='https://wa.me/?text='+encodeURIComponent('Comparé el '+A.n+' con el '+B.n+' en Cuál. '+veredicto(p)+' Míralo: https://cual.click/?a='+A.id+'&b='+B.id);
   $('wa').href=comp; $('wa2').href=comp;
   var lic='https://wa.me/'+DTORH.whatsapp+'?text='+encodeURIComponent('Hola dtorh, vi Cuál (cual.click) y quiero el comparador con mi marca para mi tienda.');
   $('waTop').href=lic; $('waLleva').href=lic;
@@ -1021,6 +1140,7 @@ function pintar(){
   pintarPrecios(A,B);
   if(IA_ENDPOINT && est.preg<0) veredictoIA(p);
   primera=false;
+  if(!enPortada()) try{ history.replaceState(null,'','?a='+est.a+'&b='+est.b); }catch(e){}
 }
 function veredictoIA(p){
   fetch(IA_ENDPOINT,{method:'POST',headers:{'content-type':'application/json'},
@@ -1056,7 +1176,7 @@ function pintarLista(){
   $('lista').innerHTML = r.length ? r.map(function(e){
     var en = e.id===est.a?'a':e.id===est.b?'b':'';
     return '<button class="it" type="button" data-id="'+e.id+'"'+(en?' data-en="'+en+'"':'')+'>'+(en?'<span class="ya">En '+en.toUpperCase()+'</span>':'')+
-      (e.img?'<span class="mini foto"><img src="'+e.img+'" alt="" loading="lazy" width="52" height="52"></span>':'<span class="mini" style="--m1:'+e.f[0]+';--m2:'+e.f[1]+';--c1:'+e.c[0]+';--c2:'+e.c[1]+'"><i></i></span>')+
+      (e.img?'<span class="mini foto"><img src="'+mini(e)+'" alt="" loading="lazy" width="52" height="52"></span>':'<span class="mini" style="--m1:'+e.f[0]+';--m2:'+e.f[1]+';--c1:'+e.c[0]+';--c2:'+e.c[1]+'"><i></i></span>')+
       '<b><span class="marca mini-marca">'+logoMarca(e.m)+'</span>'+e.n+'</b><small>'+e.pant.split(' · ')[0]+' · '+fmt(e.bat)+' mAh</small><span class="p">'+cop(e.precio)+'</span></button>';
   }).join('') : '<p class="vacio">No hay equipos con ese nombre. Prueba con la marca.</p>';
 }
@@ -1079,6 +1199,72 @@ function observarRondas(){
   var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ var li=e.target; setTimeout(function(){ llenar(li); }, lis.indexOf(li)%3*90); io.unobserve(li); } }); },{threshold:.3});
   lis.forEach(function(li){ io.observe(li); });
   setTimeout(function(){ lis.forEach(function(li){ if(!li.dataset.visto) llenar(li); }); },4000);
+}
+
+/* ---------- Portada: elegir Equipo A vs Equipo B ---------- */
+var sel={a:'',b:''}, poMarca='';
+var POPULARES=[['ip17','s25'],['s26u','ip18pm'],['rn15p','a56'],['g56','rn14'],['px8p','e70f']];
+function enPortada(){ return document.documentElement.classList.contains('en-portada'); }
+function mini(e){ return e.img ? e.img.replace('img/equipos/','img/equipos/t/') : ''; }
+function leerURL(){ var q=new URLSearchParams(location.search), a=q.get('a'), b=q.get('b'); return (porId(a)&&porId(b)&&a!==b)?{a:a,b:b}:null; }
+function pintarSlot(l){
+  var el=$('po'+l.toUpperCase()), E=porId(sel[l]), sig=!sel.a?'a':(!sel.b?'b':'');
+  el.className='po-slot s'+l+(E?' lleno':'')+(!E&&sig===l?' toca':'');
+  el.setAttribute('aria-label', E?('Equipo '+l.toUpperCase()+': '+E.n+'. Toca para quitarlo'):('Equipo '+l.toUpperCase()+' sin elegir'));
+  el.innerHTML = E ? '<img src="'+mini(E)+'" alt="" width="42" height="42"><span><small>Equipo '+l.toUpperCase()+'</small><b>'+E.n+'</b></span><u aria-hidden="true">×</u>'
+                   : '<i>'+l.toUpperCase()+'</i><span><small>Equipo '+l.toUpperCase()+'</small><b>'+(sig===l?'Elige uno':'Falta elegir')+'</b></span>';
+}
+function pintarPortada(){
+  if(!$('poGrid')) return;
+  var q=$('poBuscar').value.trim().toLowerCase();
+  [].forEach.call(document.querySelectorAll('#poMarcas button'),function(b){b.setAttribute('aria-pressed',b.dataset.m===poMarca)});
+  var r=EQUIPOS.filter(function(e){return (!poMarca||e.m===poMarca) && (e.m+' '+e.n).toLowerCase().indexOf(q)>-1});
+  $('poGrid').innerHTML = r.length ? r.map(function(e,i){
+    var en=e.id===sel.a?'a':e.id===sel.b?'b':'';
+    return '<button class="po-card" type="button" data-id="'+e.id+'"'+(en?' data-en="'+en+'"':'')+' aria-pressed="'+(en?'true':'false')+'">'+
+      '<span class="po-tag">'+(en?en.toUpperCase():'')+'</span>'+
+      '<img src="'+mini(e)+'" alt="" loading="'+(i<6?'eager':'lazy')+'" decoding="async" width="400" height="400">'+
+      '<span class="marca">'+logoMarca(e.m)+'</span><b>'+e.n+'</b><small>'+e.pant.split(' · ')[0]+' · '+fmt(e.bat)+' mAh</small>'+
+      '<span class="p">'+(e.tienda?'desde ':'')+cop(e.precio)+'</span></button>';
+  }).join('') : '<p class="po-vacio">No hay equipos con ese nombre. Prueba con la marca.</p>';
+  pintarSlot('a'); pintarSlot('b');
+  var ir=$('poIr'), ok=!!(sel.a&&sel.b);
+  ir.disabled=!ok; ir.textContent = ok ? 'Comparar' : (!sel.a&&!sel.b ? 'Elige dos equipos' : 'Elige el otro equipo');
+}
+function irPortada(push){
+  if(!enPortada()){ sel.a=est.a; sel.b=est.b; }
+  document.documentElement.classList.add('en-portada');
+  if(push) try{ history.pushState(null,'',location.pathname); }catch(e){}
+  window.scrollTo(0,0); pintarPortada();
+}
+function irComparar(push){
+  if(!(porId(sel.a)&&porId(sel.b))) return;
+  est.a=sel.a; est.b=sel.b; est.preg=-1;
+  document.documentElement.classList.remove('en-portada');
+  if(push) try{ history.pushState(null,'','?a='+est.a+'&b='+est.b); }catch(e){}
+  window.scrollTo(0,0); pintar();
+}
+function iniciarPortada(){
+  var marcas=['']; EQUIPOS.forEach(function(e){ if(marcas.indexOf(e.m)<0) marcas.push(e.m); });
+  $('poMarcas').innerHTML=marcas.map(function(m){return '<button type="button" data-m="'+m+'" aria-pressed="false">'+(m||'Todas')+'</button>'}).join('');
+  $('poPop').innerHTML=POPULARES.map(function(x){ var A=porId(x[0]),B=porId(x[1]); return (A&&B)?'<button type="button" data-a="'+A.id+'" data-b="'+B.id+'"><img src="'+mini(A)+'" alt="" width="30" height="30" loading="lazy"><img src="'+mini(B)+'" alt="" width="30" height="30" loading="lazy">'+A.n+' <em>VS</em> '+B.n+'</button>':''; }).join('');
+  $('poMarcas').addEventListener('click',function(e){var b=e.target.closest('button'); if(!b) return; poMarca=b.dataset.m; pintarPortada();});
+  $('poBuscar').addEventListener('input',pintarPortada);
+  $('poPop').addEventListener('click',function(e){var b=e.target.closest('button'); if(!b) return; sel.a=b.dataset.a; sel.b=b.dataset.b; irComparar(true);});
+  $('poGrid').addEventListener('click',function(e){
+    var b=e.target.closest('.po-card'); if(!b) return; var id=b.dataset.id;
+    if(id===sel.a) sel.a=''; else if(id===sel.b) sel.b=''; else if(!sel.a) sel.a=id; else sel.b=id;
+    pintarPortada();
+  });
+  ['a','b'].forEach(function(l){ $('po'+l.toUpperCase()).addEventListener('click',function(){ if(sel[l]){ sel[l]=''; pintarPortada(); } else { $('poGrid').scrollIntoView({behavior:quieto()?'auto':'smooth',block:'start'}); } }); });
+  $('poIr').addEventListener('click',function(){ irComparar(true); });
+  $('logoInicio').addEventListener('click',function(e){ e.preventDefault(); irPortada(true); });
+  $('navElegir').addEventListener('click',function(){ irPortada(true); });
+  window.addEventListener('popstate',function(){ var u=leerURL(); if(u){ sel=u; irComparar(false); } else irPortada(false); });
+  var u=leerURL();
+  if(u){ est.a=u.a; est.b=u.b; sel={a:u.a,b:u.b}; document.documentElement.classList.remove('en-portada'); }
+  else document.documentElement.classList.add('en-portada');
+  pintarPortada();
 }
 
 /* ---------- Arranque ---------- */
@@ -1111,6 +1297,7 @@ function iniciar(data){
     setTimeout(function(){ b.textContent='Copiar'; },1600); });
   pintarCats();
   inclinar();
+  iniciarPortada();
   pintar();
   observarRondas();
   cargarPrecios();
