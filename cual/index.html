@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Cuál · compara celulares y gadgets antes de comprar</title>
 <meta name="description" content="Pon dos equipos frente a frente, dinos para qué lo quieres y te decimos cuál te conviene, ronda por ronda. Gratis, un producto de dtorh.">
-<meta property="og:title" content="Cuál · ¿cuál te llevas?">
+<meta property="og:title" content="Cuál · ¿cuál te conviene?">
 <meta property="og:description" content="Comparador gratis de celulares y gadgets, ronda por ronda. Un producto de dtorh.">
 <meta property="og:url" content="https://cual.click/">
 <meta name="theme-color" content="#ffffff">
@@ -676,6 +676,11 @@ html{scroll-snap-type:y proximity;scroll-padding-top:66px}
   .po-card b{font-size:14px}
 }
 @media (max-width:420px){.ficha .cambiar .eq{display:none}}
+
+.grupo > b{display:flex;align-items:center;gap:8px}
+.pmarca{height:14px;opacity:.85}
+.pmarca .marca-logo{height:14px}.pmarca .marca-logo[aria-label="Samsung"]{height:11px;width:70px}
+.pmarca .marca-txt{display:none}
 </style>
 </head>
 <body>
@@ -699,7 +704,7 @@ html{scroll-snap-type:y proximity;scroll-padding-top:66px}
   <div class="po-in">
     <div class="po-hero">
       <span class="chip-vivo"><b>Gratis</b>Sin registrarte</span>
-      <h1 id="poT">¿Cuál te <span class="ga-txt">llevas</span><span class="gb-txt">?</span></h1>
+      <h1 id="poT">¿Cuál te <span class="ga-txt">conviene</span><span class="gb-txt">?</span></h1>
       <p>Elige dos celulares. Te decimos cuál te conviene, ronda por ronda, con el precio de hoy en Colombia.</p>
     </div>
     <div class="po-pop" id="poPop" aria-label="Comparaciones populares"></div>
@@ -725,7 +730,7 @@ html{scroll-snap-type:y proximity;scroll-padding-top:66px}
   <div class="b-in">
   <section class="hero">
     <span class="chip-vivo"><b>Gratis</b>Un producto de dtorh™</span>
-    <h1>¿Cuál te <span class="ga-txt">llevas</span><span class="vs gb-txt">?</span></h1>
+    <h1>¿Cuál te <span class="ga-txt">conviene</span><span class="vs gb-txt">?</span></h1>
     <p>Pon dos equipos frente a frente, dinos para qué lo quieres y te decimos cuál te conviene, ronda por ronda. Aquí no vendemos equipos: te ayudamos a decidir.</p>
   </section>
   <nav class="cats" aria-label="Categorías" id="cats"></nav>
@@ -820,7 +825,7 @@ html{scroll-snap-type:y proximity;scroll-padding-top:66px}
         <span class="eti">Precios hoy en Colombia</span>
         <h3 id="pT">¿Dónde está más barato?</h3>
         <div id="ptab"></div>
-        <p class="nota-p">Tiendas de la marca y almacenes de cadena, revisados cada dos días por el motor de dtorh. Cuál no vende equipos: confirma el precio final en la tienda.</p>
+        <p class="nota-p">Tiendas de la marca y almacenes de cadena, revisados cada tres días por el motor de dtorh. Cuál no vende equipos: confirma el precio final en la tienda.</p>
       </section>
   </div>
 </section>
@@ -875,20 +880,20 @@ var PRECIOS = {}; var VIDEOS = {};
 /* ---------- Equipos. pts = puntaje propio 0-100 por ronda (estimado). precio en COP (referencia).
    m1/m2 = color del marco · c1/c2 = fondo de pantalla ---------- */
 var EQUIPOS = [
- {id:'ip18pm',img:'img/equipos/ip18pm.webp?v=3',alto:163.4,k:'pro3',m:'Apple',n:'iPhone 18 Pro Max',precio:6100000,pant:'6,9″ · 120 Hz',chip:'A20 Pro',cam:'48 + 48 + 48 MP',bat:5391,carga:60,peso:249,f:['#B5525E','#5A1E27'],d:['#A8424F','#6E2630'],c:['#FF8A98','#2E0A10'],pts:{pant:97,rend:100,cam:97,bat:94}},
- {id:'ip17pm',img:'img/equipos/ip17pm.webp?v=3',alto:163.4,k:'pro3',m:'Apple',n:'iPhone 17 Pro Max',precio:5700000,pant:'6,9″ · 120 Hz',chip:'A19 Pro',cam:'48 + 48 + 48 MP',bat:4823,carga:40,peso:233,f:['#F4B183','#B8622F'],d:['#F09A5C','#C9672D'],c:['#FF9B57','#3B1C0E'],pts:{pant:96,rend:98,cam:96,bat:90}},
- {id:'ip17',img:'img/equipos/ip17.webp?v=3',alto:149.6,k:'dual',m:'Apple',n:'iPhone 17',precio:4200000,pant:'6,3″ · 120 Hz',chip:'A19',cam:'48 + 48 MP',bat:3692,carga:40,peso:177,f:['#E3D8F5','#9A8CC0'],d:['#D8CCF2','#B3A4DB'],c:['#C9B6FF','#2B2160'],pts:{pant:90,rend:93,cam:86,bat:74}},
- {id:'ip16',img:'img/equipos/ip16.webp?v=3',alto:147.6,k:'dual',m:'Apple',n:'iPhone 16',precio:3300000,pant:'6,1″ · 60 Hz',chip:'A18',cam:'48 + 12 MP',bat:3561,carga:25,peso:170,f:['#8EA4F2','#3A52B8'],d:['#7D93F0','#4A63CF'],c:['#7FB2FF','#14205C'],pts:{pant:74,rend:88,cam:82,bat:70}},
- {id:'s26u',img:'img/equipos/s26u.webp?v=3',alto:163.6,k:'trio',m:'Samsung',n:'Galaxy S26 Ultra',precio:4500000,pant:'6,9″ · 120 Hz',chip:'Snapdragon 8 Elite Gen 5',cam:'200 + 50 + 50 + 10 MP',bat:5000,carga:60,peso:214,f:['#8E7CC3','#3B2D6E'],d:['#7E6BB8','#4A3A86'],c:['#B9A6FF','#170F3A'],pts:{pant:98,rend:99,cam:96,bat:88}},
- {id:'s25u',img:'img/equipos/s25u.webp?v=3',alto:162.8,k:'trio',m:'Samsung',n:'Galaxy S25 Ultra',precio:4000000,pant:'6,9″ · 120 Hz',chip:'Snapdragon 8 Elite',cam:'200 + 50 + 50 + 10 MP',bat:5000,carga:45,peso:218,f:['#D3DAE4','#707B8C'],d:['#B9C3D1','#8C97A8'],c:['#9FC0E8','#0F1B33'],pts:{pant:97,rend:96,cam:95,bat:86}},
- {id:'s25',img:'img/equipos/s25.webp?v=3',alto:146.9,k:'trio',m:'Samsung',n:'Galaxy S25',precio:3200000,pant:'6,2″ · 120 Hz',chip:'Snapdragon 8 Elite',cam:'50 + 12 + 10 MP',bat:4000,carga:25,peso:162,f:['#CDE6F5','#6E97B2'],d:['#BFDDF0','#8DB6D1'],c:['#7FD7FF','#0B2A44'],pts:{pant:90,rend:95,cam:85,bat:72}},
- {id:'a56',img:'img/equipos/a56.webp?v=3',alto:162.2,k:'trio',m:'Samsung',n:'Galaxy A56',precio:2100000,pant:'6,7″ · 120 Hz',chip:'Exynos 1580',cam:'50 + 12 + 5 MP',bat:5000,carga:45,peso:198,f:['#6B7280','#2B2F38'],d:['#4B515D','#2E333C'],c:['#8AB4FF','#0B1530'],pts:{pant:84,rend:70,cam:74,bat:82}},
- {id:'x17t',img:'img/equipos/x17t.webp?v=3',alto:157.6,k:'cuad',m:'Xiaomi',n:'Xiaomi 17T',precio:4000000,pant:'6,59″ · 120 Hz',chip:'Dimensity 8500 Ultra',cam:'50 + 50 + 12 MP',bat:6500,carga:67,peso:200,f:['#2A2C31','#0E0F12'],d:['#3A3D44','#1C1E22'],c:['#9FD3FF','#1A2F5A'],pts:{pant:90,rend:88,cam:88,bat:92}},
- {id:'rn15p',img:'img/equipos/rn15p.webp?v=3',alto:163.6,k:'redmi',m:'Xiaomi',n:'Redmi Note 15 Pro 5G',precio:1150000,pant:'6,83″ · 120 Hz',chip:'Dimensity 7400 Ultra',cam:'200 + 8 MP',bat:6580,carga:45,peso:210,f:['#C9C2B6','#7A7266'],d:['#BEB6A8','#8F877A'],c:['#E8DCC4','#2E2A22'],pts:{pant:86,rend:66,cam:78,bat:92}},
- {id:'rn14',img:'img/equipos/rn14.webp?v=3',alto:163.25,k:'redmi',m:'Xiaomi',n:'Redmi Note 14',precio:950000,pant:'6,67″ · 120 Hz',chip:'Helio G99 Ultra',cam:'108 + 2 MP',bat:5500,carga:33,peso:196,f:['#8CC4A8','#2F6B50'],d:['#7FB89B','#3F7D5F'],c:['#9BE8C2','#0E3B2A'],pts:{pant:78,rend:50,cam:62,bat:88}},
- {id:'px8p',img:'img/equipos/px8p.webp?v=3',alto:157.53,k:'poco',m:'POCO',n:'POCO X8 Pro',precio:1650000,pant:'6,59″ · 120 Hz',chip:'Dimensity 8500 Ultra',cam:'50 + 8 MP',bat:6500,carga:100,peso:201,f:['#A9D8C0','#3E7A5E'],d:['#9CCFB5','#4F8B6F'],c:['#B8F2D4','#0F3324'],pts:{pant:88,rend:88,cam:72,bat:94}},
- {id:'e70f',img:'img/equipos/e70f.webp?v=3',alto:162.8,k:'moto',m:'Motorola',n:'Edge 70 Fusion',precio:2000000,pant:'6,78″ · 144 Hz',chip:'Snapdragon 7s Gen 3',cam:'50 + 13 MP',bat:5200,carga:68,peso:177,f:['#3D6E9E','#16324F'],d:['#356391','#1E4166'],c:['#8EC5FF','#0A1B30'],pts:{pant:88,rend:66,cam:74,bat:82}},
- {id:'g56',img:'img/equipos/g56.webp?v=3',alto:165.75,k:'moto',m:'Motorola',n:'Moto G56',precio:850000,pant:'6,72″ · 120 Hz',chip:'Dimensity 7060',cam:'50 + 8 MP',bat:5200,carga:30,peso:200,f:['#9DB07A','#4C5A33'],d:['#90A46C','#5D6B40'],c:['#D2E8A8','#1F2812'],pts:{pant:76,rend:52,cam:62,bat:82}}
+ {id:'ip18pm',img:'img/equipos/ip18pm.webp?v=4',alto:163.4,k:'pro3',m:'Apple',n:'iPhone 18 Pro Max',precio:6100000,pant:'6,9″ · 120 Hz',chip:'A20 Pro',cam:'48 + 48 + 48 MP',bat:5391,carga:60,peso:249,f:['#B5525E','#5A1E27'],d:['#A8424F','#6E2630'],c:['#FF8A98','#2E0A10'],pts:{pant:97,rend:100,cam:97,bat:94}},
+ {id:'ip17pm',img:'img/equipos/ip17pm.webp?v=4',alto:163.4,k:'pro3',m:'Apple',n:'iPhone 17 Pro Max',precio:5700000,pant:'6,9″ · 120 Hz',chip:'A19 Pro',cam:'48 + 48 + 48 MP',bat:4823,carga:40,peso:233,f:['#F4B183','#B8622F'],d:['#F09A5C','#C9672D'],c:['#FF9B57','#3B1C0E'],pts:{pant:96,rend:98,cam:96,bat:90}},
+ {id:'ip17',img:'img/equipos/ip17.webp?v=4',alto:149.6,k:'dual',m:'Apple',n:'iPhone 17',precio:4200000,pant:'6,3″ · 120 Hz',chip:'A19',cam:'48 + 48 MP',bat:3692,carga:40,peso:177,f:['#E3D8F5','#9A8CC0'],d:['#D8CCF2','#B3A4DB'],c:['#C9B6FF','#2B2160'],pts:{pant:90,rend:93,cam:86,bat:74}},
+ {id:'ip16',img:'img/equipos/ip16.webp?v=4',alto:147.6,k:'dual',m:'Apple',n:'iPhone 16',precio:3300000,pant:'6,1″ · 60 Hz',chip:'A18',cam:'48 + 12 MP',bat:3561,carga:25,peso:170,f:['#8EA4F2','#3A52B8'],d:['#7D93F0','#4A63CF'],c:['#7FB2FF','#14205C'],pts:{pant:74,rend:88,cam:82,bat:70}},
+ {id:'s26u',img:'img/equipos/s26u.webp?v=4',alto:163.6,k:'trio',m:'Samsung',n:'Galaxy S26 Ultra',precio:4500000,pant:'6,9″ · 120 Hz',chip:'Snapdragon 8 Elite Gen 5',cam:'200 + 50 + 50 + 10 MP',bat:5000,carga:60,peso:214,f:['#8E7CC3','#3B2D6E'],d:['#7E6BB8','#4A3A86'],c:['#B9A6FF','#170F3A'],pts:{pant:98,rend:99,cam:96,bat:88}},
+ {id:'s25u',img:'img/equipos/s25u.webp?v=4',alto:162.8,k:'trio',m:'Samsung',n:'Galaxy S25 Ultra',precio:4000000,pant:'6,9″ · 120 Hz',chip:'Snapdragon 8 Elite',cam:'200 + 50 + 50 + 10 MP',bat:5000,carga:45,peso:218,f:['#D3DAE4','#707B8C'],d:['#B9C3D1','#8C97A8'],c:['#9FC0E8','#0F1B33'],pts:{pant:97,rend:96,cam:95,bat:86}},
+ {id:'s25',img:'img/equipos/s25.webp?v=4',alto:146.9,k:'trio',m:'Samsung',n:'Galaxy S25',precio:3200000,pant:'6,2″ · 120 Hz',chip:'Snapdragon 8 Elite',cam:'50 + 12 + 10 MP',bat:4000,carga:25,peso:162,f:['#CDE6F5','#6E97B2'],d:['#BFDDF0','#8DB6D1'],c:['#7FD7FF','#0B2A44'],pts:{pant:90,rend:95,cam:85,bat:72}},
+ {id:'a56',img:'img/equipos/a56.webp?v=4',alto:162.2,k:'trio',m:'Samsung',n:'Galaxy A56',precio:2100000,pant:'6,7″ · 120 Hz',chip:'Exynos 1580',cam:'50 + 12 + 5 MP',bat:5000,carga:45,peso:198,f:['#6B7280','#2B2F38'],d:['#4B515D','#2E333C'],c:['#8AB4FF','#0B1530'],pts:{pant:84,rend:70,cam:74,bat:82}},
+ {id:'x17t',img:'img/equipos/x17t.webp?v=4',alto:157.6,k:'cuad',m:'Xiaomi',n:'Xiaomi 17T',precio:4000000,pant:'6,59″ · 120 Hz',chip:'Dimensity 8500 Ultra',cam:'50 + 50 + 12 MP',bat:6500,carga:67,peso:200,f:['#2A2C31','#0E0F12'],d:['#3A3D44','#1C1E22'],c:['#9FD3FF','#1A2F5A'],pts:{pant:90,rend:88,cam:88,bat:92}},
+ {id:'rn15p',img:'img/equipos/rn15p.webp?v=4',alto:163.6,k:'redmi',m:'Xiaomi',n:'Redmi Note 15 Pro 5G',precio:1150000,pant:'6,83″ · 120 Hz',chip:'Dimensity 7400 Ultra',cam:'200 + 8 MP',bat:6580,carga:45,peso:210,f:['#C9C2B6','#7A7266'],d:['#BEB6A8','#8F877A'],c:['#E8DCC4','#2E2A22'],pts:{pant:86,rend:66,cam:78,bat:92}},
+ {id:'rn14',img:'img/equipos/rn14.webp?v=4',alto:163.25,k:'redmi',m:'Xiaomi',n:'Redmi Note 14',precio:950000,pant:'6,67″ · 120 Hz',chip:'Helio G99 Ultra',cam:'108 + 2 MP',bat:5500,carga:33,peso:196,f:['#8CC4A8','#2F6B50'],d:['#7FB89B','#3F7D5F'],c:['#9BE8C2','#0E3B2A'],pts:{pant:78,rend:50,cam:62,bat:88}},
+ {id:'px8p',img:'img/equipos/px8p.webp?v=4',alto:157.53,k:'poco',m:'POCO',n:'POCO X8 Pro',precio:1650000,pant:'6,59″ · 120 Hz',chip:'Dimensity 8500 Ultra',cam:'50 + 8 MP',bat:6500,carga:100,peso:201,f:['#A9D8C0','#3E7A5E'],d:['#9CCFB5','#4F8B6F'],c:['#B8F2D4','#0F3324'],pts:{pant:88,rend:88,cam:72,bat:94}},
+ {id:'e70f',img:'img/equipos/e70f.webp?v=4',alto:162.8,k:'moto',m:'Motorola',n:'Edge 70 Fusion',precio:2000000,pant:'6,78″ · 144 Hz',chip:'Snapdragon 7s Gen 3',cam:'50 + 13 MP',bat:5200,carga:68,peso:177,f:['#3D6E9E','#16324F'],d:['#356391','#1E4166'],c:['#8EC5FF','#0A1B30'],pts:{pant:88,rend:66,cam:74,bat:82}},
+ {id:'g56',img:'img/equipos/g56.webp?v=4',alto:165.75,k:'moto',m:'Motorola',n:'Moto G56',precio:850000,pant:'6,72″ · 120 Hz',chip:'Dimensity 7060',cam:'50 + 8 MP',bat:5200,carga:30,peso:200,f:['#9DB07A','#4C5A33'],d:['#90A46C','#5D6B40'],c:['#D2E8A8','#1F2812'],pts:{pant:76,rend:52,cam:62,bat:82}}
 ];
 function porId(id){ for(var i=0;i<EQUIPOS.length;i++) if(EQUIPOS[i].id===id) return EQUIPOS[i]; return null; }
 function fmt(n){ return n.toLocaleString('es-CO'); }
@@ -1007,7 +1012,7 @@ function mockup(E){
 function pintarPrecios(A,B){
   var html='';
   [[A,'var(--a)'],[B,'var(--b)']].forEach(function(x){ var e=x[0], d=PRECIOS[e.id];
-    html+='<div class="grupo"><b><i style="background:'+x[1]+'"></i>'+e.n+'</b>';
+    html+='<div class="grupo"><b><i style="background:'+x[1]+'"></i><span class="marca pmarca">'+logoMarca(e.m)+'</span>'+e.n+'</b>';
     if(d&&d.tiendas&&d.tiendas.length){ html+=d.tiendas.map(function(t,i){ return '<div class="pfila'+(i===0&&d.tiendas.length>1?' mejor':'')+'"><span>'+t.tienda+'</span><span class="pr">'+cop(t.precio)+'</span><a href="'+t.url+'" target="_blank" rel="noopener nofollow">Ver ↗</a></div>'; }).join('')+
       '<span class="nota-p" style="margin-top:2px">Revisado el '+d.fecha+'</span>'; }
     else html+='<div class="pvacio">Aún sin precio confirmado en tiendas. Referencia: '+cop(e.precio)+'.</div>';

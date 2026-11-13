@@ -640,9 +640,9 @@ var PROYECTOS = [
     tipo: 'Comparador de equipos',
     rubro: 'Celulares y tecnología en Colombia',
     ciudad: 'Colombia',
-    etapa: 3,
-    resumen: 'Comparador gratis en su propia plataforma, cual.click: dos celulares frente a frente, ronda por ronda, con veredicto según el uso y el precio de hoy en tiendas oficiales y almacenes de cadena. No vende equipos; las tiendas pueden tenerlo con su marca.',
-    piezas: ['Precios reales cada dos días', 'Veredicto con IA', '14 equipos 2024–2026', 'Hecho para celular y computador'],
+    etapa: 4,
+    resumen: 'Comparador gratis en su propia plataforma, cual.click: eliges dos celulares y te dice cuál te conviene, ronda por ronda, con fotos reales de cada modelo y el precio de hoy en Alkosto, Ktronix, Alkomprar, Éxito y Falabella. No vende equipos; las tiendas pueden tenerlo con su marca.',
+    piezas: ['Precios reales de 5 tiendas', 'Veredicto con IA', 'Fotos y tamaños reales', 'Hecho para celular y computador'],
     url: 'https://cual.click/'
   }}
 ];
