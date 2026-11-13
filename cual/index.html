@@ -443,6 +443,17 @@ body{background:#fff}
 .pfila a{font-size:12.5px;font-weight:600;color:var(--a);text-decoration:none;white-space:nowrap}
 .pfila.mejor{box-shadow:inset 0 0 0 2px var(--lima)}
 .pfila.mejor .pr::after{content:" · más barato";font-family:var(--f);font-size:11px;font-weight:700;color:#5b7f00}
+.precios .grupo>b small{font-weight:600;color:var(--piedra);font-size:12px}
+.psub{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--piedra);margin:8px 0 0}
+.pfila{grid-template-columns:auto 1fr auto auto}
+.pfila .puesto{font-family:var(--mono);font-size:12px;font-weight:700;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#f1f1ec;color:var(--piedra)}
+.pfila.mejor .puesto{background:var(--lima);color:#1d2a00}
+.pfila .ptienda{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0}
+.pfila .ptienda em{font-style:normal;font-size:10.5px;font-weight:700;color:#4a6800;background:rgba(190,242,100,.35);border-radius:999px;padding:2px 7px}
+.pfila.mejor .pr::after{content:none}
+.pahorro{font-size:12.5px;color:var(--piedra)}
+@media (min-width:1024px){#ptab{display:grid;grid-template-columns:1fr 1fr;gap:0 22px;align-items:start}}
+@media (max-width:420px){.pfila{gap:8px;padding:9px 10px;font-size:13.5px}.pfila a{font-size:12px}}
 .pvacio{font-size:13.5px;color:var(--piedra);background:#fff;border-radius:14px;padding:10px 12px}
 .nota-p{font-size:12px;color:var(--piedra);margin-top:12px}
 .precio .fuente{display:block;font-family:var(--f);font-size:11px;color:var(--piedra)}
@@ -825,7 +836,7 @@ html{scroll-snap-type:y proximity;scroll-padding-top:66px}
         <span class="eti">Precios hoy en Colombia</span>
         <h3 id="pT">¿Dónde está más barato?</h3>
         <div id="ptab"></div>
-        <p class="nota-p">Tiendas de la marca y almacenes de cadena, revisados cada tres días por el motor de dtorh. Cuál no vende equipos: confirma el precio final en la tienda.</p>
+        <p class="nota-p">Éxito, Olímpica, Jumbo, Falabella, Alkosto, Ktronix y Alkomprar; operadores Tigo (también vende los equipos de Movistar) y Claro, solo precio de contado, sin plan. WOM no tiene tienda en línea desde que dejó de usar su marca. Revisados cada tres días por el motor de dtorh. Cuál no vende equipos: confirma el precio final en la tienda.</p>
       </section>
   </div>
 </section>
@@ -1009,13 +1020,17 @@ function mockup(E){
 }
 
 /* ---------- Precios reales (Motor dtorh) ---------- */
+function filaTop(t,i,n,min){ var m=n>1&&t.precio===min; return '<div class="pfila'+(m?' mejor':'')+'"><span class="puesto">'+(i+1)+'</span><span class="ptienda">'+escHTML(t.tienda)+(m?'<em>Más barato</em>':'')+'</span><span class="pr">'+cop(t.precio)+'</span><a href="'+escHTML(t.url)+'" target="_blank" rel="noopener nofollow" aria-label="Ver '+escHTML(t.tienda)+'">Ver ↗</a></div>'; }
 function pintarPrecios(A,B){
   var html='';
   [[A,'var(--a)'],[B,'var(--b)']].forEach(function(x){ var e=x[0], d=PRECIOS[e.id];
-    html+='<div class="grupo"><b><i style="background:'+x[1]+'"></i><span class="marca pmarca">'+logoMarca(e.m)+'</span>'+e.n+'</b>';
-    if(d&&d.tiendas&&d.tiendas.length){ html+=d.tiendas.map(function(t,i){ return '<div class="pfila'+(i===0&&d.tiendas.length>1?' mejor':'')+'"><span>'+t.tienda+'</span><span class="pr">'+cop(t.precio)+'</span><a href="'+t.url+'" target="_blank" rel="noopener nofollow">Ver ↗</a></div>'; }).join('')+
-      '<span class="nota-p" style="margin-top:2px">Revisado el '+d.fecha+'</span>'; }
-    else html+='<div class="pvacio">Aún sin precio confirmado en tiendas. Referencia: '+cop(e.precio)+'.</div>';
+    html+='<div class="grupo"><b><i style="background:'+x[1]+'"></i><span class="marca pmarca">'+logoMarca(e.m)+'</span>'+escHTML(e.n)+(d&&d.cap?' <small>'+escHTML(d.cap)+'</small>':'')+'</b>';
+    var ts=(d&&d.tiendas)||[], cad=ts.filter(function(t){return t.tipo!=='operador'}), op=ts.filter(function(t){return t.tipo==='operador'});
+    if(cad.length){ html+='<span class="psub">Top almacenes de cadena</span>'+cad.map(function(t,i){return filaTop(t,i,cad.length,cad[0].precio)}).join('');
+      if(cad.length>1){ var dif=cad[cad.length-1].precio-cad[0].precio; if(dif>0) html+='<span class="pahorro">Entre la más barata y la más cara hay '+cop(dif)+'.</span>'; } }
+    else html+='<span class="psub">Top almacenes de cadena</span><div class="pvacio">Aún sin precio confirmado en almacenes. Referencia: '+cop(e.ref||e.precio)+'.</div>';
+    html+='<span class="psub">Operadores · precio de contado</span>'+(op.length?op.map(function(t,i){return filaTop(t,i,op.length,op[0].precio)}).join(''):'<div class="pvacio">Ningún operador lo tiene hoy en su tienda en línea.</div>');
+    if(d&&d.fecha) html+='<span class="nota-p" style="margin-top:2px">Revisado el '+d.fecha+'</span>';
     html+='</div>'; });
   $('ptab').innerHTML=html;
 }
