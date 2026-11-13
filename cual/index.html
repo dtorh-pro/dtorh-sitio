@@ -446,6 +446,30 @@ body{background:#fff}
 .pvacio{font-size:13.5px;color:var(--piedra);background:#fff;border-radius:14px;padding:10px 12px}
 .nota-p{font-size:12px;color:var(--piedra);margin-top:12px}
 .precio .fuente{display:block;font-family:var(--f);font-size:11px;color:var(--piedra)}
+
+/* Diseño real: video de YouTube del equipo, con el reproductor oficial y crédito al canal */
+.reales{max-width:1200px;margin:18px auto 0;padding:0 16px}
+.reales-cab{text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:16px}
+.reales-cab h3{margin:0;font-weight:800;font-size:clamp(22px,4vw,34px);letter-spacing:-.04em;color:var(--tinta);text-wrap:balance}
+.reales-cab p{margin:0;color:var(--piedra);font-size:15px;max-width:46ch}
+.reales-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:720px){.reales-grid{grid-template-columns:1fr}}
+.real{margin:0;display:flex;flex-direction:column;gap:10px}
+.real .marco{position:relative;aspect-ratio:16/9;border-radius:24px;overflow:hidden;background:#0B0B0F;box-shadow:0 1px 2px rgba(0,0,0,.06),0 18px 40px -18px rgba(0,0,0,.35)}
+.real .marco img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.real .marco iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.real .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.55));cursor:pointer;color:#fff;font:inherit}
+.real .play:hover img,.real .marco:hover img{transform:scale(1.03)}
+.real .play .verreal{position:relative;z-index:1;white-space:nowrap;flex:none;display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.94);color:var(--tinta);border-radius:100px;padding:12px 18px 12px 14px;font-weight:700;font-size:14px;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:transform .3s var(--spring)}
+.real .play:hover .verreal{transform:scale(1.05)}
+.real .play:focus-visible{outline:3px solid var(--a);outline-offset:-3px}
+.real .play i{width:30px;height:30px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff}
+.real.ra .play i{background:var(--a)} .real.rb .play i{background:var(--b)}
+.real .quien{z-index:1;position:absolute;left:14px;top:14px;background:rgba(0,0,0,.55);color:#fff;font-size:12px;font-weight:700;border-radius:100px;padding:6px 11px;backdrop-filter:blur(6px)}
+.real figcaption{display:flex;justify-content:space-between;gap:10px;align-items:baseline;font-size:12.5px;color:var(--piedra);padding:0 6px}
+.real figcaption b{color:var(--tinta);font-size:14px}
+.real figcaption a{color:var(--piedra)}
+.real.sinvideo .marco{display:flex;align-items:center;justify-content:center;background:var(--porcelana);color:var(--piedra);font-size:14px;text-align:center;padding:20px}
 </style>
 </head>
 <body>
@@ -502,6 +526,18 @@ body{background:#fff}
       </div>
     </div>
     <div class="cinta" aria-hidden="true"><div id="cinta"></div></div>
+  </section>
+
+  <section class="reales" id="reales" aria-labelledby="realT" hidden>
+    <div class="reales-cab">
+      <span class="eti">Diseño real</span>
+      <h3 id="realT">Míralos de verdad antes de decidir</h3>
+      <p>El equipo real en video: cómo se ve, de qué tamaño es y cómo se siente en la mano.</p>
+    </div>
+    <div class="reales-grid">
+      <figure class="real ra" id="realA"></figure>
+      <figure class="real rb" id="realB"></figure>
+    </div>
   </section>
 
   <div class="cuerpo-pag">
@@ -577,7 +613,7 @@ body{background:#fff}
 var DTORH = { whatsapp:'573024135572' };
 var MOTOR = 'https://motor-dtorh.dtorh-ofc.workers.dev';
 var IA_ENDPOINT = MOTOR + '/cual/veredicto'; /* Groq a través del Motor de dtorh: la clave nunca está en la página */
-var PRECIOS = {};
+var PRECIOS = {}; var VIDEOS = {};
 
 /* ---------- Equipos. pts = puntaje propio 0-100 por ronda (estimado). precio en COP (referencia).
    m1/m2 = color del marco · c1/c2 = fondo de pantalla ---------- */
@@ -720,9 +756,25 @@ function pintarPrecios(A,B){
     html+='</div>'; });
   $('ptab').innerHTML=html;
 }
+function escHTML(s){ return String(s||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]}); }
+function pintarReales(A,B){
+  var hay=false;
+  [['A',A],['B',B]].forEach(function(x){ var el=$('real'+x[0]), E=x[1], v=VIDEOS[E.id];
+    if(el.dataset.id===E.id+(v?v.id:'')) { if(v) hay=true; return; }
+    el.dataset.id=E.id+(v?v.id:'');
+    if(!v){ el.className='real r'+x[0].toLowerCase()+' sinvideo'; el.innerHTML='<div class="marco">Estamos buscando un video real del '+escHTML(E.n)+'.</div>'; return; }
+    hay=true; el.className='real r'+x[0].toLowerCase();
+    el.innerHTML='<div class="marco"><button class="play" type="button" aria-label="Ver el video del '+escHTML(E.n)+'"><img src="https://i.ytimg.com/vi/'+v.id+'/hqdefault.jpg" alt="" loading="lazy" width="480" height="360" onerror="this.style.visibility=\'hidden\'"><span class="quien">'+escHTML(E.n)+'</span><span class="verreal"><i><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></i>Ver el diseño real</span></button></div>'+
+      '<figcaption><b>'+escHTML(E.n)+'</b><span>Video de <a href="https://www.youtube.com/watch?v='+v.id+'" target="_blank" rel="noopener">'+escHTML(v.canal)+'</a> en YouTube</span></figcaption>';
+    el.querySelector('.play').addEventListener('click',function(){
+      var m=el.querySelector('.marco'); m.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+v.id+'?autoplay=1&rel=0&modestbranding=1&playsinline=1" title="Video del '+escHTML(E.n)+' en YouTube" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>';
+    });
+  });
+  $('reales').hidden=!hay;
+}
 function cargarPrecios(){
   fetch(MOTOR+'/cual/precios').then(function(r){return r.json()}).then(function(j){
-    PRECIOS=(j&&j.precios)||{};
+    PRECIOS=(j&&j.precios)||{}; VIDEOS=(j&&j.videos)||{};
     EQUIPOS.forEach(function(e){ var d=PRECIOS[e.id]; if(d&&d.min){ e.ref=e.ref||e.precio; e.precio=d.min; e.tienda=d.tiendas[0].tienda; } });
     pintar(); if(!$('hoja').hidden) pintarLista();
   }).catch(function(){});
@@ -788,6 +840,7 @@ function pintar(){
   $('perfilTxt').textContent=perfil.n;
   $('verMarcador').textContent='A '+p.ga+' · '+p.gb+' B';
   pintarCinta(A,B);
+  pintarReales(A,B);
 
   var ul=$('lista-rondas');
   if(!ul.children.length){
