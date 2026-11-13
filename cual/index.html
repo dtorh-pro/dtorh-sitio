@@ -547,6 +547,13 @@ html{scroll-snap-type:y proximity;scroll-padding-top:66px}
 .it .mini.foto{width:52px;aspect-ratio:1;background:#fff;padding:0;border-radius:12px;overflow:hidden;display:block}
 .it .mini.foto img{width:100%;height:100%;object-fit:contain}
 .sombra-piso{opacity:.6}
+
+/* con foto real: sin giros 3D (la foto es plana), solo flota; la viga queda detrás */
+.cuerpo:has(.foto-real){transform:none!important;animation:none}
+.cuerpo:has(.foto-real).cambio{animation:cambio .7s var(--ease)}
+.b-inicio .fono{width:min(80cqh,40cqw,430px);margin-bottom:0}
+.b-inicio .pie{z-index:3}
+.b-inicio .viga,.b-inicio .fiel{z-index:1;opacity:.55}
 </style>
 </head>
 <body>
