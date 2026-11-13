@@ -636,14 +636,14 @@ var PROYECTOS = [
     url: '/carta/'
   }},
   {{
-    nombre: 'Cotejo',
+    nombre: 'Cuál',
     tipo: 'Comparador de equipos',
-    rubro: 'Tiendas de celulares y tecnología',
-    ciudad: 'Barranquilla',
-    etapa: 2,
-    resumen: 'Pon dos celulares en la balanza: compite ronda por ronda, el veredicto cambia según para qué lo quiere el cliente y el pedido llega listo al WhatsApp de la tienda.',
-    piezas: ['Comparador por rondas', 'Veredicto según el uso', 'Pedido por WhatsApp', 'Hecho para celular y computador'],
-    url: '/cotejo/'
+    rubro: 'Celulares y tecnología en Colombia',
+    ciudad: 'Colombia',
+    etapa: 3,
+    resumen: 'Comparador gratis en su propia plataforma, cual.click: dos celulares frente a frente, ronda por ronda, con veredicto según el uso y el precio de hoy en tiendas oficiales y almacenes de cadena. No vende equipos; las tiendas pueden tenerlo con su marca.',
+    piezas: ['Precios reales cada dos días', 'Veredicto con IA', '14 equipos 2024–2026', 'Hecho para celular y computador'],
+    url: 'https://cual.click/'
   }}
 ];
 var ETAPAS = ['Diagnóstico','Diseño','Desarrollo','Lanzamiento'];
