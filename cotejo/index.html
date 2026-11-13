@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Cotejo comparador de equipos · diseño de dtorh</title>
 <meta name="description" content="Pon dos celulares frente a frente: mockups 3D, marcador por rondas, veredicto según tu uso y pedido por WhatsApp.">
-<meta name="theme-color" content="#F2F5FA">
+<meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
@@ -359,6 +359,68 @@ h1,h2,h3,p{margin:0}
 }
 @media (max-width:360px){.cta-top span{display:none}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+/* ===== v5 · galería blanca (referencia: Apple iPhone Duo en refero) =====
+   Fondo blanco y gris estudio, cero manchas de color; el producto es el protagonista y se sostiene con sombras reales.
+   El azul y el cian quedan solo como señal de equipo A / B. */
+:root{--porcelana:#F5F5F7; --tinta:#1D1D1F; --grafito:#3A3A3C; --piedra:#6E6E73; --niebla:#A1A1A6; --linea:#E6E6E8; --a:#0071E3; --b:#00A3C4}
+body{background:#fff}
+.aurora{display:none}
+.top-in{background:rgba(255,255,255,.8);border:1px solid var(--linea);box-shadow:none}
+.logo i{background:var(--tinta);animation:none}
+.logo i::after{background:linear-gradient(135deg,#0071E3,#00C2E0)}
+.chip-vivo{box-shadow:none;border-color:var(--linea);background:var(--porcelana)}
+.hero h1{color:var(--tinta);font-weight:700;letter-spacing:-.045em}
+.hero h1 .ga-txt{background:none;color:var(--a);-webkit-text-fill-color:var(--a)}
+.hero h1 .gb-txt{background:none;color:var(--b);-webkit-text-fill-color:var(--b)}
+.hero h1 .vs{animation:none}
+/* escenario tipo estudio fotográfico */
+.escena{margin-top:22px;padding:0}
+.escena .balanza,.escena .fichas{position:relative}
+.escena::before{content:"";position:absolute;inset:0 12px 0;border-radius:28px;z-index:-1;
+  background:radial-gradient(70% 60% at 50% 38%,#FFFFFF 0%,#F5F5F7 62%,#ECECEF 100%)}
+@media (min-width:1200px){.escena::before{inset:0}}
+.escena{padding:26px 8px 18px}
+.halo{display:none}
+.chispas{display:none}
+.frente,.dorso{box-shadow:inset 0 0 0 1px rgba(255,255,255,.6),0 1px 2px rgba(0,0,0,.10),0 12px 24px -8px rgba(0,0,0,.18),0 40px 60px -30px rgba(0,0,0,.30)!important}
+.sombra-piso{left:6%;right:6%;bottom:-18px;height:26px;background:radial-gradient(closest-side,rgba(0,0,0,.32),rgba(0,0,0,.08) 60%,transparent);filter:blur(2px)}
+.fono{animation-duration:7s}
+@keyframes flota{50%{translate:0 -6px}}
+.pie.gana .fono{filter:none}
+.viga{height:4px;background:linear-gradient(90deg,#D6D6D6,#F5F5F7 50%,#D6D6D6);box-shadow:inset 0 1px 0 #fff,0 6px 14px -6px rgba(0,0,0,.25)}
+.viga::before,.viga::after{content:"";position:absolute;top:0;bottom:0;width:22%;border-radius:99px}
+.viga::before{left:0;background:var(--a)} .viga::after{right:0;background:var(--b)}
+.fiel{background:linear-gradient(#FFFFFF,#E6E6E8);filter:drop-shadow(0 4px 6px rgba(0,0,0,.15))}
+.vs-pill{border:1px solid var(--linea);box-shadow:0 1px 2px rgba(0,0,0,.06),0 12px 28px -14px rgba(0,0,0,.25)}
+.vs-pill::before,.vs-pill::after{display:none}
+.num.ga-txt{background:none;color:var(--a);-webkit-text-fill-color:var(--a)}
+.num.gb-txt{background:none;color:var(--b);-webkit-text-fill-color:var(--b)}
+.marcador small{background:#fff;border:1px solid var(--linea)}
+.ficha .lado.ga-txt{background:none;color:var(--a);-webkit-text-fill-color:var(--a)}
+.ficha .lado.gb-txt{background:none;color:var(--b);-webkit-text-fill-color:var(--b)}
+.ficha .lado b{-webkit-text-fill-color:var(--tinta)}
+.ficha h2{font-weight:700;letter-spacing:-.03em}
+.cambiar,.redondo{box-shadow:0 1px 2px rgba(0,0,0,.06),0 6px 14px -8px rgba(0,0,0,.2)}
+.cinta{background:#fff;border-color:var(--linea);margin-top:0}
+.cinta span i{border-radius:50%}
+/* tarjetas en gris estudio, sin bordes ni vidrio */
+.card{background:var(--porcelana);border:0;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;border-radius:28px}
+.usos button{background:#fff}
+.rd{background:#fff;border-radius:20px}
+.veredicto{background:var(--tinta);border-radius:28px;box-shadow:0 30px 60px -34px rgba(0,0,0,.5)}
+.veredicto::before{display:none}
+.veredicto p em.ea{background:rgba(0,113,227,.55)} .veredicto p em.eb{background:rgba(0,163,196,.5)}
+.pedir::after{background:linear-gradient(90deg,transparent,rgba(0,113,227,.15),transparent)}
+.bar.ba i{background:var(--a)} .bar.bb i{background:var(--b)}
+.rd-g.ga{background:var(--a)} .rd-g.gb{background:var(--b)}
+.ley span:first-child{background:var(--a)!important} .ley span:last-child{background:var(--b)!important}
+.puesto button i:first-child{background:var(--a)!important}
+.lleva{background:var(--porcelana);border:0;box-shadow:none;border-radius:28px}
+.cta-lleva{box-shadow:none}
+.dock{background:rgba(29,29,31,.92)}
+.hoja .caja{box-shadow:0 -10px 40px -10px rgba(0,0,0,.25)}
+.it{background:var(--porcelana)}
 </style>
 </head>
 <body>
