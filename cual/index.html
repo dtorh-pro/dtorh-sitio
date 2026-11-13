@@ -434,6 +434,18 @@ body{background:#fff}
 .cats button[disabled]{color:var(--niebla);cursor:default}
 .cats button em{font-style:normal;font-size:10.5px;font-weight:700;background:var(--porcelana);color:var(--piedra);border-radius:100px;padding:1px 7px}
 .escena{margin-top:14px}
+.ia{font-weight:700;letter-spacing:.06em;background:var(--lima);color:var(--tinta);border-radius:100px;padding:1px 8px;margin-left:6px;font-size:10.5px}
+.precios .grupo{margin-top:14px;display:flex;flex-direction:column;gap:6px}
+.precios .grupo>b{font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px}
+.precios .grupo>b i{width:9px;height:9px;border-radius:50%}
+.pfila{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;background:#fff;border-radius:14px;padding:10px 12px;font-size:14px}
+.pfila .pr{font-family:var(--mono);font-weight:600;letter-spacing:0}
+.pfila a{font-size:12.5px;font-weight:600;color:var(--a);text-decoration:none;white-space:nowrap}
+.pfila.mejor{box-shadow:inset 0 0 0 2px var(--lima)}
+.pfila.mejor .pr::after{content:" · más barato";font-family:var(--f);font-size:11px;font-weight:700;color:#5b7f00}
+.pvacio{font-size:13.5px;color:var(--piedra);background:#fff;border-radius:14px;padding:10px 12px}
+.nota-p{font-size:12px;color:var(--piedra);margin-top:12px}
+.precio .fuente{display:block;font-family:var(--f);font-size:11px;color:var(--piedra)}
 </style>
 </head>
 <body>
@@ -500,7 +512,7 @@ body{background:#fff}
         <div class="usos" id="usos" role="group" aria-label="Uso principal"></div>
       </section>
       <section class="veredicto" id="veredicto" aria-labelledby="verT">
-        <div class="cab"><span class="eti" id="verT">Veredicto</span><span class="marcador-mini" id="verMarcador"></span></div>
+        <div class="cab"><span class="eti" id="verT">Veredicto <b class="ia" id="iaChip" hidden>con IA</b></span><span class="marcador-mini" id="verMarcador"></span></div>
         <p id="vtxt" aria-live="polite"></p>
         <div class="preg" id="preg" role="group" aria-label="Preguntas rápidas"></div>
         <div class="acc">
@@ -508,6 +520,12 @@ body{background:#fff}
           <button class="sec" type="button" id="copiar">Copiar</button>
         </div>
         <span class="nota">Mándaselo a quien te esté ayudando a decidir. Cuál no vende equipos.</span>
+      </section>
+      <section class="card precios" id="precios" aria-labelledby="pT">
+        <span class="eti">Precios hoy en Colombia</span>
+        <h3 id="pT">¿Dónde está más barato?</h3>
+        <div id="ptab"></div>
+        <p class="nota-p">Tiendas de la marca y almacenes de cadena, revisados cada dos días por el motor de dtorh. Cuál no vende equipos: confirma el precio final en la tienda.</p>
       </section>
     </div>
     <div class="col">
@@ -528,7 +546,7 @@ body{background:#fff}
   <a class="cta-lleva" id="waLleva" target="_blank" rel="noopener">Quiero Cuál para mi tienda</a>
 </section>
 <footer class="pie-pag">
-  <span>Cuál es un producto de <a href="https://dtorh.click/">dtorh™</a>. No vendemos equipos. Precios y puntajes de referencia (nov. 2026).</span>
+  <span>Cuál es un producto de <a href="https://dtorh.click/">dtorh™</a>. No vendemos equipos. Precios de tiendas revisados por el motor de dtorh; puntajes propios de referencia.</span>
   <span><a href="https://dtorh.click/laboratorio/">Ver más del estudio</a></span>
 </footer>
 
@@ -557,7 +575,9 @@ body{background:#fff}
 <script>
 /* ---------- Cuál es plataforma de dtorh. DTORH = contacto para licenciarlo a una tienda (no para vender equipos). ---------- */
 var DTORH = { whatsapp:'573024135572' };
-var IA_ENDPOINT = ''; /* ruta del Motor que llama a Groq. Vacío = veredicto local. */
+var MOTOR = 'https://motor-dtorh.dtorh-ofc.workers.dev';
+var IA_ENDPOINT = MOTOR + '/cual/veredicto'; /* Groq a través del Motor de dtorh: la clave nunca está en la página */
+var PRECIOS = {};
 
 /* ---------- Equipos. pts = puntaje propio 0-100 por ronda (estimado). precio en COP (referencia).
    m1/m2 = color del marco · c1/c2 = fondo de pantalla ---------- */
@@ -688,6 +708,25 @@ function mockup(E){
     '<div class="cara dorso" style="--m2:'+E.f[1]+';--d1:'+(E.d||E.f)[0]+';--d2:'+(E.d||E.f)[1]+'">'+CAMARAS[E.k]+'<span class="logo-d">'+E.m+'</span>'+botones(E,true)+'</div>';
 }
 
+/* ---------- Precios reales (Motor dtorh) ---------- */
+function pintarPrecios(A,B){
+  var html='';
+  [[A,'var(--a)'],[B,'var(--b)']].forEach(function(x){ var e=x[0], d=PRECIOS[e.id];
+    html+='<div class="grupo"><b><i style="background:'+x[1]+'"></i>'+e.n+'</b>';
+    if(d&&d.tiendas&&d.tiendas.length){ html+=d.tiendas.map(function(t,i){ return '<div class="pfila'+(i===0&&d.tiendas.length>1?' mejor':'')+'"><span>'+t.tienda+'</span><span class="pr">'+cop(t.precio)+'</span><a href="'+t.url+'" target="_blank" rel="noopener nofollow">Ver ↗</a></div>'; }).join('')+
+      '<span class="nota-p" style="margin-top:2px">Revisado el '+d.fecha+'</span>'; }
+    else html+='<div class="pvacio">Aún sin precio confirmado en tiendas. Referencia: '+cop(e.precio)+'.</div>';
+    html+='</div>'; });
+  $('ptab').innerHTML=html;
+}
+function cargarPrecios(){
+  fetch(MOTOR+'/cual/precios').then(function(r){return r.json()}).then(function(j){
+    PRECIOS=(j&&j.precios)||{};
+    EQUIPOS.forEach(function(e){ var d=PRECIOS[e.id]; if(d&&d.min){ e.ref=e.ref||e.precio; e.precio=d.min; e.tienda=d.tiendas[0].tienda; } });
+    pintar(); if(!$('hoja').hidden) pintarLista();
+  }).catch(function(){});
+}
+
 /* ---------- Pintar ---------- */
 var textoVeredicto='', primera=true, vista=0, autoGiro=null, prev={ga:-1,gb:-1,ganador:''};
 function cuenta(el,hasta){
@@ -735,7 +774,7 @@ function pintar(){
   var p=partido(), A=p.A, B=p.B;
   [['a',A],['b',B]].forEach(function(x){ var L=x[0].toUpperCase();
     if($('cuerpo'+L).dataset.id!==x[1].id) ponerMockup(x[0],x[1]);
-    $('nom'+L).textContent=x[1].n; $('pre'+L).textContent=cop(x[1].precio); });
+    $('nom'+L).textContent=x[1].n; $('pre'+L).innerHTML=cop(x[1].precio)+'<span class="fuente">'+(x[1].tienda?'desde, en '+x[1].tienda:'precio de referencia')+'</span>'; });
   var tot=Math.max(1,p.ga+p.gb);
   $('balanza').style.setProperty('--t',((p.gb-p.ga)/tot).toFixed(3));
   var ganador = p.ga>p.gb?'a':p.gb>p.ga?'b':'';
@@ -775,13 +814,16 @@ function pintar(){
   $('wa').href=comp; $('wa2').href=comp;
   var lic='https://wa.me/'+DTORH.whatsapp+'?text='+encodeURIComponent('Hola dtorh, vi Cuál (cual.click) y quiero el comparador con mi marca para mi tienda.');
   $('waTop').href=lic; $('waLleva').href=lic;
+  $('iaChip').hidden=true;
+  pintarPrecios(A,B);
   if(IA_ENDPOINT && est.preg<0) veredictoIA(p);
   primera=false;
 }
 function veredictoIA(p){
   fetch(IA_ENDPOINT,{method:'POST',headers:{'content-type':'application/json'},
-    body:JSON.stringify({a:p.A,b:p.B,perfil:est.perfil,marcador:[p.ga,p.gb],base:veredicto(p)})})
-  .then(function(r){return r.json()}).then(function(j){ if(j&&j.texto&&est.preg<0) escribir(j.texto,p); }).catch(function(){});
+    body:JSON.stringify({a:p.A.id,b:p.B.id,perfil:est.perfil,base:veredicto(p)})})
+  .then(function(r){return r.json()}).then(function(j){ var A2=porId(est.a),B2=porId(est.b);
+    if(j&&j.texto&&est.preg<0&&A2===p.A&&B2===p.B){ escribir(j.texto,p); $('iaChip').hidden=false; } }).catch(function(){});
 }
 
 /* ---------- Giro: muestra la espalda sola cada tanto; el botón lo fija ---------- */
@@ -867,6 +909,7 @@ function iniciar(data){
   inclinar();
   pintar();
   observarRondas();
+  cargarPrecios();
   setTimeout(function(){ [$('cuerpoA'),$('cuerpoB')].forEach(function(c){ c.classList.remove('intro'); }); },2000);
   setTimeout(iniciarAutoGiro,2500);
 }
