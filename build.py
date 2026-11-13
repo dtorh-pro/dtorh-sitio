@@ -634,6 +634,16 @@ var PROYECTOS = [
     resumen: 'Carta para pedir desde el celular con un QR, con fotos de cada plato: te ayuda a elegir, sugiere lo que combina y manda el pedido listo al WhatsApp del restaurante. Tres identidades de muestra: gourmet, comida rápida y café.',
     piezas: ['Pedido por WhatsApp', 'Pago con Bre-B, Nequi y Daviplata', 'QR por mesa', 'Domicilio por barrio'],
     url: '/carta/'
+  }},
+  {{
+    nombre: 'Cotejo',
+    tipo: 'Comparador de equipos',
+    rubro: 'Tiendas de celulares y tecnología',
+    ciudad: 'Barranquilla',
+    etapa: 2,
+    resumen: 'Pon dos celulares en la balanza: compite ronda por ronda, el veredicto cambia según para qué lo quiere el cliente y el pedido llega listo al WhatsApp de la tienda.',
+    piezas: ['Comparador por rondas', 'Veredicto según el uso', 'Pedido por WhatsApp', 'Hecho para celular y computador'],
+    url: '/cotejo/'
   }}
 ];
 var ETAPAS = ['Diagnóstico','Diseño','Desarrollo','Lanzamiento'];
