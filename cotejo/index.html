@@ -7,21 +7,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Cotejo comparador de equipos · diseño de dtorh</title>
 <meta name="description" content="Pon dos celulares frente a frente: mockups 3D, marcador por rondas, veredicto según tu uso y pedido por WhatsApp.">
-<meta name="theme-color" content="#f4f5f6">
+<meta name="theme-color" content="#F2F5FA">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
 <style>
-/* dtorh™ Cotejo v3 — "pulso sobre porcelana".
-   Base tomada del sistema Glow (refero): lienzo porcelana, tinta casi negra, tarjetas blancas de 40px, píldoras.
-   Equipo A = degradado plasma (violeta → rosa), equipo B = brasa (naranja → rojo señal).
+/* dtorh™ Cotejo v4 — plataforma propia de dtorh (no vende equipos).
+   Estructura tomada del sistema Glow (refero): lienzo claro, tarjetas blancas de 40px, píldoras.
+   Paleta elegida por David: blanco / gris hielo, equipo A azul eléctrico, equipo B cian, texto azul noche, ganador lima.
    Firma: dos mockups 3D que giran solos (frente/espalda), se paran sobre una balanza y el ganador queda con un halo vivo.
    Celular: una columna + dock. Computador: escenario ancho; abajo veredicto fijo a la izquierda y rondas a la derecha. */
 :root{
-  --porcelana:#f4f5f6; --blanco:#ffffff; --tinta:#131517; --grafito:#333537; --piedra:#737577; --niebla:#b3b5b7; --linea:#e6e7ea;
-  --a:#8800ff; --a2:#ef79ff; --a-mid:#a732d6; --b:#ec660d; --b2:#e83b47;
-  --plasma:linear-gradient(120deg,#8800ff,#a732d6 45%,#ef79ff);
-  --brasa:linear-gradient(120deg,#ff9a3d,#ec660d 45%,#e83b47);
+  --porcelana:#F2F5FA; --blanco:#ffffff; --tinta:#0B1530; --grafito:#2A3550; --piedra:#5D6A85; --niebla:#A9B3C7; --linea:#E1E7F0;
+  --a:#1E5BFF; --b:#00C2E0; --lima:#B8F23A;
+  --plasma:linear-gradient(120deg,#1E5BFF,#4C7DFF);
+  --brasa:linear-gradient(120deg,#00B4D8,#00C2E0 50%,#3FE0F5);
   --f:"Manrope",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
   --r-card:40px; --ease:cubic-bezier(.2,.75,.2,1); --spring:cubic-bezier(.34,1.45,.45,1);
@@ -40,17 +40,17 @@ h1,h2,h3,p{margin:0}
 :focus-visible{outline:2.5px solid var(--a);outline-offset:3px;border-radius:14px}
 .mono{font-family:var(--mono);letter-spacing:0;font-variant-numeric:tabular-nums}
 .ga-txt{background:var(--plasma);-webkit-background-clip:text;background-clip:text;color:transparent}
-.gb-txt{background:var(--brasa);-webkit-background-clip:text;background-clip:text;color:transparent}
+.gb-txt{background:linear-gradient(120deg,#0097B2,#00B4D8);-webkit-background-clip:text;background-clip:text;color:transparent}
 
 /* ---------- fondo vivo ---------- */
 .aurora{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
 .aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;will-change:transform}
-.aurora .x1{width:60vmax;height:60vmax;left:-22vmax;top:-18vmax;background:radial-gradient(closest-side,#c58bff,transparent);animation:nube1 22s ease-in-out infinite alternate}
-.aurora .x2{width:55vmax;height:55vmax;right:-20vmax;top:-10vmax;background:radial-gradient(closest-side,#ffb27a,transparent);animation:nube2 26s ease-in-out infinite alternate}
-.aurora .x3{width:50vmax;height:50vmax;left:30%;top:55%;background:radial-gradient(closest-side,#ffd0f5,transparent);opacity:.45;animation:nube1 30s ease-in-out infinite alternate-reverse}
+.aurora .x1{width:60vmax;height:60vmax;left:-22vmax;top:-18vmax;background:radial-gradient(closest-side,#8FB0FF,transparent);animation:nube1 22s ease-in-out infinite alternate}
+.aurora .x2{width:55vmax;height:55vmax;right:-20vmax;top:-10vmax;background:radial-gradient(closest-side,#8BEBFA,transparent);animation:nube2 26s ease-in-out infinite alternate}
+.aurora .x3{width:50vmax;height:50vmax;left:30%;top:55%;background:radial-gradient(closest-side,#DDF7A8,transparent);opacity:.35;animation:nube1 30s ease-in-out infinite alternate-reverse}
 @keyframes nube1{to{transform:translate(12vmax,10vmax) scale(1.15)}}
 @keyframes nube2{to{transform:translate(-14vmax,14vmax) scale(.9)}}
-.aurora::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(19,21,23,.09) 1px,transparent 1px);background-size:22px 22px;
+.aurora::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(11,21,48,.08) 1px,transparent 1px);background-size:22px 22px;
   -webkit-mask-image:linear-gradient(#000,transparent 70%);mask-image:linear-gradient(#000,transparent 70%)}
 
 /* ---------- barra superior ---------- */
@@ -59,10 +59,10 @@ h1,h2,h3,p{margin:0}
   background:rgba(255,255,255,.72);backdrop-filter:saturate(1.6) blur(18px);-webkit-backdrop-filter:saturate(1.6) blur(18px);
   border:1px solid rgba(255,255,255,.9);border-radius:100px;box-shadow:0 10px 30px -18px rgba(19,21,23,.25)}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;font-size:18px;letter-spacing:-.04em}
-.logo i{width:30px;height:30px;border-radius:10px;background:conic-gradient(from 200deg,#8800ff,#ef79ff,#ec660d,#e83b47,#8800ff);
-  display:grid;place-items:center;font-style:normal;animation:gira-logo 8s linear infinite}
+.logo i{width:30px;height:30px;border-radius:10px;background:conic-gradient(from 200deg,#1E5BFF,#00C2E0,#B8F23A,#1E5BFF);
+  display:grid;place-items:center;font-style:normal;animation:gira-logo 6s linear infinite}
 .logo i::after{content:"";width:12px;height:12px;border-radius:4px;background:#fff}
-@keyframes gira-logo{to{filter:hue-rotate(360deg)}}
+@keyframes gira-logo{to{transform:rotate(360deg)}}
 .top nav{display:none;gap:2px}
 .top nav a,.top nav button{background:none;border:0;text-decoration:none;font-size:14.5px;font-weight:600;color:var(--grafito);padding:9px 16px;border-radius:100px;transition:background .2s}
 .top nav a:hover,.top nav button:hover{background:rgba(19,21,23,.06)}
@@ -76,7 +76,7 @@ h1,h2,h3,p{margin:0}
 .hero{max-width:1200px;margin:0 auto;padding:26px 16px 0;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}
 .chip-vivo{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--linea);border-radius:100px;padding:6px 12px 6px 6px;
   font-size:12.5px;font-weight:600;color:var(--grafito);box-shadow:0 6px 18px -12px rgba(19,21,23,.3)}
-.chip-vivo b{background:var(--plasma);color:#fff;border-radius:100px;padding:2px 9px;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.chip-vivo b{background:var(--lima);color:var(--tinta);border-radius:100px;padding:2px 9px;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
 .hero h1{font-weight:800;font-size:clamp(38px,9.6vw,84px);line-height:.98;letter-spacing:-.05em;text-wrap:balance;max-width:14ch}
 .hero h1 .vs{display:inline-block;animation:respira 3.4s ease-in-out infinite}
 @keyframes respira{50%{transform:scale(1.06) rotate(-3deg)}}
@@ -90,12 +90,12 @@ h1,h2,h3,p{margin:0}
 .pie.pb{transform:translateY(calc(var(--t) * 18px))}
 .halo{position:absolute;left:50%;bottom:16%;width:clamp(150px,44vw,360px);aspect-ratio:1;translate:-50% 0;border-radius:50%;z-index:-1;
   background:conic-gradient(from 0deg,var(--h1),var(--h2),var(--h1));filter:blur(38px);opacity:.28;animation:halo 7s linear infinite;transition:opacity .6s}
-.pa .halo{--h1:#8800ff;--h2:#ef79ff} .pb .halo{--h1:#ec660d;--h2:#ffb36b}
+.pa .halo{--h1:#1E5BFF;--h2:#8FB0FF} .pb .halo{--h1:#00C2E0;--h2:#B8F23A}
 .pie.gana .halo{opacity:.85}
 @keyframes halo{to{transform:rotate(360deg)}}
 .chispas{position:absolute;inset:0;pointer-events:none;z-index:4}
 .chispas i{position:absolute;left:50%;top:40%;width:8px;height:8px;border-radius:2px;background:var(--k);opacity:0}
-.pie.pa{--k:#a732d6} .pie.pb{--k:#ec660d}
+.pie.pa{--k:#1E5BFF} .pie.pb{--k:#00C2E0} .chispas i:nth-child(3n){background:#B8F23A}
 .pie.estalla .chispas i{animation:chispa .9s var(--ease) forwards}
 @keyframes chispa{0%{opacity:1;transform:translate(0,0) rotate(0) scale(1)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(260deg) scale(.4)}}
 
@@ -111,10 +111,16 @@ h1,h2,h3,p{margin:0}
 @keyframes intro{from{transform:translateY(80px) rotateY(-220deg) scale(.7);opacity:0}}
 .cuerpo.giro{animation:giro .9s var(--ease)}
 @keyframes giro{50%{transform:rotateY(calc(var(--gy) + 180deg)) scale(.86)}100%{transform:rotateY(calc(var(--gy) + 360deg))}}
-.cara{position:absolute;inset:0;border-radius:17% / 8.1%;backface-visibility:hidden;-webkit-backface-visibility:hidden}
-.frente{padding:3.2%;background:linear-gradient(135deg,var(--m1),var(--m2) 40%,var(--m1) 62%,var(--m2));
-  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55),0 30px 50px -24px rgba(19,21,23,.55)}
-.pantalla{position:relative;height:100%;border-radius:15% / 7.1%;overflow:hidden;background:#000}
+.cara{position:absolute;inset:0;border-radius:var(--rad,17% / 8.1%);backface-visibility:hidden;-webkit-backface-visibility:hidden}
+/* marco metálico: brillos en los cantos como un borde redondeado real */
+.frente{padding:1.6%;background:linear-gradient(90deg,var(--m2) 0%,var(--m1) 3%,rgba(255,255,255,.95) 5%,var(--m1) 8%,var(--m2) 30%,var(--m2) 70%,var(--m1) 92%,rgba(255,255,255,.95) 95%,var(--m1) 97%,var(--m2) 100%);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.6),0 34px 56px -26px rgba(11,21,48,.6),0 10px 18px -12px rgba(11,21,48,.45)}
+.bisel{height:100%;padding:2%;border-radius:var(--rad-in,15.4% / 7.3%);background:#05070c}
+.pantalla{position:relative;height:100%;border-radius:var(--rad-p,14% / 6.6%);overflow:hidden;background:#000}
+.boton{position:absolute;width:1.6%;border-radius:2px;background:linear-gradient(90deg,var(--m2),var(--m1));box-shadow:inset 0 0 0 .5px rgba(0,0,0,.25)}
+.punto{position:absolute;top:2.4%;left:50%;width:4.4%;aspect-ratio:1;border-radius:50%;background:#000;translate:-50% 0;z-index:2;box-shadow:0 0 0 1.5px rgba(255,255,255,.08)}
+.brillo{animation:reflejo 7s ease-in-out infinite;background-size:300% 100%!important}
+@keyframes reflejo{0%,60%{background-position:100% 0}100%{background-position:-50% 0}}
 .pantalla .fondo{position:absolute;inset:-25%;background:radial-gradient(55% 40% at 30% 28%,var(--c1),transparent 70%),radial-gradient(65% 50% at 78% 82%,var(--c1),transparent 66%),var(--c2);
   animation:deriva 12s ease-in-out infinite alternate}
 @keyframes deriva{to{transform:translate(7%,-6%) rotate(10deg) scale(1.08)}}
@@ -123,16 +129,18 @@ h1,h2,h3,p{margin:0}
 .reloj small{display:block;font-size:.24em;font-weight:600;letter-spacing:.02em;opacity:.85;margin-bottom:.35em}
 .widgets{position:absolute;left:8%;right:8%;bottom:8%;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:6%}
 .widgets i{aspect-ratio:1;border-radius:22%;background:rgba(255,255,255,.22);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.25)}
-.brillo{position:absolute;inset:0;z-index:3;pointer-events:none;border-radius:17% / 8.1%;background:linear-gradient(115deg,rgba(255,255,255,.45),transparent 30%,transparent 72%,rgba(255,255,255,.12))}
+.brillo{position:absolute;inset:0;z-index:3;pointer-events:none;border-radius:var(--rad,17% / 8.1%);background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.38) 45%,transparent 55%),linear-gradient(115deg,rgba(255,255,255,.22),transparent 30%)}
 .dorso{transform:rotateY(180deg);background:
-  radial-gradient(120% 70% at 20% 10%,rgba(255,255,255,.45),transparent 55%),
-  linear-gradient(160deg,var(--d1),var(--d2));
-  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.5),inset 0 0 0 4px var(--m2),0 30px 50px -24px rgba(19,21,23,.55)}
+  linear-gradient(115deg,rgba(255,255,255,.4),transparent 28%,transparent 62%,rgba(255,255,255,.18) 78%,transparent 90%),
+  linear-gradient(170deg,var(--d1),var(--d2));
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.7),inset 0 0 0 3.5px var(--m2),inset 0 0 0 4.5px rgba(255,255,255,.5),0 34px 56px -26px rgba(11,21,48,.6)}
 .dorso .logo-d{position:absolute;left:0;right:0;top:55%;text-align:center;font-weight:700;font-size:clamp(9px,2.2vw,15px);letter-spacing:.14em;text-transform:uppercase;
-  color:rgba(255,255,255,.7);mix-blend-mode:overlay}
-.modulo{position:absolute;background:linear-gradient(145deg,rgba(255,255,255,.35),rgba(0,0,0,.18));box-shadow:inset 0 0 0 1px rgba(255,255,255,.4),0 6px 14px -6px rgba(0,0,0,.45)}
-.lente{position:absolute;border-radius:50%;background:radial-gradient(circle at 36% 34%,#9fb3ff 0 6%,#0b0d14 16%,#1e2230 40%,#3a3f4f 52%,#0b0d14 62%,#20232c 72%);
-  box-shadow:0 0 0 1.5px rgba(255,255,255,.55),0 3px 6px rgba(0,0,0,.4)}
+  color:rgba(255,255,255,.85);text-shadow:0 0 1px rgba(11,21,48,.45),0 1px 2px rgba(11,21,48,.25)}
+.modulo{position:absolute;background:linear-gradient(145deg,rgba(255,255,255,.5),rgba(255,255,255,.06) 55%,rgba(0,0,0,.14));box-shadow:inset 0 0 0 1px rgba(255,255,255,.55),inset 0 -2px 4px rgba(0,0,0,.18),0 8px 14px -6px rgba(0,0,0,.5)}
+.lente{position:absolute;border-radius:50%;
+  background:radial-gradient(circle at 38% 34%,rgba(170,195,255,.95) 0 4%,transparent 8%),radial-gradient(circle at 62% 66%,rgba(120,255,230,.35) 0 3%,transparent 7%),
+    radial-gradient(circle,#05060a 0 28%,#1b2233 29% 44%,#05060a 45% 56%,transparent 57%),conic-gradient(from 20deg,#eef1f6,#7c8390,#f7f9fc,#5f6672,#d5dae2,#eef1f6);
+  box-shadow:0 0 0 1px rgba(0,0,0,.35),0 3px 7px rgba(0,0,0,.45)}
 .flash{position:absolute;border-radius:50%;background:radial-gradient(circle,#fff7d6,#e9d9a0);box-shadow:0 0 0 1px rgba(0,0,0,.15)}
 .sombra-piso{position:absolute;left:12%;right:12%;bottom:-24px;height:22px;border-radius:50%;background:radial-gradient(closest-side,rgba(19,21,23,.35),transparent);
   animation:sombra 6s ease-in-out infinite}
@@ -140,14 +148,14 @@ h1,h2,h3,p{margin:0}
 @keyframes sombra{50%{transform:scaleX(.82);opacity:.6}}
 
 .viga{position:absolute;left:5%;right:5%;bottom:22px;height:8px;border-radius:99px;z-index:1;
-  background:linear-gradient(90deg,#8800ff,#ef79ff 30%,#fff 50%,#ffb36b 70%,#e83b47);
-  box-shadow:0 8px 20px -8px rgba(136,0,255,.5),0 8px 20px -8px rgba(236,102,13,.5),inset 0 1px 0 rgba(255,255,255,.7);
+  background:linear-gradient(90deg,#1E5BFF,#7FA2FF 35%,#fff 50%,#7FE6F5 65%,#00C2E0);
+  box-shadow:0 8px 20px -8px rgba(30,91,255,.5),0 8px 20px -8px rgba(0,194,224,.5),inset 0 1px 0 rgba(255,255,255,.7);
   transform:rotate(calc(var(--t) * 2.2deg));transition:transform 1s var(--spring)}
 .fiel{position:absolute;left:50%;bottom:0;width:52px;height:28px;translate:-50% 0;clip-path:polygon(50% 0,100% 100%,0 100%);background:linear-gradient(#fff,#d9dbe0)}
 
 .marcador{align-self:center;z-index:3;margin-bottom:90px;display:flex;flex-direction:column;align-items:center;gap:8px}
 .vs-pill{position:relative;display:flex;align-items:center;gap:6px;padding:10px 16px;border-radius:100px;background:#fff;box-shadow:0 18px 40px -20px rgba(19,21,23,.45);isolation:isolate}
-.vs-pill::before{content:"";position:absolute;inset:-2px;border-radius:inherit;z-index:-1;background:conic-gradient(from var(--ang,0deg),#8800ff,#ef79ff,#ec660d,#e83b47,#8800ff);animation:anillo 4s linear infinite}
+.vs-pill::before{content:"";position:absolute;inset:-2px;border-radius:inherit;z-index:-1;background:conic-gradient(from var(--ang,0deg),#1E5BFF,#00C2E0,#B8F23A,#1E5BFF);animation:anillo 4s linear infinite}
 .vs-pill::after{content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;background:#fff}
 @property --ang{syntax:"<angle>";inherits:false;initial-value:0deg}
 @keyframes anillo{to{--ang:360deg}}
@@ -160,8 +168,8 @@ h1,h2,h3,p{margin:0}
 .fichas{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:start;margin-top:14px}
 .ficha{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;min-width:0}
 .ficha .lado{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
-.ficha .lado b{display:none;color:#fff;border-radius:100px;padding:2px 8px;font-size:10.5px}
-.fa .lado b{background:var(--plasma)} .fb .lado b{background:var(--brasa)}
+.ficha .lado b{display:none;color:var(--tinta);border-radius:100px;padding:2px 8px;font-size:10.5px}
+.fa .lado b,.fb .lado b{background:var(--lima)}
 .ficha.gana .lado b{display:inline-block;animation:salta .5s var(--spring)}
 .ficha h2{font-weight:800;font-size:clamp(17px,4.4vw,30px);line-height:1.05;letter-spacing:-.04em;text-wrap:balance;overflow-wrap:anywhere}
 .ficha .precio{font-family:var(--mono);font-size:13px;color:var(--piedra);letter-spacing:0}
@@ -202,13 +210,13 @@ h1,h2,h3,p{margin:0}
 .usos button[aria-pressed="true"]{color:#fff}
 .usos button[aria-pressed="true"]::before{opacity:1}
 .usos button[aria-pressed="true"] span{color:#c9cbd0}
-.usos button[aria-pressed="true"] svg{background:var(--plasma);color:#fff}
+.usos button[aria-pressed="true"] svg{background:var(--lima);color:var(--tinta)}
 .usos button:last-child:nth-child(odd){grid-column:1 / -1}
 
-.veredicto{position:relative;background:var(--tinta);color:#fff;border-radius:var(--r-card);padding:26px 22px;overflow:hidden;isolation:isolate;
-  box-shadow:0 30px 60px -30px rgba(136,0,255,.55)}
+.veredicto{position:relative;background:#0B1530;color:#fff;border-radius:var(--r-card);padding:26px 22px;overflow:hidden;isolation:isolate;
+  box-shadow:0 30px 60px -30px rgba(30,91,255,.6)}
 .veredicto::before{content:"";position:absolute;width:420px;height:420px;right:-160px;top:-200px;z-index:-1;border-radius:50%;
-  background:conic-gradient(from 0deg,#8800ff,#ef79ff,#ec660d,#8800ff);filter:blur(60px);opacity:.55;animation:halo 10s linear infinite}
+  background:conic-gradient(from 0deg,#1E5BFF,#00C2E0,#B8F23A,#1E5BFF);filter:blur(60px);opacity:.5;animation:halo 10s linear infinite}
 .veredicto .cab{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .veredicto .eti{color:#c9cbd0}
 .marcador-mini{font-family:var(--mono);font-size:12px;letter-spacing:0;background:rgba(255,255,255,.1);border-radius:100px;padding:4px 10px}
@@ -216,8 +224,8 @@ h1,h2,h3,p{margin:0}
 .veredicto p span{display:inline-block;animation:pal .55s var(--ease) both;animation-delay:calc(var(--i) * 20ms)}
 @keyframes pal{from{opacity:0;transform:translateY(8px);filter:blur(5px)}}
 .veredicto p em{font-style:normal;padding:0 .1em;border-radius:6px}
-.veredicto p em.ea{background:linear-gradient(120deg,rgba(136,0,255,.55),rgba(239,121,255,.45))}
-.veredicto p em.eb{background:linear-gradient(120deg,rgba(236,102,13,.6),rgba(232,59,71,.45))}
+.veredicto p em.ea{background:rgba(30,91,255,.55)}
+.veredicto p em.eb{background:rgba(0,194,224,.45)}
 .preg{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
 .preg button{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:100px;padding:8px 14px;font-size:13.5px;font-weight:500;color:#e8e9ec;
   transition:background .2s,transform .25s var(--spring)}
@@ -226,7 +234,7 @@ h1,h2,h3,p{margin:0}
 .acc{display:flex;gap:10px;margin-top:20px}
 .pedir{flex:1 1 auto;display:inline-flex;align-items:center;justify-content:center;gap:10px;white-space:nowrap;background:#fff;color:var(--tinta);font-weight:700;border:0;
   border-radius:19px;padding:15px 20px;text-decoration:none;position:relative;overflow:hidden;transition:transform .25s var(--spring)}
-.pedir::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(90deg,transparent,rgba(136,0,255,.18),transparent);animation:barrido 3.2s ease-in-out infinite}
+.pedir::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(90deg,transparent,rgba(30,91,255,.18),transparent);animation:barrido 3.2s ease-in-out infinite}
 @keyframes barrido{60%,100%{left:120%}}
 .pedir:hover{transform:translateY(-2px)}
 .pedir svg{width:20px;height:20px;color:#1faf54;flex:none}
@@ -246,7 +254,7 @@ h1,h2,h3,p{margin:0}
 .rd-x{margin-left:auto;font-size:11px;font-weight:700;color:#fff;background:var(--tinta);border-radius:100px;padding:3px 9px}
 .rd-g{margin-left:auto;font-size:11px;font-weight:700;color:#fff;border-radius:100px;padding:3px 9px}
 .rd-x:not([hidden])+.rd-g{margin-left:0}
-.rd-g.ga{background:var(--plasma)} .rd-g.gb{background:var(--brasa)} .rd-g.ge{background:var(--niebla)}
+.rd-g.ga{background:var(--a)} .rd-g.gb{background:#009FB8} .rd-g.ge{background:var(--niebla)}
 .vals{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:12.5px;letter-spacing:0;color:var(--piedra)}
 .vals span:last-child{text-align:right}
 .vals .w{color:var(--tinta);font-weight:600}
@@ -262,6 +270,15 @@ h1,h2,h3,p{margin:0}
 .rd-c{font-size:14px;color:var(--grafito);text-wrap:pretty}
 .rd-c b{font-weight:700}
 
+.lleva{max-width:1176px;margin:26px auto 0;padding:26px 22px;border-radius:40px;background:#fff;border:1px solid #fff;
+  box-shadow:0 24px 50px -36px rgba(11,21,48,.35);display:flex;flex-direction:column;gap:16px;margin-inline:12px}
+@media (min-width:1200px){.lleva{margin-inline:auto}}
+.lleva h3{font-weight:800;font-size:clamp(22px,3vw,30px);letter-spacing:-.04em;line-height:1.1;margin-top:4px;max-width:22ch}
+.lleva p{color:var(--piedra);margin-top:8px;max-width:58ch}
+.cta-lleva{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;background:var(--lima);color:var(--tinta);font-weight:800;text-decoration:none;
+  border-radius:100px;padding:15px 22px;transition:transform .25s var(--spring);box-shadow:0 12px 24px -14px rgba(120,170,0,.8)}
+.cta-lleva:hover{transform:translateY(-2px)}
+@media (min-width:860px){.lleva{flex-direction:row;align-items:center;justify-content:space-between;padding:34px 40px}.cta-lleva{align-self:center;flex:none}}
 .pie-pag{max-width:1200px;margin:24px auto 0;padding:0 18px;font-size:12.5px;color:var(--piedra);display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px}
 .pie-pag a{color:var(--tinta);font-weight:600}
 
@@ -306,8 +323,8 @@ h1,h2,h3,p{margin:0}
 .it small{font-family:var(--mono);font-size:11px;color:var(--piedra);letter-spacing:0}
 .it .p{font-family:var(--mono);font-size:12.5px;font-weight:600;letter-spacing:0}
 .it .ya{position:absolute;top:8px;right:8px;font-size:10.5px;font-weight:700;color:#fff;border-radius:100px;padding:2px 8px}
-.it[data-en="a"]{border-color:#a732d6;background:#fff} .it[data-en="a"] .ya{background:var(--plasma)}
-.it[data-en="b"]{border-color:#ec660d;background:#fff} .it[data-en="b"] .ya{background:var(--brasa)}
+.it[data-en="a"]{border-color:#1E5BFF;background:#fff} .it[data-en="a"] .ya{background:var(--plasma)}
+.it[data-en="b"]{border-color:#00C2E0;background:#fff} .it[data-en="b"] .ya{background:var(--brasa)}
 .vacio{grid-column:1/-1;color:var(--piedra);padding:28px 10px;text-align:center}
 
 /* ---------- tableta ---------- */
@@ -355,15 +372,15 @@ h1,h2,h3,p{margin:0}
       <a href="#rondas">Ronda por ronda</a>
       <a href="#veredicto">Veredicto</a>
     </nav>
-    <a class="cta-top" id="waTop" target="_blank" rel="noopener"><s></s><span>Pedir</span></a>
+    <a class="cta-top" id="waTop" target="_blank" rel="noopener"><s></s><span>Para tu tienda</span></a>
   </div>
 </header>
 
 <main id="arriba">
   <section class="hero">
-    <span class="chip-vivo"><b>En vivo</b>Comparador de celulares con veredicto</span>
+    <span class="chip-vivo"><b>Gratis</b>Comparador de celulares de dtorh</span>
     <h1>¿Cuál te <span class="ga-txt">llevas</span><span class="vs gb-txt">?</span></h1>
-    <p>Pon dos equipos frente a frente, dinos para qué lo quieres y te decimos cuál gana, ronda por ronda.</p>
+    <p>Pon dos equipos frente a frente, dinos para qué lo quieres y te decimos cuál te conviene, ronda por ronda. Aquí no vendemos celulares: te ayudamos a decidir.</p>
   </section>
 
   <section class="escena" aria-label="Equipos frente a frente">
@@ -410,10 +427,10 @@ h1,h2,h3,p{margin:0}
         <p id="vtxt" aria-live="polite"></p>
         <div class="preg" id="preg" role="group" aria-label="Preguntas rápidas"></div>
         <div class="acc">
-          <a class="pedir" id="wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.2-.7-2.7-1.1-4.4-3.8-4.5-4-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.1.1.6-.1 1.2Z"/></svg>Pedir por WhatsApp</a>
+          <a class="pedir" id="wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.2-.7-2.7-1.1-4.4-3.8-4.5-4-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.1.1.6-.1 1.2Z"/></svg>Compartir veredicto</a>
           <button class="sec" type="button" id="copiar">Copiar</button>
         </div>
-        <span class="nota" id="tel"></span>
+        <span class="nota">Mándaselo a quien te esté ayudando a decidir. Cotejo no vende equipos.</span>
       </section>
     </div>
     <div class="col">
@@ -428,14 +445,19 @@ h1,h2,h3,p{margin:0}
   </div>
 </main>
 
+<section class="lleva" aria-labelledby="llT">
+  <div><span class="eti">Para tiendas de tecnología</span><h3 id="llT">Cotejo con tu marca, tus equipos y tus precios.</h3>
+  <p>Cotejo es una plataforma de dtorh. Si tienes una tienda, la adaptamos a tu identidad y tu catálogo, y el botón final lleva el pedido a tu WhatsApp.</p></div>
+  <a class="cta-lleva" id="waLleva" target="_blank" rel="noopener">Quiero Cotejo para mi tienda</a>
+</section>
 <footer class="pie-pag">
-  <span>Precios de referencia y puntajes: estimados de muestra (nov. 2026). Cada tienda carga sus precios reales.</span>
-  <span>Diseño y desarrollo: <a href="https://dtorh.click/laboratorio/">dtorh™</a></span>
+  <span>Cotejo es una herramienta de dtorh™. No vendemos celulares. Precios y puntajes de referencia (nov. 2026).</span>
+  <span><a href="https://dtorh.click/laboratorio/">Laboratorio dtorh™</a></span>
 </footer>
 
 <div class="dock" aria-label="Acciones">
   <button type="button" data-abrir="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="7" height="16" rx="2"/><rect x="14" y="4" width="7" height="16" rx="2"/></svg>Equipos</button>
-  <a class="pedir" id="wa2" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.2-.7-2.7-1.1-4.4-3.8-4.5-4-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.1.1.6-.1 1.2Z"/></svg>Pedir por WhatsApp</a>
+  <a class="pedir" id="wa2" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.2-.7-2.7-1.1-4.4-3.8-4.5-4-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.1.1.6-.1 1.2Z"/></svg>Compartir veredicto</a>
 </div>
 
 <div class="hoja" id="hoja" hidden role="dialog" aria-modal="true" aria-labelledby="hT">
@@ -456,26 +478,26 @@ h1,h2,h3,p{margin:0}
 </div>
 
 <script>
-/* ---------- Configuración por tienda (lo que cambia con cada licencia) ---------- */
-var TIENDA = { whatsapp:'573024135572', telTexto:'302 413 5572' };
+/* ---------- Cotejo es plataforma de dtorh. DTORH = contacto para licenciarlo a una tienda (no para vender equipos). ---------- */
+var DTORH = { whatsapp:'573024135572' };
 var IA_ENDPOINT = ''; /* ruta del Motor que llama a Groq. Vacío = veredicto local. */
 
 /* ---------- Equipos. pts = puntaje propio 0-100 por ronda (estimado). precio en COP (referencia).
    m1/m2 = color del marco · c1/c2 = fondo de pantalla ---------- */
 var EQUIPOS = [
- {id:'ip17pm',k:'pro3',m:'Apple',n:'iPhone 17 Pro Max',precio:6900000,pant:'6,9″ · 120 Hz',chip:'A19 Pro',cam:'48 + 48 + 48 MP',bat:5088,carga:40,peso:233,f:['#C9A27A','#5E4632'],c:['#FF8A3D','#2A1C4F'],pts:{pant:96,rend:98,cam:96,bat:90}},
- {id:'ip17',k:'dual',m:'Apple',n:'iPhone 17',precio:4300000,pant:'6,3″ · 120 Hz',chip:'A19',cam:'48 + 48 MP',bat:3692,carga:40,peso:177,f:['#B8C7E8','#55627E'],c:['#7FB2FF','#1B2560'],pts:{pant:90,rend:93,cam:86,bat:74}},
- {id:'ip16',k:'dual',m:'Apple',n:'iPhone 16',precio:3300000,pant:'6,1″ · 60 Hz',chip:'A18',cam:'48 + 12 MP',bat:3561,carga:25,peso:170,f:['#E7B9D2','#7D5468'],c:['#FF8FC0','#3C1B5E'],pts:{pant:74,rend:88,cam:82,bat:70}},
- {id:'s25u',k:'trio',m:'Samsung',n:'Galaxy S25 Ultra',precio:5200000,pant:'6,9″ · 120 Hz',chip:'Snapdragon 8 Elite',cam:'200 + 50 + 50 + 10 MP',bat:5000,carga:45,peso:218,f:['#A9AFB9','#3F444D'],c:['#9FB2CC','#111827'],pts:{pant:97,rend:96,cam:95,bat:86}},
- {id:'s25',k:'trio',m:'Samsung',n:'Galaxy S25',precio:3200000,pant:'6,2″ · 120 Hz',chip:'Snapdragon 8 Elite',cam:'50 + 12 + 10 MP',bat:4000,carga:25,peso:162,f:['#9ED9CC','#3A6B62'],c:['#5EE6C8','#0B3B4A'],pts:{pant:90,rend:95,cam:85,bat:72}},
- {id:'a56',k:'trio',m:'Samsung',n:'Galaxy A56',precio:1500000,pant:'6,7″ · 120 Hz',chip:'Exynos 1580',cam:'50 + 12 + 5 MP',bat:5000,carga:45,peso:198,f:['#C9D99A','#56633A'],c:['#C6F06E','#1E4A2A'],pts:{pant:84,rend:70,cam:74,bat:82}},
- {id:'x15',k:'cuad',m:'Xiaomi',n:'Xiaomi 15',precio:3400000,pant:'6,36″ · 120 Hz',chip:'Snapdragon 8 Elite',cam:'50 + 50 + 50 MP',bat:5240,carga:90,peso:191,f:['#D0C4F2','#5B4E86'],c:['#B39CFF','#24195C'],pts:{pant:92,rend:96,cam:90,bat:88}},
- {id:'rn14pp',k:'redmi',m:'Xiaomi',n:'Redmi Note 14 Pro+',precio:1700000,pant:'6,67″ · 120 Hz',chip:'Snapdragon 7s Gen 3',cam:'200 + 8 + 2 MP',bat:5110,carga:120,peso:210,f:['#A6CCE6','#3C5C78'],c:['#5CC8FF','#102A6B'],pts:{pant:86,rend:68,cam:78,bat:84}},
- {id:'rn14',k:'redmi',m:'Xiaomi',n:'Redmi Note 14',precio:750000,pant:'6,67″ · 120 Hz',chip:'Helio G99 Ultra',cam:'108 + 2 MP',bat:5500,carga:33,peso:196,f:['#E6CF9A','#7A6234'],c:['#FFD06A','#5A2A08'],pts:{pant:78,rend:50,cam:62,bat:88}},
- {id:'px7p',k:'poco',m:'POCO',n:'POCO X7 Pro',precio:1500000,pant:'6,67″ · 120 Hz',chip:'Dimensity 8400 Ultra',cam:'50 + 8 MP',bat:6000,carga:90,peso:195,f:['#E8D46A','#4A4320'],c:['#FFE04A','#1B1A12'],pts:{pant:86,rend:84,cam:70,bat:93}},
- {id:'pix9',k:'pixel',m:'Google',n:'Pixel 9',precio:3000000,pant:'6,3″ · 120 Hz',chip:'Tensor G4',cam:'50 + 48 MP',bat:4700,carga:27,peso:198,f:['#F0C6D6','#7C5262'],c:['#FFA3C4','#5A1F3E'],pts:{pant:90,rend:80,cam:91,bat:78}},
- {id:'e50p',k:'moto',m:'Motorola',n:'Edge 50 Pro',precio:1600000,pant:'6,7″ · 144 Hz',chip:'Snapdragon 7 Gen 3',cam:'50 + 13 + 10 MP',bat:4500,carga:125,peso:186,f:['#D4C2F0','#4E3A7A'],c:['#D2B6FF','#33166E'],pts:{pant:88,rend:70,cam:78,bat:74}},
- {id:'g85',k:'moto',m:'Motorola',n:'Moto G85',precio:900000,pant:'6,67″ · 120 Hz',chip:'Snapdragon 6s Gen 3',cam:'50 + 8 MP',bat:5000,carga:33,peso:172,f:['#9CDCD4','#2F615B'],c:['#6EE2D4','#0B4A45'],pts:{pant:82,rend:55,cam:64,bat:82}}
+ {id:'ip17pm',k:'pro3',m:'Apple',n:'iPhone 17 Pro Max',precio:6900000,pant:'6,9″ · 120 Hz',chip:'A19 Pro',cam:'48 + 48 + 48 MP',bat:5088,carga:40,peso:233,f:['#F4B183','#B8622F'],d:['#F09A5C','#C9672D'],c:['#FF9B57','#3B1C0E'],pts:{pant:96,rend:98,cam:96,bat:90}},
+ {id:'ip17',k:'dual',m:'Apple',n:'iPhone 17',precio:4300000,pant:'6,3″ · 120 Hz',chip:'A19',cam:'48 + 48 MP',bat:3692,carga:40,peso:177,f:['#E3D8F5','#9A8CC0'],d:['#D8CCF2','#B3A4DB'],c:['#C9B6FF','#2B2160'],pts:{pant:90,rend:93,cam:86,bat:74}},
+ {id:'ip16',k:'dual',m:'Apple',n:'iPhone 16',precio:3300000,pant:'6,1″ · 60 Hz',chip:'A18',cam:'48 + 12 MP',bat:3561,carga:25,peso:170,f:['#8EA4F2','#3A52B8'],d:['#7D93F0','#4A63CF'],c:['#7FB2FF','#14205C'],pts:{pant:74,rend:88,cam:82,bat:70}},
+ {id:'s25u',k:'trio',m:'Samsung',n:'Galaxy S25 Ultra',precio:5200000,pant:'6,9″ · 120 Hz',chip:'Snapdragon 8 Elite',cam:'200 + 50 + 50 + 10 MP',bat:5000,carga:45,peso:218,f:['#D3DAE4','#707B8C'],d:['#B9C3D1','#8C97A8'],c:['#9FC0E8','#0F1B33'],pts:{pant:97,rend:96,cam:95,bat:86}},
+ {id:'s25',k:'trio',m:'Samsung',n:'Galaxy S25',precio:3200000,pant:'6,2″ · 120 Hz',chip:'Snapdragon 8 Elite',cam:'50 + 12 + 10 MP',bat:4000,carga:25,peso:162,f:['#CDE6F5','#6E97B2'],d:['#BFDDF0','#8DB6D1'],c:['#7FD7FF','#0B2A44'],pts:{pant:90,rend:95,cam:85,bat:72}},
+ {id:'a56',k:'trio',m:'Samsung',n:'Galaxy A56',precio:1500000,pant:'6,7″ · 120 Hz',chip:'Exynos 1580',cam:'50 + 12 + 5 MP',bat:5000,carga:45,peso:198,f:['#6B7280','#2B2F38'],d:['#4B515D','#2E333C'],c:['#8AB4FF','#0B1530'],pts:{pant:84,rend:70,cam:74,bat:82}},
+ {id:'x15',k:'cuad',m:'Xiaomi',n:'Xiaomi 15',precio:3400000,pant:'6,36″ · 120 Hz',chip:'Snapdragon 8 Elite',cam:'50 + 50 + 50 MP',bat:5240,carga:90,peso:191,f:['#F5F5F3','#AEB1B5'],d:['#FBFBFA','#DADCDE'],c:['#9FD3FF','#1A2F5A'],pts:{pant:92,rend:96,cam:90,bat:88}},
+ {id:'rn14pp',k:'redmi',m:'Xiaomi',n:'Redmi Note 14 Pro+',precio:1700000,pant:'6,67″ · 120 Hz',chip:'Snapdragon 7s Gen 3',cam:'200 + 8 + 2 MP',bat:5110,carga:120,peso:210,f:['#A9CBEA','#40699A'],d:['#93BEE6','#3E6A99'],c:['#5CC8FF','#102A6B'],pts:{pant:86,rend:68,cam:78,bat:84}},
+ {id:'rn14',k:'redmi',m:'Xiaomi',n:'Redmi Note 14',precio:750000,pant:'6,67″ · 120 Hz',chip:'Helio G99 Ultra',cam:'108 + 2 MP',bat:5500,carga:33,peso:196,f:['#8CC4A8','#2F6B50'],d:['#7FB89B','#3F7D5F'],c:['#9BE8C2','#0E3B2A'],pts:{pant:78,rend:50,cam:62,bat:88}},
+ {id:'px7p',k:'poco',m:'POCO',n:'POCO X7 Pro',precio:1500000,pant:'6,67″ · 120 Hz',chip:'Dimensity 8400 Ultra',cam:'50 + 8 MP',bat:6000,carga:90,peso:195,f:['#F6D743','#4A4520'],d:['#F3D23A','#C9A912'],c:['#FFE04A','#1B1A12'],pts:{pant:86,rend:84,cam:70,bat:93}},
+ {id:'pix9',k:'pixel',m:'Google',n:'Pixel 9',precio:3000000,pant:'6,3″ · 120 Hz',chip:'Tensor G4',cam:'50 + 48 MP',bat:4700,carga:27,peso:198,f:['#F4C3D4','#B06A86'],d:['#F2B7CB','#D891AE'],c:['#FFB3CF','#4A1730'],pts:{pant:90,rend:80,cam:91,bat:78}},
+ {id:'e50p',k:'moto',m:'Motorola',n:'Edge 50 Pro',precio:1600000,pant:'6,7″ · 144 Hz',chip:'Snapdragon 7 Gen 3',cam:'50 + 13 + 10 MP',bat:4500,carga:125,peso:186,f:['#D3C4F0','#6A55A8'],d:['#C9B7EC','#9A86CF'],c:['#C6B2FF','#2A1A63'],pts:{pant:88,rend:70,cam:78,bat:74}},
+ {id:'g85',k:'moto',m:'Motorola',n:'Moto G85',precio:900000,pant:'6,67″ · 120 Hz',chip:'Snapdragon 6s Gen 3',cam:'50 + 8 MP',bat:5000,carga:33,peso:172,f:['#5F7BE0','#1F2F75'],d:['#4E6BD8','#2C3F9A'],c:['#7FA2FF','#0B1A55'],pts:{pant:82,rend:55,cam:64,bat:82}}
 ];
 function porId(id){ for(var i=0;i<EQUIPOS.length;i++) if(EQUIPOS[i].id===id) return EQUIPOS[i]; return null; }
 function fmt(n){ return n.toLocaleString('es-CO'); }
@@ -566,12 +588,19 @@ var CAMARAS = {
  pixel: '<div class="modulo" style="left:-1%;right:-1%;top:12%;aspect-ratio:4;border-radius:99px;background:linear-gradient(180deg,#2b2f3a,#11131a)">'+L(14,16,17)+L(34,16,17)+F(56,36,7)+'</div>',
  moto:  '<div class="modulo" style="left:7%;top:3%;width:44%;aspect-ratio:1;border-radius:24%">'+L(8,8,40)+L(52,8,40)+L(8,52,40)+F(60,60,14)+'</div>'
 };
+function botones(E,dorso){
+  var izq=dorso?'right':'left', der=dorso?'left':'right', b='';
+  if(E.m==='Apple') b+='<i class="boton" style="'+izq+':-1.3%;top:16%;height:4%"></i><i class="boton" style="'+izq+':-1.3%;top:24%;height:8%"></i><i class="boton" style="'+izq+':-1.3%;top:34%;height:8%"></i><i class="boton" style="'+der+':-1.3%;top:26%;height:12%"></i><i class="boton" style="'+der+':-1.3%;top:56%;height:7%"></i>';
+  else b+='<i class="boton" style="'+der+':-1.3%;top:22%;height:13%"></i><i class="boton" style="'+der+':-1.3%;top:38%;height:7%"></i>';
+  return b;
+}
+function radios(E){ return E.id==='s25u' ? '--rad:7% / 3.4%;--rad-in:6% / 2.9%;--rad-p:5% / 2.4%' : E.m==='Apple' ? '' : '--rad:14% / 6.6%;--rad-in:12.5% / 5.9%;--rad-p:11% / 5.2%'; }
 function mockup(E){
   var hora=['10:09','9:41','11:24','7:30'][EQUIPOS.indexOf(E)%4];
-  return '<div class="cara frente" style="--m1:'+E.f[0]+';--m2:'+E.f[1]+'"><div class="pantalla" style="--c1:'+E.c[0]+';--c2:'+E.c[1]+'">'+
-    '<div class="fondo"></div><div class="isla"></div><div class="reloj"><small>viernes 13</small>'+hora+'</div>'+
-    '<div class="widgets"><i></i><i></i></div></div><div class="brillo"></div></div>'+
-    '<div class="cara dorso" style="--m2:'+E.f[1]+';--d1:'+E.f[0]+';--d2:'+E.f[1]+'">'+CAMARAS[E.k]+'<span class="logo-d">'+E.m+'</span></div>';
+  return '<div class="cara frente" style="--m1:'+E.f[0]+';--m2:'+E.f[1]+'"><div class="bisel"><div class="pantalla" style="--c1:'+E.c[0]+';--c2:'+E.c[1]+'">'+
+    '<div class="fondo"></div>'+(E.m==='Apple'?'<div class="isla"></div>':'<div class="punto"></div>')+'<div class="reloj"><small>viernes 13</small>'+hora+'</div>'+
+    '<div class="widgets"><i></i><i></i></div></div></div><div class="brillo"></div>'+botones(E,false)+'</div>'+
+    '<div class="cara dorso" style="--m2:'+E.f[1]+';--d1:'+(E.d||E.f)[0]+';--d2:'+(E.d||E.f)[1]+'">'+CAMARAS[E.k]+'<span class="logo-d">'+E.m+'</span>'+botones(E,true)+'</div>';
 }
 
 /* ---------- Pintar ---------- */
@@ -598,6 +627,7 @@ function resaltar(texto,A,B){
 function escribir(texto,p){ textoVeredicto=texto; $('vtxt').innerHTML=resaltar(texto,p.A,p.B); }
 function ponerMockup(lado,E){
   var c=$('cuerpo'+lado.toUpperCase());
+  c.setAttribute('style',(c.getAttribute('style')||'').replace(/--rad[^;]*;?/g,'')+';'+radios(E));
   if(primera||quieto()){ c.innerHTML=mockup(E); c.dataset.id=E.id; return; }
   c.classList.remove('intro','giro'); void c.offsetWidth; c.classList.add('giro');
   setTimeout(function(){ c.innerHTML=mockup(E); c.dataset.id=E.id; },430);
@@ -656,8 +686,10 @@ function pintar(){
   [].forEach.call(document.querySelectorAll('#usos button'),function(b){b.setAttribute('aria-pressed',b.dataset.k===est.perfil)});
   [].forEach.call(document.querySelectorAll('#preg button'),function(b,i){b.setAttribute('aria-pressed',i===est.preg)});
   escribir(est.preg>=0 ? PREGUNTAS[est.preg].f(A,B) : veredicto(p), p);
-  var wa='https://wa.me/'+TIENDA.whatsapp+'?text='+encodeURIComponent('Hola, comparé el '+A.n+' con el '+B.n+' en Cotejo. '+veredicto(p)+' ¿Lo tienen disponible?');
-  $('wa').href=wa; $('wa2').href=wa; $('waTop').href=wa;
+  var comp='https://wa.me/?text='+encodeURIComponent('Comparé el '+A.n+' con el '+B.n+' en Cotejo. '+veredicto(p)+' Míralo tú: https://dtorh.click/cotejo/');
+  $('wa').href=comp; $('wa2').href=comp;
+  var lic='https://wa.me/'+DTORH.whatsapp+'?text='+encodeURIComponent('Hola dtorh, vi Cotejo y quiero el comparador con mi marca para mi tienda.');
+  $('waTop').href=lic; $('waLleva').href=lic;
   if(IA_ENDPOINT && est.preg<0) veredictoIA(p);
   primera=false;
 }
@@ -725,7 +757,6 @@ function iniciar(data){
   $('preg').innerHTML=PREGUNTAS.map(function(p,i){return '<button type="button" data-i="'+i+'" aria-pressed="false">'+p.n+'</button>'}).join('');
   var marcas=['']; EQUIPOS.forEach(function(e){ if(marcas.indexOf(e.m)<0) marcas.push(e.m); });
   $('marcas').innerHTML=marcas.map(function(m){return '<button type="button" data-m="'+m+'" aria-pressed="false">'+(m||'Todas')+'</button>'}).join('');
-  $('tel').textContent='Te responde la tienda en el WhatsApp '+TIENDA.telTexto+'.';
 
   $('usos').addEventListener('click',function(e){var b=e.target.closest('button'); if(!b) return; est.perfil=b.dataset.k; est.preg=-1; pintar();});
   $('preg').addEventListener('click',function(e){var b=e.target.closest('button'); if(!b) return; var i=+b.dataset.i; est.preg=est.preg===i?-1:i; pintar();});
