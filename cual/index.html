@@ -513,6 +513,11 @@ body{background:#fff}
 .marcas button,.preg button,.ficha .cambiar,.cats button{min-height:44px}
 .pfila a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;padding:0 10px;margin:-12px -8px -12px 0}
 .pvacio{font-size:13.5px;color:var(--piedra);background:#fff;border-radius:14px;padding:10px 12px}
+.pml{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:48px;margin-top:10px;padding:0 16px;border-radius:14px;background:#FFE600;color:#2D3277;font-weight:700;font-size:14.5px;text-decoration:none;transition:transform .15s ease}
+.pml small{font-size:12px;font-weight:600;opacity:.8}
+.pml:hover{transform:translateY(-1px)}.pml:focus-visible{outline:3px solid #2D3277;outline-offset:2px}
+.pafil{display:block;font-size:11.5px;color:var(--piedra);margin-top:4px}
+@media (prefers-reduced-motion:reduce){.pml{transition:none}.pml:hover{transform:none}}
 .nota-p{font-size:12px;color:var(--piedra);margin-top:12px}
 .precio .fuente{display:block;font-family:var(--f);font-size:11px;color:var(--piedra)}
 
@@ -886,7 +891,7 @@ html{scroll-snap-type:y proximity;scroll-padding-top:66px}
         <span class="eti">Precios hoy en Colombia</span>
         <h3 id="pT">¿Dónde está más barato?</h3>
         <div id="ptab"></div>
-        <p class="nota-p">Éxito, Olímpica, Jumbo, Falabella, Alkosto, Ktronix y Alkomprar; operadores Tigo (también vende los equipos de Movistar) y Claro, solo precio de contado, sin plan. WOM no tiene tienda en línea desde que dejó de usar su marca. Revisados cada tres días por el motor de dtorh. Cuál no vende equipos: confirma el precio final en la tienda.</p>
+        <p class="nota-p">Éxito, Olímpica, Jumbo, Falabella, Alkosto, Ktronix y Alkomprar; operadores Tigo (también vende los equipos de Movistar) y Claro, solo precio de contado, sin plan. WOM no tiene tienda en línea desde que dejó de usar su marca. Revisados cada tres días por el motor de dtorh. Cuál no vende equipos: confirma el precio final en la tienda. El botón de Mercado Libre es un enlace de afiliado: si compras ahí, Cuál puede recibir una comisión. El orden del top no depende de eso.</p>
       </section>
   </div>
 </section>
@@ -1114,6 +1119,8 @@ function mockup(E){
 
 /* ---------- Precios reales (Motor dtorh) ---------- */
 function filaTop(t,i,n,min){ var m=n>1&&t.precio===min; return '<div class="pfila'+(m?' mejor':'')+'"><span class="puesto">'+(i+1)+'</span><span class="ptienda">'+escHTML(t.tienda)+(m?'<em>Más barato</em>':'')+'</span><span class="pr">'+cop(t.precio)+'</span><a href="'+escHTML(t.url)+'" target="_blank" rel="noopener nofollow" aria-label="Ver precio en '+escHTML(t.tienda)+' (abre otra pestaña)">Ver ↗</a></div>'; }
+var ML={ip18pm:'1RWHeMs',ip18p:'2rWVHpN',ip17pm:'2UTkbN5',ip17p:'2nXW4uf',ip17:'2uuU9GU',ip16:'28aCFpo',s26u:'1P7njEd',s25u:'1oUGwKG',s25:'19Wbmhz',a57:'2VJe9vF',x17t:'1MSRdS8',rn15p:'1mKGkH7',rn17:'2LWcbVN',px8p:'1bqzymo',e70f:'1W2Aqxa',e60f:'1hAtoYv',reno16f:'2vbyvUB',oa6:'2mTmSad',honx8d:'2g5tXLd'};
+function botonML(e){ var c=ML[e.id]; if(!c) return ''; return '<a class="pml" href="https://meli.la/'+c+'" target="_blank" rel="noopener nofollow sponsored" aria-label="Ver '+escHTML(e.n)+' en Mercado Libre, tienda oficial (enlace de afiliado, abre otra pestaña)"><span>Ver en Mercado Libre</span><small>Tienda oficial ↗</small></a><span class="pafil">Enlace de afiliado: Cuál puede recibir una comisión si compras. A ti no te cuesta más.</span>'; }
 function pintarPrecios(A,B){
   var html='';
   [[A,'var(--a)'],[B,'var(--b)']].forEach(function(x){ var e=x[0], d=PRECIOS[e.id];
@@ -1123,6 +1130,7 @@ function pintarPrecios(A,B){
       if(cad.length>1){ var dif=cad[cad.length-1].precio-cad[0].precio; if(dif>0) html+='<span class="pahorro">Entre la más barata y la más cara hay '+cop(dif)+'.</span>'; } }
     else html+='<span class="psub">Top almacenes de cadena</span><div class="pvacio">Aún sin precio confirmado en almacenes. Referencia: '+cop(e.ref||e.precio)+'.</div>';
     html+='<span class="psub">Operadores · precio de contado</span>'+(op.length?op.map(function(t,i){return filaTop(t,i,op.length,op[0].precio)}).join(''):'<div class="pvacio">Ningún operador lo tiene hoy en su tienda en línea.</div>');
+    html+=botonML(e);
     if(d&&d.fecha) html+='<span class="nota-p" style="margin-top:2px">Revisado el '+d.fecha+'</span>';
     html+='</div>'; });
   $('ptab').innerHTML=html;
