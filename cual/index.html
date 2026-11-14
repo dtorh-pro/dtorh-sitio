@@ -216,6 +216,14 @@ h1,h2,h3,p{margin:0}
 .eti{font-size:12px;font-weight:700;letter-spacing:.083em;text-transform:uppercase;color:var(--piedra)}
 .card h3{font-weight:800;font-size:24px;line-height:1.2;letter-spacing:-.04em;margin-top:4px}
 
+.uso-p{font-size:14px;line-height:1.5;color:var(--piedra);margin-top:8px;max-width:60ch}
+.uso-res{margin-top:12px;background:#fff;border-radius:24px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.uso-eti{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--piedra)}
+.uso-gana{font-size:20px;font-weight:700;line-height:1.25;color:var(--tinta)}
+.uso-pesa,.uso-cambio{font-size:13.5px;line-height:1.45;color:var(--piedra)}
+.uso-cambio{color:var(--tinta)}
+.uso-ir{align-self:flex-start;display:inline-flex;align-items:center;min-height:44px;font-weight:600;font-size:14px;color:var(--a);text-decoration:none}
+.uso-ir:focus-visible{outline:3px solid var(--a);outline-offset:2px;border-radius:8px}
 .usos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:16px}
 .usos button{position:relative;text-align:left;background:var(--porcelana);border:0;border-radius:24px;padding:14px;display:flex;flex-direction:column;gap:8px;
   transition:transform .3s var(--spring),background .3s,color .3s;isolation:isolate;overflow:hidden}
@@ -776,7 +784,6 @@ html{scroll-snap-type:y proximity;scroll-padding-top:66px}
       <a href="#ficha">Ficha técnica</a>
       <a href="#reales">Diseño real</a>
     </nav>
-    <a class="cta-top" id="waTop" target="_blank" rel="noopener"><span>Para tu tienda</span></a>
   </div>
 </header>
 
@@ -853,7 +860,9 @@ html{scroll-snap-type:y proximity;scroll-padding-top:66px}
       <section class="card" aria-labelledby="usoT">
         <span class="eti">Paso 1</span>
         <h3 id="usoT">¿Para qué lo vas a usar?</h3>
+        <p class="uso-p">Cuál enfrenta los dos equipos en 7 rondas: pantalla, potencia, cámara, batería, carga, peso y precio. Elige tu uso y lo que más te importa cuenta más en el resultado.</p>
         <div class="usos" id="usos" role="group" aria-label="Uso principal"></div>
+        <div class="uso-res" id="usoRes" aria-live="polite"></div>
       </section>
   </div>
 </section>
@@ -927,12 +936,12 @@ html{scroll-snap-type:y proximity;scroll-padding-top:66px}
   </div>
 </section>
 
-<section class="bloque b-fin" id="tienda" data-n="Para tu tienda">
+<section class="bloque b-fin" id="tienda" data-n="Para tiendas">
   <div class="b-in">
 <section class="lleva" aria-labelledby="llT">
-  <div><span class="eti">Para tiendas de tecnología</span><h3 id="llT">Cuál con tu marca, tus equipos y tus precios.</h3>
-  <p>Cuál es una plataforma de dtorh. Si tienes una tienda, la adaptamos a tu identidad y tu catálogo, y el botón final lleva el pedido a tu WhatsApp.</p></div>
-  <a class="cta-lleva" id="waLleva" target="_blank" rel="noopener">Quiero Cuál para mi tienda</a>
+  <div><span class="eti">¿Tienes una tienda de celulares?</span><h3 id="llT">Este comparador de celulares, en tu tienda y con tu marca.</h3>
+  <p>Cuál es el comparador de celulares de dtorh. Lo montamos con tu logo, tus colores, los equipos que vendes y tus precios. Tu cliente compara dos modelos, ve cuál le conviene y el botón final le abre un chat de WhatsApp contigo para pedirlo.</p></div>
+  <a class="cta-lleva" id="waLleva" target="_blank" rel="noopener">Quiero el comparador para mi tienda</a>
 </section>
 <footer class="pie-pag">
   <span>Cuál es un producto de <a href="https://dtorh.click/">dtorh™</a>. No vendemos equipos. Precios de tiendas revisados por el motor de dtorh; puntajes propios de referencia.</span>
@@ -1021,11 +1030,11 @@ var RONDAS = [
  {k:'precio',n:'Precio',    t:'precio',   v:function(e){return cop(e.precio)}, s:function(e){return Math.max(8,100-e.precio/75000)}, claro:function(g,p){return 'El <b>'+g.n+'</b> te deja '+cop(Math.abs(g.precio-p.precio))+' en el bolsillo.'}}
 ];
 var PERFILES = [
- {k:'todo',  n:'De todo un poco', d:'Todas las rondas valen igual', frase:'un uso de todo un poco', w:{}},
- {k:'fotos', n:'Fotos y video',   d:'Cámara ×3 · pantalla ×2', frase:'fotos y video', w:{cam:3,pant:2}},
- {k:'juegos',n:'Juegos',          d:'Potencia ×3 · pantalla y batería ×2', frase:'jugar', w:{rend:3,pant:2,bat:2}},
- {k:'dura',  n:'Que dure el día', d:'Batería ×3 · carga ×2', frase:'que dure todo el día', w:{bat:3,carga:2}},
- {k:'plata', n:'Cuidar la plata', d:'Precio ×3', frase:'cuidar la plata', w:{precio:3}}
+ {k:'todo',  n:'De todo un poco', d:'Todas las rondas valen lo mismo', pesa:'Todas las rondas valen lo mismo.', frase:'un uso de todo un poco', w:{}},
+ {k:'fotos', n:'Fotos y video',   d:'Pesa más: cámara y pantalla', pesa:'La cámara vale triple y la pantalla doble.', frase:'fotos y video', w:{cam:3,pant:2}},
+ {k:'juegos',n:'Juegos',          d:'Pesa más: potencia, pantalla y batería', pesa:'La potencia vale triple; la pantalla y la batería, doble.', frase:'jugar', w:{rend:3,pant:2,bat:2}},
+ {k:'dura',  n:'Que dure el día', d:'Pesa más: batería y carga', pesa:'La batería vale triple y la velocidad de carga doble.', frase:'que dure todo el día', w:{bat:3,carga:2}},
+ {k:'plata', n:'Cuidar la plata', d:'Pesa más: el precio', pesa:'El precio vale triple.', frase:'cuidar la plata', w:{precio:3}}
 ];
 function duelo(a,b,k,si,empate){ var d=a.pts[k]-b.pts[k]; return Math.abs(d)<3 ? empate : si(d>0?a:b); }
 var PREGUNTAS = [
@@ -1048,6 +1057,17 @@ function partido(){
     return {r:r,sa:sa,sb:sb,peso:peso,gana:gana};
   });
   return {A:A,B:B,ga:ga,gb:gb,filas:filas};
+}
+function resumenUso(p){
+  var perfil=PERFILES.filter(function(x){return x.k===est.perfil})[0], A=p.A, B=p.B;
+  var g=p.ga>p.gb?A:p.gb>p.ga?B:null;
+  var res=g?'<b>'+escHTML(g.n)+'</b> gana '+Math.max(p.ga,p.gb)+' a '+Math.min(p.ga,p.gb):'<b>Empate</b> '+p.ga+' a '+p.gb;
+  var h='<span class="uso-eti">Resultado para '+escHTML(perfil.frase)+'</span><p class="uso-gana">'+res+'</p><p class="uso-pesa">'+perfil.pesa+' Puntos: cada ronda ganada suma lo que vale.</p>';
+  if(est.perfil!=='todo'){ var ant=est.perfil; est.perfil='todo'; var q=partido(); est.perfil=ant;
+    var g0=q.ga>q.gb?A:q.gb>q.ga?B:null;
+    if((g0&&g0.id)!==(g&&g.id)) h+='<p class="uso-cambio">Ojo: comparando todo parejo, '+(g0?'gana el '+escHTML(g0.n)+' '+Math.max(q.ga,q.gb)+' a '+Math.min(q.ga,q.gb):'quedan empatados '+q.ga+' a '+q.gb)+'. Tu uso cambia el resultado.</p>';
+    else h+='<p class="uso-cambio">Comparando todo parejo el resultado es el mismo: tu uso lo confirma.</p>'; }
+  return h+'<a class="uso-ir" href="#rondas">Ver ronda por ronda ↓</a>';
 }
 function veredicto(p){
   var A=p.A,B=p.B,ga=p.ga,gb=p.gb,filas=p.filas, perfil=PERFILES.filter(function(x){return x.k===est.perfil})[0];
@@ -1282,8 +1302,9 @@ function pintar(){
   var comp='https://wa.me/?text='+encodeURIComponent('Comparé el '+A.n+' con el '+B.n+' en Cuál. '+veredicto(p)+' Míralo: https://cual.click/?a='+A.id+'&b='+B.id);
   $('wa').href=comp; $('wa2').href=comp;
   var lic='https://wa.me/'+DTORH.whatsapp+'?text='+encodeURIComponent('Hola dtorh, vi Cuál (cual.click) y quiero el comparador con mi marca para mi tienda.');
-  $('waTop').href=lic; $('waLleva').href=lic;
+  $('waLleva').href=lic;
   $('iaChip').hidden=true;
+  $('usoRes').innerHTML=resumenUso(p);
   pintarPrecios(A,B);
   if(IA_ENDPOINT && est.preg<0) veredictoIA(p);
   primera=false;
