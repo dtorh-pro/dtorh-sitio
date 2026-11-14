@@ -22,7 +22,7 @@
   },
   "Batería y carga": {
    "Batería": "3.998 mAh",
-   "Carga por cable": "40 W",
+   "Carga por cable": "50 % en 20 min (con cargador de 40 W o más)",
    "Otras": "Inalámbrica 25 W · Carga inversa por cable"
   },
   "Software y actualizaciones": {
@@ -75,7 +75,7 @@
   },
   "Batería y carga": {
    "Batería": "4.823 mAh",
-   "Carga por cable": "40 W",
+   "Carga por cable": "50 % en 20 min (con cargador de 40 W o más)",
    "Otras": "Inalámbrica 25 W · Carga inversa por cable"
   },
   "Software y actualizaciones": {
@@ -128,7 +128,7 @@
   },
   "Batería y carga": {
    "Batería": "3.692 mAh",
-   "Carga por cable": "40 W",
+   "Carga por cable": "50 % en 20 min (con cargador de 40 W o más)",
    "Otras": "Inalámbrica 25 W · Carga inversa por cable"
   },
   "Software y actualizaciones": {
@@ -529,59 +529,6 @@
    "Anunciado": "diciembre de 2025"
   }
  },
- "hnova14": {
-  "Pantalla": {
-   "Tamaño": "6,7″",
-   "Tipo": "OLED · 120 Hz · HDR",
-   "Resolución": "1084 × 2412 (395 ppi)",
-   "Brillo máximo": "1.100 nits",
-   "Protección": "Sin dato confirmado para la versión global"
-  },
-  "Rendimiento": {
-   "Procesador": "Kirin 8000",
-   "CPU": "8 núcleos hasta 2,4 GHz",
-   "Memoria RAM": "12 GB de RAM",
-   "Almacenamiento": "256 GB, 512 GB",
-   "Tarjeta microSD": "No"
-  },
-  "Cámaras": {
-   "Trasera": "50 MP principal · 12 MP teleobjetivo 3x · 8 MP ultra gran angular",
-   "Video trasero": "4K",
-   "Frontal": "50 MP",
-   "Video frontal": "4K"
-  },
-  "Batería y carga": {
-   "Batería": "5.500 mAh",
-   "Carga por cable": "100 W",
-   "Otras": "Sin carga inalámbrica · Carga inversa por cable"
-  },
-  "Software y actualizaciones": {
-   "Sistema de fábrica": "EMUI 14.2, sin servicios de Google (apps desde AppGallery)",
-   "Actualizaciones de sistema": "El fabricante no ha confirmado cuántas versiones"
-  },
-  "Diseño y resistencia": {
-   "Medidas": "161,7 × 75,5 × 7,2 mm",
-   "Peso": "192 g",
-   "Materiales": "Sin dato confirmado para la versión global",
-   "Resistencia": "Sin dato confirmado para la versión global"
-  },
-  "Conectividad": {
-   "Red": "4G (no tiene 5G)",
-   "SIM": "Dual SIM (dos Nano-SIM)",
-   "Wi-Fi": "Wi-Fi 6",
-   "Bluetooth": "5.2",
-   "NFC": "Sí",
-   "Puerto": "USB-C 2.0",
-   "Audífonos con cable": "No, solo USB-C o Bluetooth"
-  },
-  "Seguridad y sonido": {
-   "Desbloqueo": "Huella (sensor en el botón lateral)",
-   "Parlantes": "Estéreo"
-  },
-  "Lanzamiento": {
-   "Anunciado": "19 de mayo de 2025"
-  }
- },
  "ip18pm": {
   "Pantalla": {
    "Tamaño": "6,9″",
@@ -605,7 +552,7 @@
   },
   "Batería y carga": {
    "Batería": "5.391 mAh",
-   "Carga por cable": "60 W",
+   "Carga por cable": "50 % en 15 min (Apple no publica los vatios)",
    "Otras": "Inalámbrica 25 W · Carga inversa por cable"
   },
   "Software y actualizaciones": {
@@ -658,7 +605,7 @@
   },
   "Batería y carga": {
    "Batería": "3.561 mAh",
-   "Carga por cable": "25 W",
+   "Carga por cable": "50 % en 30 min (con cargador de 20 W o más)",
    "Otras": "Inalámbrica 25 W · Carga inversa por cable"
   },
   "Software y actualizaciones": {
@@ -1322,6 +1269,112 @@
   },
   "Lanzamiento": {
    "Anunciado": "9 de enero de 2025"
+  }
+ },
+ "ip18p": {
+  "Pantalla": {
+   "Tamaño": "6,3″",
+   "Tipo": "LTPO Super Retina XDR OLED · 120 Hz · HDR",
+   "Resolución": "1206 × 2622 (460 ppi)",
+   "Brillo máximo": "3.000 nits",
+   "Protección": "Ceramic Shield 2 · capa antirreflejo"
+  },
+  "Rendimiento": {
+   "Procesador": "Apple A20 Pro",
+   "CPU": "6 núcleos hasta 4,93 GHz",
+   "Memoria RAM": "12 GB de RAM",
+   "Almacenamiento": "256 GB, 512 GB, 1 TB, 2 TB",
+   "Tarjeta microSD": "No"
+  },
+  "Cámaras": {
+   "Trasera": "48 MP principal con estabilizador (OIS) · 48 MP teleobjetivo periscopio 4x · 48 MP ultra gran angular",
+   "Video trasero": "4K hasta 120 fps",
+   "Frontal": "18 MP",
+   "Video frontal": "4K hasta 60 fps"
+  },
+  "Batería y carga": {
+   "Batería": "4.056 mAh",
+   "Carga por cable": "50 % en 15 min (Apple no publica los vatios)",
+   "Otras": "Inalámbrica 25 W · Carga inversa por cable"
+  },
+  "Software y actualizaciones": {
+   "Sistema de fábrica": "iOS 27 (ya actualizable a iOS 27.2)",
+   "Actualizaciones de sistema": "Apple no publica un número de años de actualizaciones"
+  },
+  "Diseño y resistencia": {
+   "Medidas": "150 × 71,9 × 8,8 mm",
+   "Peso": "211 g",
+   "Materiales": "Frente de vidrio (Ceramic Shield 2), marco de aluminio, espalda de aluminio/ espalda de vidrio (Ceramic Shield)",
+   "Resistencia": "IP68 · sumergible hasta 6 m por 30 min"
+  },
+  "Conectividad": {
+   "Red": "5G",
+   "SIM": "Nano-SIM + eSIM",
+   "Wi-Fi": "Wi-Fi 7",
+   "Bluetooth": "6.0",
+   "NFC": "Sí",
+   "Puerto": "USB-C 3.2",
+   "Audífonos con cable": "No, solo USB-C o Bluetooth"
+  },
+  "Seguridad y sonido": {
+   "Desbloqueo": "Face ID (rostro 3D), sin huella",
+   "Parlantes": "Estéreo"
+  },
+  "Lanzamiento": {
+   "Anunciado": "9 de septiembre de 2026"
+  }
+ },
+ "hn15m": {
+  "Pantalla": {
+   "Tamaño": "6,84″",
+   "Tipo": "OLED · 120 Hz",
+   "Resolución": "1272 × 2756 (444 ppi)",
+   "Brillo máximo": "4.000 nits",
+   "Protección": "Sin dato publicado"
+  },
+  "Rendimiento": {
+   "Procesador": "Kirin 8000",
+   "CPU": "8 núcleos hasta 2,4 GHz",
+   "Memoria RAM": "8 GB de RAM",
+   "Almacenamiento": "256 GB",
+   "Tarjeta microSD": "No"
+  },
+  "Cámaras": {
+   "Trasera": "50 MP principal · 2 MP de apoyo",
+   "Video trasero": "4K hasta 30 fps",
+   "Frontal": "8 MP",
+   "Video frontal": "4K hasta 30 fps"
+  },
+  "Batería y carga": {
+   "Batería": "8.500 mAh",
+   "Carga por cable": "40 W",
+   "Otras": "Sin carga inalámbrica · Carga inversa por cable"
+  },
+  "Software y actualizaciones": {
+   "Sistema de fábrica": "EMUI 14.2, sin servicios de Google (apps desde AppGallery)",
+   "Actualizaciones de sistema": "El fabricante no ha confirmado cuántas versiones"
+  },
+  "Diseño y resistencia": {
+   "Medidas": "163,3 × 78 × 8 mm",
+   "Peso": "232 g",
+   "Materiales": "Frente de vidrio, marco de plástico, espalda de plástico",
+   "Resistencia": "Sin certificación IP publicada"
+  },
+  "Conectividad": {
+   "Red": "4G (no tiene 5G)",
+   "SIM": "Dual SIM (dos Nano-SIM)",
+   "Wi-Fi": "Wi-Fi 7",
+   "Bluetooth": "5.2",
+   "NFC": "Sí",
+   "Puerto": "USB-C 2.0",
+   "Audífonos con cable": "No, solo USB-C o Bluetooth"
+  },
+  "Seguridad y sonido": {
+   "Desbloqueo": "En el botón lateral",
+   "Parlantes": "Estéreo"
+  },
+  "Lanzamiento": {
+   "Anunciado": "7 de mayo de 2026"
   }
  }
 }
