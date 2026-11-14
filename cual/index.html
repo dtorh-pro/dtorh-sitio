@@ -528,7 +528,12 @@ body{background:#fff}
 .real figcaption{display:flex;justify-content:space-between;gap:10px;align-items:baseline;font-size:12.5px;color:var(--piedra);padding:0 6px}
 .real figcaption b{color:var(--tinta);font-size:14px}
 .real figcaption a{color:var(--piedra)}
-.real.sinvideo .marco{display:flex;align-items:center;justify-content:center;background:var(--porcelana);color:var(--piedra);font-size:14px;text-align:center;padding:20px}
+.real.sinvideo .marco{display:flex;align-items:center;justify-content:center;background:radial-gradient(120% 90% at 50% 100%,#E6ECF7 0%,#F7F9FC 70%)}
+.real.sinvideo .marco img{position:absolute;inset:6% 0 0;width:100%;height:94%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 18px 24px rgba(11,21,48,.18))}
+.real.sinvideo .verreal{position:absolute;z-index:1;left:50%;bottom:16px;transform:translateX(-50%);text-decoration:none;white-space:nowrap;display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.96);color:var(--tinta);border-radius:100px;padding:11px 18px 11px 12px;font-weight:700;font-size:14px;box-shadow:0 8px 24px rgba(11,21,48,.2);transition:transform .3s var(--spring)}
+.real.sinvideo .verreal:hover{transform:translateX(-50%) scale(1.05)}
+.real.sinvideo .verreal i{width:30px;height:30px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff;background:#FF0033}
+.real.sinvideo .verreal:focus-visible{outline:3px solid var(--a);outline-offset:3px}
 
 /* ---------- Bloques: cada parte ocupa la pantalla completa y se lee entera al hacer scroll ---------- */
 html{scroll-snap-type:y proximity;scroll-padding-top:66px}
@@ -1137,7 +1142,9 @@ function pintarReales(A,B){
   [['A',A],['B',B]].forEach(function(x){ var el=$('real'+x[0]), E=x[1], v=VIDEOS[E.id];
     if(el.dataset.id===E.id+(v?v.id:'')) { if(v) hay=true; return; }
     el.dataset.id=E.id+(v?v.id:'');
-    if(!v){ el.className='real r'+x[0].toLowerCase()+' sinvideo'; el.innerHTML='<div class="marco">Estamos buscando un video real del '+escHTML(E.n)+'.</div>'; return; }
+    if(!v){ hay=true; el.className='real r'+x[0].toLowerCase()+' sinvideo'; var qy=encodeURIComponent((E.m==='Apple'||E.n.toLowerCase().indexOf(E.m.toLowerCase())===0?E.n:E.m+' '+E.n)+' review en español');
+      el.innerHTML='<div class="marco"><img src="'+E.img+'" alt="'+escHTML(E.n)+', foto real" loading="lazy" width="1200" height="1200"><a class="verreal" href="https://www.youtube.com/results?search_query='+qy+'" target="_blank" rel="noopener"><i><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></i>Ver videos en YouTube</a></div>'+
+        '<figcaption><b>'+escHTML(E.n)+'</b><span>Foto real · videos de reseñas en YouTube</span></figcaption>'; return; }
     hay=true; el.className='real r'+x[0].toLowerCase();
     el.innerHTML='<div class="marco"><button class="play" type="button" aria-label="Ver el video del '+escHTML(E.n)+'"><img src="https://i.ytimg.com/vi/'+v.id+'/hqdefault.jpg" alt="" loading="lazy" width="480" height="360" onerror="this.style.visibility=\'hidden\'"><span class="quien">'+escHTML(E.n)+'</span><span class="verreal"><i><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></i>Ver el diseño real</span></button></div>'+
       '<figcaption><b>'+escHTML(E.n)+'</b><span>Video de <a href="https://www.youtube.com/watch?v='+v.id+'" target="_blank" rel="noopener">'+escHTML(v.canal)+'</a> en YouTube</span></figcaption>';
@@ -1150,7 +1157,7 @@ function pintarReales(A,B){
 function cargarPrecios(){
   var aplicar=function(j){ aplicarPrecios(j); };
   try{ var c=JSON.parse(localStorage.getItem('cual:precios')||'null'); if(c) aplicar(c); }catch(e){}
-  fetch(MOTOR+'/cual/precios').then(function(r){return r.json()}).then(function(j){ try{ localStorage.setItem('cual:precios',JSON.stringify({precios:j.precios,videos:j.videos})); }catch(e){} aplicar(j); }).catch(function(){});
+  fetch(MOTOR+'/cual/precios',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(j){ try{ localStorage.setItem('cual:precios',JSON.stringify({precios:j.precios,videos:j.videos})); }catch(e){} aplicar(j); }).catch(function(){});
 }
 function aplicarPrecios(j){
     PRECIOS=(j&&j.precios)||{}; VIDEOS=(j&&j.videos)||{};
