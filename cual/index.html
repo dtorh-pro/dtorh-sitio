@@ -940,7 +940,7 @@ html{scroll-snap-type:y proximity;scroll-padding-top:66px}
         <span class="eti">Precios hoy en Colombia</span>
         <h3 id="pT">¿Dónde está más barato?</h3>
         <div id="ptab"></div>
-        <p class="nota-p">Éxito, Olímpica, Jumbo, Falabella, Alkosto, Ktronix y Alkomprar; operadores Tigo (también vende los equipos de Movistar) y Claro, solo precio de contado, sin plan. WOM no tiene tienda en línea desde que dejó de usar su marca. Si una marca no vende oficialmente en Colombia o ningún almacén tiene el equipo, mostramos aparte los vendedores externos de Falabella y Mercado Libre. Revisados cada tres días por el motor de dtorh. Cuál no vende equipos: confirma el precio final en la tienda. El botón de Mercado Libre es un enlace de afiliado: si compras ahí, Cuál puede recibir una comisión. El orden del top no depende de eso.</p>
+        <p class="nota-p">Éxito, Olímpica, Jumbo, Falabella, Alkosto, Ktronix y Alkomprar; operadores Tigo (también vende los equipos de Movistar) y Claro, solo precio de contado, sin plan. WOM no tiene tienda en línea desde que dejó de usar su marca. Si una marca no vende oficialmente en Colombia o ningún almacén tiene el equipo, mostramos aparte los vendedores externos de Falabella y Mercado Libre. Revisados cada tres días por el motor de dtorh. Cuál no vende equipos: confirma el precio final en la tienda. Mercado Libre va primero porque es un enlace de afiliado: si compras ahí, Cuál puede recibir una comisión, y a ti no te cuesta más. Solo lo ponemos con tienda oficial o vendedor de reputación verde, nunca compra internacional. El orden del top de tiendas va solo por precio.</p>
       </section>
   </div>
 </section>
@@ -1202,12 +1202,18 @@ function mockup(E){
 
 /* ---------- Precios reales (Motor dtorh) ---------- */
 function filaTop(t,i,n,min){ var m=n>1&&t.precio===min; return '<div class="pfila'+(m?' mejor':'')+'"><span class="puesto">'+(i+1)+'</span><span class="ptienda">'+escHTML(t.tienda)+(m?'<em>Más barato</em>':'')+'</span><span class="pr">'+cop(t.precio)+'</span><a href="'+escHTML(t.url)+'" target="_blank" rel="noopener nofollow" aria-label="Ver precio en '+escHTML(t.tienda)+' (abre otra pestaña)">Ver ↗</a></div>'; }
-var ML={ip18pm:'1RWHeMs',ip18p:'2rWVHpN',ip17pm:'2UTkbN5',ip17p:'2nXW4uf',ip17:'2uuU9GU',ip16:'28aCFpo',s26u:'1P7njEd',s25u:'1oUGwKG',s25:'19Wbmhz',a57:'2VJe9vF',x17t:'1MSRdS8',rn15p:'1mKGkH7',rn17:'2LWcbVN',px8p:'1bqzymo',e70f:'1W2Aqxa',e60f:'1hAtoYv',reno16f:'2vbyvUB',oa6:'2mTmSad',honx8d:'2g5tXLd'};
-function botonML(e){ var c=ML[e.id]; if(!c) return ''; return '<a class="pml" href="https://meli.la/'+c+'" target="_blank" rel="noopener nofollow sponsored" aria-label="Ver '+escHTML(e.n)+' en Mercado Libre, tienda oficial (enlace de afiliado, abre otra pestaña)"><span>Ver en Mercado Libre</span><small>Tienda oficial ↗</small></a><span class="pafil">Enlace de afiliado: Cuál puede recibir una comisión si compras. A ti no te cuesta más.</span>'; }
+var ML={ip18pm:'1RWHeMs',ip18p:'2rWVHpN',ip17pm:'2UTkbN5',ip17p:'2nXW4uf',ip17:'2uuU9GU',ip16:'28aCFpo',s26u:'1P7njEd',s25u:'1oUGwKG',s25:'19Wbmhz',a57:'2VJe9vF',x17t:'1MSRdS8',rn15p:'1mKGkH7',rn17:'2LWcbVN',px8p:'1bqzymo',e70f:'1W2Aqxa',e60f:'1hAtoYv',reno16f:'2vbyvUB',oa6:'2mTmSad',honx8d:'2g5tXLd',hon600s:'1G2cXoS',px7p:'2GqqW7A',g56:'2wSdVSu',gp11:'22qzJBP',gp11xl:'2MRc4Jz'};
+// Sin tienda oficial en ML: publicación local (sin compra internacional) de vendedor con reputación verde, revisada a mano. Se revisa cada semana.
+var ML_VEND={px7p:'14-nov',g56:'14-nov',gp11:'14-nov',gp11xl:'14-nov'};
+function botonML(e){ var c=ML[e.id]; if(!c) return ''; var v=ML_VEND[e.id], tipo=v?'Vendedor con buena reputación':'Tienda oficial';
+  return '<span class="psub">Primera opción · Mercado Libre</span><a class="pml" href="https://meli.la/'+c+'" target="_blank" rel="noopener nofollow sponsored" aria-label="Ver '+escHTML(e.n)+' en Mercado Libre, '+tipo.toLowerCase()+' (enlace de afiliado, abre otra pestaña)"><span>Ver precio en Mercado Libre</span><small>'+tipo+' ↗</small></a>'+
+    (v?'<span class="pafil">Compra local, sin importación. Vendedor con reputación verde en Mercado Libre, revisado el '+v+'.</span>':'')+
+    '<span class="pafil">Enlace de afiliado: Cuál puede recibir una comisión si compras. A ti no te cuesta más.</span>'; }
 function pintarPrecios(A,B){
   var html='';
   [[A,'var(--a)'],[B,'var(--b)']].forEach(function(x){ var e=x[0], d=PRECIOS[e.id];
     html+='<div class="grupo"><b><i style="background:'+x[1]+'"></i><span class="marca pmarca">'+logoMarca(e.m)+'</span>'+escHTML(e.n)+(d&&d.cap?' <small>'+escHTML(d.cap)+'</small>':'')+'</b>';
+    html+=botonML(e);
     var ts=(d&&d.tiendas)||[], cad=ts.filter(function(t){return t.tipo!=='operador'&&t.tipo!=='externo'}), op=ts.filter(function(t){return t.tipo==='operador'}), ext=ts.filter(function(t){return t.tipo==='externo'});
     if(cad.length){ html+='<span class="psub">Top almacenes de cadena</span>'+cad.map(function(t,i){return filaTop(t,i,cad.length,cad[0].precio)}).join('');
       if(cad.length>1){ var dif=cad[cad.length-1].precio-cad[0].precio; if(dif>0) html+='<span class="pahorro">Entre la más barata y la más cara hay '+cop(dif)+'.</span>'; } }
@@ -1216,7 +1222,6 @@ function pintarPrecios(A,B){
       '<span class="pext">'+(e.ext?'Esta marca no vende oficialmente en Colombia. ':cad.length||op.length?'':'Hoy ningún almacén de cadena ni operador lo tiene en su tienda en línea. ')+'Estos precios son de vendedores dentro de Falabella o Mercado Libre: revisa la garantía (suele ser del vendedor), si es versión global y que funcione con tu operador.</span>'; }
     if(!cad.length&&!op.length&&!ext.length){ var h=(d&&d.historial)||[], u=h[h.length-1];
       html+='<span class="psub">Precio de referencia</span><div class="pref"><b>'+cop(u&&u.min?u.min:(e.ref||e.precio))+'</b><span>'+(u&&u.min?'Último precio visto el '+escHTML(u.f)+(u.t?' en '+escHTML(u.t):'')+'. Hoy no aparece en stock en las tiendas que revisamos.':'Precio estimado del mercado colombiano. Hoy no aparece en stock en las tiendas que revisamos; lo actualizamos solos cuando vuelva.')+'</span></div>'; }
-    html+=botonML(e);
     if(d&&d.fecha) html+='<span class="nota-p" style="margin-top:2px">Revisado el '+d.fecha+'</span>';
     html+='</div>'; });
   $('ptab').innerHTML=html;

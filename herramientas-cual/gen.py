@@ -1,7 +1,8 @@
 import json, re, html, unicodedata, os, shutil
 D=json.load(open('datos.json')); F=json.load(open('/home/claude/dtorh-sitio/cual/fichas.json'))
 EQ=D['eq']; E={e['id']:e for e in EQ}; ORD=[e['id'] for e in EQ]
-ML={'ip18pm':'1RWHeMs','ip18p':'2rWVHpN','ip17pm':'2UTkbN5','ip17p':'2nXW4uf','ip17':'2uuU9GU','ip16':'28aCFpo','s26u':'1P7njEd','s25u':'1oUGwKG','s25':'19Wbmhz','a57':'2VJe9vF','x17t':'1MSRdS8','rn15p':'1mKGkH7','rn17':'2LWcbVN','px8p':'1bqzymo','e70f':'1W2Aqxa','e60f':'1hAtoYv','reno16f':'2vbyvUB','oa6':'2mTmSad','honx8d':'2g5tXLd'}
+ML={'ip18pm':'1RWHeMs','ip18p':'2rWVHpN','ip17pm':'2UTkbN5','ip17p':'2nXW4uf','ip17':'2uuU9GU','ip16':'28aCFpo','s26u':'1P7njEd','s25u':'1oUGwKG','s25':'19Wbmhz','a57':'2VJe9vF','x17t':'1MSRdS8','rn15p':'1mKGkH7','rn17':'2LWcbVN','px8p':'1bqzymo','e70f':'1W2Aqxa','e60f':'1hAtoYv','reno16f':'2vbyvUB','oa6':'2mTmSad','honx8d':'2g5tXLd','hon600s':'1G2cXoS','px7p':'2GqqW7A','g56':'2wSdVSu','gp11':'22qzJBP','gp11xl':'2MRc4Jz'}
+ML_VEND={'px7p','g56','gp11','gp11xl'}  # vendedor verde, no tienda oficial
 MARCA={'Google':'Google ','Apple':'','Samsung':'Samsung ','Xiaomi':'Xiaomi ','Motorola':'Motorola ','Huawei':'Huawei ','OPPO':'OPPO ','vivo':'vivo ','Honor':'Honor '}
 def full(e): n=e['n']; return n if n.lower().startswith(e['m'].lower()) or e['m']=='Apple' and n.startswith('iPhone') else MARCA.get(e['m'],e['m']+' ')+n
 def slug(t): t=unicodedata.normalize('NFKD',t).encode('ascii','ignore').decode().lower(); return re.sub(r'[^a-z0-9]+','-',t).strip('-')
@@ -48,15 +49,15 @@ for i,a in enumerate(ORD):
             rows=''.join(f'<tr><th scope="row">{h(k)}</th><td>{h(str(fa_[sec].get(k,"—")))}</td><td>{h(str(fb_.get(sec,{}).get(k,"—")))}</td></tr>' for k in keys)
             fic+=f'<h3>{h(sec)}</h3><div class="tw"><table><thead><tr><th scope="col">{h(sec)}</th><th scope="col">{h(A["n"])}</th><th scope="col">{h(B["n"])}</th></tr></thead><tbody>{rows}</tbody></table></div>'
         def tarjeta(e):
-            ml=f'<a class="ml" href="https://meli.la/{ML[e["id"]]}" rel="nofollow sponsored noopener" target="_blank">Ver en Mercado Libre · tienda oficial ↗</a>' if e['id'] in ML else ''
-            return f'''<figure class="eq"><img src="/{e['img']}" alt="{h(full(e))}, frente y espalda" width="400" height="400" loading="eager"><figcaption><small>{h(e['m'])}</small><b>{h(e['n'])}</b><span class="pr" id="p-{e['id']}">Precio de hoy en el comparador</span>{ml}</figcaption></figure>'''
+            ml=f'<a class="ml" href="https://meli.la/{ML[e["id"]]}" rel="nofollow sponsored noopener" target="_blank">Ver precio en Mercado Libre · {"vendedor con buena reputación" if e["id"] in ML_VEND else "tienda oficial"} ↗</a>' if e['id'] in ML else ''
+            return f'''<figure class="eq"><img src="/{e['img']}" alt="{h(full(e))}, frente y espalda" width="400" height="400" loading="eager"><figcaption><small>{h(e['m'])}</small><b>{h(e['n'])}</b>{ml}<span class="pr" id="p-{e['id']}">Precio de hoy en el comparador</span></figcaption></figure>'''
         hay_ml=a in ML or b in ML
         body=f'''<nav class="migas" aria-label="Ruta"><a href="/">Cuál</a> › <a href="/comparar/">Comparaciones</a> › <span>{h(A['n'])} vs {h(B['n'])}</span></nav>
 <h1>{h(A['n'])} <em>vs</em> {h(B['n'])}</h1>
 <p class="lead">{h(res)} en {len(fil)} rondas técnicas, con todas las rondas valiendo lo mismo. Si te importan más las fotos, los juegos o la batería, el resultado puede cambiar: pruébalo en el comparador.</p>
 <div class="duo">{tarjeta(A)}<span class="vs">{ga}<small>vs</small>{gb}</span>{tarjeta(B)}</div>
 <a class="cta" href="/?a={a}&amp;b={b}">Comparar en vivo, con mi uso y el precio de hoy</a>
-{'<p class="afil">Los botones de Mercado Libre son enlaces de afiliado: Cuál puede recibir una comisión si compras. A ti no te cuesta más.</p>' if hay_ml else ''}
+{'<p class="afil">Mercado Libre va primero porque es un enlace de afiliado: Cuál puede recibir una comisión si compras, y a ti no te cuesta más. Solo tienda oficial o vendedor con reputación verde, nunca compra internacional.</p>' if hay_ml else ''}
 <h2>Ronda por ronda</h2><div class="tw"><table class="rd"><thead><tr><th scope="col">Ronda</th><th scope="col">{h(A['n'])}</th><th scope="col">{h(B['n'])}</th><th scope="col">Qué significa</th></tr></thead><tbody>{filas}</tbody></table></div>
 <h2>Ficha técnica lado a lado</h2>{fic}
 <p class="nota">Versión Latam que se vende en Colombia. Los precios cambian todos los días: el valor de arriba se lee en vivo del motor de Cuál; confírmalo en la tienda antes de comprar.</p>'''
