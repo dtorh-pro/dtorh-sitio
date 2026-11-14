@@ -1261,7 +1261,7 @@ function cargarPrecios(){
 function aplicarPrecios(j){
     PRECIOS=(j&&j.precios)||{}; VIDEOS=(j&&j.videos)||{};
 
-    EQUIPOS.forEach(function(e){ var d=PRECIOS[e.id]; e.ref=e.ref||e.precio; if(d&&d.min){ e.precio=d.min; e.tienda=d.tiendas[0].tienda; } else { e.precio=e.ref; delete e.tienda; } }); // sin precio vigente: vuelve a la referencia, nunca deja una tienda vieja
+    EQUIPOS.forEach(function(e){ var d=PRECIOS[e.id]; e.ref=e.ref||e.precio; if(d&&d.min){ e.precio=d.min; e.tienda=(d.tiendas.filter(function(t){return t.precio===d.min})[0]||d.tiendas[0]).tienda; } else { e.precio=e.ref; delete e.tienda; } }); // sin precio vigente: vuelve a la referencia, nunca deja una tienda vieja
     pintar(); if(!$('hoja').hidden) pintarLista(); pintarPortada();
 }
 
