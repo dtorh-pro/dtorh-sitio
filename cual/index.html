@@ -10,6 +10,17 @@
 <meta property="og:title" content="Cuál · ¿cuál te conviene?">
 <meta property="og:description" content="Comparador gratis de celulares y gadgets, ronda por ronda. Un producto de dtorh.">
 <meta property="og:url" content="https://cual.click/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Cuál">
+<meta property="og:locale" content="es_CO">
+<meta property="og:image" content="https://cual.click/og/portada.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:alt" content="Cuál: compara dos celulares frente a frente">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cuál · ¿cuál te conviene?">
+<meta name="twitter:image" content="https://cual.click/og/portada.jpg">
 <meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -456,6 +467,41 @@ body{background:#fff}
 @media (max-width:420px){.pfila{gap:8px;padding:9px 10px;font-size:13.5px}.pfila a{font-size:12px}}
 .marca-logo.palabra{width:auto!important;height:11px!important}
 .mini-marca .marca-logo.palabra,.po-card .marca .marca-logo.palabra,.pmarca .marca-logo.palabra{height:9px!important}
+
+/* ---------- Ficha técnica ---------- */
+.ft{background:#fff;border:1px solid var(--linea);border-radius:28px;padding:18px clamp(14px,3vw,28px) 16px;box-shadow:0 30px 60px -40px rgba(11,21,48,.25)}
+.ft-cab,.ft-fila{display:grid;grid-template-columns:minmax(110px,1.1fr) 1fr 1fr;gap:14px;align-items:start}
+.ft-cab{position:sticky;top:66px;z-index:2;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:6px 0 10px;border-bottom:1px solid var(--linea)}
+.ft-cab b{font-size:14px;font-weight:800;letter-spacing:-.02em;display:flex;align-items:center;gap:7px;min-width:0}
+.ft-cab b::before{content:"";flex:none;width:9px;height:9px;border-radius:50%;background:var(--a)}.ft-cab .fb::before{background:var(--b)}
+.ft-fila{padding:11px 0;border-bottom:1px solid #EEF2F7;font-size:14.5px;line-height:1.4}
+.ft-fila:last-child{border-bottom:0}
+.ft-fila dt{color:var(--piedra);font-size:13px;font-weight:600}
+.ft-fila dd{margin:0;color:var(--tinta);font-weight:600;min-width:0;overflow-wrap:anywhere}
+.ft-fila dd .dif{background:linear-gradient(transparent 64%,rgba(184,242,58,.5) 64%);-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ft-sec summary i{color:var(--tinta)}
+.ft-clave{margin:4px 0 0}
+.ft-boton{margin:14px auto 4px;display:flex;align-items:center;gap:8px;border:0;cursor:pointer;background:var(--tinta);color:#fff;font:700 15px/1 var(--f);letter-spacing:-.01em;padding:14px 22px;border-radius:100px;box-shadow:0 14px 30px -14px rgba(11,21,48,.55);transition:transform .3s var(--ease),box-shadow .3s}
+.ft-boton:hover{transform:translateY(-2px);box-shadow:0 18px 34px -14px rgba(11,21,48,.6)}
+.ft-boton svg{transition:transform .4s var(--ease)}.ft-boton[aria-expanded="true"] svg{transform:rotate(180deg)}
+.ft-boton:focus-visible,.ft-sec summary:focus-visible{outline:3px solid var(--a);outline-offset:3px}
+.ft-todo{margin-top:8px}
+.ft-sec{border-top:1px solid var(--linea)}
+.ft-sec summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:16px 2px;font-weight:800;font-size:16px;letter-spacing:-.02em;color:var(--tinta)}
+.ft-sec summary::-webkit-details-marker{display:none}
+.ft-sec summary i{width:34px;height:34px;flex:none;border-radius:11px;background:var(--porcelana);display:grid;place-items:center;font-style:normal;font-size:17px}
+.ft-sec summary small{margin-left:auto;font-size:12px;font-weight:600;color:var(--piedra)}
+.ft-sec summary::after{content:"";width:9px;height:9px;border-right:2px solid var(--piedra);border-bottom:2px solid var(--piedra);transform:rotate(45deg) translateY(-3px);transition:transform .3s var(--ease);margin-right:6px}
+.ft-sec[open] summary::after{transform:rotate(-135deg) translateY(-2px)}
+.ft-sec dl{margin:0 0 10px;animation:ftEntra .45s var(--ease)}
+@keyframes ftEntra{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@media (max-width:640px){
+  .ft-cab{grid-template-columns:1fr 1fr}.ft-cab span{display:none}
+  .ft-fila{grid-template-columns:1fr 1fr;gap:4px 12px}
+  .ft-fila dt{grid-column:1/-1}
+  .ft-fila dd{font-size:14px}
+}
+@media (prefers-reduced-motion:reduce){.ft-sec dl{animation:none}}
 .pvacio{font-size:13.5px;color:var(--piedra);background:#fff;border-radius:14px;padding:10px 12px}
 .nota-p{font-size:12px;color:var(--piedra);margin-top:12px}
 .precio .fuente{display:block;font-family:var(--f);font-size:11px;color:var(--piedra)}
@@ -781,6 +827,23 @@ html{scroll-snap-type:y proximity;scroll-padding-top:66px}
   </div>
 </section>
 
+<section class="bloque" id="ficha" data-n="Ficha técnica" aria-labelledby="fichaT">
+  <div class="b-in b-medio">
+    <div class="reales-cab">
+      <span class="eti">Ficha técnica</span>
+      <h3 id="fichaT">Lo técnico, sin enredos</h3>
+      <p>Hardware, software, actualizaciones y conectividad de la versión que se vende en Colombia, lado a lado.</p>
+    </div>
+    <div class="ft" id="ft">
+      <div class="ft-cab" aria-hidden="true"><span></span><b class="fa" id="ftA"></b><b class="fb" id="ftB"></b></div>
+      <div class="ft-clave" id="ftClave"></div>
+      <button class="ft-boton" id="ftBoton" type="button" aria-expanded="false" aria-controls="ftTodo"><span>Ver ficha completa</span><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="ft-todo" id="ftTodo" hidden></div>
+      <p class="nota-p">Datos públicos del fabricante y de fichas técnicas especializadas, revisados por dtorh. Pueden variar según la versión.</p>
+    </div>
+  </div>
+</section>
+
 <section class="bloque" id="reales" data-n="Diseño real" aria-labelledby="realT" hidden>
   <div class="b-in">
     <div class="reales-cab">
@@ -915,7 +978,9 @@ var EQUIPOS = [
  {id:'vv70fe',img:'img/equipos/vv70fe.webp?v=5',alto:163.7,k:'dual',m:'vivo',n:'V70 FE',precio:3000000,pant:'6,83″ · 120 Hz',chip:'Dimensity 7360 Turbo',cam:'200 + 8 MP',bat:7000,carga:90,peso:200,f:['#4E5C8C','#1C2240'],d:['#45507E','#262E52'],c:['#9FB4FF','#10173A'],pts:{pant:88,rend:68,cam:78,bat:94}},
  {id:'hon600s',img:'img/equipos/hon600s.webp?v=5',alto:168.3,k:'dual',m:'Honor',n:'600 Smart',precio:2000000,pant:'6,87″ · 120 Hz',chip:'Snapdragon 4 Gen 4',cam:'50 MP',bat:8100,carga:45,peso:216.5,f:['#E6E3DE','#9A958E'],d:['#D9D5CF','#AAA59E'],c:['#C9B8FF','#2A2340'],pts:{pant:64,rend:48,cam:54,bat:98}},
  {id:'honx8d',img:'img/equipos/honx8d.webp?v=5',alto:162.9,k:'dual',m:'Honor',n:'X8d',precio:1150000,pant:'6,77″ · 120 Hz',chip:'Snapdragon 6s 4G Gen 2',cam:'108 + 5 MP',bat:7000,carga:45,peso:188,f:['#A9C8EE','#4A78B8'],d:['#9BBEEA','#5C88C6'],c:['#8FE3FF','#0E2C4A'],pts:{pant:82,rend:46,cam:66,bat:94}},
- {id:'hnova14',img:'img/equipos/hnova14.webp?v=5',alto:161.7,k:'trio',m:'Huawei',n:'nova 14',precio:1900000,pant:'6,7″ · 120 Hz',chip:'Kirin 8000',cam:'50 + 12 + 8 MP',bat:5500,carga:100,peso:192,f:['#F1F1EF','#A9AAAE'],d:['#E5E5E3','#B9BABE'],c:['#D0D0D6','#1A1A22'],pts:{pant:86,rend:66,cam:80,bat:82}}
+ {id:'hnova14',img:'img/equipos/hnova14.webp?v=5',alto:161.7,k:'trio',m:'Huawei',n:'nova 14',precio:1900000,pant:'6,7″ · 120 Hz',chip:'Kirin 8000',cam:'50 + 12 + 8 MP',bat:5500,carga:100,peso:192,f:['#F1F1EF','#A9AAAE'],d:['#E5E5E3','#B9BABE'],c:['#D0D0D6','#1A1A22'],pts:{pant:86,rend:66,cam:80,bat:82}},
+ {id:'e60f',img:'img/equipos/e60f.webp?v=5',alto:161.0,k:'moto',m:'Motorola',n:'Edge 60 Fusion',precio:1300000,pant:'6,67″ · 120 Hz',chip:'Dimensity 7300',cam:'50 + 13 MP',bat:5200,carga:68,peso:180,f:['#5FC4BE','#1F6E6A'],d:['#52B8B2','#2C7F7A'],c:['#9BF2EA','#0B302D'],pts:{pant:88,rend:62,cam:72,bat:82}},
+ {id:'px7p',img:'img/equipos/px7p.webp?v=5',alto:160.8,k:'poco',m:'POCO',n:'POCO X7 Pro',precio:1400000,pant:'6,67″ · 120 Hz',chip:'Dimensity 8400 Ultra',cam:'50 + 8 MP',bat:6000,carga:90,peso:195,f:['#3A3B3F','#111214'],d:['#2E2F33','#18191C'],c:['#FFD34D','#2A2205'],pts:{pant:88,rend:86,cam:70,bat:90}}
 ];
 function porId(id){ for(var i=0;i<EQUIPOS.length;i++) if(EQUIPOS[i].id===id) return EQUIPOS[i]; return null; }
 function fmt(n){ return n.toLocaleString('es-CO'); }
@@ -1045,6 +1110,27 @@ function pintarPrecios(A,B){
     html+='</div>'; });
   $('ptab').innerHTML=html;
 }
+
+/* ---------- Ficha técnica ---------- */
+var FICHAS=null, ftCargando=false;
+var FT_ICONO={"Pantalla": "<rect x=\"6\" y=\"2.5\" width=\"12\" height=\"19\" rx=\"2.5\"/><path d=\"M10 18.5h4\"/>", "Rendimiento": "<rect x=\"5\" y=\"5\" width=\"14\" height=\"14\" rx=\"2\"/><rect x=\"9\" y=\"9\" width=\"6\" height=\"6\"/><path d=\"M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3\"/>", "Cámaras": "<path d=\"M4 8h3l2-3h6l2 3h3v11H4z\"/><circle cx=\"12\" cy=\"13\" r=\"3.5\"/>", "Batería y carga": "<rect x=\"3\" y=\"7\" width=\"16\" height=\"10\" rx=\"2\"/><path d=\"M21 10.5v3M11.5 9l-2 3.5h3l-2 3.5\"/>", "Software y actualizaciones": "<path d=\"M20 12a8 8 0 1 1-2.3-5.6M20 4v4h-4\"/>", "Diseño y resistencia": "<path d=\"M12 2.5c3 3.8 6 7.3 6 11a6 6 0 0 1-12 0c0-3.7 3-7.2 6-11z\"/>", "Conectividad": "<path d=\"M2.5 9a14 14 0 0 1 19 0M5.5 12.5a9.5 9.5 0 0 1 13 0M8.5 16a5 5 0 0 1 7 0\"/><circle cx=\"12\" cy=\"19.5\" r=\"1\"/>", "Seguridad y sonido": "<rect x=\"5\" y=\"10.5\" width=\"14\" height=\"10\" rx=\"2\"/><path d=\"M8 10.5V8a4 4 0 0 1 8 0v2.5\"/>", "Lanzamiento": "<rect x=\"3.5\" y=\"5\" width=\"17\" height=\"15\" rx=\"2\"/><path d=\"M3.5 10h17M8 3v4M16 3v4\"/>"};
+var FT_CLAVE=[['Rendimiento','Procesador'],['Software y actualizaciones','Actualizaciones de sistema'],['Conectividad','Red'],['Diseño y resistencia','Resistencia'],['Batería y carga','Otras']];
+function cargarFichas(cb){ if(FICHAS){cb();return;} if(ftCargando) return; ftCargando=true;
+  fetch('fichas.json?v=1').then(function(r){return r.json()}).then(function(j){FICHAS=j;ftCargando=false;cb();}).catch(function(){ftCargando=false;}); }
+function ftFila(et,va,vb){ var dif=va&&vb&&va!==vb; return '<div class="ft-fila"><dt>'+escHTML(et)+'</dt><dd><span'+(dif?' class="dif"':'')+'>'+escHTML(va||'Sin dato')+'</span></dd><dd><span'+(dif?' class="dif"':'')+'>'+escHTML(vb||'Sin dato')+'</span></dd></div>'; }
+function pintarFicha(A,B){
+  if(!$('ft')) return;
+  $('ftA').textContent=A.n; $('ftB').textContent=B.n;
+  if(!FICHAS){ cargarFichas(function(){ var p=partido(); pintarFicha(p.A,p.B); }); $('ftClave').innerHTML='<div class="pvacio">Cargando ficha…</div>'; return; }
+  var fa=FICHAS[A.id]||{}, fb=FICHAS[B.id]||{};
+  $('ftClave').innerHTML='<dl>'+FT_CLAVE.map(function(c){ return ftFila(c[1]==='Otras'?'Carga inalámbrica':c[1], (fa[c[0]]||{})[c[1]], (fb[c[0]]||{})[c[1]]); }).join('')+'</dl>';
+  var secs=Object.keys(fa).length?Object.keys(fa):Object.keys(fb), abiertas={};
+  [].forEach.call($('ftTodo').querySelectorAll('details[open]'),function(d){abiertas[d.dataset.s]=1});
+  $('ftTodo').innerHTML=secs.map(function(sn,i){ var ka=Object.keys(fa[sn]||{}), kb=Object.keys(fb[sn]||{}), ks=ka.concat(kb.filter(function(k){return ka.indexOf(k)<0}));
+    return '<details class="ft-sec" data-s="'+escHTML(sn)+'"'+((abiertas[sn]||(!Object.keys(abiertas).length&&i===0))?' open':'')+'><summary><i aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+(FT_ICONO[sn]||'')+'</svg></i>'+escHTML(sn)+'<small>'+ks.length+' datos</small></summary><dl>'+
+      ks.map(function(k){ return ftFila(k==='Otras'?'Inalámbrica e inversa':k,(fa[sn]||{})[k],(fb[sn]||{})[k]); }).join('')+'</dl></details>'; }).join('');
+}
+(function(){ var b=$('ftBoton'); if(!b) return; b.addEventListener('click',function(){ var abre=b.getAttribute('aria-expanded')!=='true'; b.setAttribute('aria-expanded',abre); $('ftTodo').hidden=!abre; b.querySelector('span').textContent=abre?'Ocultar ficha completa':'Ver ficha completa'; if(abre){ var p=partido(); pintarFicha(p.A,p.B); } }); })();
 function escHTML(s){ return String(s||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]}); }
 function pintarReales(A,B){
   var hay=false;
@@ -1141,7 +1227,7 @@ function pintar(){
   $('perfilTxt').textContent=perfil.n;
   $('verMarcador').textContent='A '+p.ga+' · '+p.gb+' B';
   pintarCinta(A,B);
-  pintarReales(A,B);
+  pintarReales(A,B); pintarFicha(A,B);
 
   var ul=$('lista-rondas');
   if(!ul.children.length){
@@ -1236,7 +1322,7 @@ function observarRondas(){
 
 /* ---------- Portada: elegir Equipo A vs Equipo B ---------- */
 var sel={a:'',b:''}, poMarca='';
-var POPULARES=[['ip17','s25'],['s26u','ip18pm'],['ip17p','s26u'],['reno16f','vv70fe'],['rn15p','a56'],['a57','hnova14'],['g56','rn14'],['honx8d','rn17'],['px8p','e70f']];
+var POPULARES=[['ip17','s25'],['s26u','ip18pm'],['ip17p','s26u'],['reno16f','vv70fe'],['rn15p','a56'],['a57','hnova14'],['g56','rn14'],['honx8d','rn17'],['px8p','e70f'],['px7p','e60f']];
 function enPortada(){ return document.documentElement.classList.contains('en-portada'); }
 function mini(e){ return e.img ? e.img.replace('img/equipos/','img/equipos/t/') : ''; }
 function leerURL(){ var q=new URLSearchParams(location.search), a=q.get('a'), b=q.get('b'); return (porId(a)&&porId(b)&&a!==b)?{a:a,b:b}:null; }
