@@ -253,6 +253,20 @@ h1,h2,h3,p{margin:0}
 .usos button[aria-pressed="true"] span{color:#c9cbd0}
 .usos button[aria-pressed="true"] svg{background:var(--lima);color:var(--tinta)}
 .usos button:last-child:nth-child(odd){grid-column:1 / -1}
+.uso-par{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-top:12px;font-size:13px;font-weight:600;color:var(--tinta)}
+.uso-par i{width:8px;height:8px;border-radius:50%;display:inline-block}.uso-par em{font-style:normal;color:var(--piedra);font-weight:500;margin:0 4px}
+.usos button .u-top{display:flex;align-items:center;justify-content:space-between}
+.usos button .u-ver{font-size:12px;font-weight:600;color:var(--a);opacity:0;transform:translateX(-4px);transition:opacity .25s,transform .25s}
+.usos button:hover .u-ver,.usos button:focus-visible .u-ver{opacity:1;transform:none}
+.usos button .u-r{margin-top:auto;display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding-top:10px;border-top:1px solid var(--linea);font-size:13px;color:var(--tinta)}
+.usos button .u-r i{width:8px;height:8px;border-radius:50%;background:var(--niebla)}
+.usos button .u-r.ga i{background:var(--a)}.usos button .u-r.gb i{background:var(--b)}
+.usos button .u-r.ga b{color:var(--a)}.usos button .u-r.gb b{color:var(--b-txt)}
+.usos button .u-r small{margin-left:auto;font-size:12px;font-weight:700;color:var(--piedra);font-variant-numeric:tabular-nums}
+.usos button[aria-pressed="true"] .u-r{border-top-color:rgba(255,255,255,.18);color:#fff}
+.usos button[aria-pressed="true"] .u-r b{color:#fff}.usos button[aria-pressed="true"] .u-r small{color:#c9cbd0}
+.usos button:focus-visible{outline:3px solid var(--a);outline-offset:2px}
+@media (hover:none){.usos button .u-ver{opacity:1;transform:none}}
 
 .veredicto{position:relative;background:#0B1530;color:#fff;border-radius:var(--r-card);padding:26px 22px;overflow:hidden;isolation:isolate;
   box-shadow:0 30px 60px -30px rgba(30,91,255,.6)}
@@ -876,7 +890,8 @@ html{scroll-snap-type:y proximity;scroll-padding-top:66px}
       <section class="card" aria-labelledby="usoT">
         <span class="eti">Paso 1</span>
         <h3 id="usoT">¿Para qué lo vas a usar?</h3>
-        <p class="uso-p">Cuál enfrenta los dos equipos en 7 rondas: pantalla, potencia, cámara, batería, carga, peso y precio. Toca tu uso y te mostramos al instante cuál te conviene.</p>
+        <p class="uso-p">Cuál enfrenta los dos equipos en 7 rondas: pantalla, potencia, cámara, batería, carga, peso y precio. Debajo de cada uso ves quién gana. Toca el tuyo para ver por qué.</p>
+        <p class="uso-par" id="usoPar"></p>
         <div class="usos" id="usos" role="group" aria-label="Uso principal"></div>
         <dialog class="uso-pop" id="usoPop" aria-labelledby="usoPopT">
           <div class="uso-pop-in" id="usoPopIn"></div>
@@ -1090,6 +1105,18 @@ function resumenUso(p){
     if((g0&&g0.id)!==(g&&g.id)) h+='<p class="uso-cambio">Ojo: comparando todo parejo '+(g0?'ganaría el '+escHTML(g0.n):'quedarían empatados')+'. Tu uso cambia el resultado.</p>'; }
   return h+'<div class="uso-acc"><a class="uso-ir" href="#rondas" data-cerrar>Ver las 7 rondas</a><button type="button" class="uso-otro" data-cerrar>Elegir otro uso</button></div>';
 }
+function pintarUsos(A,B){
+  var ant=est.perfil;
+  $('usoPar').innerHTML='<i style="background:var(--a)"></i>'+escHTML(A.n)+' <em>vs</em> <i style="background:var(--b)"></i>'+escHTML(B.n);
+  [].forEach.call(document.querySelectorAll('#usos button'),function(b){
+    est.perfil=b.dataset.k; var q=partido(), g=q.ga>q.gb?'a':q.gb>q.ga?'b':'';
+    var r=b.querySelector('.u-r'); r.className='u-r '+(g?'g'+g:'ge');
+    r.innerHTML=g?'<i></i>Gana <b>'+escHTML(corto((g==='a'?A:B).n))+'</b><small>'+Math.max(q.ga,q.gb)+'–'+Math.min(q.ga,q.gb)+'</small>':'<i></i>Empate <small>'+q.ga+'–'+q.gb+'</small>';
+    var P=PERFILES.filter(function(x){return x.k===b.dataset.k})[0];
+    b.setAttribute('aria-label',P.n+': '+(g?'gana '+(g==='a'?A:B).n+' '+Math.max(q.ga,q.gb)+' a '+Math.min(q.ga,q.gb):'empate '+q.ga+' a '+q.gb)+'. Toca para ver por qué.');
+  });
+  est.perfil=ant;
+}
 function abrirUso(){
   var d=$('usoPop'); $('usoPopIn').innerHTML=resumenUso(partido());
   if(d.showModal){ if(!d.open) d.showModal(); } else d.setAttribute('open','');
@@ -1298,7 +1325,7 @@ function pintar(){
   prev={ga:p.ga,gb:p.gb,ganador:ganador};
   cuenta($('gA'),p.ga); cuenta($('gB'),p.gb);
   var perfil=PERFILES.filter(function(x){return x.k===est.perfil})[0];
-  $('perfilTxt').textContent=perfil.n;
+  $('perfilTxt').textContent=est.elegido?perfil.n:'Puntaje general';
   $('verMarcador').textContent='A '+p.ga+' · '+p.gb+' B';
   pintarReales(A,B); pintarFicha(A,B);
 
@@ -1321,7 +1348,8 @@ function pintar(){
     li.querySelector('.rd-c').innerHTML = f.gana ? f.r.claro(f.gana==='a'?A:B, f.gana==='a'?B:A) : 'Aquí están parejos: esta ronda no decide.';
   });
 
-  [].forEach.call(document.querySelectorAll('#usos button'),function(b){b.setAttribute('aria-pressed',b.dataset.k===est.perfil)});
+  [].forEach.call(document.querySelectorAll('#usos button'),function(b){b.setAttribute('aria-pressed',!!est.elegido&&b.dataset.k===est.perfil)});
+  pintarUsos(A,B);
   [].forEach.call(document.querySelectorAll('#preg button'),function(b,i){b.setAttribute('aria-pressed',i===est.preg)});
   escribir(est.preg>=0 ? PREGUNTAS[est.preg].f(A,B) : veredicto(p), p);
   var comp='https://wa.me/?text='+encodeURIComponent('Comparé el '+A.n+' con el '+B.n+' en Cuál. '+veredicto(p)+' Míralo: https://cual.click/?a='+A.id+'&b='+B.id);
@@ -1465,13 +1493,13 @@ function iniciarPortada(){
 /* ---------- Arranque ---------- */
 function iniciar(data){
   if(data && porId(data.a) && porId(data.b)) for(var k in data) est[k]=data[k];
-  $('usos').innerHTML=PERFILES.map(function(p){return '<button type="button" data-k="'+p.k+'" aria-pressed="false">'+svg(p.k)+'<b>'+p.n+'</b><span>'+p.d+'</span></button>'}).join('');
+  $('usos').innerHTML=PERFILES.map(function(p){return '<button type="button" data-k="'+p.k+'" aria-pressed="false"><span class="u-top">'+svg(p.k)+'<span class="u-ver" aria-hidden="true">Ver por qué →</span></span><b>'+p.n+'</b><span class="u-d">'+p.d+'</span><span class="u-r" aria-live="off"></span></button>'}).join('');
   $('preg').innerHTML=PREGUNTAS.map(function(p,i){return '<button type="button" data-i="'+i+'" aria-pressed="false">'+p.n+'</button>'}).join('');
   var marcas=['']; EQUIPOS.forEach(function(e){ if(marcas.indexOf(e.m)<0) marcas.push(e.m); });
   $('marcas').innerHTML=marcas.map(function(m){return '<button type="button" data-m="'+m+'" aria-pressed="false">'+(m||'Todas')+'</button>'}).join('');
 
   $('usoPop').addEventListener('click',function(e){ var d=$('usoPop'); if(e.target===d || e.target.closest('[data-cerrar]')) d.close(); });
-  $('usos').addEventListener('click',function(e){var b=e.target.closest('button'); if(!b) return; est.perfil=b.dataset.k; est.preg=-1; pintar(); abrirUso();});
+  $('usos').addEventListener('click',function(e){var b=e.target.closest('button'); if(!b) return; est.perfil=b.dataset.k; est.elegido=true; est.preg=-1; pintar(); abrirUso();});
   $('preg').addEventListener('click',function(e){var b=e.target.closest('button'); if(!b) return; var i=+b.dataset.i; est.preg=est.preg===i?-1:i; pintar();});
   [].forEach.call(document.querySelectorAll('[data-abrir]'),function(b){ b.addEventListener('click',function(){ abrirHoja(b.dataset.abrir); }); });
   [].forEach.call(document.querySelectorAll('[data-cerrar]'),function(b){ b.addEventListener('click',cerrarHoja); });
