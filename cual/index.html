@@ -5,10 +5,10 @@
 <link rel="canonical" href="https://cual.click/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Cuál · compara celulares y gadgets antes de comprar</title>
-<meta name="description" content="Pon dos equipos frente a frente, dinos para qué lo quieres y te decimos cuál te conviene, ronda por ronda. Gratis, un producto de dtorh.">
+<title>Comparar celulares en Colombia con precios de hoy · Cuál</title>
+<meta name="description" content="Pon dos celulares frente a frente: ficha técnica, fotos a tamaño real, veredicto según tu uso y el precio de hoy en Éxito, Falabella, Alkosto, Tigo, Claro y más. Gratis, no vendemos equipos.">
 <meta property="og:title" content="Cuál · ¿cuál te conviene?">
-<meta property="og:description" content="Comparador gratis de celulares y gadgets, ronda por ronda. Un producto de dtorh.">
+<meta property="og:description" content="Compara dos celulares ronda por ronda, con ficha técnica y precios de hoy en Colombia. Gratis.">
 <meta property="og:url" content="https://cual.click/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Cuál">
@@ -21,11 +21,14 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Cuál · ¿cuál te conviene?">
 <meta name="twitter:image" content="https://cual.click/og/portada.jpg">
+<meta name="twitter:description" content="Compara dos celulares ronda por ronda, con ficha técnica y precios de hoy en Colombia. Gratis.">
 <meta name="theme-color" content="#ffffff">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="preload" href="/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preconnect" href="https://motor-dtorh.dtorh-ofc.workers.dev" crossorigin>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Cuál","url":"https://cual.click/","inLanguage":"es-CO","description":"Comparador gratis de celulares en Colombia: ficha técnica, veredicto por uso y precios de hoy en almacenes y operadores.","publisher":{"@type":"Organization","name":"dtorh","url":"https://dtorh.click/"}}</script>
 <style>
+@font-face{font-family:"Manrope";src:url(/fonts/manrope.woff2) format("woff2");font-weight:200 800;font-style:normal;font-display:swap}
+@font-face{font-family:"JetBrains Mono";src:url(/fonts/jetbrains-mono.woff2) format("woff2");font-weight:100 800;font-style:normal;font-display:swap}
 /* Cuál (cual.click) — plataforma propia de dtorh™ (no vende equipos).
    Estructura tomada del sistema Glow (refero): lienzo claro, tarjetas blancas de 40px, píldoras.
    Paleta elegida por David: blanco / gris hielo, equipo A azul eléctrico, equipo B cian, texto azul noche, ganador lima.
@@ -322,6 +325,7 @@ h1,h2,h3,p{margin:0}
 .puesto button[aria-pressed="true"]{background:#fff;color:var(--tinta);box-shadow:0 4px 12px -6px rgba(19,21,23,.3)}
 .buscar{width:100%;background:var(--porcelana);border:1px solid transparent;border-radius:100px;padding:13px 18px;font-size:15px;transition:border-color .2s,background .2s}
 .buscar:focus{background:#fff;border-color:var(--tinta);outline:none}
+.buscar:focus-visible{box-shadow:0 0 0 3px rgba(0,113,227,.35)}
 .marcas{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 -18px;padding:0 18px}
 .marcas::-webkit-scrollbar{display:none}
 .marcas button{flex:none;background:#fff;border:1px solid var(--linea);border-radius:100px;padding:7px 13px;font-size:13px;font-weight:600}
@@ -377,7 +381,8 @@ h1,h2,h3,p{margin:0}
 /* ===== v5 · galería blanca (referencia: Apple iPhone Duo en refero) =====
    Fondo blanco y gris estudio, cero manchas de color; el producto es el protagonista y se sostiene con sombras reales.
    El azul y el cian quedan solo como señal de equipo A / B. */
-:root{--porcelana:#F5F5F7; --tinta:#1D1D1F; --grafito:#3A3A3C; --piedra:#6E6E73; --niebla:#A1A1A6; --linea:#E6E6E8; --a:#0071E3; --b:#00A3C4}
+:root{--porcelana:#F5F5F7; --tinta:#1D1D1F; --grafito:#3A3A3C; --piedra:#6E6E73; --niebla:#A1A1A6; --linea:#E6E6E8; --a:#0071E3; --b:#00A3C4; --b-txt:#007A94}
+/* --b-txt: el cian de marca (#00A3C4) da 2,98:1 sobre blanco; para texto y fondos con texto blanco se usa este (≈5:1) */
 body{background:#fff}
 .aurora{display:none}
 .top-in{background:rgba(255,255,255,.8);border:1px solid var(--linea);box-shadow:none}
@@ -409,10 +414,10 @@ body{background:#fff}
 .vs-pill{border:1px solid var(--linea);box-shadow:0 1px 2px rgba(0,0,0,.06),0 12px 28px -14px rgba(0,0,0,.25)}
 .vs-pill::before,.vs-pill::after{display:none}
 .num.ga-txt{background:none;color:var(--a);-webkit-text-fill-color:var(--a)}
-.num.gb-txt{background:none;color:var(--b);-webkit-text-fill-color:var(--b)}
+.num.gb-txt{background:none;color:var(--b-txt);-webkit-text-fill-color:var(--b-txt)}
 .marcador small{background:#fff;border:1px solid var(--linea)}
 .ficha .lado.ga-txt{background:none;color:var(--a);-webkit-text-fill-color:var(--a)}
-.ficha .lado.gb-txt{background:none;color:var(--b);-webkit-text-fill-color:var(--b)}
+.ficha .lado.gb-txt{background:none;color:var(--b-txt);-webkit-text-fill-color:var(--b-txt)}
 .ficha .lado b{-webkit-text-fill-color:var(--tinta)}
 .ficha h2{font-weight:700;letter-spacing:-.03em}
 .cambiar,.redondo{box-shadow:0 1px 2px rgba(0,0,0,.06),0 6px 14px -8px rgba(0,0,0,.2)}
@@ -427,8 +432,8 @@ body{background:#fff}
 .veredicto p em.ea{background:rgba(0,113,227,.55)} .veredicto p em.eb{background:rgba(0,163,196,.5)}
 .pedir::after{background:linear-gradient(90deg,transparent,rgba(0,113,227,.15),transparent)}
 .bar.ba i{background:var(--a)} .bar.bb i{background:var(--b)}
-.rd-g.ga{background:var(--a)} .rd-g.gb{background:var(--b)}
-.ley span:first-child{background:var(--a)!important} .ley span:last-child{background:var(--b)!important}
+.rd-g.ga{background:var(--a)} .rd-g.gb{background:var(--b-txt)} .rd-g.ge{background:var(--piedra)}
+.ley span:first-child{background:var(--a)!important} .ley span:last-child{background:var(--b-txt)!important}
 .puesto button i:first-child{background:var(--a)!important}
 .lleva{background:var(--porcelana);border:0;box-shadow:none;border-radius:28px}
 .cta-lleva{box-shadow:none}
@@ -502,6 +507,11 @@ body{background:#fff}
   .ft-fila dd{font-size:14px}
 }
 @media (prefers-reduced-motion:reduce){.ft-sec dl{animation:none}}
+.b-inicio .cats{display:none}
+.ft-reintentar{margin-left:8px;border:1px solid var(--linea);background:#fff;color:var(--tinta);font:600 13px/1 var(--f);padding:12px 16px;border-radius:100px;min-height:44px;cursor:pointer}
+.sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.marcas button,.preg button,.ficha .cambiar,.cats button{min-height:44px}
+.pfila a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;padding:0 10px;margin:-12px -8px -12px 0}
 .pvacio{font-size:13.5px;color:var(--piedra);background:#fff;border-radius:14px;padding:10px 12px}
 .nota-p{font-size:12px;color:var(--piedra);margin-top:12px}
 .precio .fuente{display:block;font-family:var(--f);font-size:11px;color:var(--piedra)}
@@ -643,7 +653,7 @@ html{scroll-snap-type:y proximity;scroll-padding-top:66px}
 
 /* Cambiar equipo: siempre visible y con el color de su lado; tocar la foto también abre el selector */
 .ficha .cambiar{display:inline-flex!important;align-items:center;gap:7px;color:#fff;border:0;box-shadow:0 6px 16px -6px rgba(0,0,0,.35);cursor:pointer}
-.ficha.fa .cambiar{background:var(--a)}.ficha.fb .cambiar{background:var(--b)}
+.ficha.fa .cambiar{background:var(--a)}.ficha.fb .cambiar{background:var(--b-txt)}
 .ficha .cambiar:hover{filter:brightness(1.08);transform:translateY(-1px)}
 .ficha .cambiar:focus-visible{outline:3px solid var(--tinta);outline-offset:2px}
 .b-inicio .fono{cursor:pointer}
@@ -688,7 +698,7 @@ html{scroll-snap-type:y proximity;scroll-padding-top:66px}
 .po-card .po-tag{position:absolute;left:10px;top:10px;min-width:26px;height:26px;border-radius:100px;display:none;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:800;padding:0 8px}
 .po-card[data-en="a"]{border-color:var(--a);background:#fff}.po-card[data-en="b"]{border-color:var(--b);background:#fff}
 .po-card[data-en] .po-tag{display:inline-flex}
-.po-card[data-en="a"] .po-tag{background:var(--a)}.po-card[data-en="b"] .po-tag{background:var(--b)}
+.po-card[data-en="a"] .po-tag{background:var(--a)}.po-card[data-en="b"] .po-tag{background:var(--b-txt)}
 .po-vacio{grid-column:1/-1;text-align:center;color:var(--piedra);padding:30px 0}
 .po-nota{text-align:center;color:var(--piedra);font-size:12.5px;margin:6px 0 0}
 .po-nota a{color:inherit}
@@ -756,11 +766,12 @@ html{scroll-snap-type:y proximity;scroll-padding-top:66px}
     <a class="logo" href="/" id="logoInicio" aria-label="Cuál, inicio"><i></i><span>cuál<small>.click</small></span></a>
     <nav aria-label="Secciones">
       <button type="button" id="navElegir">Elegir equipos</button>
-      <a href="#reales">Diseño real</a>
       <a href="#rondas">Ronda por ronda</a>
       <a href="#precios">Precios</a>
+      <a href="#ficha">Ficha técnica</a>
+      <a href="#reales">Diseño real</a>
     </nav>
-    <a class="cta-top" id="waTop" target="_blank" rel="noopener"><s></s><span>Para tu tienda</span></a>
+    <a class="cta-top" id="waTop" target="_blank" rel="noopener"><span>Para tu tienda</span></a>
   </div>
 </header>
 
@@ -801,7 +812,7 @@ html{scroll-snap-type:y proximity;scroll-padding-top:66px}
   <section class="escena" aria-label="Equipos frente a frente">
     <div class="balanza" id="balanza">
       <div class="pie pa" id="pieA"><span class="halo"></span><div class="fono"><div class="cuerpo intro" id="cuerpoA"></div><span class="sombra-piso"></span></div><span class="chispas"></span></div>
-      <div class="marcador" aria-live="polite">
+      <div class="marcador">
         <div class="vs-pill"><span class="num ga-txt" id="gA">0</span><em>VS</em><span class="num gb-txt" id="gB">0</span></div>
         <small id="perfilTxt">De todo un poco</small>
       </div>
@@ -829,6 +840,54 @@ html{scroll-snap-type:y proximity;scroll-padding-top:66px}
     </div>
     <div class="cinta" aria-hidden="true"><div id="cinta"></div></div>
   </section>
+  </div>
+</section>
+
+<section class="bloque" id="uso" data-n="Para qué lo quieres">
+  <div class="b-in b-angosto">
+      <section class="card" aria-labelledby="usoT">
+        <span class="eti">Paso 1</span>
+        <h3 id="usoT">¿Para qué lo vas a usar?</h3>
+        <div class="usos" id="usos" role="group" aria-label="Uso principal"></div>
+      </section>
+  </div>
+</section>
+
+<section class="bloque" id="rondas" data-n="Ronda por ronda">
+  <div class="b-in b-medio">
+      <section class="card" aria-labelledby="rT">
+        <div class="rondas-h">
+          <div><span class="eti">Paso 2</span><h3 id="rT">Ronda por ronda</h3></div>
+          <div class="ley"><span style="background:var(--plasma)">A</span><span style="background:var(--brasa)">B</span></div>
+        </div>
+        <ul class="rondas" id="lista-rondas"></ul>
+      </section>
+  </div>
+</section>
+
+<section class="bloque" id="veredicto" data-n="Veredicto">
+  <div class="b-in b-angosto">
+      <section class="veredicto" aria-labelledby="verT">
+        <div class="cab"><span class="eti" id="verT">Veredicto <b class="ia" id="iaChip" hidden>con IA</b></span><span class="marcador-mini" id="verMarcador"></span></div>
+        <p id="vtxt"></p><p class="sr" id="anuncio" aria-live="polite" aria-atomic="true"></p>
+        <div class="preg" id="preg" role="group" aria-label="Preguntas rápidas"></div>
+        <div class="acc">
+          <a class="pedir" id="wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.2-.7-2.7-1.1-4.4-3.8-4.5-4-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.1.1.6-.1 1.2Z"/></svg>Compartir veredicto</a>
+          <button class="sec" type="button" id="copiar">Copiar</button>
+        </div>
+        <span class="nota">Mándaselo a quien te esté ayudando a decidir. Cuál no vende equipos.</span>
+      </section>
+  </div>
+</section>
+
+<section class="bloque" id="precios" data-n="Precios">
+  <div class="b-in b-medio">
+      <section class="card precios" aria-labelledby="pT">
+        <span class="eti">Precios hoy en Colombia</span>
+        <h3 id="pT">¿Dónde está más barato?</h3>
+        <div id="ptab"></div>
+        <p class="nota-p">Éxito, Olímpica, Jumbo, Falabella, Alkosto, Ktronix y Alkomprar; operadores Tigo (también vende los equipos de Movistar) y Claro, solo precio de contado, sin plan. WOM no tiene tienda en línea desde que dejó de usar su marca. Revisados cada tres días por el motor de dtorh. Cuál no vende equipos: confirma el precio final en la tienda.</p>
+      </section>
   </div>
 </section>
 
@@ -863,54 +922,6 @@ html{scroll-snap-type:y proximity;scroll-padding-top:66px}
   </div>
 </section>
 
-<section class="bloque" id="uso" data-n="Para qué lo quieres">
-  <div class="b-in b-angosto">
-      <section class="card" aria-labelledby="usoT">
-        <span class="eti">Paso 1</span>
-        <h3 id="usoT">¿Para qué lo vas a usar?</h3>
-        <div class="usos" id="usos" role="group" aria-label="Uso principal"></div>
-      </section>
-  </div>
-</section>
-
-<section class="bloque" id="rondas" data-n="Ronda por ronda">
-  <div class="b-in b-medio">
-      <section class="card" aria-labelledby="rT">
-        <div class="rondas-h">
-          <div><span class="eti">Paso 2</span><h3 id="rT">Ronda por ronda</h3></div>
-          <div class="ley"><span style="background:var(--plasma)">A</span><span style="background:var(--brasa)">B</span></div>
-        </div>
-        <ul class="rondas" id="lista-rondas"></ul>
-      </section>
-  </div>
-</section>
-
-<section class="bloque" id="veredicto" data-n="Veredicto">
-  <div class="b-in b-angosto">
-      <section class="veredicto" aria-labelledby="verT">
-        <div class="cab"><span class="eti" id="verT">Veredicto <b class="ia" id="iaChip" hidden>con IA</b></span><span class="marcador-mini" id="verMarcador"></span></div>
-        <p id="vtxt" aria-live="polite"></p>
-        <div class="preg" id="preg" role="group" aria-label="Preguntas rápidas"></div>
-        <div class="acc">
-          <a class="pedir" id="wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.2-.7-2.7-1.1-4.4-3.8-4.5-4-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.1.1.6-.1 1.2Z"/></svg>Compartir veredicto</a>
-          <button class="sec" type="button" id="copiar">Copiar</button>
-        </div>
-        <span class="nota">Mándaselo a quien te esté ayudando a decidir. Cuál no vende equipos.</span>
-      </section>
-  </div>
-</section>
-
-<section class="bloque" id="precios" data-n="Precios">
-  <div class="b-in b-medio">
-      <section class="card precios" aria-labelledby="pT">
-        <span class="eti">Precios hoy en Colombia</span>
-        <h3 id="pT">¿Dónde está más barato?</h3>
-        <div id="ptab"></div>
-        <p class="nota-p">Éxito, Olímpica, Jumbo, Falabella, Alkosto, Ktronix y Alkomprar; operadores Tigo (también vende los equipos de Movistar) y Claro, solo precio de contado, sin plan. WOM no tiene tienda en línea desde que dejó de usar su marca. Revisados cada tres días por el motor de dtorh. Cuál no vende equipos: confirma el precio final en la tienda.</p>
-      </section>
-  </div>
-</section>
-
 <section class="bloque b-fin" id="tienda" data-n="Para tu tienda">
   <div class="b-in">
 <section class="lleva" aria-labelledby="llT">
@@ -929,10 +940,10 @@ html{scroll-snap-type:y proximity;scroll-padding-top:66px}
 <nav class="indice" id="indice" aria-label="Bloques de la página"></nav>
 <div class="donde" id="donde" aria-hidden="true"></div>
 
-<div class="dock" aria-label="Acciones">
+<nav class="dock" aria-label="Acciones">
   <button type="button" data-abrir="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="7" height="16" rx="2"/><rect x="14" y="4" width="7" height="16" rx="2"/></svg>Equipos</button>
   <a class="pedir" id="wa2" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.2-.7-2.7-1.1-4.4-3.8-4.5-4-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.1.1.6-.1 1.2Z"/></svg>Compartir veredicto</a>
-</div>
+</nav>
 
 <div class="hoja" id="hoja" hidden role="dialog" aria-modal="true" aria-labelledby="hT">
   <div class="velo" data-cerrar></div>
@@ -974,7 +985,7 @@ var EQUIPOS = [
  {id:'rn15p',img:'img/equipos/rn15p.webp?v=5',alto:163.6,k:'redmi',m:'Xiaomi',n:'Redmi Note 15 Pro 5G',precio:1150000,pant:'6,83″ · 120 Hz',chip:'Dimensity 7400 Ultra',cam:'200 + 8 MP',bat:6580,carga:45,peso:210,f:['#C9C2B6','#7A7266'],d:['#BEB6A8','#8F877A'],c:['#E8DCC4','#2E2A22'],pts:{pant:86,rend:66,cam:78,bat:92}},
  {id:'rn14',img:'img/equipos/rn14.webp?v=5',alto:163.25,k:'redmi',m:'Xiaomi',n:'Redmi Note 14',precio:950000,pant:'6,67″ · 120 Hz',chip:'Helio G99 Ultra',cam:'108 + 2 MP',bat:5500,carga:33,peso:196,f:['#8CC4A8','#2F6B50'],d:['#7FB89B','#3F7D5F'],c:['#9BE8C2','#0E3B2A'],pts:{pant:78,rend:50,cam:62,bat:88}},
  {id:'px8p',img:'img/equipos/px8p.webp?v=5',alto:157.53,k:'poco',m:'POCO',n:'POCO X8 Pro',precio:1650000,pant:'6,59″ · 120 Hz',chip:'Dimensity 8500 Ultra',cam:'50 + 8 MP',bat:6500,carga:100,peso:201,f:['#A9D8C0','#3E7A5E'],d:['#9CCFB5','#4F8B6F'],c:['#B8F2D4','#0F3324'],pts:{pant:88,rend:88,cam:72,bat:94}},
- {id:'e70f',img:'img/equipos/e70f.webp?v=5',alto:162.8,k:'moto',m:'Motorola',n:'Edge 70 Fusion',precio:2000000,pant:'6,78″ · 144 Hz',chip:'Snapdragon 7s Gen 3',cam:'50 + 13 MP',bat:5200,carga:68,peso:177,f:['#3D6E9E','#16324F'],d:['#356391','#1E4166'],c:['#8EC5FF','#0A1B30'],pts:{pant:88,rend:66,cam:74,bat:82}},
+ {id:'e70f',img:'img/equipos/e70f.webp?v=6',alto:162.8,k:'moto',m:'Motorola',n:'Edge 70 Fusion',precio:2000000,pant:'6,78″ · 144 Hz',chip:'Snapdragon 7s Gen 3',cam:'50 + 13 MP',bat:5200,carga:68,peso:177,f:['#3D6E9E','#16324F'],d:['#356391','#1E4166'],c:['#8EC5FF','#0A1B30'],pts:{pant:88,rend:66,cam:74,bat:82}},
  {id:'g56',img:'img/equipos/g56.webp?v=5',alto:165.75,k:'moto',m:'Motorola',n:'Moto G56',precio:850000,pant:'6,72″ · 120 Hz',chip:'Dimensity 7060',cam:'50 + 8 MP',bat:5200,carga:30,peso:200,f:['#9DB07A','#4C5A33'],d:['#90A46C','#5D6B40'],c:['#D2E8A8','#1F2812'],pts:{pant:76,rend:52,cam:62,bat:82}},
  {id:'ip17p',img:'img/equipos/ip17p.webp?v=5',alto:150.0,k:'pro3',m:'Apple',n:'iPhone 17 Pro',precio:5200000,pant:'6,3″ · 120 Hz',chip:'A19 Pro',cam:'48 + 48 + 48 MP',bat:3998,carga:40,peso:206,f:['#5A6A8C','#1E2740'],d:['#4A5878','#28324D'],c:['#8FA8E0','#0E1630'],pts:{pant:93,rend:97,cam:93,bat:78}},
  {id:'a57',img:'img/equipos/a57.webp?v=5',alto:161.5,k:'trio',m:'Samsung',n:'Galaxy A57',precio:2000000,pant:'6,7″ · 120 Hz',chip:'Exynos 1680',cam:'50 + 12 + 5 MP',bat:5000,carga:45,peso:179,f:['#9A9DA3','#4A4D54'],d:['#85888F','#55585F'],c:['#C9D3FF','#1A1F33'],pts:{pant:86,rend:74,cam:76,bat:82}},
@@ -985,7 +996,7 @@ var EQUIPOS = [
  {id:'hon600s',img:'img/equipos/hon600s.webp?v=5',alto:168.3,k:'dual',m:'Honor',n:'600 Smart',precio:2000000,pant:'6,87″ · 120 Hz',chip:'Snapdragon 4 Gen 4',cam:'50 MP',bat:8100,carga:45,peso:216.5,f:['#E6E3DE','#9A958E'],d:['#D9D5CF','#AAA59E'],c:['#C9B8FF','#2A2340'],pts:{pant:64,rend:48,cam:54,bat:98}},
  {id:'honx8d',img:'img/equipos/honx8d.webp?v=6',alto:162.9,k:'dual',m:'Honor',n:'X8d',precio:1150000,pant:'6,77″ · 120 Hz',chip:'Snapdragon 6s 4G Gen 2',cam:'108 + 5 MP',bat:7000,carga:45,peso:188,f:['#A9C8EE','#4A78B8'],d:['#9BBEEA','#5C88C6'],c:['#8FE3FF','#0E2C4A'],pts:{pant:82,rend:46,cam:66,bat:94}},
  {id:'hn15m',img:'img/equipos/hn15m.webp?v=6',alto:163.3,k:'dual',m:'Huawei',n:'nova 15 Max',precio:1800000,pant:'6,84″ · 120 Hz',chip:'Kirin 8000',cam:'50 + 2 MP',bat:8500,carga:40,peso:232,f:['#9FE3DA','#3E9C93'],d:['#8FD8CF','#4FA99F'],c:['#A6F5EC','#0C3330'],pts:{pant:88,rend:62,cam:62,bat:98}},
- {id:'e60f',img:'img/equipos/e60f.webp?v=5',alto:161.0,k:'moto',m:'Motorola',n:'Edge 60 Fusion',precio:1000000,pant:'6,67″ · 120 Hz',chip:'Dimensity 7300',cam:'50 + 13 MP',bat:5200,carga:68,peso:180,f:['#5FC4BE','#1F6E6A'],d:['#52B8B2','#2C7F7A'],c:['#9BF2EA','#0B302D'],pts:{pant:88,rend:62,cam:72,bat:82}},
+ {id:'e60f',img:'img/equipos/e60f.webp?v=6',alto:161.0,k:'moto',m:'Motorola',n:'Edge 60 Fusion',precio:1000000,pant:'6,67″ · 120 Hz',chip:'Dimensity 7300',cam:'50 + 13 MP',bat:5200,carga:68,peso:180,f:['#5FC4BE','#1F6E6A'],d:['#52B8B2','#2C7F7A'],c:['#9BF2EA','#0B302D'],pts:{pant:88,rend:62,cam:72,bat:82}},
  {id:'px7p',img:'img/equipos/px7p.webp?v=5',alto:160.8,k:'poco',m:'POCO',n:'POCO X7 Pro',precio:1400000,pant:'6,67″ · 120 Hz',chip:'Dimensity 8400 Ultra',cam:'50 + 8 MP',bat:6000,carga:90,peso:195,f:['#3A3B3F','#111214'],d:['#2E2F33','#18191C'],c:['#FFD34D','#2A2205'],pts:{pant:88,rend:86,cam:70,bat:90}}
 ];
 function porId(id){ for(var i=0;i<EQUIPOS.length;i++) if(EQUIPOS[i].id===id) return EQUIPOS[i]; return null; }
@@ -1102,7 +1113,7 @@ function mockup(E){
 }
 
 /* ---------- Precios reales (Motor dtorh) ---------- */
-function filaTop(t,i,n,min){ var m=n>1&&t.precio===min; return '<div class="pfila'+(m?' mejor':'')+'"><span class="puesto">'+(i+1)+'</span><span class="ptienda">'+escHTML(t.tienda)+(m?'<em>Más barato</em>':'')+'</span><span class="pr">'+cop(t.precio)+'</span><a href="'+escHTML(t.url)+'" target="_blank" rel="noopener nofollow" aria-label="Ver '+escHTML(t.tienda)+'">Ver ↗</a></div>'; }
+function filaTop(t,i,n,min){ var m=n>1&&t.precio===min; return '<div class="pfila'+(m?' mejor':'')+'"><span class="puesto">'+(i+1)+'</span><span class="ptienda">'+escHTML(t.tienda)+(m?'<em>Más barato</em>':'')+'</span><span class="pr">'+cop(t.precio)+'</span><a href="'+escHTML(t.url)+'" target="_blank" rel="noopener nofollow" aria-label="Ver precio en '+escHTML(t.tienda)+' (abre otra pestaña)">Ver ↗</a></div>'; }
 function pintarPrecios(A,B){
   var html='';
   [[A,'var(--a)'],[B,'var(--b)']].forEach(function(x){ var e=x[0], d=PRECIOS[e.id];
@@ -1122,7 +1133,7 @@ var FICHAS=null, ftCargando=false;
 var FT_ICONO={"Pantalla": "<rect x=\"6\" y=\"2.5\" width=\"12\" height=\"19\" rx=\"2.5\"/><path d=\"M10 18.5h4\"/>", "Rendimiento": "<rect x=\"5\" y=\"5\" width=\"14\" height=\"14\" rx=\"2\"/><rect x=\"9\" y=\"9\" width=\"6\" height=\"6\"/><path d=\"M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3\"/>", "Cámaras": "<path d=\"M4 8h3l2-3h6l2 3h3v11H4z\"/><circle cx=\"12\" cy=\"13\" r=\"3.5\"/>", "Batería y carga": "<rect x=\"3\" y=\"7\" width=\"16\" height=\"10\" rx=\"2\"/><path d=\"M21 10.5v3M11.5 9l-2 3.5h3l-2 3.5\"/>", "Software y actualizaciones": "<path d=\"M20 12a8 8 0 1 1-2.3-5.6M20 4v4h-4\"/>", "Diseño y resistencia": "<path d=\"M12 2.5c3 3.8 6 7.3 6 11a6 6 0 0 1-12 0c0-3.7 3-7.2 6-11z\"/>", "Conectividad": "<path d=\"M2.5 9a14 14 0 0 1 19 0M5.5 12.5a9.5 9.5 0 0 1 13 0M8.5 16a5 5 0 0 1 7 0\"/><circle cx=\"12\" cy=\"19.5\" r=\"1\"/>", "Seguridad y sonido": "<rect x=\"5\" y=\"10.5\" width=\"14\" height=\"10\" rx=\"2\"/><path d=\"M8 10.5V8a4 4 0 0 1 8 0v2.5\"/>", "Lanzamiento": "<rect x=\"3.5\" y=\"5\" width=\"17\" height=\"15\" rx=\"2\"/><path d=\"M3.5 10h17M8 3v4M16 3v4\"/>"};
 var FT_CLAVE=[['Rendimiento','Procesador'],['Software y actualizaciones','Actualizaciones de sistema'],['Conectividad','Red'],['Diseño y resistencia','Resistencia'],['Batería y carga','Otras']];
 function cargarFichas(cb){ if(FICHAS){cb();return;} if(ftCargando) return; ftCargando=true;
-  fetch('fichas.json?v=2').then(function(r){return r.json()}).then(function(j){FICHAS=j;ftCargando=false;cb();}).catch(function(){ftCargando=false;}); }
+  pedirJSON('fichas.json?v=2').then(function(j){FICHAS=j;ftCargando=false;cb();}).catch(function(){ftCargando=false; $('ftClave').innerHTML='<div class="pvacio">No pudimos cargar la ficha. <button type="button" class="ft-reintentar" onclick="var p=partido();pintarFicha(p.A,p.B)">Reintentar</button></div>';}); }
 function ftFila(et,va,vb){ var dif=va&&vb&&va!==vb; return '<div class="ft-fila"><dt>'+escHTML(et)+'</dt><dd><span'+(dif?' class="dif"':'')+'>'+escHTML(va||'Sin dato')+'</span></dd><dd><span'+(dif?' class="dif"':'')+'>'+escHTML(vb||'Sin dato')+'</span></dd></div>'; }
 function pintarFicha(A,B){
   if(!$('ft')) return;
@@ -1155,15 +1166,17 @@ function pintarReales(A,B){
   });
   $('reales').hidden=!hay;
 }
+function pedirJSON(u,o){ var c=('AbortController' in window)?new AbortController():null, t=c&&setTimeout(function(){c.abort()},9000);
+  return fetch(u,Object.assign(c?{signal:c.signal}:{},o||{})).then(function(r){ if(t) clearTimeout(t); if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }); }
 function cargarPrecios(){
   var aplicar=function(j){ aplicarPrecios(j); };
-  try{ var c=JSON.parse(localStorage.getItem('cual:precios')||'null'); if(c) aplicar(c); }catch(e){}
-  fetch(MOTOR+'/cual/precios',{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){ try{ localStorage.setItem('cual:precios',JSON.stringify({precios:j.precios,videos:j.videos})); }catch(e){} aplicar(j); }).catch(function(){});
+  try{ var c=JSON.parse(localStorage.getItem('cual:precios')||'null'); if(c&&c.t&&Date.now()-c.t<3*86400000) aplicar(c); }catch(e){} // caché local de máx. 3 días
+  pedirJSON(MOTOR+'/cual/precios').then(function(j){ try{ localStorage.setItem('cual:precios',JSON.stringify({t:Date.now(),precios:j.precios,videos:j.videos})); }catch(e){} aplicar(j); }).catch(function(){});
 }
 function aplicarPrecios(j){
     PRECIOS=(j&&j.precios)||{}; VIDEOS=(j&&j.videos)||{};
 
-    EQUIPOS.forEach(function(e){ var d=PRECIOS[e.id]; if(d&&d.min){ e.ref=e.ref||e.precio; e.precio=d.min; e.tienda=d.tiendas[0].tienda; } });
+    EQUIPOS.forEach(function(e){ var d=PRECIOS[e.id]; e.ref=e.ref||e.precio; if(d&&d.min){ e.precio=d.min; e.tienda=d.tiendas[0].tienda; } else { e.precio=e.ref; delete e.tienda; } }); // sin precio vigente: vuelve a la referencia, nunca deja una tienda vieja
     pintar(); if(!$('hoja').hidden) pintarLista(); pintarPortada();
 }
 
@@ -1178,7 +1191,7 @@ function cuenta(el,hasta){
 }
 function resaltar(texto,A,B){
   var n=0, nombres=[[A.n,'ea'],[B.n,'eb']].sort(function(x,y){return y[0].length-x[0].length});
-  function palabras(s){ return s.split(' ').map(function(w){ return w ? '<span style="--i:'+(n++)+'">'+w+'</span>' : ''; }).join(' '); }
+  function palabras(s){ return s.split(' ').map(function(w){ return w ? '<span style="--i:'+(n++)+'">'+escHTML(w)+'</span>' : ''; }).join(' '); }
   var trozos=[{t:texto}];
   nombres.forEach(function(nm){
     var sig=[]; trozos.forEach(function(tr){
@@ -1189,7 +1202,7 @@ function resaltar(texto,A,B){
   return trozos.map(function(tr){ return tr.k ? '<em class="'+tr.k+'">'+palabras(tr.t)+'</em>' : palabras(tr.t); }).join('');
 }
 function escribir(texto,p){ textoVeredicto=texto; $('vtxt').innerHTML=resaltar(texto,p.A,p.B); }
-function fotoReal(E){ return '<img class="foto-real" src="'+E.img+'" alt="'+E.m+' '+E.n+'" width="1200" height="1200" decoding="async">'; }
+function fotoReal(E){ return '<img class="foto-real" src="'+E.img+'" srcset="'+mini(E)+' 400w, '+E.img+' 1200w" sizes="(max-width:719px) 46vw, 380px" alt="" width="1200" height="1200" decoding="async" fetchpriority="high">'; } // alt vacío: el nombre ya está en el título de al lado
 function ponerMockup(lado,E){
   var c=$('cuerpo'+lado.toUpperCase());
   if(E.img){ if(primera||quieto()){ c.innerHTML=fotoReal(E); c.dataset.id=E.id; return; }
@@ -1222,19 +1235,18 @@ function pintar(){
   var p=partido(), A=p.A, B=p.B;
   [['a',A],['b',B]].forEach(function(x){ var L=x[0].toUpperCase();
     if($('cuerpo'+L).dataset.id!==x[1].id) ponerMockup(x[0],x[1]);
-    $('nom'+L).textContent=x[1].n; $('marca'+L).innerHTML=logoMarca(x[1].m); $('pre'+L).innerHTML=cop(x[1].precio)+'<span class="fuente">'+(x[1].tienda?'desde, en '+x[1].tienda:'precio de referencia')+'</span>'; });
+    $('nom'+L).textContent=x[1].n; $('marca'+L).innerHTML=logoMarca(x[1].m); $('pre'+L).innerHTML=(x[1].tienda?'Desde ':'')+cop(x[1].precio)+'<span class="fuente">'+(x[1].tienda?'más barato hoy en '+escHTML(x[1].tienda):'precio de referencia')+'</span>'; });
   var tot=Math.max(1,p.ga+p.gb);
   $('balanza').style.setProperty('--t',((p.gb-p.ga)/tot).toFixed(3));
   var ganador = p.ga>p.gb?'a':p.gb>p.ga?'b':'';
   $('pieA').classList.toggle('gana',ganador==='a'); $('pieB').classList.toggle('gana',ganador==='b');
   $('fichaA').classList.toggle('gana',ganador==='a'); $('fichaB').classList.toggle('gana',ganador==='b');
-  if(ganador && (ganador!==prev.ganador || p.ga!==prev.ga || p.gb!==prev.gb)) setTimeout(function(){ estallar($(ganador==='a'?'pieA':'pieB')); }, primera?1500:300);
+  if(!primera && (ganador!==prev.ganador || p.ga!==prev.ga || p.gb!==prev.gb)) $('anuncio').textContent = ganador ? ((ganador==='a'?A:B).n+' gana '+Math.max(p.ga,p.gb)+' a '+Math.min(p.ga,p.gb)) : ('Empate '+p.ga+' a '+p.gb);
   prev={ga:p.ga,gb:p.gb,ganador:ganador};
   cuenta($('gA'),p.ga); cuenta($('gB'),p.gb);
   var perfil=PERFILES.filter(function(x){return x.k===est.perfil})[0];
   $('perfilTxt').textContent=perfil.n;
   $('verMarcador').textContent='A '+p.ga+' · '+p.gb+' B';
-  pintarCinta(A,B);
   pintarReales(A,B); pintarFicha(A,B);
 
   var ul=$('lista-rondas');
@@ -1252,7 +1264,7 @@ function pintar(){
     li.dataset.wa=f.sa.toFixed(0); li.dataset.wb=f.sb.toFixed(0);
     if(!primera || li.dataset.visto){ ba.firstChild.style.setProperty('--w',f.sa.toFixed(0)+'%'); bb.firstChild.style.setProperty('--w',f.sb.toFixed(0)+'%'); }
     var x=li.querySelector('.rd-x'); x.hidden=f.peso<2; x.textContent='×'+f.peso;
-    var g=li.querySelector('.rd-g'); g.className='rd-g '+(f.gana==='a'?'ga':f.gana==='b'?'gb':'ge'); g.textContent=f.gana?'Gana '+f.gana.toUpperCase():'Parejos';
+    var g=li.querySelector('.rd-g'); g.className='rd-g '+(f.gana==='a'?'ga':f.gana==='b'?'gb':'ge'); g.textContent=f.gana?'Gana '+corto((f.gana==='a'?A:B).n):'Parejos';
     li.querySelector('.rd-c').innerHTML = f.gana ? f.r.claro(f.gana==='a'?A:B, f.gana==='a'?B:A) : 'Aquí están parejos: esta ronda no decide.';
   });
 
@@ -1269,11 +1281,14 @@ function pintar(){
   primera=false;
   if(!enPortada()) try{ history.replaceState(null,'','?a='+est.a+'&b='+est.b); }catch(e){}
 }
-function veredictoIA(p){
+function corto(n){ return n.length>16 ? n.replace(/^(Galaxy|Redmi Note|Moto|POCO|Xiaomi) /,'').slice(0,16) : n; }
+var iaTimer=null;
+function veredictoIA(p){ clearTimeout(iaTimer); iaTimer=setTimeout(function(){ veredictoIAya(p); },600); } // espera a que la persona termine de elegir
+function veredictoIAya(p){
   fetch(IA_ENDPOINT,{method:'POST',headers:{'content-type':'application/json'},
     body:JSON.stringify({a:p.A.id,b:p.B.id,perfil:est.perfil,base:veredicto(p)})})
   .then(function(r){return r.json()}).then(function(j){ var A2=porId(est.a),B2=porId(est.b);
-    if(j&&j.texto&&est.preg<0&&A2===p.A&&B2===p.B){ escribir(j.texto,p); $('iaChip').hidden=false; } }).catch(function(){});
+    if(j&&j.texto&&est.preg<0&&A2===p.A&&B2===p.B){ escribir(j.texto,p); $('iaChip').hidden=false; $('anuncio').textContent=j.texto; } }).catch(function(){});
 }
 
 /* ---------- Giro: muestra la espalda sola cada tanto; el botón lo fija ---------- */
@@ -1423,13 +1438,11 @@ function iniciar(data){
       .then(function(){ b.textContent='Copiado'; },function(){ b.textContent='No se pudo'; });
     setTimeout(function(){ b.textContent='Copiar'; },1600); });
   pintarCats();
-  inclinar();
   iniciarPortada();
   pintar();
   observarRondas();
   cargarPrecios();
   setTimeout(function(){ [$('cuerpoA'),$('cuerpoB')].forEach(function(c){ c.classList.remove('intro'); }); },2000);
-  setTimeout(iniciarAutoGiro,2500);
 }
 if(window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(function(){ return est; });
 if(window.claude && window.claude.hot && window.claude.hot.ready) window.claude.hot.ready(iniciar);
