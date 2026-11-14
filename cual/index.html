@@ -217,13 +217,29 @@ h1,h2,h3,p{margin:0}
 .card h3{font-weight:800;font-size:24px;line-height:1.2;letter-spacing:-.04em;margin-top:4px}
 
 .uso-p{font-size:14px;line-height:1.5;color:var(--piedra);margin-top:8px;max-width:60ch}
-.uso-res{margin-top:12px;background:#fff;border-radius:24px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.uso-pop{border:0;padding:0;margin:auto;width:min(440px,calc(100% - 24px));border-radius:28px;background:#fff;color:var(--tinta);box-shadow:0 24px 60px rgba(0,0,0,.25)}
+.uso-pop::backdrop{background:rgba(15,17,22,.45)}
+.uso-pop[open]{animation:popIn .28s cubic-bezier(.2,.8,.2,1)}
+@keyframes popIn{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+.uso-pop-in{padding:22px 22px 18px;display:flex;flex-direction:column;gap:10px}
 .uso-eti{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--piedra)}
-.uso-gana{font-size:20px;font-weight:700;line-height:1.25;color:var(--tinta)}
-.uso-pesa,.uso-cambio{font-size:13.5px;line-height:1.45;color:var(--piedra)}
+.uso-gana{font-size:22px;font-weight:600;line-height:1.2;margin:0}
+.uso-gana b{font-weight:800}
+.uso-marc{display:flex;align-items:center;justify-content:center;gap:12px;background:var(--porcelana);border-radius:18px;padding:10px;font-size:14px}
+.uso-marc b{font-size:24px;font-weight:800}.uso-marc .ua b{color:var(--a)}.uso-marc .ub b{color:var(--b-txt)}
+.uso-marc em{font-style:normal;font-size:11px;color:var(--piedra)}
+.uso-pesa,.uso-cambio{font-size:14px;line-height:1.45;color:var(--piedra);margin:0}
 .uso-cambio{color:var(--tinta)}
-.uso-ir{align-self:flex-start;display:inline-flex;align-items:center;min-height:44px;font-weight:600;font-size:14px;color:var(--a);text-decoration:none}
-.uso-ir:focus-visible{outline:3px solid var(--a);outline-offset:2px;border-radius:8px}
+.uso-lista{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.uso-lista li{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:14px;padding:9px 12px;border-radius:14px;background:var(--porcelana)}
+.uso-lista small{font-size:11.5px;color:var(--piedra);font-weight:600}
+.uso-lista .ga{color:var(--a)}.uso-lista .gb{color:var(--b-txt)}.uso-lista .ge{color:var(--piedra)}
+.uso-acc{display:flex;gap:8px;margin-top:4px}
+.uso-ir,.uso-otro{flex:1;display:inline-flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;font:inherit;font-weight:700;font-size:14.5px;text-decoration:none;cursor:pointer}
+.uso-ir{background:var(--tinta);color:#fff}.uso-otro{background:var(--porcelana);color:var(--tinta);border:0}
+.uso-ir:focus-visible,.uso-otro:focus-visible{outline:3px solid var(--a);outline-offset:2px}
+@media (max-width:520px){.uso-pop{margin:auto auto 0;width:100%;max-width:100%;border-radius:28px 28px 0 0}.uso-pop-in{padding-bottom:calc(18px + env(safe-area-inset-bottom))}}
+@media (prefers-reduced-motion:reduce){.uso-pop[open]{animation:none}}
 .usos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:16px}
 .usos button{position:relative;text-align:left;background:var(--porcelana);border:0;border-radius:24px;padding:14px;display:flex;flex-direction:column;gap:8px;
   transition:transform .3s var(--spring),background .3s,color .3s;isolation:isolate;overflow:hidden}
@@ -860,9 +876,11 @@ html{scroll-snap-type:y proximity;scroll-padding-top:66px}
       <section class="card" aria-labelledby="usoT">
         <span class="eti">Paso 1</span>
         <h3 id="usoT">¿Para qué lo vas a usar?</h3>
-        <p class="uso-p">Cuál enfrenta los dos equipos en 7 rondas: pantalla, potencia, cámara, batería, carga, peso y precio. Elige tu uso y lo que más te importa cuenta más en el resultado.</p>
+        <p class="uso-p">Cuál enfrenta los dos equipos en 7 rondas: pantalla, potencia, cámara, batería, carga, peso y precio. Toca tu uso y te mostramos al instante cuál te conviene.</p>
         <div class="usos" id="usos" role="group" aria-label="Uso principal"></div>
-        <div class="uso-res" id="usoRes" aria-live="polite"></div>
+        <dialog class="uso-pop" id="usoPop" aria-labelledby="usoPopT">
+          <div class="uso-pop-in" id="usoPopIn"></div>
+        </dialog>
       </section>
   </div>
 </section>
@@ -1061,13 +1079,20 @@ function partido(){
 function resumenUso(p){
   var perfil=PERFILES.filter(function(x){return x.k===est.perfil})[0], A=p.A, B=p.B;
   var g=p.ga>p.gb?A:p.gb>p.ga?B:null;
-  var res=g?'<b>'+escHTML(g.n)+'</b> gana '+Math.max(p.ga,p.gb)+' a '+Math.min(p.ga,p.gb):'<b>Empate</b> '+p.ga+' a '+p.gb;
-  var h='<span class="uso-eti">Resultado para '+escHTML(perfil.frase)+'</span><p class="uso-gana">'+res+'</p><p class="uso-pesa">'+perfil.pesa+' Puntos: cada ronda ganada suma lo que vale.</p>';
+  var h='<span class="uso-eti">Si lo quieres para '+escHTML(perfil.frase)+'</span>';
+  h+='<h4 id="usoPopT" class="uso-gana">'+(g?'Te conviene el <b>'+escHTML(g.n)+'</b>':'Están <b>empatados</b>')+'</h4>';
+  h+='<div class="uso-marc"><span class="ua">'+escHTML(corto(A.n))+' <b>'+p.ga+'</b></span><em>vs</em><span class="ub"><b>'+p.gb+'</b> '+escHTML(corto(B.n))+'</span></div>';
+  h+='<p class="uso-pesa">Comparamos 7 rondas. '+perfil.pesa+'</p>';
+  var claves=p.filas.filter(function(f){return f.peso>1}); if(!claves.length) claves=p.filas;
+  h+='<ul class="uso-lista">'+claves.map(function(f){return '<li><span>'+escHTML(f.r.n)+(f.peso>1?' <small>vale ×'+f.peso+'</small>':'')+'</span><b class="'+(f.gana==='a'?'ga':f.gana==='b'?'gb':'ge')+'">'+(f.gana?escHTML(corto((f.gana==='a'?A:B).n)):'Parejos')+'</b></li>'}).join('')+'</ul>';
   if(est.perfil!=='todo'){ var ant=est.perfil; est.perfil='todo'; var q=partido(); est.perfil=ant;
     var g0=q.ga>q.gb?A:q.gb>q.ga?B:null;
-    if((g0&&g0.id)!==(g&&g.id)) h+='<p class="uso-cambio">Ojo: comparando todo parejo, '+(g0?'gana el '+escHTML(g0.n)+' '+Math.max(q.ga,q.gb)+' a '+Math.min(q.ga,q.gb):'quedan empatados '+q.ga+' a '+q.gb)+'. Tu uso cambia el resultado.</p>';
-    else h+='<p class="uso-cambio">Comparando todo parejo el resultado es el mismo: tu uso lo confirma.</p>'; }
-  return h+'<a class="uso-ir" href="#rondas">Ver ronda por ronda ↓</a>';
+    if((g0&&g0.id)!==(g&&g.id)) h+='<p class="uso-cambio">Ojo: comparando todo parejo '+(g0?'ganaría el '+escHTML(g0.n):'quedarían empatados')+'. Tu uso cambia el resultado.</p>'; }
+  return h+'<div class="uso-acc"><a class="uso-ir" href="#rondas" data-cerrar>Ver las 7 rondas</a><button type="button" class="uso-otro" data-cerrar>Elegir otro uso</button></div>';
+}
+function abrirUso(){
+  var d=$('usoPop'); $('usoPopIn').innerHTML=resumenUso(partido());
+  if(d.showModal){ if(!d.open) d.showModal(); } else d.setAttribute('open','');
 }
 function veredicto(p){
   var A=p.A,B=p.B,ga=p.ga,gb=p.gb,filas=p.filas, perfil=PERFILES.filter(function(x){return x.k===est.perfil})[0];
@@ -1304,7 +1329,6 @@ function pintar(){
   var lic='https://wa.me/'+DTORH.whatsapp+'?text='+encodeURIComponent('Hola dtorh, vi Cuál (cual.click) y quiero el comparador con mi marca para mi tienda.');
   $('waLleva').href=lic;
   $('iaChip').hidden=true;
-  $('usoRes').innerHTML=resumenUso(p);
   pintarPrecios(A,B);
   if(IA_ENDPOINT && est.preg<0) veredictoIA(p);
   primera=false;
@@ -1446,7 +1470,8 @@ function iniciar(data){
   var marcas=['']; EQUIPOS.forEach(function(e){ if(marcas.indexOf(e.m)<0) marcas.push(e.m); });
   $('marcas').innerHTML=marcas.map(function(m){return '<button type="button" data-m="'+m+'" aria-pressed="false">'+(m||'Todas')+'</button>'}).join('');
 
-  $('usos').addEventListener('click',function(e){var b=e.target.closest('button'); if(!b) return; est.perfil=b.dataset.k; est.preg=-1; pintar();});
+  $('usoPop').addEventListener('click',function(e){ var d=$('usoPop'); if(e.target===d || e.target.closest('[data-cerrar]')) d.close(); });
+  $('usos').addEventListener('click',function(e){var b=e.target.closest('button'); if(!b) return; est.perfil=b.dataset.k; est.preg=-1; pintar(); abrirUso();});
   $('preg').addEventListener('click',function(e){var b=e.target.closest('button'); if(!b) return; var i=+b.dataset.i; est.preg=est.preg===i?-1:i; pintar();});
   [].forEach.call(document.querySelectorAll('[data-abrir]'),function(b){ b.addEventListener('click',function(){ abrirHoja(b.dataset.abrir); }); });
   [].forEach.call(document.querySelectorAll('[data-cerrar]'),function(b){ b.addEventListener('click',cerrarHoja); });
