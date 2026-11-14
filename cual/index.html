@@ -1158,7 +1158,7 @@ function pintarReales(A,B){
 function cargarPrecios(){
   var aplicar=function(j){ aplicarPrecios(j); };
   try{ var c=JSON.parse(localStorage.getItem('cual:precios')||'null'); if(c) aplicar(c); }catch(e){}
-  fetch(MOTOR+'/cual/precios',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(j){ try{ localStorage.setItem('cual:precios',JSON.stringify({precios:j.precios,videos:j.videos})); }catch(e){} aplicar(j); }).catch(function(){});
+  fetch(MOTOR+'/cual/precios',{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){ try{ localStorage.setItem('cual:precios',JSON.stringify({precios:j.precios,videos:j.videos})); }catch(e){} aplicar(j); }).catch(function(){});
 }
 function aplicarPrecios(j){
     PRECIOS=(j&&j.precios)||{}; VIDEOS=(j&&j.videos)||{};
