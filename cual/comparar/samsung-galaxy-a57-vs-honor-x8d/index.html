@@ -45,7 +45,7 @@ a:focus-visible{outline:3px solid #0071E3;outline-offset:2px}
 (function(){var ids=['a57','honx8d'];function cop(n){return '$'+n.toLocaleString('es-CO')}
 fetch('https://motor-dtorh.dtorh-ofc.workers.dev/cual/precios').then(function(r){return r.ok?r.json():null}).then(function(j){if(!j||!j.precios)return;
 ids.forEach(function(id){var d=j.precios[id],el=document.getElementById('p-'+id);if(!el||!d||!d.min)return;var t=(d.tiendas||[]).filter(function(x){return x.precio===d.min})[0];
-el.innerHTML='Desde <b>'+cop(d.min)+'</b>'+(t?' hoy en '+t.tienda.replace(/[<>&]/g,''):'')+(d.cap?' · '+d.cap.replace(/[<>&]/g,''):'')})}).catch(function(){})})();
+el.innerHTML='Desde <b>'+cop(d.min)+'</b>'+(t?' hoy en '+t.tienda.replace(/[<>&]/g,'')+(t.tipo==='externo'?' (vendedor externo: revisa garantía)':''):'')+(d.cap?' · '+d.cap.replace(/[<>&]/g,''):'')})}).catch(function(){})})();
 </script></main>
 <footer class="pie"><span>Cuál es un producto de <a href="https://dtorh.click/">dtorh™</a>. No vendemos equipos. Datos de fichas técnicas públicas revisadas por dtorh; puntajes propios de referencia.</span>
 <span class="redes"><a href="https://www.instagram.com/cual.click/" rel="me">Instagram</a> · <a href="https://www.facebook.com/cual.click" rel="me">Facebook</a> · <a href="https://www.youtube.com/@cualclick" rel="me">YouTube</a> · <a href="/comparar/">Todas las comparaciones</a></span></footer>

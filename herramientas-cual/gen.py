@@ -2,7 +2,7 @@ import json, re, html, unicodedata, os, shutil
 D=json.load(open('datos.json')); F=json.load(open('/home/claude/dtorh-sitio/cual/fichas.json'))
 EQ=D['eq']; E={e['id']:e for e in EQ}; ORD=[e['id'] for e in EQ]
 ML={'ip18pm':'1RWHeMs','ip18p':'2rWVHpN','ip17pm':'2UTkbN5','ip17p':'2nXW4uf','ip17':'2uuU9GU','ip16':'28aCFpo','s26u':'1P7njEd','s25u':'1oUGwKG','s25':'19Wbmhz','a57':'2VJe9vF','x17t':'1MSRdS8','rn15p':'1mKGkH7','rn17':'2LWcbVN','px8p':'1bqzymo','e70f':'1W2Aqxa','e60f':'1hAtoYv','reno16f':'2vbyvUB','oa6':'2mTmSad','honx8d':'2g5tXLd'}
-MARCA={'Apple':'','Samsung':'Samsung ','Xiaomi':'Xiaomi ','Motorola':'Motorola ','Huawei':'Huawei ','OPPO':'OPPO ','vivo':'vivo ','Honor':'Honor '}
+MARCA={'Google':'Google ','Apple':'','Samsung':'Samsung ','Xiaomi':'Xiaomi ','Motorola':'Motorola ','Huawei':'Huawei ','OPPO':'OPPO ','vivo':'vivo ','Honor':'Honor '}
 def full(e): n=e['n']; return n if n.lower().startswith(e['m'].lower()) or e['m']=='Apple' and n.startswith('iPhone') else MARCA.get(e['m'],e['m']+' ')+n
 def slug(t): t=unicodedata.normalize('NFKD',t).encode('ascii','ignore').decode().lower(); return re.sub(r'[^a-z0-9]+','-',t).strip('-')
 SL={i:slug(full(E[i])) for i in ORD}
@@ -29,7 +29,7 @@ JS='''<script>
 (function(){var ids=[%s];function cop(n){return '$'+n.toLocaleString('es-CO')}
 fetch('https://motor-dtorh.dtorh-ofc.workers.dev/cual/precios').then(function(r){return r.ok?r.json():null}).then(function(j){if(!j||!j.precios)return;
 ids.forEach(function(id){var d=j.precios[id],el=document.getElementById('p-'+id);if(!el||!d||!d.min)return;var t=(d.tiendas||[]).filter(function(x){return x.precio===d.min})[0];
-el.innerHTML='Desde <b>'+cop(d.min)+'</b>'+(t?' hoy en '+t.tienda.replace(/[<>&]/g,''):'')+(d.cap?' · '+d.cap.replace(/[<>&]/g,''):'')})}).catch(function(){})})();
+el.innerHTML='Desde <b>'+cop(d.min)+'</b>'+(t?' hoy en '+t.tienda.replace(/[<>&]/g,'')+(t.tipo==='externo'?' (vendedor externo: revisa garantía)':''):'')+(d.cap?' · '+d.cap.replace(/[<>&]/g,''):'')})}).catch(function(){})})();
 </script>'''
 for i,a in enumerate(ORD):
     for b in ORD[i+1:]:

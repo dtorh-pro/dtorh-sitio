@@ -555,6 +555,8 @@ body{background:#fff}
 .sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .marcas button,.preg button,.ficha .cambiar,.cats button{min-height:44px}
 .pfila a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;padding:0 10px;margin:-12px -8px -12px 0}
+.pext{display:block;font-size:12px;line-height:1.45;color:var(--piedra);margin-top:6px}
+.pref{display:flex;flex-direction:column;gap:4px;background:#fff;border-radius:14px;padding:12px}.pref b{font-family:'JetBrains Mono',monospace;font-size:18px}.pref span{font-size:13px;color:var(--piedra);line-height:1.45}
 .pvacio{font-size:13.5px;color:var(--piedra);background:#fff;border-radius:14px;padding:10px 12px}
 .pml{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:48px;margin-top:10px;padding:0 16px;border-radius:14px;background:#FFE600;color:#2D3277;font-weight:700;font-size:14.5px;text-decoration:none;transition:transform .15s ease}
 .pml small{font-size:12px;font-weight:600;opacity:.8}
@@ -938,7 +940,7 @@ html{scroll-snap-type:y proximity;scroll-padding-top:66px}
         <span class="eti">Precios hoy en Colombia</span>
         <h3 id="pT">¿Dónde está más barato?</h3>
         <div id="ptab"></div>
-        <p class="nota-p">Éxito, Olímpica, Jumbo, Falabella, Alkosto, Ktronix y Alkomprar; operadores Tigo (también vende los equipos de Movistar) y Claro, solo precio de contado, sin plan. WOM no tiene tienda en línea desde que dejó de usar su marca. Revisados cada tres días por el motor de dtorh. Cuál no vende equipos: confirma el precio final en la tienda. El botón de Mercado Libre es un enlace de afiliado: si compras ahí, Cuál puede recibir una comisión. El orden del top no depende de eso.</p>
+        <p class="nota-p">Éxito, Olímpica, Jumbo, Falabella, Alkosto, Ktronix y Alkomprar; operadores Tigo (también vende los equipos de Movistar) y Claro, solo precio de contado, sin plan. WOM no tiene tienda en línea desde que dejó de usar su marca. Si una marca no vende oficialmente en Colombia o ningún almacén tiene el equipo, mostramos aparte los vendedores externos de Falabella y Mercado Libre. Revisados cada tres días por el motor de dtorh. Cuál no vende equipos: confirma el precio final en la tienda. El botón de Mercado Libre es un enlace de afiliado: si compras ahí, Cuál puede recibir una comisión. El orden del top no depende de eso.</p>
       </section>
   </div>
 </section>
@@ -1049,7 +1051,11 @@ var EQUIPOS = [
  {id:'honx8d',img:'img/equipos/honx8d.webp?v=6',alto:162.9,k:'dual',m:'Honor',n:'X8d',precio:1150000,pant:'6,77″ · 120 Hz',chip:'Snapdragon 6s 4G Gen 2',cam:'108 + 5 MP',bat:7000,carga:45,peso:188,f:['#A9C8EE','#4A78B8'],d:['#9BBEEA','#5C88C6'],c:['#8FE3FF','#0E2C4A'],pts:{pant:82,rend:46,cam:66,bat:94}},
  {id:'hn15m',img:'img/equipos/hn15m.webp?v=6',alto:163.3,k:'dual',m:'Huawei',n:'nova 15 Max',precio:1800000,pant:'6,84″ · 120 Hz',chip:'Kirin 8000',cam:'50 + 2 MP',bat:8500,carga:40,peso:232,f:['#9FE3DA','#3E9C93'],d:['#8FD8CF','#4FA99F'],c:['#A6F5EC','#0C3330'],pts:{pant:88,rend:62,cam:62,bat:98}},
  {id:'e60f',img:'img/equipos/e60f.webp?v=6',alto:161.0,k:'moto',m:'Motorola',n:'Edge 60 Fusion',precio:1000000,pant:'6,67″ · 120 Hz',chip:'Dimensity 7300',cam:'50 + 13 MP',bat:5200,carga:68,peso:180,f:['#5FC4BE','#1F6E6A'],d:['#52B8B2','#2C7F7A'],c:['#9BF2EA','#0B302D'],pts:{pant:88,rend:62,cam:72,bat:82}},
- {id:'px7p',img:'img/equipos/px7p.webp?v=5',alto:160.8,k:'poco',m:'POCO',n:'POCO X7 Pro',precio:1400000,pant:'6,67″ · 120 Hz',chip:'Dimensity 8400 Ultra',cam:'50 + 8 MP',bat:6000,carga:90,peso:195,f:['#3A3B3F','#111214'],d:['#2E2F33','#18191C'],c:['#FFD34D','#2A2205'],pts:{pant:88,rend:86,cam:70,bat:90}}
+ {id:'px7p',img:'img/equipos/px7p.webp?v=5',alto:160.8,k:'poco',m:'POCO',n:'POCO X7 Pro',precio:1400000,pant:'6,67″ · 120 Hz',chip:'Dimensity 8400 Ultra',cam:'50 + 8 MP',bat:6000,carga:90,peso:195,f:['#3A3B3F','#111214'],d:['#2E2F33','#18191C'],c:['#FFD34D','#2A2205'],pts:{pant:88,rend:86,cam:70,bat:90}},
+ {id:'gp11xl',img:'img/equipos/gp11xl.webp?v=6',alto:162.7,k:'pro3',m:'Google',n:'Pixel 11 Pro XL',precio:5900000,ext:true,pant:'6,8″ · 120 Hz',chip:'Tensor G6',cam:'50 + 48 + 48 MP',bat:5115,carga:45,peso:226,f:['#F2A58E','#B8604A'],d:['#EE9478','#C46A52'],c:['#FFB39C','#3A1A10'],pts:{pant:96,rend:90,cam:96,bat:88}},
+ {id:'gp11',img:'img/equipos/gp11.webp?v=6',alto:152.8,k:'pro3',m:'Google',n:'Pixel 11',precio:3700000,ext:true,pant:'6,3″ · 120 Hz',chip:'Tensor G6',cam:'48 + 13 + 10,8 MP',bat:4985,carga:30,peso:197,f:['#D9D6EE','#8E8AB8'],d:['#CFCBE8','#A29DCB'],c:['#D6D0FF','#24203F'],pts:{pant:88,rend:89,cam:87,bat:82}},
+ {id:'gp10xl',img:'img/equipos/gp10xl.webp?v=6',alto:162.8,k:'pro3',m:'Google',n:'Pixel 10 Pro XL',precio:4700000,ext:true,pant:'6,8″ · 120 Hz',chip:'Tensor G5',cam:'50 + 48 + 48 MP',bat:5200,carga:45,peso:232,f:['#5B5F63','#25282B'],d:['#4E5256','#2E3134'],c:['#A9B0B8','#121416'],pts:{pant:95,rend:84,cam:95,bat:89}},
+ {id:'gp10',img:'img/equipos/gp10.webp?v=6',alto:152.8,k:'pro3',m:'Google',n:'Pixel 10',precio:3000000,ext:true,pant:'6,3″ · 120 Hz',chip:'Tensor G5',cam:'48 + 13 + 10,8 MP',bat:4970,carga:30,peso:204,f:['#6E8BE8','#2E4BB0'],d:['#5F7EE0','#3555BE'],c:['#9DB4FF','#0E1A45'],pts:{pant:87,rend:83,cam:85,bat:81}},
 ];
 function porId(id){ for(var i=0;i<EQUIPOS.length;i++) if(EQUIPOS[i].id===id) return EQUIPOS[i]; return null; }
 function fmt(n){ return n.toLocaleString('es-CO'); }
@@ -1202,11 +1208,14 @@ function pintarPrecios(A,B){
   var html='';
   [[A,'var(--a)'],[B,'var(--b)']].forEach(function(x){ var e=x[0], d=PRECIOS[e.id];
     html+='<div class="grupo"><b><i style="background:'+x[1]+'"></i><span class="marca pmarca">'+logoMarca(e.m)+'</span>'+escHTML(e.n)+(d&&d.cap?' <small>'+escHTML(d.cap)+'</small>':'')+'</b>';
-    var ts=(d&&d.tiendas)||[], cad=ts.filter(function(t){return t.tipo!=='operador'}), op=ts.filter(function(t){return t.tipo==='operador'});
+    var ts=(d&&d.tiendas)||[], cad=ts.filter(function(t){return t.tipo!=='operador'&&t.tipo!=='externo'}), op=ts.filter(function(t){return t.tipo==='operador'}), ext=ts.filter(function(t){return t.tipo==='externo'});
     if(cad.length){ html+='<span class="psub">Top almacenes de cadena</span>'+cad.map(function(t,i){return filaTop(t,i,cad.length,cad[0].precio)}).join('');
       if(cad.length>1){ var dif=cad[cad.length-1].precio-cad[0].precio; if(dif>0) html+='<span class="pahorro">Entre la más barata y la más cara hay '+cop(dif)+'.</span>'; } }
-    else html+='<span class="psub">Top almacenes de cadena</span><div class="pvacio">Aún sin precio confirmado en almacenes. Referencia: '+cop(e.ref||e.precio)+'.</div>';
-    html+='<span class="psub">Operadores · precio de contado</span>'+(op.length?op.map(function(t,i){return filaTop(t,i,op.length,op[0].precio)}).join(''):'<div class="pvacio">Ningún operador lo tiene hoy en su tienda en línea.</div>');
+    if(op.length) html+='<span class="psub">Operadores · precio de contado</span>'+op.map(function(t,i){return filaTop(t,i,op.length,op[0].precio)}).join('');
+    if(ext.length){ html+='<span class="psub">Vendedores externos · importado o de terceros</span>'+ext.map(function(t,i){return filaTop(t,i,ext.length,ext[0].precio)}).join('')+
+      '<span class="pext">'+(e.ext?'Esta marca no vende oficialmente en Colombia. ':cad.length||op.length?'':'Hoy ningún almacén de cadena ni operador lo tiene en su tienda en línea. ')+'Estos precios son de vendedores dentro de Falabella o Mercado Libre: revisa la garantía (suele ser del vendedor), si es versión global y que funcione con tu operador.</span>'; }
+    if(!cad.length&&!op.length&&!ext.length){ var h=(d&&d.historial)||[], u=h[h.length-1];
+      html+='<span class="psub">Precio de referencia</span><div class="pref"><b>'+cop(u&&u.min?u.min:(e.ref||e.precio))+'</b><span>'+(u&&u.min?'Último precio visto el '+escHTML(u.f)+(u.t?' en '+escHTML(u.t):'')+'. Hoy no aparece en stock en las tiendas que revisamos.':'Precio estimado del mercado colombiano. Hoy no aparece en stock en las tiendas que revisamos; lo actualizamos solos cuando vuelva.')+'</span></div>'; }
     html+=botonML(e);
     if(d&&d.fecha) html+='<span class="nota-p" style="margin-top:2px">Revisado el '+d.fecha+'</span>';
     html+='</div>'; });
@@ -1218,7 +1227,7 @@ var FICHAS=null, ftCargando=false;
 var FT_ICONO={"Pantalla": "<rect x=\"6\" y=\"2.5\" width=\"12\" height=\"19\" rx=\"2.5\"/><path d=\"M10 18.5h4\"/>", "Rendimiento": "<rect x=\"5\" y=\"5\" width=\"14\" height=\"14\" rx=\"2\"/><rect x=\"9\" y=\"9\" width=\"6\" height=\"6\"/><path d=\"M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3\"/>", "Cámaras": "<path d=\"M4 8h3l2-3h6l2 3h3v11H4z\"/><circle cx=\"12\" cy=\"13\" r=\"3.5\"/>", "Batería y carga": "<rect x=\"3\" y=\"7\" width=\"16\" height=\"10\" rx=\"2\"/><path d=\"M21 10.5v3M11.5 9l-2 3.5h3l-2 3.5\"/>", "Software y actualizaciones": "<path d=\"M20 12a8 8 0 1 1-2.3-5.6M20 4v4h-4\"/>", "Diseño y resistencia": "<path d=\"M12 2.5c3 3.8 6 7.3 6 11a6 6 0 0 1-12 0c0-3.7 3-7.2 6-11z\"/>", "Conectividad": "<path d=\"M2.5 9a14 14 0 0 1 19 0M5.5 12.5a9.5 9.5 0 0 1 13 0M8.5 16a5 5 0 0 1 7 0\"/><circle cx=\"12\" cy=\"19.5\" r=\"1\"/>", "Seguridad y sonido": "<rect x=\"5\" y=\"10.5\" width=\"14\" height=\"10\" rx=\"2\"/><path d=\"M8 10.5V8a4 4 0 0 1 8 0v2.5\"/>", "Lanzamiento": "<rect x=\"3.5\" y=\"5\" width=\"17\" height=\"15\" rx=\"2\"/><path d=\"M3.5 10h17M8 3v4M16 3v4\"/>"};
 var FT_CLAVE=[['Rendimiento','Procesador'],['Software y actualizaciones','Actualizaciones de sistema'],['Conectividad','Red'],['Diseño y resistencia','Resistencia'],['Batería y carga','Otras']];
 function cargarFichas(cb){ if(FICHAS){cb();return;} if(ftCargando) return; ftCargando=true;
-  pedirJSON('fichas.json?v=2').then(function(j){FICHAS=j;ftCargando=false;cb();}).catch(function(){ftCargando=false; $('ftClave').innerHTML='<div class="pvacio">No pudimos cargar la ficha. <button type="button" class="ft-reintentar" onclick="var p=partido();pintarFicha(p.A,p.B)">Reintentar</button></div>';}); }
+  pedirJSON('fichas.json?v=3').then(function(j){FICHAS=j;ftCargando=false;cb();}).catch(function(){ftCargando=false; $('ftClave').innerHTML='<div class="pvacio">No pudimos cargar la ficha. <button type="button" class="ft-reintentar" onclick="var p=partido();pintarFicha(p.A,p.B)">Reintentar</button></div>';}); }
 function ftFila(et,va,vb){ var dif=va&&vb&&va!==vb; return '<div class="ft-fila"><dt>'+escHTML(et)+'</dt><dd><span'+(dif?' class="dif"':'')+'>'+escHTML(va||'Sin dato')+'</span></dd><dd><span'+(dif?' class="dif"':'')+'>'+escHTML(vb||'Sin dato')+'</span></dd></div>'; }
 function pintarFicha(A,B){
   if(!$('ft')) return;
@@ -1261,7 +1270,7 @@ function cargarPrecios(){
 function aplicarPrecios(j){
     PRECIOS=(j&&j.precios)||{}; VIDEOS=(j&&j.videos)||{};
 
-    EQUIPOS.forEach(function(e){ var d=PRECIOS[e.id]; e.ref=e.ref||e.precio; if(d&&d.min){ e.precio=d.min; e.tienda=(d.tiendas.filter(function(t){return t.precio===d.min})[0]||d.tiendas[0]).tienda; } else { e.precio=e.ref; delete e.tienda; } }); // sin precio vigente: vuelve a la referencia, nunca deja una tienda vieja
+    EQUIPOS.forEach(function(e){ var d=PRECIOS[e.id]; e.ref=e.ref||e.precio; if(d&&d.min){ var tm=(d.tiendas.filter(function(t){return t.precio===d.min})[0]||d.tiendas[0]); e.precio=d.min; e.tienda=tm.tienda+(tm.tipo==='externo'?' (externo)':''); } else { e.precio=e.ref; delete e.tienda; } }); // sin precio vigente: vuelve a la referencia, nunca deja una tienda vieja
     pintar(); if(!$('hoja').hidden) pintarLista(); pintarPortada();
 }
 

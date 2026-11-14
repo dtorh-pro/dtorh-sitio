@@ -1271,6 +1271,218 @@
    "Anunciado": "9 de enero de 2025"
   }
  },
+ "gp11": {
+  "Pantalla": {
+   "Tamaño": "6,3″",
+   "Tipo": "OLED · 120 Hz · HDR",
+   "Resolución": "1080 × 2424 (422 ppi)",
+   "Brillo máximo": "3.000 nits",
+   "Protección": "Corning Gorilla Glass Victus 2"
+  },
+  "Rendimiento": {
+   "Procesador": "Google Tensor G6",
+   "CPU": "7 núcleos hasta 4,1 GHz",
+   "Memoria RAM": "12 GB de RAM",
+   "Almacenamiento": "256 GB, 512 GB",
+   "Tarjeta microSD": "No"
+  },
+  "Cámaras": {
+   "Trasera": "48 MP principal con estabilizador (OIS) · 10,8 MP teleobjetivo 5x · 13 MP ultra gran angular",
+   "Video trasero": "4K hasta 60 fps",
+   "Frontal": "10,5 MP",
+   "Video frontal": "4K hasta 60 fps"
+  },
+  "Batería y carga": {
+   "Batería": "4.985 mAh",
+   "Carga por cable": "30 W",
+   "Otras": "Inalámbrica 25 W"
+  },
+  "Software y actualizaciones": {
+   "Sistema de fábrica": "Android 17",
+   "Actualizaciones de sistema": "Hasta 7 versiones nuevas de Android (Google promete 7 años)"
+  },
+  "Diseño y resistencia": {
+   "Medidas": "152,8 × 72 × 8,6 mm",
+   "Peso": "197 g",
+   "Materiales": "Frente de vidrio (Gorilla Glass Victus 2), espalda de vidrio (Gorilla Glass Victus 2), marco de aluminio",
+   "Resistencia": "IP68 · sumergible hasta 1,5 m por 30 min"
+  },
+  "Conectividad": {
+   "Red": "5G",
+   "SIM": "Nano-SIM + eSIM en la versión global (la de EE. UU. es solo eSIM): revisa cuál te venden",
+   "Wi-Fi": "Wi-Fi 6e",
+   "Bluetooth": "6.0",
+   "NFC": "Sí",
+   "Puerto": "USB-C 3.2",
+   "Audífonos con cable": "No, solo USB-C o Bluetooth"
+  },
+  "Seguridad y sonido": {
+   "Desbloqueo": "Bajo la pantalla (ultrasónica)",
+   "Parlantes": "Estéreo"
+  },
+  "Lanzamiento": {
+   "Anunciado": "12 de agosto de 2026"
+  }
+ },
+ "gp11xl": {
+  "Pantalla": {
+   "Tamaño": "6,8″",
+   "Tipo": "LTPO OLED · 120 Hz · HDR",
+   "Resolución": "1344 × 2992 (486 ppi)",
+   "Brillo máximo": "3.600 nits",
+   "Protección": "Corning Gorilla Glass Victus 2"
+  },
+  "Rendimiento": {
+   "Procesador": "Google Tensor G6",
+   "CPU": "7 núcleos hasta 4,1 GHz",
+   "Memoria RAM": "12 GB o 16 GB de RAM",
+   "Almacenamiento": "256 GB, 512 GB, 1 TB",
+   "Tarjeta microSD": "No"
+  },
+  "Cámaras": {
+   "Trasera": "50 MP principal con estabilizador (OIS) · 48 MP teleobjetivo periscopio 5x · 48 MP ultra gran angular",
+   "Video trasero": "8K hasta 30 fps",
+   "Frontal": "42 MP",
+   "Video frontal": "4K hasta 60 fps"
+  },
+  "Batería y carga": {
+   "Batería": "5.115 mAh",
+   "Carga por cable": "45 W",
+   "Otras": "Inalámbrica 25 W"
+  },
+  "Software y actualizaciones": {
+   "Sistema de fábrica": "Android 17",
+   "Actualizaciones de sistema": "Hasta 7 versiones nuevas de Android (Google promete 7 años)"
+  },
+  "Diseño y resistencia": {
+   "Medidas": "162,7 × 76,5 × 8,5 mm",
+   "Peso": "226 g",
+   "Materiales": "Frente de vidrio (Gorilla Glass Victus 2), espalda de vidrio (Gorilla Glass Victus 2), marco de aluminio",
+   "Resistencia": "IP68 · sumergible hasta 1,5 m por 30 min"
+  },
+  "Conectividad": {
+   "Red": "5G",
+   "SIM": "Nano-SIM + eSIM en la versión global (la de EE. UU. es solo eSIM): revisa cuál te venden",
+   "Wi-Fi": "Wi-Fi 7",
+   "Bluetooth": "6.0",
+   "NFC": "Sí",
+   "Puerto": "USB-C 3.2",
+   "Audífonos con cable": "No, solo USB-C o Bluetooth"
+  },
+  "Seguridad y sonido": {
+   "Desbloqueo": "Bajo la pantalla (ultrasónica)",
+   "Parlantes": "Estéreo"
+  },
+  "Lanzamiento": {
+   "Anunciado": "12 de agosto de 2026"
+  }
+ },
+ "gp10": {
+  "Pantalla": {
+   "Tamaño": "6,3″",
+   "Tipo": "OLED · 120 Hz · HDR",
+   "Resolución": "1080 × 2424 (422 ppi)",
+   "Brillo máximo": "3.000 nits",
+   "Protección": "Corning Gorilla Glass Victus 2"
+  },
+  "Rendimiento": {
+   "Procesador": "Google Tensor G5",
+   "CPU": "8 núcleos hasta 3,78 GHz",
+   "Memoria RAM": "12 GB de RAM",
+   "Almacenamiento": "128 GB, 256 GB",
+   "Tarjeta microSD": "No"
+  },
+  "Cámaras": {
+   "Trasera": "48 MP principal con estabilizador (OIS) · 10,8 MP teleobjetivo 5x · 13 MP ultra gran angular",
+   "Video trasero": "4K hasta 60 fps",
+   "Frontal": "10,5 MP",
+   "Video frontal": "4K hasta 60 fps"
+  },
+  "Batería y carga": {
+   "Batería": "4.970 mAh",
+   "Carga por cable": "30 W",
+   "Otras": "Inalámbrica 15 W"
+  },
+  "Software y actualizaciones": {
+   "Sistema de fábrica": "Android 16",
+   "Actualizaciones de sistema": "Hasta 7 versiones nuevas de Android (Google promete 7 años)"
+  },
+  "Diseño y resistencia": {
+   "Medidas": "152,8 × 72 × 8,6 mm",
+   "Peso": "204 g",
+   "Materiales": "Frente de vidrio (Gorilla Glass Victus 2), espalda de vidrio (Gorilla Glass Victus 2), marco de aluminio",
+   "Resistencia": "IP68 · sumergible hasta 1,5 m por 30 min"
+  },
+  "Conectividad": {
+   "Red": "5G",
+   "SIM": "Nano-SIM + eSIM en la versión global (la de EE. UU. es solo eSIM): revisa cuál te venden",
+   "Wi-Fi": "Wi-Fi 6e",
+   "Bluetooth": "6.0",
+   "NFC": "Sí",
+   "Puerto": "USB-C 3.2",
+   "Audífonos con cable": "No, solo USB-C o Bluetooth"
+  },
+  "Seguridad y sonido": {
+   "Desbloqueo": "Bajo la pantalla (ultrasónica)",
+   "Parlantes": "Estéreo"
+  },
+  "Lanzamiento": {
+   "Anunciado": "20 de agosto de 2025"
+  }
+ },
+ "gp10xl": {
+  "Pantalla": {
+   "Tamaño": "6,8″",
+   "Tipo": "LTPO OLED · 120 Hz · HDR",
+   "Resolución": "1344 × 2992 (486 ppi)",
+   "Brillo máximo": "3.300 nits",
+   "Protección": "Corning Gorilla Glass Victus 2"
+  },
+  "Rendimiento": {
+   "Procesador": "Google Tensor G5",
+   "CPU": "8 núcleos hasta 3,78 GHz",
+   "Memoria RAM": "16 GB de RAM",
+   "Almacenamiento": "256 GB, 512 GB, 1 TB",
+   "Tarjeta microSD": "No"
+  },
+  "Cámaras": {
+   "Trasera": "50 MP principal con estabilizador (OIS) · 48 MP teleobjetivo periscopio 5x · 48 MP ultra gran angular",
+   "Video trasero": "8K hasta 30 fps",
+   "Frontal": "42 MP",
+   "Video frontal": "4K hasta 60 fps"
+  },
+  "Batería y carga": {
+   "Batería": "5.200 mAh",
+   "Carga por cable": "45 W",
+   "Otras": "Inalámbrica 25 W"
+  },
+  "Software y actualizaciones": {
+   "Sistema de fábrica": "Android 16",
+   "Actualizaciones de sistema": "Hasta 7 versiones nuevas de Android (Google promete 7 años)"
+  },
+  "Diseño y resistencia": {
+   "Medidas": "162,8 × 76,6 × 8,5 mm",
+   "Peso": "232 g",
+   "Materiales": "Frente de vidrio (Gorilla Glass Victus 2), espalda de vidrio (Gorilla Glass Victus 2), marco de aluminio",
+   "Resistencia": "IP68 · sumergible hasta 1,5 m por 30 min"
+  },
+  "Conectividad": {
+   "Red": "5G",
+   "SIM": "Nano-SIM + eSIM en la versión global (la de EE. UU. es solo eSIM): revisa cuál te venden",
+   "Wi-Fi": "Wi-Fi 7",
+   "Bluetooth": "6.0",
+   "NFC": "Sí",
+   "Puerto": "USB-C 3.2",
+   "Audífonos con cable": "No, solo USB-C o Bluetooth"
+  },
+  "Seguridad y sonido": {
+   "Desbloqueo": "Bajo la pantalla (ultrasónica)",
+   "Parlantes": "Estéreo"
+  },
+  "Lanzamiento": {
+   "Anunciado": "20 de agosto de 2025"
+  }
+ },
  "ip18p": {
   "Pantalla": {
    "Tamaño": "6,3″",
