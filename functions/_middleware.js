@@ -1,10 +1,10 @@
 // 1) www.dtorh.click y dtorh-sitio.pages.dev → dtorh.click (una sola dirección para Google: evita contenido duplicado).
 //    Las vistas previas (<rama>.dtorh-sitio.pages.dev) se sirven, pero con noindex.
-// 2) Archivos internos del repositorio (generadores, notas): no se publican aunque estén en la carpeta.
+// 2) Archivos internos del repositorio (generadores, notas, datos de clientes de Carta): no se publican aunque estén en la carpeta.
 // 3) datos.dtorh.click -> sirve la carpeta /datos del mismo sitio.
 //    Lo que no exista dentro de /datos se sirve desde la raíz solo si es un recurso (fuentes, íconos, estilos);
 //    cualquier otra página se redirige a dtorh.click para no duplicar el sitio en el subdominio.
-const INTERNOS = /^\/(build\.py|servicios\.py|README\.md|lastmod\.json)$|\.(py|md)$/i;
+const INTERNOS = /^\/(build\.py|servicios\.py|README\.md|lastmod\.json)$|^\/herramientas-carta(\/|$)|\.(py|md)$/i;
 const RECURSO = /^\/(assets|fonts|img)\/|^\/(favicon[\w.-]*|apple-touch-icon\.png|icon-512\.png|og\.jpg|robots\.txt)$/;
 
 async function noEncontrado(ctx, url) {

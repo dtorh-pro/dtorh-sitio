@@ -1,0 +1,745 @@
+{
+  "slug": "pescaye",
+  "tema": "caribe",
+  "nombre": "Pescayé",
+  "lema": "Pesca artesanal de la Ciénaga Grande, a precio justo.",
+  "subtitulo": "Comida Caribe · Barranquilla",
+  "hero": "",
+  "ilustrado": true,
+  "textos": {
+    "destacados": "Lo más recomendado",
+    "promo": "Hoy",
+    "popular": "Recomendado en reseñas"
+  },
+  "prefijo": "PES",
+  "colores": {
+    "acento": "#e4622b",
+    "tinta": "#1d3a2a",
+    "ola": "#3ba7a6",
+    "ola2": "#2f7fb0"
+  },
+  "whatsapp": "",
+  "instagram": "pescaye",
+  "direccion": "Cra. 59 # 70-13 · Cra. 52 # 46-49, Barrio Abajo · Barranquilla",
+  "tiempo": "40–60 min",
+  "licencia": {
+    "plan": "Demo",
+    "vence": "2026-12-10"
+  },
+  "horario": {
+    "0": [
+      [
+        "12:00",
+        "21:00"
+      ]
+    ],
+    "1": [
+      [
+        "12:00",
+        "21:00"
+      ]
+    ],
+    "2": [
+      [
+        "12:00",
+        "21:00"
+      ]
+    ],
+    "3": [
+      [
+        "12:00",
+        "21:00"
+      ]
+    ],
+    "4": [
+      [
+        "12:00",
+        "21:00"
+      ]
+    ],
+    "5": [
+      [
+        "12:00",
+        "21:00"
+      ]
+    ],
+    "6": [
+      [
+        "12:00",
+        "21:00"
+      ]
+    ]
+  },
+  "modos": [
+    "domicilio",
+    "recoger",
+    "mesa"
+  ],
+  "reservas": true,
+  "minimo": 40000,
+  "domicilioGratisDesde": 0,
+  "zonas": [
+    {
+      "id": "altoprado",
+      "nombre": "Alto Prado (ejemplo)",
+      "costo": 6000
+    },
+    {
+      "id": "prado",
+      "nombre": "El Prado (ejemplo)",
+      "costo": 6000
+    },
+    {
+      "id": "barrioabajo",
+      "nombre": "Barrio Abajo (ejemplo)",
+      "costo": 6000
+    },
+    {
+      "id": "riomar",
+      "nombre": "Riomar (ejemplo)",
+      "costo": 8000
+    },
+    {
+      "id": "villacountry",
+      "nombre": "Villa Country (ejemplo)",
+      "costo": 8000
+    },
+    {
+      "id": "buenavista",
+      "nombre": "Buenavista (ejemplo)",
+      "costo": 9000
+    }
+  ],
+  "pagos": [
+    {
+      "id": "breb",
+      "nombre": "Bre-B",
+      "detalle": "Transferencia inmediata desde cualquier banco o billetera",
+      "llave": "de ejemplo"
+    },
+    {
+      "id": "nequi",
+      "nombre": "Nequi",
+      "detalle": "Envía al número",
+      "numero": "300 000 0000 (ejemplo)"
+    },
+    {
+      "id": "datafono",
+      "nombre": "Tarjeta al recibir",
+      "detalle": "El domiciliario lleva datáfono",
+      "soloEntrega": true
+    }
+  ],
+  "promos": [],
+  "sugerir": [
+    "bebidas"
+  ],
+  "asistente": {
+    "antojos": [
+      {
+        "id": "frito",
+        "label": "Pescado frito"
+      },
+      {
+        "id": "arroz",
+        "label": "Un arroz"
+      },
+      {
+        "id": "calle",
+        "label": "Algo de calle"
+      },
+      {
+        "id": "picar",
+        "label": "Para picar"
+      }
+    ]
+  },
+  "categorias": [
+    {
+      "id": "primeros-bocados",
+      "nombre": "Primeros bocados",
+      "icono": "plato",
+      "productos": [
+        {
+          "id": "patacon-pisao-pisao",
+          "nombre": "Patacón pisao, pisao",
+          "desc": "Nueve patacones crocantes, hechos a la minuta, servidos con suave sour cream y fresco pico de gallo artesanal.",
+          "precio": 25000,
+          "ilus": "patacon",
+          "antojos": [
+            "picar"
+          ]
+        },
+        {
+          "id": "coctel-del-manglar",
+          "nombre": "Cóctel del manglar",
+          "desc": "Camarones desvenados de pesca artesanal, bañados en salsas premium con un sutil toque picoso, cebolla morada en julianas y aceite de oliva. Servido con galleta crackers.",
+          "precio": 49000,
+          "ilus": "camaron",
+          "tags": [
+            "popular"
+          ],
+          "antojos": [
+            "picar"
+          ],
+          "combina": [
+            "cervezas-de-origen"
+          ]
+        },
+        {
+          "id": "croquetas-del-estuario",
+          "nombre": "Croquetas del estuario",
+          "desc": "Elaboradas con róbalo auténtico, delicadamente tempurizadas y realizadas con sutil toque cítrico. Acompañadas de crujientes patacones, tártara artesanal y salsa golf.",
+          "precio": 75000,
+          "ilus": "croqueta",
+          "tags": [
+            "popular"
+          ],
+          "antojos": [
+            "picar",
+            "frito"
+          ],
+          "combina": [
+            "panela-ginger",
+            "cervezas-locales"
+          ]
+        },
+        {
+          "id": "gambas-panko-y-patacon",
+          "nombre": "Gambas, panko y patacón",
+          "desc": "Camarones tempurizados al panko, acompañados de crujientes patacones, tártara artesanal y salsa golf.",
+          "precio": 75000,
+          "ilus": "camaron",
+          "antojos": [
+            "picar"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sopas",
+      "nombre": "Sopas",
+      "icono": "plato",
+      "productos": [
+        {
+          "id": "sopa-de-la-abuela",
+          "nombre": "Sopa de la abuela",
+          "desc": "Elaborada con pescado fresco, ingredientes premium seleccionados y especias típicas del Caribe. Servida con arroz blanco, cilantro fresco y limón criollo recién cortado. (470 ml.)",
+          "precio": 25000,
+          "lema": "Alma de hogar y sabor a mar.",
+          "ilus": "sopa",
+          "tags": [
+            "popular"
+          ],
+          "antojos": []
+        },
+        {
+          "id": "sopa-del-pescador",
+          "nombre": "Sopa del pescador",
+          "desc": "Preparada con cortes frescos de pescado, ingredientes premium seleccionados y especias típicas del Caribe. Servida con arroz blanco, cilantro fresco y limón criollo recién cortado. (1000 ml.)",
+          "precio": 35000,
+          "lema": "Sabores que nacen del mar y del fogón.",
+          "ilus": "sopa",
+          "antojos": []
+        }
+      ]
+    },
+    {
+      "id": "kids-menu",
+      "nombre": "Kids menu",
+      "icono": "plato",
+      "productos": [
+        {
+          "id": "menu-infantil",
+          "nombre": "Menú infantil",
+          "desc": "Croquetas de pescado, acompañadas de moneditas de plátano verde o arroz con coco, servidas con sour cream.",
+          "precio": 39000,
+          "ilus": "nino",
+          "grupos": [
+            {
+              "id": "acomp",
+              "nombre": "Acompañante",
+              "tipo": "uno",
+              "requerido": true,
+              "opciones": [
+                {
+                  "id": "moneditas",
+                  "nombre": "Moneditas de plátano verde"
+                },
+                {
+                  "id": "arroz-coco",
+                  "nombre": "Arroz con coco"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "coastal-bites-x-pescaye",
+      "nombre": "Coastal Bites x Pescayé",
+      "icono": "plato",
+      "productos": [
+        {
+          "id": "fish-burger",
+          "nombre": "Fish burger",
+          "desc": "Pan artesanal, crocante róbalo al panko, tomates, cebolla blanca, lechugas frescas, queso mozzarella y tártara de la casa. Acompañado de platanitos a la francesa.",
+          "precio": 60000,
+          "ilus": "pan",
+          "antojos": [
+            "calle"
+          ],
+          "combina": [
+            "cervezas-locales",
+            "tamarindo-dry"
+          ]
+        },
+        {
+          "id": "perro-playero",
+          "nombre": "Perro playero®",
+          "desc": "Pan artesanal con camarones al ajillo, queso mozzarella, lechuga fresca y tártara de la casa. Acompañado de platanitos a la francesa.",
+          "precio": 60000,
+          "ilus": "pan",
+          "antojos": [
+            "calle"
+          ],
+          "combina": [
+            "cervezas-locales"
+          ]
+        }
+      ],
+      "etiqueta": "Del mar a la calle",
+      "intro": "Clásicos del street food costero, inspirados en los Po' Boys de Nueva Orleans y las hamburguesas de pescado de Copenhague."
+    },
+    {
+      "id": "arroces-del-caribe",
+      "nombre": "Arroces del Caribe",
+      "icono": "plato",
+      "productos": [
+        {
+          "id": "arroz-de-camaron",
+          "nombre": "Arroz de camarón",
+          "desc": "Preparado en caldero, a fuego lento, sin afán, como lo hacían nuestras abuelas. Receta ancestral de patio, acompañado de yuca cocida ó patacones y ensalada verde.",
+          "precio": 70000,
+          "lema": "Delicado guiño a la paella.",
+          "ilus": "arroz",
+          "antojos": [
+            "arroz"
+          ],
+          "combina": [
+            "sopa-de-la-abuela",
+            "panela-ginger"
+          ],
+          "grupos": [
+            {
+              "id": "acomp",
+              "nombre": "Acompañante",
+              "tipo": "uno",
+              "requerido": true,
+              "opciones": [
+                {
+                  "id": "yuca",
+                  "nombre": "Yuca cocida"
+                },
+                {
+                  "id": "patacones",
+                  "nombre": "Patacones"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "arroz-popeye",
+          "nombre": "Arroz Popeye",
+          "desc": "Salteado al wok con pollo y camarones. Pimentones rojo y verde, cebolla morada en julianas, maíz tierno y espinaca fresca se saltean a fuego vivo, mientras se suman el jengibre, cítricos y notas orientales. Acompañado de crujientes chips de plátano.",
+          "precio": 70000,
+          "lema": "Caribe con influencias orientales.",
+          "ilus": "arroz",
+          "tags": [
+            "popular"
+          ],
+          "antojos": [
+            "arroz"
+          ],
+          "combina": [
+            "tamarindo-dry"
+          ]
+        }
+      ],
+      "etiqueta": "Recetas que vienen del fogón"
+    },
+    {
+      "id": "casa-del-pescado-frito-light",
+      "nombre": "Casa del pescado frito light",
+      "icono": "plato",
+      "productos": [
+        {
+          "id": "mojarra-roja",
+          "nombre": "Mojarra roja",
+          "desc": "Horneado a la minuta, con hasta 90 % menos aceite. Con sopa de la abuela, ensalada fresca y limón criollo.",
+          "precio": 70000,
+          "ilus": "pez",
+          "tags": [
+            "popular"
+          ],
+          "antojos": [
+            "frito"
+          ],
+          "grupos": [
+            {
+              "id": "arroz",
+              "nombre": "Arroz",
+              "tipo": "uno",
+              "requerido": true,
+              "opciones": [
+                {
+                  "id": "coco",
+                  "nombre": "Arroz con coco"
+                },
+                {
+                  "id": "blanco",
+                  "nombre": "Arroz blanco"
+                }
+              ]
+            },
+            {
+              "id": "acomp",
+              "nombre": "Acompañante",
+              "tipo": "uno",
+              "requerido": true,
+              "opciones": [
+                {
+                  "id": "patacones",
+                  "nombre": "Patacones"
+                },
+                {
+                  "id": "yuca",
+                  "nombre": "Yuca cocida"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mojarra-mulata",
+          "nombre": "Mojarra mulata",
+          "desc": "Horneado a la minuta, con hasta 90 % menos aceite. Con sopa de la abuela, ensalada fresca y limón criollo.",
+          "precio": 70000,
+          "ilus": "pez",
+          "antojos": [
+            "frito"
+          ],
+          "grupos": [
+            {
+              "id": "arroz",
+              "nombre": "Arroz",
+              "tipo": "uno",
+              "requerido": true,
+              "opciones": [
+                {
+                  "id": "coco",
+                  "nombre": "Arroz con coco"
+                },
+                {
+                  "id": "blanco",
+                  "nombre": "Arroz blanco"
+                }
+              ]
+            },
+            {
+              "id": "acomp",
+              "nombre": "Acompañante",
+              "tipo": "uno",
+              "requerido": true,
+              "opciones": [
+                {
+                  "id": "patacones",
+                  "nombre": "Patacones"
+                },
+                {
+                  "id": "yuca",
+                  "nombre": "Yuca cocida"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "robalo",
+          "nombre": "Róbalo",
+          "desc": "Horneado a la minuta, con hasta 90 % menos aceite. Con sopa de la abuela, ensalada fresca y limón criollo.",
+          "precio": 90000,
+          "ilus": "pez",
+          "antojos": [
+            "frito"
+          ],
+          "grupos": [
+            {
+              "id": "arroz",
+              "nombre": "Arroz",
+              "tipo": "uno",
+              "requerido": true,
+              "opciones": [
+                {
+                  "id": "coco",
+                  "nombre": "Arroz con coco"
+                },
+                {
+                  "id": "blanco",
+                  "nombre": "Arroz blanco"
+                }
+              ]
+            },
+            {
+              "id": "acomp",
+              "nombre": "Acompañante",
+              "tipo": "uno",
+              "requerido": true,
+              "opciones": [
+                {
+                  "id": "patacones",
+                  "nombre": "Patacones"
+                },
+                {
+                  "id": "yuca",
+                  "nombre": "Yuca cocida"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "lebranche",
+          "nombre": "Lebranche",
+          "desc": "Horneado a la minuta, con hasta 90 % menos aceite. Con sopa de la abuela, ensalada fresca y limón criollo.",
+          "precio": 90000,
+          "ilus": "pez",
+          "antojos": [
+            "frito"
+          ],
+          "grupos": [
+            {
+              "id": "arroz",
+              "nombre": "Arroz",
+              "tipo": "uno",
+              "requerido": true,
+              "opciones": [
+                {
+                  "id": "coco",
+                  "nombre": "Arroz con coco"
+                },
+                {
+                  "id": "blanco",
+                  "nombre": "Arroz blanco"
+                }
+              ]
+            },
+            {
+              "id": "acomp",
+              "nombre": "Acompañante",
+              "tipo": "uno",
+              "requerido": true,
+              "opciones": [
+                {
+                  "id": "patacones",
+                  "nombre": "Patacones"
+                },
+                {
+                  "id": "yuca",
+                  "nombre": "Yuca cocida"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "intro": "Horneados a la minuta, con hasta un 90 % menos aceite que una fritura tradicional. Acompañados de arroz con coco o blanco, patacones o yuca cocida, ensalada fresca, y limón criollo recién cortado. Incluye sopa de la abuela."
+    },
+    {
+      "id": "cortes-selectos",
+      "nombre": "Cortes selectos",
+      "icono": "plato",
+      "productos": [
+        {
+          "id": "filete-del-estuario",
+          "nombre": "Filete del estuario",
+          "desc": "Corte fresco de róbalo auténtico tempurizado al panko para un “crunch” ligero. Acompañado de arroz con coco, patacones, ensalada fresca, tártara artesanal y salsa golf.",
+          "precio": 85000,
+          "lema": "Una gema oculta del manglar.",
+          "ilus": "pez",
+          "tags": [
+            "popular"
+          ],
+          "antojos": [
+            "frito"
+          ],
+          "combina": [
+            "panela-ginger"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bandejas",
+      "nombre": "Bandejas",
+      "icono": "combo",
+      "productos": [
+        {
+          "id": "la-gran-pesca",
+          "nombre": "La gran pesca",
+          "desc": "Reunimos lo mejor de nuestra cocina en un festín para compartir: sopas de la abuela para todos, croquetas del estuario, gambas al panko, postas de róbalo y lebranche, arroz de camarón, arroz con coco, yuca cocida, patacones, ensalada fresca, cócteles del manglar y aderezos de la casa.",
+          "precio": 590000,
+          "lema": "Un viaje por los sabores del mar y el manglar.",
+          "personas": 6,
+          "tags": [
+            "compartir"
+          ],
+          "paraTxt": "6–7 personas",
+          "ilus": "bandeja",
+          "antojos": [
+            "frito",
+            "arroz",
+            "picar"
+          ]
+        },
+        {
+          "id": "mesa-caribe",
+          "nombre": "Mesa Caribe",
+          "desc": "Comenzamos con sopas de la abuela para todos, seguimos con postas frescas de róbalo o lebranche, arroz de camarón, croquetas del estuario, arroz de coco y patacones o yuca, ensalada fresca y aderezos de la casa.",
+          "precio": 300000,
+          "lema": "Una selección de clásicos para compartir.",
+          "personas": 3,
+          "tags": [
+            "compartir"
+          ],
+          "paraTxt": "3–4 personas",
+          "ilus": "bandeja",
+          "antojos": [
+            "frito",
+            "arroz"
+          ],
+          "grupos": [
+            {
+              "id": "posta",
+              "nombre": "Postas de",
+              "tipo": "uno",
+              "requerido": true,
+              "opciones": [
+                {
+                  "id": "robalo",
+                  "nombre": "Róbalo"
+                },
+                {
+                  "id": "lebranche",
+                  "nombre": "Lebranche"
+                }
+              ]
+            },
+            {
+              "id": "acomp",
+              "nombre": "Acompañante",
+              "tipo": "uno",
+              "requerido": true,
+              "opciones": [
+                {
+                  "id": "patacones",
+                  "nombre": "Patacones"
+                },
+                {
+                  "id": "yuca",
+                  "nombre": "Yuca cocida"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "yo-te-robo",
+          "nombre": "Yo te robo",
+          "desc": "Pensada para compartir aunque no quieras. Sopas de la abuela para empezar. Croquetas del estuario, arroz de camarón, crocantes patacones, ensalada fresca y aderezos de la casa.",
+          "precio": 150000,
+          "lema": "Pide tú… que yo te robo.",
+          "personas": 2,
+          "tags": [
+            "compartir"
+          ],
+          "paraTxt": "1–2 personas",
+          "ilus": "bandeja",
+          "antojos": [
+            "arroz",
+            "picar"
+          ]
+        }
+      ],
+      "intro": "Inspiradas en los festines de playa de Southwest Bay en la Isla de Providencia."
+    },
+    {
+      "id": "bebidas",
+      "nombre": "Bebidas",
+      "icono": "vaso",
+      "productos": [
+        {
+          "id": "cervezas-locales",
+          "nombre": "Cervezas locales",
+          "desc": "",
+          "precio": 12000,
+          "ilus": "bebida"
+        },
+        {
+          "id": "cervezas-de-origen",
+          "nombre": "Cervezas de origen",
+          "desc": "",
+          "precio": 15000,
+          "ilus": "bebida"
+        },
+        {
+          "id": "gaseosas-aguas",
+          "nombre": "Gaseosas, aguas",
+          "desc": "",
+          "precio": 11000,
+          "ilus": "bebida"
+        },
+        {
+          "id": "panela-ginger",
+          "nombre": "Panela + ginger",
+          "desc": "",
+          "precio": 12000,
+          "ilus": "bebida"
+        },
+        {
+          "id": "tamarindo-dry",
+          "nombre": "Tamarindo dry",
+          "desc": "",
+          "precio": 12000,
+          "ilus": "bebida"
+        },
+        {
+          "id": "s-pellegrino",
+          "nombre": "S.Pellegrino",
+          "desc": "",
+          "precio": 20000,
+          "ilus": "bebida"
+        }
+      ]
+    }
+  ],
+  "propuesta": {
+    "url": "https://wa.me/573024135572?text=Hola%2C%20vi%20la%20demo%20de%20la%20carta%20digital%20de%20Pescay%C3%A9%20y%20quiero%20activarla",
+    "texto": "Activar mi carta",
+    "nota": "Platos y precios tomados de su carta digital (PDF de agosto de 2026). Horario, zonas de domicilio y medios de pago son de ejemplo y se ajustan con ustedes. Los dibujos se cambian por fotos de sus platos."
+  },
+  "_revisar": [],
+  "_espejo": {
+    "fecha": "2026-11-19",
+    "modelo": "respuesta manual",
+    "fuente": [
+      "pescaye.com/menu · Pescaye-Menu-Digital-.pdf (9 páginas, imagen)"
+    ],
+    "nota": "Lectura hecha por Claude desde el PDF (la clave de Groq vive en Cloudflare); misma forma que devuelve Espejo."
+  },
+  "sello": "pesca|artesanal",
+  "causa": "Compramos directamente al pescador y a su familia, a precios justos. Gracias por apoyar la pesca responsable.",
+  "notaPrecios": "Precios en pesos colombianos."
+}
