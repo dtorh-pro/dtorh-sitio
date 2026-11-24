@@ -15,6 +15,7 @@
   var lenis = null;
   if (!quieto && window.Lenis){
     lenis = new Lenis({ lerp: .095, smoothWheel: true, syncTouch: false, wheelMultiplier: 1, autoRaf: true });
+    window.dtorhLenis = lenis;   /* escena.js lo sincroniza con ScrollTrigger */
   }
   function irA(dest, extra){
     var el = typeof dest === 'string' ? document.querySelector(dest) : dest;
@@ -174,7 +175,7 @@
     ultimoY = y;
 
     /* hero: el texto sube más rápido que el mapa (profundidad) */
-    if (heroTxt && y < vh*1.2 && !quieto){
+    if (heroTxt && y < vh*1.2 && !quieto && !raiz.classList.contains('cine')){   /* con escena.js el hero lo mueve GSAP */
       heroTxt.style.transform = 'translate3d(0,' + (y*.32) + 'px,0)';
       heroTxt.style.opacity = Math.max(0, 1 - y/(vh*.75));
       if (heroMapa) heroMapa.style.transform = 'translate3d(0,' + (y*.5) + 'px,0) scale(' + (1 + y/vh*.06) + ')';

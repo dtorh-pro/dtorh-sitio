@@ -1,0 +1,38 @@
+/* dtorh™ · escena del inicio (GSAP): hero cinematográfico, títulos que se arman
+   y "Qué montamos" con el teléfono a buen tamaño en celular.
+   Se suma a dtorh.css; sin JavaScript o con menos movimiento la página queda igual a la aprobada. */
+
+/* ---------- hero: el pin de "tu negocio" que aparece al hacer zoom en el mapa ---------- */
+.foco{position:absolute;inset:0;z-index:3;display:grid;place-items:center;pointer-events:none;visibility:hidden}
+.cine .foco{visibility:visible}
+.foco-centro{position:relative;display:grid;justify-items:center;gap:22px;transform:translateY(-4vh)}
+.foco-marca{position:relative;width:96px;height:96px;display:grid;place-items:center}
+.foco-anillo{position:absolute;inset:-60px;border-radius:50%;border:1.5px dashed rgba(255,255,255,.35);opacity:0}
+.foco-anillo::after{content:"";position:absolute;inset:34px;border-radius:50%;border:1px solid rgba(126,61,255,.45)}
+.foco-pin{width:74px;height:74px;border-radius:50% 50% 50% 10px;transform:rotate(-45deg);background:rgba(255,255,255,.06);border:2.5px dashed rgba(255,255,255,.55);display:grid;place-items:center;opacity:0}
+.foco-pin::after{content:"";width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.55)}
+.foco-txt{text-align:center;color:#fff}
+.foco-txt b{display:block;font-weight:600;letter-spacing:-.04em;line-height:1;font-size:clamp(34px,min(6vw,9vh),78px)}
+.foco-txt span{display:block;margin-top:12px;font-size:clamp(18px,min(2.2vw,3.2vh),26px);color:rgba(255,255,255,.55);letter-spacing:-.02em}
+.foco-txt b,.foco-txt span{opacity:0}
+/* palabras partidas por SplitText: la máscara las deja "salir" del renglón */
+.parte-linea{overflow:clip;padding-bottom:.08em;margin-bottom:-.08em}
+
+/* ---------- "Qué montamos" en celular: texto arriba, teléfono grande que sube desde abajo ---------- */
+@media (max-width:900px){
+  .relato .fijo > .wrap{align-content:start;gap:8px;padding-top:clamp(70px,10svh,86px);height:100%}
+  .relato .vitrina{order:2;height:calc(100svh - clamp(70px,10svh,86px) - clamp(236px,36svh,300px));min-height:300px;align-items:start;overflow:hidden;
+    -webkit-mask-image:linear-gradient(180deg,#000 76%,transparent);mask-image:linear-gradient(180deg,#000 76%,transparent)}
+  .relato .vitrina .telefono{width:min(272px,72vw);margin-top:10px}
+  .relato .vitrina .orbita{width:min(440px,118vw);top:4%}
+  .pasos-txt{min-height:clamp(150px,22svh,190px)}
+  .ptxt .lista,.ptxt .detalle{display:none}
+  .ptxt .cat{margin-bottom:8px}
+  .ptxt h3{font-size:clamp(26px,7.4vw,34px)}
+  .ptxt .lead{font-size:15px;margin-top:8px}
+  .marcador{margin-bottom:10px}
+  .relato .brace{margin-bottom:8px}
+}
+@media (max-width:900px) and (max-height:700px){.ptxt .lead{display:none}.pasos-txt{min-height:96px}}
+
+@media (prefers-reduced-motion:reduce){.foco{display:none}}

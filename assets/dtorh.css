@@ -49,11 +49,12 @@ html:not(.lenis){scroll-behavior:smooth}
 html.lenis,html.lenis body{height:auto}
 .lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
 .lenis.lenis-stopped{overflow:hidden}
+html{overflow-x:hidden;overflow-x:clip}
 body{
   background:var(--canvas);color:var(--ink);
   font-family:"Inter Tight",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   font-size:16px;line-height:1.5;letter-spacing:-.015em;
-  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;overflow-x:clip;
   transition:background-color .9s var(--ease),color .6s ease;
 }
 /* el fondo de la página cambia según el bloque que está a la vista */

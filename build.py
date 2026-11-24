@@ -214,6 +214,12 @@ HOME = f'''<body class="tono-noche">
     <span><s class="s3"></s>Cliente buscando</span>
   </div>
   <div class="contador" aria-hidden="true"><b id="cuenta">0</b>clientes llegaron a un negocio visible</div>
+  <div class="foco" aria-hidden="true">
+    <div class="foco-centro">
+      <div class="foco-marca"><span class="foco-anillo"></span><span class="foco-pin"></span></div>
+      <div class="foco-txt"><b>Aquí está tu negocio.</b><span>Pero en Google nadie lo ve.</span></div>
+    </div>
+  </div>
 </section>
 
 <!-- 2 · PROBLEMA -->
@@ -556,13 +562,17 @@ HOME = f'''<body class="tono-noche">
 </main>
 {FOOTER}
 {SCRIPTS}<script src="/assets/mapa.js?v=5" defer></script>
+<script src="/assets/vendor/gsap-3.15.1.min.js" defer></script>
+<script src="/assets/vendor/ScrollTrigger-3.15.1.min.js" defer></script>
+<script src="/assets/vendor/SplitText-3.15.1.min.js" defer></script>
+<script src="/assets/escena.js?v={V("assets/escena.js")}" defer></script>
 </body>
 </html>
 '''
 
 home = head('Google, página web y WhatsApp para tu negocio | dtorh™ Barranquilla',
  'Estudio digital en Barranquilla: ficha de Google y Maps, página web con catálogo, WhatsApp Business y redes para tu negocio, en 14 días y con pago único.',
- 'https://dtorh.click/', LD) + HOME
+ 'https://dtorh.click/', LD + f'<link rel="stylesheet" href="/assets/escena.css?v={V("assets/escena.css")}">\n') + HOME
 open('index.html','w').write(home)
 
 # ======================= LABORATORIO =======================
