@@ -42,12 +42,17 @@
       st = ScrollTriggerCrear(tl);
       g.to(hero.querySelector('.foco-anillo'), { rotate: 360, duration: 40, repeat: -1, ease: 'none' });
     }
+    /* la escena cuenta como "en curso" desde que el visitante empieza a bajar */
+    function marcar(self){
+      var en = self.isActive && self.progress > .01;
+      raiz.classList.toggle('en-escena', en); if (guia) guia.classList.toggle('en-escena', en);
+    }
     function ScrollTriggerCrear(tl){
       return ST.create({
         animation: tl, trigger: hero, start: 'top top', end: innerWidth < 700 ? '+=100%' : '+=120%',
         pin: true, scrub: .6, anticipatePin: 1,
-        onToggle: function(self){ raiz.classList.toggle('en-escena', self.isActive); if (guia) guia.classList.toggle('en-escena', self.isActive); },
-        onUpdate: function(self){ pintarGuia(self.progress); }
+        onToggle: function(self){ marcar(self); },
+        onUpdate: function(self){ marcar(self); pintarGuia(self.progress); }
       });
     }
 
