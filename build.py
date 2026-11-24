@@ -94,6 +94,17 @@ def head(titulo, desc, url, extra=''):
 </head>
 '''
 
+
+# Menú del estudio: (destino, nombre, descripción, ícono, clave de la página actual)
+MENU = [
+  ('/', 'Inicio', 'Tu negocio en internet, en 14 días', 'mapa', 'inicio'),
+  ('/servicios/', 'Servicios', 'Google, web, WhatsApp y redes, por piezas', 'catalogo', 'serv'),
+  ('/#arranque', 'Arranque 360', 'Todo montado de una vez y pagas una sola vez', 'moneda', 'pre'),
+  ('/como-trabajamos/', 'Cómo trabajamos', 'Diagnóstico gratis y precio fijo por escrito', 'ruta', 'pro'),
+  ('/laboratorio/', 'Laboratorio', 'Proyectos en obra, a la vista', 'plantillas', 'lab'),
+  ('/#preguntas', 'Preguntas', 'Lo que nos preguntan antes de empezar', 'pregunta', 'faq'),
+]
+
 def nav(actual=''):
     def l(href, txt, key):
         cur = ' aria-current="page"' if key == actual else ''
@@ -116,21 +127,32 @@ def nav(actual=''):
         <svg class="luna" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.2A8.2 8.2 0 019.8 4 8.4 8.4 0 1020 14.2z"/></svg>
       </button>
       <button class="menu-btn" id="menuBtn" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="hoja">
-        <svg class="h" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></svg>
-        <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        <span class="mb-txt">Menú</span><span class="mb-ic" aria-hidden="true"><i></i><i></i></span>
       </button>
       <a class="btn lime sm" href="{wa('Hola, vengo de la página de dtorh')}" target="_blank" rel="noopener">Hablemos</a>
     </div>
   </div>
 </nav>
-<div class="hoja" id="hoja">
-  <a href="/servicios/">{I('mapa')}Servicios</a>
-  <a href="/#arranque">{I('moneda')}Precio</a>
-  <a href="/#proceso">{I('ruta')}Cómo funciona</a>
-  <a href="/laboratorio/">{I('catalogo')}Laboratorio</a>
-  <a href="/#preguntas">{I('pregunta')}Preguntas</a>
-  <div class="hoja-redes"><a href="{IG}" target="_blank" rel="noopener" aria-label="Instagram de dtorh">{I('instagram')}Instagram</a><a href="{FB}" target="_blank" rel="noopener" aria-label="Facebook de dtorh">{I('facebook')}Facebook</a></div>
-  <a class="btn lime" href="{wa('Hola, vengo de la página de dtorh')}" target="_blank" rel="noopener">{I('whatsapp')}Hablemos por WhatsApp</a>
+<div class="hoja mm" id="hoja" role="dialog" aria-modal="true" aria-label="Menú del estudio">
+  <div class="mm-fondo" aria-hidden="true"></div>
+  <div class="mm-wrap">
+    <div class="mm-rutas">
+      <span class="mm-linea" aria-hidden="true"></span>
+      {''.join(f'<a class="mm-a" href="{h}" data-ico="{ic}"{" aria-current=" + chr(34) + "page" + chr(34) if k == actual else ""}><span class="mm-n">{{ {n:02d} }}</span><span class="mm-t"><span class="mm-raya" aria-hidden="true"></span><span class="mm-txt">{t}</span><small class="mm-d">{d}</small></span></a>' for n, (h, t, d, ic, k) in enumerate(MENU, 1))}
+    </div>
+    <aside class="mm-vista" aria-hidden="true">
+      <span class="mm-vi">{I('mapa')}</span>
+      <b class="mm-vt">Tu negocio en internet</b>
+      <p class="mm-vd">Pasa el cursor por una ruta y te contamos qué hay ahí.</p>
+      <span class="mm-vir">Ir <span class="ar">→</span></span>
+    </aside>
+    <div class="mm-pie">
+      <a class="btn lime" href="{wa('Hola, vengo de la página de dtorh')}" target="_blank" rel="noopener">{I('whatsapp')}Hablemos por WhatsApp</a>
+      <a class="mm-red" href="{IG}" target="_blank" rel="noopener" aria-label="Instagram de dtorh">{I('instagram')}<span>Instagram</span></a>
+      <a class="mm-red" href="{FB}" target="_blank" rel="noopener" aria-label="Facebook de dtorh">{I('facebook')}<span>Facebook</span></a>
+      <span class="mm-firma">{{ dtorh™ · Estudio digital · Barranquilla }}</span>
+    </div>
+  </div>
 </div>
 '''
 
@@ -164,6 +186,7 @@ SCRIPTS = ('<script src="/assets/lenis.min.js?v=1.3.26" defer></script>\n'
   + '<script src="/assets/vendor/ScrollTrigger-3.15.1.min.js" defer></script>\n'
   + '<script src="/assets/vendor/SplitText-3.15.1.min.js" defer></script>\n'
   + '<script src="/assets/escena.js?v=' + V('assets/escena.js') + '" defer></script>\n'
+  + '<script src="/assets/menu.js?v=' + V('assets/menu.js') + '" defer></script>\n'
   + '<script src="/assets/medir.js?v=' + V('assets/medir.js') + '" defer></script>\n'
   + '<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon=\'{"token": "c61f2bddfe9c47a0b9a67eb3e39e592b"}\'></script>\n')
 

@@ -95,3 +95,93 @@
 .vx-barra span{position:relative}
 .vx-barra b{color:var(--ink);font-weight:600}
 .vx-onda{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:22px;border:1.5px solid var(--lime);opacity:0;pointer-events:none}
+
+/* =====================================================================
+   Menú del estudio: "mapa de rutas" (todas las páginas)
+   Superficies sólidas o con velo de tinta, sin degradados ni brillos.
+   ===================================================================== */
+/* botón: "Menú" + dos líneas que se cruzan en X */
+.menu-btn{display:inline-flex!important;align-items:center;justify-content:center;gap:10px;width:auto;padding:0 15px 0 16px;font:inherit;font-size:14px;font-weight:500}
+.mb-ic{position:relative;width:16px;height:10px;display:block}
+.mb-ic i{position:absolute;left:0;right:0;height:1.8px;border-radius:2px;background:currentColor;transition:transform .5s var(--ease)}
+.mb-ic i:first-child{top:0}.mb-ic i:last-child{bottom:0}
+.menu-abierto .mb-ic i:first-child{transform:translateY(4.1px) rotate(45deg)}
+.menu-abierto .mb-ic i:last-child{transform:translateY(-4.1px) rotate(-45deg)}
+.menu-btn:active{transform:scale(.96)}
+@media(max-width:600px){.menu-btn{width:40px;padding:0}.mb-txt{display:none}}
+
+/* píldora que marca dónde estás y sigue al cursor */
+.links .ind{background:rgba(126,61,255,.12);box-shadow:inset 0 0 0 1px rgba(126,61,255,.18)}
+.links a.activo{color:var(--ink)}
+nav.sobre-oscuro:not(.isla) .links a.activo{color:#fff}
+
+/* con el menú abierto, la barra se funde con el mapa */
+.menu-abierto nav .bar{background:transparent!important;border-color:transparent!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+.menu-abierto nav .mark,.menu-abierto nav .tema,.menu-abierto nav .menu-btn{color:#fff!important}
+.menu-abierto nav .tema,.menu-abierto nav .menu-btn{border-color:rgba(255,255,255,.28)!important}
+.menu-abierto nav .links,.menu-abierto nav .btn.lime{opacity:0;pointer-events:none}
+.menu-abierto .float,.menu-abierto .guia{opacity:0!important;pointer-events:none!important}
+
+/* la hoja: se abre en círculo desde el botón */
+.hoja.mm{display:block!important;inset:0;left:0;right:0;top:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;opacity:1;transform:none;visibility:hidden;pointer-events:none;transition:visibility 0s .75s;color:#fff;overflow:hidden}
+.menu-abierto .hoja.mm{visibility:visible;pointer-events:auto;transition-delay:0s}
+.mm-fondo{position:absolute;inset:0;background:rgba(11,13,26,.94);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);clip-path:circle(0px at var(--ox,92%) var(--oy,40px));transition:clip-path .75s cubic-bezier(.7,0,.2,1)}
+.mm-fondo::after{content:"";position:absolute;inset:0;opacity:.6;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:56px 56px}
+.menu-abierto .mm-fondo{clip-path:circle(150vmax at var(--ox,92%) var(--oy,40px))}
+.mm-wrap{position:relative;height:100%;max-width:1240px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr);grid-template-rows:1fr auto;gap:24px clamp(24px,5vw,72px);padding:clamp(96px,14vh,130px) clamp(20px,5vw,64px) clamp(22px,4vh,36px);opacity:0;transition:opacity .3s ease}
+.menu-abierto .mm-wrap{opacity:1;transition-delay:.18s}
+
+/* las rutas */
+.mm-rutas{position:relative;align-self:center;display:grid;gap:clamp(2px,1vh,8px);padding-left:4px}
+.mm-linea{position:absolute;left:17px;top:.6em;bottom:.6em;width:0;border-left:1.5px dashed rgba(255,255,255,.18);transform-origin:top;transform:scaleY(0);transition:transform .9s var(--ease) .25s}
+.menu-abierto .mm-linea{transform:scaleY(1)}
+.mm-a{position:relative;display:flex;align-items:baseline;gap:clamp(14px,2vw,26px);text-decoration:none;color:rgba(255,255,255,.42);overflow:hidden;padding:.06em 0;transition:color .35s ease}
+.mm-n{position:relative;z-index:1;flex:0 0 auto;min-width:36px;font-size:12.5px;font-weight:500;color:rgba(255,255,255,.4);font-variant-numeric:tabular-nums;background:#0b0d1a;padding:2px 0;transition:color .3s}
+.mm-t{position:relative;display:block;font-size:clamp(30px,min(5.6vw,8.4vh),70px);font-weight:600;letter-spacing:-.045em;line-height:1.06}
+.mm-txt{display:inline-block;transition:transform .5s var(--ease)}
+.mm-raya{position:absolute;left:0;top:50%;width:.55em;height:3px;margin-top:-1.5px;border-radius:2px;background:var(--lime);transform-origin:left;transform:scaleX(0);transition:transform .45s var(--ease)}
+.mm-d{display:none}
+.mm-a:hover,.mm-a:focus-visible,.mm-a.ver,.mm-a[aria-current="page"]{color:#fff}
+.mm-a:hover .mm-txt,.mm-a:focus-visible .mm-txt,.mm-a.ver .mm-txt{transform:translateX(.75em)}
+.mm-a:hover .mm-raya,.mm-a:focus-visible .mm-raya,.mm-a.ver .mm-raya{transform:scaleX(1)}
+.mm-a:hover .mm-n,.mm-a.ver .mm-n,.mm-a[aria-current="page"] .mm-n{color:var(--lime)}
+.mm-a[aria-current="page"] .mm-n::after{content:"";position:absolute;left:-14px;top:50%;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:var(--lime)}
+.mm-a:focus-visible{outline:2px solid var(--lime);outline-offset:4px;border-radius:8px}
+
+/* vista previa del destino (computador) */
+.mm-vista{align-self:center;border:1px solid rgba(255,255,255,.12);border-radius:26px;padding:28px;background:rgba(255,255,255,.035);display:grid;gap:12px;min-height:250px;align-content:start}
+.mm-vi{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:var(--lime);color:#fff;--ac:#fff}
+.mm-vi .ic{width:26px;height:26px}
+.mm-vt{font-size:24px;font-weight:600;letter-spacing:-.03em;line-height:1.1;margin-top:6px}
+.mm-vd{font-size:15.5px;color:rgba(255,255,255,.66);line-height:1.5}
+.mm-vir{margin-top:6px;font-size:14px;font-weight:500;color:rgba(255,255,255,.8)}
+.mm-vista.cambia > *{animation:mm-cambia .45s var(--ease) both}
+.mm-vista.cambia > *:nth-child(2){animation-delay:.04s}.mm-vista.cambia > *:nth-child(3){animation-delay:.08s}.mm-vista.cambia > *:nth-child(4){animation-delay:.12s}
+@keyframes mm-cambia{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* pie del menú */
+.mm-pie{grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1)}
+.mm-pie .btn{color:#fff}
+.mm-red{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:9999px;border:1px solid rgba(255,255,255,.18);color:#fff;text-decoration:none;font-size:14px;font-weight:500;transition:border-color .25s ease}
+.mm-red .ic{width:18px;height:18px;--ac:#fff}
+.mm-red:hover{border-color:var(--lime)}
+.mm-firma{margin-left:auto;font-size:13px;color:rgba(255,255,255,.45)}
+
+@media (max-width:900px){
+  .mm-wrap{grid-template-columns:1fr;grid-template-rows:1fr auto;padding-top:clamp(84px,12vh,100px);overflow-y:auto}
+  .mm-vista,.mm-firma{display:none}
+  .mm-rutas{align-self:start;gap:clamp(10px,2vh,16px);padding-top:6px}
+  .mm-t{font-size:clamp(28px,8.4vw,40px)}
+  .mm-d{display:block;margin-top:4px;font-size:13.5px;font-weight:400;letter-spacing:0;line-height:1.35;color:rgba(255,255,255,.5)}
+  .mm-linea{top:.4em;bottom:2.4em}
+  .mm-pie .btn{flex:1 1 100%;justify-content:center}
+  .mm-red{flex:1}
+}
+@media (prefers-reduced-motion:reduce){.mm-fondo,.mm-linea,.mm-txt,.mm-raya{transition:none}.mm-vista.cambia > *{animation:none}}
+/* neutraliza los estilos de la hoja anterior dentro del nuevo menú */
+.hoja.mm a:not(.btn){padding:0;border-radius:0;font-size:inherit;font-weight:inherit}
+.hoja.mm a:not(.btn):hover{background:none}
+.hoja.mm .mm-a{gap:clamp(14px,2vw,26px);padding:.06em 0;align-items:baseline}
+.hoja.mm .mm-red{height:44px;padding:0 16px;gap:8px;font-size:14px;font-weight:500;border-radius:9999px}
+.hoja.mm .mm-red .ic{width:18px;height:18px;color:#fff}
+.hoja.mm .btn{margin-top:0}
