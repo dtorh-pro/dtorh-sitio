@@ -212,6 +212,14 @@ footer a{color:inherit}
           </div>
         </div>
         <div class="campo">
+          <span class="q">¿Cómo atiendes a tus clientes?</span>
+          <div class="chips" data-unica="Atiende">
+            <button type="button" class="chip" data-v="Tengo local">Tengo local</button>
+            <button type="button" class="chip" data-v="Voy a domicilio">Voy a domicilio</button>
+            <button type="button" class="chip" data-v="Vendo solo en línea">Vendo solo en línea</button>
+          </div>
+        </div>
+        <div class="campo">
           <span class="q">¿Dónde los encuentran hoy? <small>· toca las que tengan</small></span>
           <span class="ayuda">Con el usuario o el link revisamos cómo te ven los clientes.</span>
           <div class="chips" data-redes>
@@ -397,6 +405,7 @@ footer a{color:inherit}
       'Ciudad': $('ciudad').value.trim(),
       'Qué venden': $('vende').value.trim(),
       'Apertura': ap,
+      'Atiende': valorChips('[data-unica="Atiende"]'),
       'Lo que ya tienen': valorRedes(),
       'Qué necesitan': valorChips('[data-multi="Qué necesitan"]', true),
       'Monto destinado': valorChips('[data-unica="Monto destinado"]'),
@@ -456,6 +465,8 @@ footer a{color:inherit}
   }
   if (params.get('apertura') === 'pronto' && !valorChips('[data-unica="Apertura"]')){ marcar('[data-unica="Apertura"]', 'Abre pronto'); $('fechaCaja').classList.remove('oculto'); }
   var NECESITA = { google:'Aparecer en Google y Maps', web:'Página web con catálogo', whatsapp:'WhatsApp con catálogo y respuestas automáticas', redes:'Instagram y Facebook ordenados', resenas:'Conseguir reseñas', correo:'Correo con mi dominio' };
+  var ATIENDE = { local: 'Tengo local', domicilio: 'Voy a domicilio', enlinea: 'Vendo solo en línea' };
+  if (ATIENDE[params.get('tipo')] && !valorChips('[data-unica="Atiende"]')) marcar('[data-unica="Atiende"]', ATIENDE[params.get('tipo')]);
   (params.get('necesita') || '').split(',').forEach(function(k){ if (NECESITA[k]) marcar('[data-multi="Qué necesitan"]', NECESITA[k]); });
   var ORIGEN = params.get('ref') || params.get('utm_source') || (document.referrer ? (function(){ try{ return new URL(document.referrer).hostname; }catch(e){ return 'directo'; } })() : 'directo');
   if (hubo !== false){ toast('Seguimos donde ibas'); if (hubo > 0) setTimeout(function(){ ir(hubo); }, 0); }
@@ -531,6 +542,9 @@ footer a{color:inherit}
       var okC = !!(c.j && c.j.ok);
       if (MODO === 'prueba') return { okC: okC, okG: false };
       var hoja = Object.assign({}, paquete, { 'Ficha Cazador': (c.j && c.j.ficha) || (okC ? 'sí' : 'no llegó') });
+      /* la hoja conserva sus columnas: "cómo atiende" va dentro de Notas */
+      if (hoja['Atiende']) hoja['Notas'] = 'Atiende: ' + hoja['Atiende'] + (hoja['Notas'] ? ' · ' + hoja['Notas'] : '');
+      delete hoja['Atiende'];
       return post(ENDPOINT, hoja, 15000).then(function(g){
         var okG = !g.tarde && g.ok !== false && !(g.j && g.j.ok === false);   // Google a veces responde sin JSON y sí guardó
         return { okC: okC, okG: okG };
