@@ -33,7 +33,7 @@
       tl.fromTo(txt, { y: 0, scale: 1, opacity: 1, filter: 'blur(0px)' }, { y: corto ? -40 : -70, scale: .94, opacity: 0, filter: 'blur(6px)', ease: 'power1.in', duration: .3, immediateRender: false }, 0)
         .fromTo(hero.querySelectorAll('.leyenda, .contador'), { opacity: 1 }, { opacity: 0, duration: .12, immediateRender: false }, 0)
         .to(hero.querySelector('.capa-mapa'), { scale: corto ? 1.55 : 1.8, duration: 1 }, 0)
-        .fromTo(hero.querySelector('.foco-pin'), { scale: 0, y: -90, opacity: 0 }, { scale: 1, y: 0, opacity: 1, ease: 'back.out(2.2)', duration: .2 }, .34)
+        .fromTo(hero.querySelector('.foco-pin'), { scale: 0, y: -90, opacity: 0 }, { scale: 1, y: 0, opacity: 1, ease: 'expo.out', duration: .2 }, .34)
         .fromTo(hero.querySelector('.foco-anillo'), { scale: .3, opacity: 0 }, { scale: 1, opacity: 1, ease: 'power2.out', duration: .25 }, .38)
         .set(focoB, { opacity: 1 }, .5)
         .fromTo(focoPal, { yPercent: 110 }, { yPercent: 0, stagger: .04, ease: 'power3.out', duration: .22 }, .5)
