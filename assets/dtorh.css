@@ -78,7 +78,7 @@ main{position:relative;display:block}
 .ico .ic{width:22px;height:22px}
 
 /* ===== barra de progreso ===== */
-.progreso{position:fixed;left:0;top:0;height:2px;width:100%;z-index:150;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--cyan),var(--lime),var(--lime-2));pointer-events:none}
+.progreso{position:fixed;left:0;top:0;height:2px;width:100%;z-index:150;transform-origin:0 50%;transform:scaleX(0);background:var(--lime);pointer-events:none}
 
 /* ===== NAV ===== */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;transition:padding .5s var(--ease),transform .5s var(--ease)}
@@ -109,7 +109,7 @@ nav.sobre-oscuro:not(.isla) .ind{background:rgba(255,255,255,.14)}
 .links a:hover,.links a[aria-current="page"],.links a.activo{color:var(--ink)}
 .ind{position:absolute;top:0;left:0;height:100%;border-radius:8px;background:rgba(126,61,255,.12);opacity:0;transition:transform .45s var(--ease),width .45s var(--ease),opacity .3s;pointer-events:none}
 .derecha{display:flex;align-items:center;gap:8px}
-.tema,.menu-btn{width:40px;height:40px;border-radius:9999px;border:1px solid var(--hair);background:transparent;color:var(--ink);cursor:pointer;display:grid;place-items:center;transition:border-color .3s,transform .45s cubic-bezier(.34,1.5,.6,1)}
+.tema,.menu-btn{width:40px;height:40px;border-radius:9999px;border:1px solid var(--hair);background:transparent;color:var(--ink);cursor:pointer;display:grid;place-items:center;transition:border-color .3s,transform .45s var(--ease)}
 .tema:hover,.menu-btn:hover{border-color:currentColor}
 .tema:active{transform:scale(.9) rotate(28deg)}
 .tema svg,.menu-btn svg{width:17px;height:17px}
@@ -130,7 +130,7 @@ nav.sobre-oscuro:not(.isla) .ind{background:rgba(255,255,255,.14)}
 @media(min-width:901px){.hoja{display:none}}
 
 /* ===== botones ===== */
-.btn{display:inline-flex;align-items:center;gap:9px;border-radius:12px;padding:14px 20px;font-size:16px;font-weight:500;line-height:1.2;cursor:pointer;border:0;position:relative;transition:transform .45s cubic-bezier(.34,1.5,.6,1),background .3s,color .3s,border-color .3s,box-shadow .3s}
+.btn{display:inline-flex;align-items:center;gap:9px;border-radius:12px;padding:14px 20px;font-size:16px;font-weight:500;line-height:1.2;cursor:pointer;border:0;position:relative;transition:transform .45s var(--ease),background .3s,color .3s,border-color .3s,box-shadow .3s}
 .btn .ic{width:18px;height:18px}
 .btn:active{transform:scale(.97)}
 .btn.lime{background:var(--lime);color:#fff;box-shadow:0 12px 26px -14px rgba(126,61,255,.95)}
@@ -182,12 +182,12 @@ h3{font-size:clamp(23px,2.5vw,32px);line-height:1.08;letter-spacing:-.025em;font
 .buscador > .ic{color:#6b6b76;width:20px;height:20px}
 .buscador input{flex:1;min-width:0;text-overflow:ellipsis;border:0;outline:0;background:transparent;color:#14151c;font:inherit;font-size:16px;letter-spacing:-.015em;padding:13px 0}
 .buscador input::placeholder{color:#6b6b76}
-.buscador button{flex:0 0 auto;height:46px;padding:0 16px;border:0;border-radius:14px;background:var(--lime);color:#fff;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font-weight:500;font-size:15px;transition:transform .35s cubic-bezier(.34,1.5,.6,1),background .3s}
+.buscador button{flex:0 0 auto;height:46px;padding:0 16px;border:0;border-radius:14px;background:var(--lime);color:#fff;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font-weight:500;font-size:15px;transition:transform .35s var(--ease),background .3s}
 .buscador button:hover{background:var(--lime-2)}
 .buscador button:active{transform:scale(.96)}
 .buscador button .ic{width:18px;height:18px}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:clamp(12px,2vh,18px);justify-content:center}
-.chip{border:1px solid rgba(255,255,255,.24);border-radius:9999px;padding:9px 15px;font-size:14px;color:rgba(255,255,255,.9);background:rgba(11,13,26,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);cursor:pointer;transition:background .3s,border-color .3s,transform .35s cubic-bezier(.34,1.5,.6,1)}
+.chip{border:1px solid rgba(255,255,255,.24);border-radius:9999px;padding:9px 15px;font-size:14px;color:rgba(255,255,255,.9);background:rgba(11,13,26,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);cursor:pointer;transition:background .3s,border-color .3s,transform .35s var(--ease)}
 .chips a.chip{text-decoration:none;display:inline-block}
 .letra a{color:inherit;text-decoration:underline;text-underline-offset:3px}
 .chip:hover{background:var(--lime);border-color:var(--lime);transform:translateY(-2px)}
@@ -626,7 +626,7 @@ html:not(.js) h1 span > i{transform:none}
 .am-hero b.c{width:62%;background:var(--lime);opacity:.8}
 .am-hero > div > span{display:block;height:6px;border-radius:3px;background:var(--hair);width:80%;margin:10px 0 12px}
 .am-hero em{display:block;width:70px;height:20px;border-radius:7px;background:var(--ink);opacity:.85}
-.am-foto{aspect-ratio:4/3;border-radius:12px;background:linear-gradient(135deg,var(--suave),color-mix(in srgb,var(--cyan) 18%,var(--card)));display:grid;place-items:center;color:var(--lime);--ac:var(--cyan)}
+.am-foto{aspect-ratio:4/3;border-radius:12px;background:var(--suave);display:grid;place-items:center;color:var(--lime);--ac:var(--cyan)}
 .am-foto .ic{width:40px;height:40px;stroke-width:1.4}
 .am-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .am-grid span{border:1px solid var(--hair);border-radius:12px;padding:8px}
@@ -737,8 +737,8 @@ html:not(.js) h1 span > i{transform:none}
 .t-etapas li{display:flex;flex-direction:column;gap:6px;font-size:11.5px;color:var(--ash)}
 .t-etapas i{height:4px;border-radius:4px;background:var(--hair);position:relative;overflow:hidden}
 .t-etapas li.hecha i{background:var(--lime)}
-.t-etapas li.ahora i::after{content:"";position:absolute;inset:0;width:55%;background:var(--lime-2);border-radius:4px;animation:avance 2.4s ease-in-out infinite alternate}
-@keyframes avance{from{width:35%}to{width:70%}}
+.t-etapas li.ahora i::after{content:"";position:absolute;inset:0;background:var(--lime-2);border-radius:4px;transform-origin:left;animation:avance 2.4s ease-in-out infinite alternate}
+@keyframes avance{from{transform:scaleX(.35)}to{transform:scaleX(.7)}}
 .t-etapas li.ahora span{color:var(--ink);font-weight:500}
 @media(max-width:700px){.t-next{padding-bottom:124px}.t-mapita{width:104px;height:78px}}
 
@@ -753,7 +753,7 @@ html:not(.js) h1 span > i{transform:none}
 .red-card .brillo{position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity .4s;background:radial-gradient(420px circle at var(--gx) var(--gy),rgba(var(--tono),.25),transparent 60%)}
 .red-card:hover .brillo{opacity:1}
 .red-portada{position:relative;height:120px;margin:calc(-1*var(--pad)) calc(-1*var(--pad)) -54px;overflow:hidden;background:#11152a}
-.red-card.ig .red-portada{background:linear-gradient(120deg,#2a1560,#401a5c 55%,#5a2140)}
+.red-card.ig .red-portada{background:#2a1560}
 .red-portada .calles{position:absolute;inset:-40%;transform:rotate(-14deg);background-image:linear-gradient(rgba(255,255,255,.08) 2px,transparent 2px),linear-gradient(90deg,rgba(255,255,255,.08) 2px,transparent 2px);background-size:56px 40px;animation:calles 18s linear infinite}
 @keyframes calles{to{background-position:56px 40px}}
 .red-portada::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,#161a2e)}
@@ -763,8 +763,8 @@ html:not(.js) h1 span > i{transform:none}
 .red-portada .p1{left:58%;top:16%}.red-portada .p2{left:80%;top:40%;animation-delay:1s}.red-portada .p3{left:42%;top:46%;animation-delay:2s}
 @keyframes pin{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 .red-top{position:relative;z-index:2;display:flex;align-items:flex-end;gap:16px}
-.anillo{--g:conic-gradient(from var(--ang,0deg),#7e3dff,#c04aff,#ff5fa2,#ffb03b,#24aeff,#7e3dff);position:relative;flex:0 0 auto;width:76px;height:76px;border-radius:50%;padding:3px;background:var(--g);animation:anillo 6s linear infinite}
-.fb-anillo{--g:conic-gradient(from var(--ang,0deg),#24aeff,#7e3dff,#24aeff)}
+.anillo{--g:var(--lime);position:relative;flex:0 0 auto;width:76px;height:76px;border-radius:50%;padding:3px;background:var(--g);animation:anillo 6s linear infinite}
+.fb-anillo{--g:var(--cyan)}
 .anillo .cara{display:flex;align-items:center;justify-content:center;width:100%;height:100%;border-radius:50%;background:#0b0d1a;border:3px solid #0b0d1a;font-weight:600;font-size:15px;letter-spacing:-.05em}
 .anillo .cara i{font-style:normal;font-size:.5em;opacity:.6;transform:translateY(-.7em)}
 @property --ang{syntax:"<angle>";inherits:false;initial-value:0deg}

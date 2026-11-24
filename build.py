@@ -86,6 +86,7 @@ def head(titulo, desc, url, extra=''):
 <link rel="preload" href="/fonts/inter-tight-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/inter-tight-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/dtorh.css?v={V("assets/dtorh.css")}">
+<link rel="stylesheet" href="/assets/escena.css?v={V("assets/escena.css")}">
 {extra}<script>
   document.documentElement.className+=" js";
   try{{var t=localStorage.getItem('dtorh-tema');if(t)document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}
@@ -159,6 +160,10 @@ FOOTER = f'''<footer>
 
 SCRIPTS = ('<script src="/assets/lenis.min.js?v=1.3.26" defer></script>\n'
   + '<script src="/assets/dtorh.js?v=' + V('assets/dtorh.js') + '" defer></script>\n'
+  + '<script src="/assets/vendor/gsap-3.15.1.min.js" defer></script>\n'
+  + '<script src="/assets/vendor/ScrollTrigger-3.15.1.min.js" defer></script>\n'
+  + '<script src="/assets/vendor/SplitText-3.15.1.min.js" defer></script>\n'
+  + '<script src="/assets/escena.js?v=' + V('assets/escena.js') + '" defer></script>\n'
   + '<script src="/assets/medir.js?v=' + V('assets/medir.js') + '" defer></script>\n'
   + '<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon=\'{"token": "c61f2bddfe9c47a0b9a67eb3e39e592b"}\'></script>\n')
 
@@ -562,17 +567,14 @@ HOME = f'''<body class="tono-noche">
 </main>
 {FOOTER}
 {SCRIPTS}<script src="/assets/mapa.js?v=5" defer></script>
-<script src="/assets/vendor/gsap-3.15.1.min.js" defer></script>
-<script src="/assets/vendor/ScrollTrigger-3.15.1.min.js" defer></script>
-<script src="/assets/vendor/SplitText-3.15.1.min.js" defer></script>
-<script src="/assets/escena.js?v={V("assets/escena.js")}" defer></script>
+
 </body>
 </html>
 '''
 
 home = head('Google, página web y WhatsApp para tu negocio | dtorh™ Barranquilla',
  'Estudio digital en Barranquilla: ficha de Google y Maps, página web con catálogo, WhatsApp Business y redes para tu negocio, en 14 días y con pago único.',
- 'https://dtorh.click/', LD + f'<link rel="stylesheet" href="/assets/escena.css?v={V("assets/escena.css")}">\n') + HOME
+ 'https://dtorh.click/', LD) + HOME
 open('index.html','w').write(home)
 
 # ======================= LABORATORIO =======================

@@ -77,6 +77,13 @@
       }, true);
     }
 
+    /* ---------- 1b · páginas internas: el encabezado oscuro se despide al bajar ---------- */
+    var th = document.querySelector('.t-hero > .wrap');
+    if (th){
+      g.fromTo(th, { y: 0, opacity: 1 }, { y: -60, opacity: 0, ease: 'none', immediateRender: false,
+        scrollTrigger: { trigger: th.parentNode, start: 'top top', end: 'bottom top', scrub: .5 } });
+    }
+
     /* ---------- 2 · títulos que se arman por palabras ---------- */
     if (Split){
       document.querySelectorAll('main h2.rv').forEach(function(h){
