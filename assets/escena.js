@@ -108,8 +108,8 @@
         .from(arr.querySelectorAll('.grupo .gt'), { opacity: 0, x: -10, duration: .4, stagger: .08, ease: 'power3.out' }, '-=.2')
         .from(arr.querySelectorAll('.grupo li'), { opacity: 0, y: 10, duration: .45, stagger: .035, ease: 'power3.out' }, '<.05')
         .from(arr.querySelectorAll('.incluye .pie span'), { opacity: 0, y: 8, duration: .35, stagger: .08 }, '-=.2')
-        .from(arr.querySelectorAll('.precio > *'), { opacity: 0, y: 16, duration: .5, stagger: .07, ease: 'power3.out' }, .25)
-        .from(arr.querySelector('.garantia'), { scale: .96, opacity: 0, duration: .5, ease: 'expo.out' }, '-=.25');
+        .from(arr.querySelectorAll('.precio > *:not(.garantia)'), { opacity: 0, y: 16, duration: .5, stagger: .07, ease: 'power3.out' }, .25)
+        .fromTo(arr.querySelector('.garantia'), { scale: .96, opacity: 0 }, { scale: 1, opacity: 1, duration: .5, ease: 'expo.out' }, '-=.25');
     }
 
     /* ---------- 4 · Cómo funciona: cada paso muestra su flujo mientras está a la vista ---------- */

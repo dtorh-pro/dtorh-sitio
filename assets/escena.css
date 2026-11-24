@@ -193,3 +193,6 @@ nav.sobre-oscuro:not(.isla) .links a.activo{color:#fff}
 @view-transition{navigation:auto}
 ::view-transition-old(root),::view-transition-new(root){animation-duration:.28s;animation-timing-function:ease}
 @media (prefers-reduced-motion:reduce){@view-transition{navigation:none}}
+/* tarjeta de precio: el botón no tapa el texto de abajo */
+.precio .btn{box-shadow:none}
+.precio .letra{margin-top:14px;line-height:1.45}
