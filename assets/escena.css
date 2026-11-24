@@ -17,6 +17,7 @@
 .foco-txt b,.foco-txt span{opacity:0}
 /* palabras partidas por SplitText: la máscara las deja "salir" del renglón */
 .parte-linea{overflow:clip;padding-bottom:.08em;margin-bottom:-.08em}
+#heroTxt{will-change:transform,opacity}
 
 /* ---------- "Qué montamos" en celular: texto arriba, teléfono grande que sube desde abajo ---------- */
 @media (max-width:900px){
@@ -35,4 +36,29 @@
 }
 @media (max-width:900px) and (max-height:700px){.ptxt .lead{display:none}.pasos-txt{min-height:96px}}
 
-@media (prefers-reduced-motion:reduce){.foco{display:none}}
+/* mientras corre la escena del hero: sin botón flotante, guía siempre visible y oscura */
+.en-escena .float{opacity:0!important;pointer-events:none!important;transform:translateY(18px)!important}
+
+/* ---------- guía "baja para descubrir": interactiva, con borde vivo y avance ---------- */
+@property --ang{syntax:'<angle>';inherits:false;initial-value:0deg}
+.cine .guia{isolation:isolate;padding:10px 16px 10px 12px;font-size:13.5px;box-shadow:0 18px 40px -18px rgba(126,61,255,.75)}
+.cine .guia::before{content:"";position:absolute;inset:-1.5px;border-radius:inherit;padding:1.5px;z-index:-1;pointer-events:none;
+  background:conic-gradient(from var(--ang),rgba(126,61,255,0) 0deg,rgba(126,61,255,.95) 70deg,rgba(36,174,255,.95) 120deg,rgba(126,61,255,0) 190deg);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);
+  animation:guia-borde 3.4s linear infinite}
+@keyframes guia-borde{to{--ang:360deg}}
+.cine .guia.ver:hover{transform:translate(-50%,-3px);box-shadow:0 22px 44px -16px rgba(126,61,255,.95)}
+.cine .guia.ver:active{transform:translate(-50%,0) scale(.97)}
+.guia .flechas{display:grid;gap:1px;margin-left:2px}
+.guia .flechas i{width:8px;height:8px;border-right:1.8px solid currentColor;border-bottom:1.8px solid currentColor;transform:rotate(45deg);opacity:.2;animation:guia-flecha 1.5s ease-in-out infinite}
+.guia .flechas i:nth-child(2){animation-delay:.18s}.guia .flechas i:nth-child(3){animation-delay:.36s}
+@keyframes guia-flecha{0%,100%{opacity:.15}40%{opacity:1}}
+.guia-paso,.guia .avance{display:none}
+/* durante la escena: cambia el mensaje y aparece la barra de avance */
+.guia.en-escena{opacity:1!important;transform:translate(-50%,0)!important;pointer-events:auto!important;cursor:pointer;color:#fff!important;background:rgba(11,13,26,.66)!important;border-color:rgba(255,255,255,.16)!important}
+.guia.en-escena > b{display:none}
+.guia.en-escena .guia-paso{display:inline}
+.guia.en-escena .avance{display:block;position:absolute;left:16px;right:16px;bottom:4px;height:2px;border-radius:2px;background:rgba(255,255,255,.14);overflow:hidden}
+.guia .avance::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#7e3dff,#24aeff);transform-origin:left;transform:scaleX(var(--g,0))}
+
+@media (prefers-reduced-motion:reduce){.foco{display:none}.cine .guia::before,.guia .flechas i{animation:none}}
