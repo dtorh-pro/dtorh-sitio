@@ -100,6 +100,59 @@
       });
     }
 
+    /* ---------- 3 · Arranque 360: el paquete se arma al entrar ---------- */
+    var arr = document.getElementById('arranque');
+    if (arr){
+      var t3 = g.timeline({ scrollTrigger: { trigger: arr.querySelector('.oferta'), start: 'top 78%', once: true } });
+      t3.from(arr.querySelectorAll('.tipo-neg'), { opacity: 0, y: 14, duration: .5, ease: 'power3.out' })
+        .from(arr.querySelectorAll('.grupo .gt'), { opacity: 0, x: -10, duration: .4, stagger: .08, ease: 'power3.out' }, '-=.2')
+        .from(arr.querySelectorAll('.grupo li'), { opacity: 0, y: 10, duration: .45, stagger: .035, ease: 'power3.out' }, '<.05')
+        .from(arr.querySelectorAll('.incluye .pie span'), { opacity: 0, y: 8, duration: .35, stagger: .08 }, '-=.2')
+        .from(arr.querySelectorAll('.precio > *'), { opacity: 0, y: 16, duration: .5, stagger: .07, ease: 'power3.out' }, .25)
+        .from(arr.querySelector('.garantia'), { scale: .96, opacity: 0, duration: .5, ease: 'expo.out' }, '-=.25');
+    }
+
+    /* ---------- 4 · Cómo funciona: cada paso muestra su flujo mientras está a la vista ---------- */
+    var f1 = document.querySelector('.flujo1'), f2 = document.querySelector('.flujo2'), f3 = document.querySelector('.flujo3');
+    function enVista(el, tl){ ST.create({ trigger: el, start: 'top 85%', end: 'bottom 10%', onToggle: function(s){ s.isActive ? tl.play() : tl.pause(); } }); }
+    if (f1){
+      var tf1 = g.timeline({ paused: true, repeat: -1, repeatDelay: 2.2 });
+      tf1.fromTo(f1.querySelectorAll('.vx-fila'), { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: .35, stagger: .12, ease: 'power3.out' })
+         .fromTo(f1.querySelector('.vx-scan'), { top: 0, opacity: 0 }, { opacity: 1, duration: .1 }, 0)
+         .to(f1.querySelector('.vx-scan'), { y: function(){ return f1.offsetHeight - 2; }, duration: 1.1, ease: 'power1.inOut' }, 0)
+         .to(f1.querySelector('.vx-scan'), { opacity: 0, duration: .2 })
+         .fromTo(f1.querySelectorAll('.vx-fila em'), { opacity: 0, scale: 1.5 }, { opacity: 1, scale: 1, duration: .3, stagger: .22, ease: 'expo.out' }, .6)
+         .set(f1.querySelector('.vx-scan'), { y: 0 });
+      enVista(f1, tf1);
+    }
+    if (f2){
+      var n2 = f2.querySelector('.vx-n'), barra = f2.querySelector('.vx-barra i'), oks = f2.querySelectorAll('.ok');
+      var tf2 = g.timeline({ paused: true, repeat: -1, repeatDelay: 2.4 });
+      tf2.fromTo(f2.querySelectorAll('.vx-item'), { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: .45, stagger: .15, ease: 'power3.out' })
+         .set(oks, { scale: 0 }, 0).set(barra, { scaleX: 0 }, 0).call(function(){ n2.textContent = '0'; }, null, 0);
+      [0, 1, 2].forEach(function(i){
+        tf2.to(oks[i], { scale: 1, duration: .35, ease: 'expo.out' }, .7 + i * .45)
+           .to(barra, { scaleX: (i + 1) / 3, duration: .35, ease: 'power2.out' }, .7 + i * .45)
+           .call(function(){ n2.textContent = String(i + 1); }, null, .7 + i * .45);
+      });
+      enVista(f2, tf2);
+    }
+    if (f3){
+      var tf3 = g.timeline({ paused: true, repeat: -1, repeatDelay: 1.8 });
+      tf3.fromTo(f3.querySelector('.pin-g'), { y: -36, opacity: 0 }, { y: 0, opacity: 1, duration: .55, ease: 'expo.out' })
+         .fromTo(f3.querySelectorAll('.anillo'), { scale: .6, opacity: 0 }, { scale: 1, opacity: 1, duration: .6, stagger: .1, ease: 'power3.out' }, .2)
+         .fromTo(f3.querySelector('.vx-onda'), { scale: 1, opacity: .7 }, { scale: 3, opacity: 0, duration: 1.2, ease: 'power2.out' }, .4)
+         .fromTo(f3.querySelector('.vx-chip.c3'), { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .4, ease: 'power3.out' }, .7)
+         .fromTo(f3.querySelector('.vx-chip.c2'), { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .4, ease: 'power3.out' }, 1.15)
+         .fromTo(f3.querySelector('.vx-chip.c1'), { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .4, ease: 'power3.out' }, 1.6)
+         .fromTo(f3.querySelector('.vx-onda'), { scale: 1, opacity: .5 }, { scale: 3, opacity: 0, duration: 1.2, ease: 'power2.out' }, 2.2);
+      enVista(f3, tf3);
+    }
+
+    /* ---------- 5 · cierre: las opciones entran una tras otra ---------- */
+    var tc = document.querySelector('.tipo-cierre');
+    if (tc) g.from(tc.querySelectorAll('a'), { opacity: 0, y: 10, duration: .45, stagger: .08, ease: 'power3.out', scrollTrigger: { trigger: tc, start: 'top 92%', once: true } });
+
     /* los tamaños cambian cuando cargan fuentes e imágenes */
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ ST.refresh(); });
     addEventListener('load', function(){ ST.refresh(); });

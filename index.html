@@ -23,8 +23,8 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/fonts/inter-tight-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/inter-tight-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/dtorh.css?v=9fff554f">
-<link rel="stylesheet" href="/assets/escena.css?v=b80fe92f">
+<link rel="stylesheet" href="/assets/dtorh.css?v=18e52efe">
+<link rel="stylesheet" href="/assets/escena.css?v=ddba71fb">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","@id":"https://dtorh.click/#org","name":"dtorh","alternateName":"dtorh estudio digital","url":"https://dtorh.click/","image":"https://dtorh.click/og.jpg","logo":"https://dtorh.click/icon-512.png","description":"Estudio digital en Barranquilla: ficha de Google y Maps, página web con catálogo, WhatsApp Business y redes para negocios pequeños, montados en 14 días, con pago único.","telephone":"+57 302 413 5572","email":"dtorh.ofc@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Barranquilla","addressRegion":"Atlántico","addressCountry":"CO"},"areaServed":[{"@type":"City","name":"Barranquilla"},{"@type":"City","name":"Santa Marta"},{"@type":"City","name":"Cartagena"},{"@type":"Country","name":"Colombia"}],"knowsLanguage":"es","sameAs":["https://www.instagram.com/dtorh.click/","https://www.facebook.com/dtorh.click/"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Servicios de dtorh","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Arranque 360","url":"https://dtorh.click/servicios/arranque-360/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Google completo","url":"https://dtorh.click/servicios/perfil-de-empresa-google/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Web con catálogo","url":"https://dtorh.click/servicios/pagina-web-con-catalogo/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"WhatsApp que vende","url":"https://dtorh.click/servicios/whatsapp-business-catalogo/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Web más rápida","url":"https://dtorh.click/servicios/mejorar-pagina-web/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Redes en orden","url":"https://dtorh.click/servicios/instagram-facebook-negocio/"}}]}}
 </script>
@@ -93,6 +93,7 @@
       <a class="chip" href="https://datos.dtorh.click/?ref=hero">Quiero mis 3 hallazgos gratis</a>
       <a class="chip" href="https://datos.dtorh.click/?necesita=google&ref=hero-google">Que me encuentren en Google</a>
       <a class="chip" href="https://datos.dtorh.click/?apertura=pronto&ref=hero-apertura">Voy a abrir un negocio</a>
+      <a class="chip" href="https://datos.dtorh.click/?tipo=enlinea&ref=hero-enlinea">Vendo solo en línea</a>
     </div>
     <div class="sellos rv">
       <span><svg class="ic" aria-hidden="true"><use href="#i-reloj"/></svg>Listo en 14 días</span>
@@ -233,17 +234,13 @@
     <div class="oferta-wrap">
       <div class="oferta">
         <div class="incluye rv">
-          <div class="grupos">
-            <div class="grupo" style="--c:var(--cyan)"><h3 class="gt"><s></s>Que te encuentren</h3>
-              <ul class="lista"><li><svg class="ic" aria-hidden="true"><use href="#i-web"/></svg>Página web con catálogo</li><li><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>Google Business y Maps</li><li><svg class="ic" aria-hidden="true"><use href="#i-ruta"/></svg>Apple Maps, Waze y Bing</li><li><svg class="ic" aria-hidden="true"><use href="#i-directorio"/></svg>Directorios locales</li></ul></div>
-            <div class="grupo" style="--c:var(--lime)"><h3 class="gt"><s></s>Que te escriban</h3>
-              <ul class="lista"><li><svg class="ic" aria-hidden="true"><use href="#i-catalogo"/></svg>WhatsApp Business con catálogo</li><li><svg class="ic" aria-hidden="true"><use href="#i-rayo"/></svg>Respuestas automáticas</li><li><svg class="ic" aria-hidden="true"><use href="#i-qr"/></svg>QR impreso para el local</li><li><svg class="ic" aria-hidden="true"><use href="#i-hoja"/></svg>Formulario conectado a una hoja</li></ul></div>
-            <div class="grupo" style="--c:var(--lime-2)"><h3 class="gt"><s></s>Redes</h3>
-              <ul class="lista"><li><svg class="ic" aria-hidden="true"><use href="#i-redes"/></svg>Instagram y Facebook montados</li><li><svg class="ic" aria-hidden="true"><use href="#i-plantillas"/></svg>10 plantillas editables</li><li><svg class="ic" aria-hidden="true"><use href="#i-calendario"/></svg>Calendario de los primeros 30 días</li></ul></div>
-            <div class="grupo" style="--c:var(--azul)"><h3 class="gt"><s></s>Reputación y cierre</h3>
-              <ul class="lista"><li><svg class="ic" aria-hidden="true"><use href="#i-estrella"/></svg>Sistema de reseñas con QR</li><li><svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg>Guion para responderlas</li><li><svg class="ic" aria-hidden="true"><use href="#i-reporte"/></svg>Reporte de entrega</li><li><svg class="ic" aria-hidden="true"><use href="#i-ajustes"/></svg>Una ronda de ajustes</li></ul></div>
+          <div class="tipo-neg" role="radiogroup" aria-label="¿Cómo atiendes a tus clientes?">
+            <span class="tipo-lbl">¿Cómo atiendes a tus clientes?</span>
+            <div class="tipo-opc"><span class="tipo-ind" aria-hidden="true"></span><button type="button" role="radio" aria-checked="true" data-tipo="local"><svg class="ic" aria-hidden="true"><use href="#i-tienda"/></svg><span>Tengo local</span></button><button type="button" role="radio" aria-checked="false" data-tipo="domicilio"><svg class="ic" aria-hidden="true"><use href="#i-ruta"/></svg><span>Voy a domicilio</span></button><button type="button" role="radio" aria-checked="false" data-tipo="enlinea"><svg class="ic" aria-hidden="true"><use href="#i-web"/></svg><span>Vendo solo en línea</span></button></div>
+            <p class="tipo-nota" id="tipoNota" aria-live="polite"></p>
           </div>
-          <div class="pie"><span><b>15 entregables</b></span><span><b>14 días</b> desde que nos mandas lo necesario</span><span><b>1 solo pago</b> por el montaje</span></div>
+          <div class="grupos" id="grupos"><div class="grupo" style="--c:var(--cyan)"><h3 class="gt"><s></s>Que te encuentren</h3><ul class="lista"><li><svg class="ic" aria-hidden="true"><use href="#i-web"/></svg>Página web con catálogo</li><li><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>Google Business y Maps</li><li><svg class="ic" aria-hidden="true"><use href="#i-ruta"/></svg>Apple Maps, Waze y Bing</li><li><svg class="ic" aria-hidden="true"><use href="#i-directorio"/></svg>Directorios locales</li></ul></div><div class="grupo" style="--c:var(--lime)"><h3 class="gt"><s></s>Que te escriban</h3><ul class="lista"><li><svg class="ic" aria-hidden="true"><use href="#i-catalogo"/></svg>WhatsApp Business con catálogo</li><li><svg class="ic" aria-hidden="true"><use href="#i-rayo"/></svg>Respuestas automáticas</li><li><svg class="ic" aria-hidden="true"><use href="#i-qr"/></svg>QR impreso para el local</li><li><svg class="ic" aria-hidden="true"><use href="#i-hoja"/></svg>Formulario conectado a una hoja</li></ul></div><div class="grupo" style="--c:var(--lime-2)"><h3 class="gt"><s></s>Redes</h3><ul class="lista"><li><svg class="ic" aria-hidden="true"><use href="#i-redes"/></svg>Instagram y Facebook montados</li><li><svg class="ic" aria-hidden="true"><use href="#i-plantillas"/></svg>10 plantillas editables</li><li><svg class="ic" aria-hidden="true"><use href="#i-calendario"/></svg>Calendario de los primeros 30 días</li></ul></div><div class="grupo" style="--c:var(--azul)"><h3 class="gt"><s></s>Reputación y cierre</h3><ul class="lista"><li><svg class="ic" aria-hidden="true"><use href="#i-estrella"/></svg>Sistema de reseñas con QR</li><li><svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg>Guion para responderlas</li><li><svg class="ic" aria-hidden="true"><use href="#i-reporte"/></svg>Reporte de entrega</li><li><svg class="ic" aria-hidden="true"><use href="#i-ajustes"/></svg>Una ronda de ajustes</li></ul></div></div>
+          <div class="pie"><span><b><span id="nEnt">15</span> entregables</b></span><span><b>14 días</b> desde que nos mandas lo necesario</span><span><b>1 solo pago</b> por el montaje</span></div>
         </div>
         <div class="precio rv">
           <span class="tag">Cotización gratis · según lo que te falta</span>
@@ -255,14 +252,16 @@
             <li><svg class="ic" aria-hidden="true"><use href="#i-moneda"/></svg>50% para empezar, 50% al entregar</li>
             <li><svg class="ic" aria-hidden="true"><use href="#i-escudo"/></svg>Alojamiento de la web gratis y a tu nombre (el dominio lo pagas tú, a su precio)</li>
           </ul>
-          <div class="garantia"><svg class="ic" aria-hidden="true"><use href="#i-escudo"/></svg><span><b>Garantía</b>Si a los 14 días de recibir tus fotos, tu lista de productos y la verificación de Google no está publicada tu ficha ni funcionando tu catálogo de WhatsApp, te devolvemos el anticipo completo.</span></div>
-          <a class="btn lime" href="https://datos.dtorh.click/?ref=precio">Cotiza gratis con tus 3 hallazgos <span class="ar">→</span></a>
+          <div class="garantia"><svg class="ic" aria-hidden="true"><use href="#i-escudo"/></svg><span><b>Garantía</b><span id="garTxt">Si a los 14 días de recibir tus fotos, tu lista de productos y la verificación de Google no está publicada tu ficha ni funcionando tu catálogo de WhatsApp, te devolvemos el anticipo completo.</span></span></div>
+          <a class="btn lime" id="ctaPrecio" href="https://datos.dtorh.click/?tipo=local&ref=precio">Cotiza gratis con tus 3 hallazgos <span class="ar">→</span></a>
           <p class="letra">¿Prefieres hablar primero? <a href="https://wa.me/573024135572?text=Hola%2C%20quiero%20cotizar%20con%20dtorh" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<script type="application/json" id="variantes">{"local": {"n": 15, "nota": "", "garantia": "Si a los 14 días de recibir tus fotos, tu lista de productos y la verificación de Google no está publicada tu ficha ni funcionando tu catálogo de WhatsApp, te devolvemos el anticipo completo.", "grupos": [["Que te encuentren", [["web", "Página web con catálogo"], ["pin", "Google Business y Maps"], ["ruta", "Apple Maps, Waze y Bing"], ["directorio", "Directorios locales"]]], ["Que te escriban", [["catalogo", "WhatsApp Business con catálogo"], ["rayo", "Respuestas automáticas"], ["qr", "QR impreso para el local"], ["hoja", "Formulario conectado a una hoja"]]], ["Redes", [["redes", "Instagram y Facebook montados"], ["plantillas", "10 plantillas editables"], ["calendario", "Calendario de los primeros 30 días"]]], ["Reputación y cierre", [["estrella", "Sistema de reseñas con QR"], ["chat", "Guion para responderlas"], ["reporte", "Reporte de entrega"], ["ajustes", "Una ronda de ajustes"]]]]}, "domicilio": {"n": 15, "nota": "Si atiendes en casa del cliente, Google te da ficha con tu zona de servicio y oculta tu dirección, como lo exige.", "garantia": "Si a los 14 días de recibir tus fotos, tu lista de productos y la verificación de Google no está publicada tu ficha ni funcionando tu catálogo de WhatsApp, te devolvemos el anticipo completo.", "grupos": [["Que te encuentren", [["web", "Página web con catálogo"], ["pin", "Google Business con tu zona de servicio"], ["mapa", "Barrios o ciudades donde atiendes"], ["directorio", "Directorios locales"]]], ["Que te escriban", [["catalogo", "WhatsApp Business con catálogo"], ["rayo", "Respuestas automáticas"], ["qr", "Enlace directo y QR para volantes"], ["hoja", "Formulario conectado a una hoja"]]], ["Redes", [["redes", "Instagram y Facebook montados"], ["plantillas", "10 plantillas editables"], ["calendario", "Calendario de los primeros 30 días"]]], ["Reputación y cierre", [["estrella", "Sistema de reseñas con QR"], ["chat", "Guion para responderlas"], ["reporte", "Reporte de entrega"], ["ajustes", "Una ronda de ajustes"]]]]}, "enlinea": {"n": 12, "nota": "Sin local no aplica la ficha de Google Maps: Google solo la da a negocios que atienden en persona. Te mostramos en Google con tu propia web y vendes por WhatsApp y redes.", "garantia": "Si a los 14 días de recibir tus fotos y tu lista de productos no está funcionando tu catálogo de WhatsApp, te devolvemos el anticipo completo.", "grupos": [["Que te encuentren", [["web", "Página web propia con catálogo"], ["buscar", "Descripción para Google y SEO básico"], ["redes", "Enlace a tu tienda desde tus redes"]]], ["Que te escriban", [["catalogo", "WhatsApp Business con catálogo"], ["rayo", "Respuestas automáticas"], ["qr", "Enlace directo y QR para empaques"], ["hoja", "Formulario conectado a una hoja"]]], ["Redes", [["redes", "Instagram y Facebook montados"], ["plantillas", "10 plantillas editables"], ["calendario", "Calendario de los primeros 30 días"]]], ["Cierre", [["reporte", "Reporte de entrega"], ["ajustes", "Una ronda de ajustes"]]]]}}</script>
 
 <!-- 5 · PROCESO (bloque oscuro) -->
 <section class="sec oscura proceso" id="proceso" data-tono="noche">
@@ -277,7 +276,7 @@
         <h3>Te mandamos 3 hallazgos</h3>
         <p>Revisamos cómo te ve hoy un cliente en Google, WhatsApp y redes. Tres cosas que estás perdiendo, cada una con su captura.</p>
         <div class="ilus" aria-hidden="true">
-          <div class="vx reporte" data-par="-.04">
+          <div class="vx reporte flujo1" data-par="-.04"><span class="vx-scan" aria-hidden="true"></span>
             <div class="vx-cab"><svg class="ic" aria-hidden="true"><use href="#i-reporte"/></svg><b>Tus 3 hallazgos</b><span>PDF · 3 capturas</span></div>
             <div class="vx-fila"><svg class="ic" aria-hidden="true"><use href="#i-mapa"/></svg><span>No apareces en Maps</span><em>Falta</em></div>
             <div class="vx-fila"><svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg><span>WhatsApp sin catálogo</span><em>Falta</em></div>
@@ -291,10 +290,11 @@
         <h3>Nos mandas tres cosas</h3>
         <p>La verificación que pida Google, entre 8 y 15 fotos, y la lista de productos con precios. Nada de reuniones largas.</p>
         <div class="ilus" aria-hidden="true">
-          <div class="vx tres" data-par="-.04">
+          <div class="vx tres flujo2" data-par="-.04">
             <div class="vx-item" style="--ac:var(--cyan)"><span class="ico"><svg class="ic" aria-hidden="true"><use href="#i-llave"/></svg></span><span><b>Código de Google</b><small>La verificación que pida Google</small></span><svg class="ic ok" aria-hidden="true"><use href="#i-check"/></svg></div>
             <div class="vx-item"><span class="ico"><svg class="ic" aria-hidden="true"><use href="#i-camara"/></svg></span><span><b>8 a 15 fotos</b><small>Del local y los productos</small></span><svg class="ic ok" aria-hidden="true"><use href="#i-check"/></svg></div>
             <div class="vx-item" style="--ac:var(--lime-2)"><span class="ico"><svg class="ic" aria-hidden="true"><use href="#i-lista"/></svg></span><span><b>Productos y precios</b><small>Una lista sencilla</small></span><svg class="ic ok" aria-hidden="true"><use href="#i-check"/></svg></div>
+            <div class="vx-barra" aria-hidden="true"><i></i><span>Material recibido <b class="vx-n">3</b>/3</span></div>
           </div>
         </div>
       </li>
@@ -303,7 +303,7 @@
         <h3>Recibes todo funcionando</h3>
         <p>Con un reporte de lo que quedó montado, los próximos 3 pasos y una ronda de ajustes incluida.</p>
         <div class="ilus" aria-hidden="true">
-          <div class="vx listo" data-par="-.04">
+          <div class="vx listo flujo3" data-par="-.04"><span class="vx-onda" aria-hidden="true"></span>
             <span class="anillo a1"></span><span class="anillo a2"></span>
             <span class="pin-g"><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg></span>
             <span class="vx-chip c1"><svg class="ic" aria-hidden="true"><use href="#i-estrella"/></svg>4,9 · 27 reseñas</span>
@@ -388,6 +388,7 @@
       <div class="qa rv"><svg class="ic" aria-hidden="true"><use href="#i-moneda"/></svg><h3>¿Tengo que pagar cada mes?</h3><p>No. El Arranque 360 se paga una vez y lo que montamos queda a tu nombre, aunque no volvamos a trabajar juntos. Si después quieres que lo mantengamos al día (cambios de precios, revisiones y reseñas), hay un plan mensual opcional que se cotiza aparte.</p></div>
       <div class="qa rv"><svg class="ic" aria-hidden="true"><use href="#i-redes"/></svg><h3>¿Ustedes manejan mis redes?</h3><p>No. Te dejamos las cuentas listas, 10 plantillas y el calendario de los primeros 30 días. Publicas tú o quien tú digas.</p></div>
       <div class="qa rv"><svg class="ic" aria-hidden="true"><use href="#i-reloj"/></svg><h3>¿Cuánto tiempo me toca dedicarle?</h3><p>Casi nada. Nos mandas tres cosas: la verificación que pida Google (un código o un video corto del local), las fotos y la lista de productos con precios. El resto lo hacemos nosotros.</p></div>
+      <div class="qa rv"><svg class="ic" aria-hidden="true"><use href="#i-web"/></svg><h3>Vendo solo por internet, sin local. ¿Me sirve?</h3><p>Sí. Te montamos la web con catálogo, el WhatsApp que vende y las redes. La ficha de Google Maps no aplica, porque Google solo la da a negocios que atienden en persona; por eso cotizas solo lo que te sirve.</p></div>
       <div class="qa rv"><svg class="ic" aria-hidden="true"><use href="#i-tienda"/></svg><h3>Todavía no he abierto. ¿Sirve?</h3><p>Sí. Dejamos todo montado antes de abrir. Solo la ficha de Google espera a que tengas la dirección del local, porque Google lo exige.</p></div>
       <div class="qa rv"><svg class="ic" aria-hidden="true"><use href="#i-pregunta"/></svg><h3>¿Hacen publicidad pagada o logos?</h3><p>No. Tampoco vendemos seguidores. Nos dedicamos a que te encuentren y te puedan escribir, y lo hacemos completo.</p></div>
       <div class="qa rv"><svg class="ic" aria-hidden="true"><use href="#i-escudo"/></svg><h3>¿Y si no quedo conforme?</h3><p>Incluye una ronda de ajustes. Y si a los 14 días no están tu ficha de Google y tu catálogo de WhatsApp, te devolvemos el anticipo.</p></div>
@@ -447,6 +448,7 @@
     <h2 class="rv">Cuéntanos qué vendes. Te mostramos qué le falta.</h2>
     <p class="lead rv">Tres minutos de preguntas desde el celular. Te mandamos tus 3 hallazgos por WhatsApp, sin compromiso.</p>
     <div class="hcta rv"><a class="btn lime" href="https://datos.dtorh.click/?ref=cierre"><svg class="ic" aria-hidden="true"><use href="#i-reporte"/></svg>Pedir mis 3 hallazgos</a></div>
+    <div class="tipo-cierre rv"><span>Tu diagnóstico, según cómo vendes:</span><a href="https://datos.dtorh.click/?tipo=local&ref=cierre"><svg class="ic" aria-hidden="true"><use href="#i-tienda"/></svg>Tengo local</a><a href="https://datos.dtorh.click/?tipo=domicilio&ref=cierre"><svg class="ic" aria-hidden="true"><use href="#i-ruta"/></svg>Voy a domicilio</a><a href="https://datos.dtorh.click/?tipo=enlinea&ref=cierre"><svg class="ic" aria-hidden="true"><use href="#i-web"/></svg>Vendo solo en línea</a></div>
     <p class="contacto-alt rv">¿Prefieres hablar directo? <a href="https://wa.me/573024135572?text=Hola%2C%20vengo%20de%20la%20p%C3%A1gina%20de%20dtorh" target="_blank" rel="noopener">WhatsApp</a> o <a href="mailto:dtorh.ofc@gmail.com">dtorh.ofc@gmail.com</a></p>
   </div>
 </section>
@@ -480,10 +482,11 @@
 <script src="/assets/vendor/gsap-3.15.1.min.js" defer></script>
 <script src="/assets/vendor/ScrollTrigger-3.15.1.min.js" defer></script>
 <script src="/assets/vendor/SplitText-3.15.1.min.js" defer></script>
-<script src="/assets/escena.js?v=077ba874" defer></script>
+<script src="/assets/escena.js?v=cd69a51a" defer></script>
 <script src="/assets/medir.js?v=6ac6f4c2" defer></script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "c61f2bddfe9c47a0b9a67eb3e39e592b"}'></script>
 <script src="/assets/mapa.js?v=5" defer></script>
+<script src="/assets/portafolio.js?v=c0ec8f98" defer></script>
 
 </body>
 </html>

@@ -63,3 +63,35 @@
 .guia .avance::after{content:"";position:absolute;inset:0;background:var(--lime);transform-origin:left;transform:scaleX(var(--g,0))}
 
 @media (prefers-reduced-motion:reduce){.foco{display:none}.guia .flechas i{animation:none}}
+
+/* ---------- Arranque 360 adaptable: selector de tipo de negocio ---------- */
+.tipo-neg{margin-bottom:26px;padding-bottom:22px;border-bottom:1px solid var(--hair)}
+.tipo-lbl{display:block;font-size:13px;color:var(--ash);margin-bottom:10px}
+.tipo-opc{position:relative;display:inline-flex;flex-wrap:nowrap;gap:2px;padding:4px;border-radius:14px;background:var(--canvas-2);border:1px solid var(--hair);max-width:100%;overflow-x:auto;scrollbar-width:none}
+.tipo-opc::-webkit-scrollbar{display:none}
+.tipo-ind{position:absolute;left:0;top:4px;bottom:4px;border-radius:10px;background:var(--card);box-shadow:0 1px 0 rgba(20,10,60,.04),0 6px 14px -8px rgba(30,14,90,.35);border:1px solid var(--hair);transition:transform .45s var(--ease),width .45s var(--ease);pointer-events:none}
+.tipo-opc button{position:relative;z-index:1;display:inline-flex;align-items:center;gap:7px;border:0;background:none;color:var(--ash);font:inherit;font-size:14px;font-weight:500;padding:9px 13px;border-radius:10px;cursor:pointer;white-space:nowrap;transition:color .25s ease}
+.tipo-opc button .ic{width:17px;height:17px}
+.tipo-opc button[aria-checked="true"]{color:var(--ink)}
+.tipo-opc button[aria-checked="true"] .ic{--ac:var(--lime);color:var(--lime)}
+.tipo-opc button:hover{color:var(--ink)}
+.tipo-opc button:active{transform:scale(.98)}
+.tipo-nota{max-height:0;overflow:hidden;opacity:0;margin-top:0;font-size:14px;color:var(--ink);line-height:1.45;transition:max-height .45s var(--ease),opacity .3s ease,margin .45s var(--ease)}
+.tipo-nota.ver{max-height:120px;opacity:1;margin-top:12px;padding:10px 12px;border-radius:12px;background:var(--suave)}
+@media(max-width:600px){.tipo-opc button{padding:9px 10px;font-size:13.5px}.tipo-opc button .ic{display:none}}
+
+/* cierre: el diagnóstico según cómo vende */
+.tipo-cierre{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 10px;margin-top:20px;font-size:14px;color:var(--ash)}
+.tipo-cierre span{width:100%}
+.tipo-cierre a{display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border-radius:9999px;border:1px solid var(--hair);background:var(--card);color:var(--ink);text-decoration:none;font-weight:500;transition:border-color .25s ease,transform .3s var(--ease)}
+.tipo-cierre a .ic{width:16px;height:16px;--ac:var(--lime)}
+.tipo-cierre a:hover{border-color:var(--lime);transform:translateY(-2px)}
+
+/* ---------- Cómo funciona: flujos ---------- */
+.flujo1{overflow:hidden}
+.vx-scan{position:absolute;left:0;right:0;top:0;height:2px;background:var(--lime);opacity:0;pointer-events:none;z-index:2}
+.vx-barra{position:relative;margin-top:4px;height:26px;border-radius:9px;background:rgba(255,255,255,.06);border:1px solid var(--hair);overflow:hidden;display:flex;align-items:center;padding:0 10px;font-size:11.5px;color:var(--ash)}
+.vx-barra i{position:absolute;inset:0;background:rgba(43,182,115,.16);transform-origin:left;transform:scaleX(1)}
+.vx-barra span{position:relative}
+.vx-barra b{color:var(--ink);font-weight:600}
+.vx-onda{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:22px;border:1.5px solid var(--lime);opacity:0;pointer-events:none}

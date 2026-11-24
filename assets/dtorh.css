@@ -764,10 +764,10 @@ html:not(.js) h1 span > i{transform:none}
 @keyframes pin{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 .red-top{position:relative;z-index:2;display:flex;align-items:flex-end;gap:16px}
 /* anillos de perfil: reproducen la foto de perfil real de cada red (degradado por decisión de David, 24-nov) */
-.anillo{--g:conic-gradient(from var(--ang,0deg),#7e3dff,#c04aff,#ff5fa2,#ffb03b,#24aeff,#7e3dff);position:relative;flex:0 0 auto;width:76px;height:76px;border-radius:50%;padding:3px;background:var(--g);animation:anillo 6s linear infinite}
-.fb-anillo{--g:conic-gradient(from var(--ang,0deg),#24aeff,#7e3dff,#24aeff)}
-.anillo .cara{display:flex;align-items:center;justify-content:center;width:100%;height:100%;border-radius:50%;background:#0b0d1a;border:3px solid #0b0d1a;font-weight:600;font-size:15px;letter-spacing:-.05em}
-.anillo .cara i{font-style:normal;font-size:.5em;opacity:.6;transform:translateY(-.7em)}
+.red-card .anillo{--g:conic-gradient(from var(--ang,0deg),#7e3dff,#c04aff,#ff5fa2,#ffb03b,#24aeff,#7e3dff);position:relative;flex:0 0 auto;width:76px;height:76px;border-radius:50%;padding:3px;background:var(--g);animation:anillo 6s linear infinite}
+.red-card .fb-anillo{--g:conic-gradient(from var(--ang,0deg),#24aeff,#7e3dff,#24aeff)}
+.red-card .anillo .cara{display:flex;align-items:center;justify-content:center;width:100%;height:100%;border-radius:50%;background:#0b0d1a;border:3px solid #0b0d1a;font-weight:600;font-size:15px;letter-spacing:-.05em}
+.red-card .anillo .cara i{font-style:normal;font-size:.5em;opacity:.6;transform:translateY(-.7em)}
 @property --ang{syntax:"<angle>";inherits:false;initial-value:0deg}
 @keyframes anillo{to{--ang:360deg}}
 .red-id{padding-bottom:6px;min-width:0}
@@ -791,11 +791,11 @@ html:not(.js) h1 span > i{transform:none}
   .red-grid{grid-template-columns:1fr;gap:14px}
   .red-card{--pad:18px;gap:14px;border-radius:22px}
   .red-portada{height:92px;margin-bottom:-46px}
-  .anillo{width:64px;height:64px}.anillo .cara{font-size:13px}
+  .red-card .anillo{width:64px;height:64px}.red-card .anillo .cara{font-size:13px}
   .red-id b{font-size:18px}
   .red-acciones a{padding:12px;font-size:14.5px}
 }
-@media (prefers-reduced-motion:reduce){.anillo,.red-portada .calles,.red-portada .pin{animation:none}}
+@media (prefers-reduced-motion:reduce){.red-card .anillo,.red-portada .calles,.red-portada .pin{animation:none}}
 
 /* ===== página legal ===== */
 .legal h2{font-size:22px;letter-spacing:-.025em;margin:34px 0 10px}

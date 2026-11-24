@@ -182,6 +182,44 @@ def persona(nombre, alt=''):
     a = f' alt="{alt}"' if alt else ' alt="" aria-hidden="true"'
     return f'<img src="/img/personas/{nombre}.svg"{a} loading="lazy" decoding="async" width="850" height="1200">'
 
+
+# ── Arranque 360 adaptable: el portafolio cambia según cómo atiende el negocio ──
+# Regla de Google (verificada 24-nov-2026, support.google.com/business/answer/13763036):
+# la ficha de empresa es solo para negocios con contacto en persona; los que van a domicilio
+# muestran zona de servicio y ocultan la dirección; los que venden solo en línea no tienen ficha.
+GRUPOS_COLOR = ['var(--cyan)', 'var(--lime)', 'var(--lime-2)', 'var(--azul)']
+VARIANTES = {
+ 'local': dict(boton='Tengo local', ico='tienda', grupos=[
+   ('Que te encuentren', [('web','Página web con catálogo'),('pin','Google Business y Maps'),('ruta','Apple Maps, Waze y Bing'),('directorio','Directorios locales')]),
+   ('Que te escriban', [('catalogo','WhatsApp Business con catálogo'),('rayo','Respuestas automáticas'),('qr','QR impreso para el local'),('hoja','Formulario conectado a una hoja')]),
+   ('Redes', [('redes','Instagram y Facebook montados'),('plantillas','10 plantillas editables'),('calendario','Calendario de los primeros 30 días')]),
+   ('Reputación y cierre', [('estrella','Sistema de reseñas con QR'),('chat','Guion para responderlas'),('reporte','Reporte de entrega'),('ajustes','Una ronda de ajustes')])],
+   nota='', garantia='Si a los 14 días de recibir tus fotos, tu lista de productos y la verificación de Google no está publicada tu ficha ni funcionando tu catálogo de WhatsApp, te devolvemos el anticipo completo.'),
+ 'domicilio': dict(boton='Voy a domicilio', ico='ruta', grupos=[
+   ('Que te encuentren', [('web','Página web con catálogo'),('pin','Google Business con tu zona de servicio'),('mapa','Barrios o ciudades donde atiendes'),('directorio','Directorios locales')]),
+   ('Que te escriban', [('catalogo','WhatsApp Business con catálogo'),('rayo','Respuestas automáticas'),('qr','Enlace directo y QR para volantes'),('hoja','Formulario conectado a una hoja')]),
+   ('Redes', [('redes','Instagram y Facebook montados'),('plantillas','10 plantillas editables'),('calendario','Calendario de los primeros 30 días')]),
+   ('Reputación y cierre', [('estrella','Sistema de reseñas con QR'),('chat','Guion para responderlas'),('reporte','Reporte de entrega'),('ajustes','Una ronda de ajustes')])],
+   nota='Si atiendes en casa del cliente, Google te da ficha con tu zona de servicio y oculta tu dirección, como lo exige.',
+   garantia='Si a los 14 días de recibir tus fotos, tu lista de productos y la verificación de Google no está publicada tu ficha ni funcionando tu catálogo de WhatsApp, te devolvemos el anticipo completo.'),
+ 'enlinea': dict(boton='Vendo solo en línea', ico='web', grupos=[
+   ('Que te encuentren', [('web','Página web propia con catálogo'),('buscar','Descripción para Google y SEO básico'),('redes','Enlace a tu tienda desde tus redes')]),
+   ('Que te escriban', [('catalogo','WhatsApp Business con catálogo'),('rayo','Respuestas automáticas'),('qr','Enlace directo y QR para empaques'),('hoja','Formulario conectado a una hoja')]),
+   ('Redes', [('redes','Instagram y Facebook montados'),('plantillas','10 plantillas editables'),('calendario','Calendario de los primeros 30 días')]),
+   ('Cierre', [('reporte','Reporte de entrega'),('ajustes','Una ronda de ajustes')])],
+   nota='Sin local no aplica la ficha de Google Maps: Google solo la da a negocios que atienden en persona. Te mostramos en Google con tu propia web y vendes por WhatsApp y redes.',
+   garantia='Si a los 14 días de recibir tus fotos y tu lista de productos no está funcionando tu catálogo de WhatsApp, te devolvemos el anticipo completo.'),
+}
+def grupos_html(tipo):
+    v = VARIANTES[tipo]; h = ''
+    for (titulo, items), color in zip(v['grupos'], GRUPOS_COLOR):
+        h += f'<div class="grupo" style="--c:{color}"><h3 class="gt"><s></s>{titulo}</h3><ul class="lista">' + ''.join(f'<li>{I(ic)}{t}</li>' for ic, t in items) + '</ul></div>'
+    return h
+def entregables(tipo): return sum(len(it) for _, it in VARIANTES[tipo]['grupos'])
+import json as _json
+VARIANTES_JSON = _json.dumps({k: dict(n=entregables(k), nota=v['nota'], garantia=v['garantia'],
+   grupos=[[t, items] for t, items in v['grupos']]) for k, v in VARIANTES.items()}, ensure_ascii=False)
+
 # ======================= INICIO =======================
 HOME = f'''<body class="tono-noche">
 <a class="saltar" href="#contenido">Saltar al contenido</a>
@@ -206,6 +244,7 @@ HOME = f'''<body class="tono-noche">
       <a class="chip" href="{form('hero')}">Quiero mis 3 hallazgos gratis</a>
       <a class="chip" href="{form('hero-google', necesita='google')}">Que me encuentren en Google</a>
       <a class="chip" href="{form('hero-apertura', apertura='pronto')}">Voy a abrir un negocio</a>
+      <a class="chip" href="{form('hero-enlinea', tipo='enlinea')}">Vendo solo en línea</a>
     </div>
     <div class="sellos rv">
       <span>{I('reloj')}Listo en 14 días</span>
@@ -346,17 +385,13 @@ HOME = f'''<body class="tono-noche">
     <div class="oferta-wrap">
       <div class="oferta">
         <div class="incluye rv">
-          <div class="grupos">
-            <div class="grupo" style="--c:var(--cyan)"><h3 class="gt"><s></s>Que te encuentren</h3>
-              <ul class="lista"><li>{I('web')}Página web con catálogo</li><li>{I('pin')}Google Business y Maps</li><li>{I('ruta')}Apple Maps, Waze y Bing</li><li>{I('directorio')}Directorios locales</li></ul></div>
-            <div class="grupo" style="--c:var(--lime)"><h3 class="gt"><s></s>Que te escriban</h3>
-              <ul class="lista"><li>{I('catalogo')}WhatsApp Business con catálogo</li><li>{I('rayo')}Respuestas automáticas</li><li>{I('qr')}QR impreso para el local</li><li>{I('hoja')}Formulario conectado a una hoja</li></ul></div>
-            <div class="grupo" style="--c:var(--lime-2)"><h3 class="gt"><s></s>Redes</h3>
-              <ul class="lista"><li>{I('redes')}Instagram y Facebook montados</li><li>{I('plantillas')}10 plantillas editables</li><li>{I('calendario')}Calendario de los primeros 30 días</li></ul></div>
-            <div class="grupo" style="--c:var(--azul)"><h3 class="gt"><s></s>Reputación y cierre</h3>
-              <ul class="lista"><li>{I('estrella')}Sistema de reseñas con QR</li><li>{I('chat')}Guion para responderlas</li><li>{I('reporte')}Reporte de entrega</li><li>{I('ajustes')}Una ronda de ajustes</li></ul></div>
+          <div class="tipo-neg" role="radiogroup" aria-label="¿Cómo atiendes a tus clientes?">
+            <span class="tipo-lbl">¿Cómo atiendes a tus clientes?</span>
+            <div class="tipo-opc"><span class="tipo-ind" aria-hidden="true"></span>{''.join(f'<button type="button" role="radio" aria-checked="{"true" if k == "local" else "false"}" data-tipo="{k}">{I(v["ico"])}<span>{v["boton"]}</span></button>' for k, v in VARIANTES.items())}</div>
+            <p class="tipo-nota" id="tipoNota" aria-live="polite"></p>
           </div>
-          <div class="pie"><span><b>15 entregables</b></span><span><b>14 días</b> desde que nos mandas lo necesario</span><span><b>1 solo pago</b> por el montaje</span></div>
+          <div class="grupos" id="grupos">{grupos_html('local')}</div>
+          <div class="pie"><span><b><span id="nEnt">{entregables("local")}</span> entregables</b></span><span><b>14 días</b> desde que nos mandas lo necesario</span><span><b>1 solo pago</b> por el montaje</span></div>
         </div>
         <div class="precio rv">
           <span class="tag">Cotización gratis · según lo que te falta</span>
@@ -368,14 +403,16 @@ HOME = f'''<body class="tono-noche">
             <li>{I('moneda')}50% para empezar, 50% al entregar</li>
             <li>{I('escudo')}Alojamiento de la web gratis y a tu nombre (el dominio lo pagas tú, a su precio)</li>
           </ul>
-          <div class="garantia">{I('escudo')}<span><b>Garantía</b>Si a los 14 días de recibir tus fotos, tu lista de productos y la verificación de Google no está publicada tu ficha ni funcionando tu catálogo de WhatsApp, te devolvemos el anticipo completo.</span></div>
-          <a class="btn lime" href="{form('precio')}">Cotiza gratis con tus 3 hallazgos <span class="ar">→</span></a>
+          <div class="garantia">{I('escudo')}<span><b>Garantía</b><span id="garTxt">{VARIANTES['local']['garantia']}</span></span></div>
+          <a class="btn lime" id="ctaPrecio" href="{form('precio', tipo='local')}">Cotiza gratis con tus 3 hallazgos <span class="ar">→</span></a>
           <p class="letra">¿Prefieres hablar primero? <a href="{wa('Hola, quiero cotizar con dtorh')}" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<script type="application/json" id="variantes">{VARIANTES_JSON}</script>
 
 <!-- 5 · PROCESO (bloque oscuro) -->
 <section class="sec oscura proceso" id="proceso" data-tono="noche">
@@ -390,7 +427,7 @@ HOME = f'''<body class="tono-noche">
         <h3>Te mandamos 3 hallazgos</h3>
         <p>Revisamos cómo te ve hoy un cliente en Google, WhatsApp y redes. Tres cosas que estás perdiendo, cada una con su captura.</p>
         <div class="ilus" aria-hidden="true">
-          <div class="vx reporte" data-par="-.04">
+          <div class="vx reporte flujo1" data-par="-.04"><span class="vx-scan" aria-hidden="true"></span>
             <div class="vx-cab">{I('reporte')}<b>Tus 3 hallazgos</b><span>PDF · 3 capturas</span></div>
             <div class="vx-fila">{I('mapa')}<span>No apareces en Maps</span><em>Falta</em></div>
             <div class="vx-fila">{I('chat')}<span>WhatsApp sin catálogo</span><em>Falta</em></div>
@@ -404,10 +441,11 @@ HOME = f'''<body class="tono-noche">
         <h3>Nos mandas tres cosas</h3>
         <p>La verificación que pida Google, entre 8 y 15 fotos, y la lista de productos con precios. Nada de reuniones largas.</p>
         <div class="ilus" aria-hidden="true">
-          <div class="vx tres" data-par="-.04">
+          <div class="vx tres flujo2" data-par="-.04">
             <div class="vx-item" style="--ac:var(--cyan)"><span class="ico">{I('llave')}</span><span><b>Código de Google</b><small>La verificación que pida Google</small></span>{I('check','ic ok')}</div>
             <div class="vx-item"><span class="ico">{I('camara')}</span><span><b>8 a 15 fotos</b><small>Del local y los productos</small></span>{I('check','ic ok')}</div>
             <div class="vx-item" style="--ac:var(--lime-2)"><span class="ico">{I('lista')}</span><span><b>Productos y precios</b><small>Una lista sencilla</small></span>{I('check','ic ok')}</div>
+            <div class="vx-barra" aria-hidden="true"><i></i><span>Material recibido <b class="vx-n">3</b>/3</span></div>
           </div>
         </div>
       </li>
@@ -416,7 +454,7 @@ HOME = f'''<body class="tono-noche">
         <h3>Recibes todo funcionando</h3>
         <p>Con un reporte de lo que quedó montado, los próximos 3 pasos y una ronda de ajustes incluida.</p>
         <div class="ilus" aria-hidden="true">
-          <div class="vx listo" data-par="-.04">
+          <div class="vx listo flujo3" data-par="-.04"><span class="vx-onda" aria-hidden="true"></span>
             <span class="anillo a1"></span><span class="anillo a2"></span>
             <span class="pin-g">{I('pin')}</span>
             <span class="vx-chip c1">{I('estrella')}4,9 · 27 reseñas</span>
@@ -501,6 +539,7 @@ HOME = f'''<body class="tono-noche">
       <div class="qa rv">{I('moneda')}<h3>¿Tengo que pagar cada mes?</h3><p>No. El Arranque 360 se paga una vez y lo que montamos queda a tu nombre, aunque no volvamos a trabajar juntos. Si después quieres que lo mantengamos al día (cambios de precios, revisiones y reseñas), hay un plan mensual opcional que se cotiza aparte.</p></div>
       <div class="qa rv">{I('redes')}<h3>¿Ustedes manejan mis redes?</h3><p>No. Te dejamos las cuentas listas, 10 plantillas y el calendario de los primeros 30 días. Publicas tú o quien tú digas.</p></div>
       <div class="qa rv">{I('reloj')}<h3>¿Cuánto tiempo me toca dedicarle?</h3><p>Casi nada. Nos mandas tres cosas: la verificación que pida Google (un código o un video corto del local), las fotos y la lista de productos con precios. El resto lo hacemos nosotros.</p></div>
+      <div class="qa rv">{I('web')}<h3>Vendo solo por internet, sin local. ¿Me sirve?</h3><p>Sí. Te montamos la web con catálogo, el WhatsApp que vende y las redes. La ficha de Google Maps no aplica, porque Google solo la da a negocios que atienden en persona; por eso cotizas solo lo que te sirve.</p></div>
       <div class="qa rv">{I('tienda')}<h3>Todavía no he abierto. ¿Sirve?</h3><p>Sí. Dejamos todo montado antes de abrir. Solo la ficha de Google espera a que tengas la dirección del local, porque Google lo exige.</p></div>
       <div class="qa rv">{I('pregunta')}<h3>¿Hacen publicidad pagada o logos?</h3><p>No. Tampoco vendemos seguidores. Nos dedicamos a que te encuentren y te puedan escribir, y lo hacemos completo.</p></div>
       <div class="qa rv">{I('escudo')}<h3>¿Y si no quedo conforme?</h3><p>Incluye una ronda de ajustes. Y si a los 14 días no están tu ficha de Google y tu catálogo de WhatsApp, te devolvemos el anticipo.</p></div>
@@ -560,6 +599,7 @@ HOME = f'''<body class="tono-noche">
     <h2 class="rv">Cuéntanos qué vendes. Te mostramos qué le falta.</h2>
     <p class="lead rv">Tres minutos de preguntas desde el celular. Te mandamos tus 3 hallazgos por WhatsApp, sin compromiso.</p>
     <div class="hcta rv"><a class="btn lime" href="{form('cierre')}">{I('reporte')}Pedir mis 3 hallazgos</a></div>
+    <div class="tipo-cierre rv"><span>Tu diagnóstico, según cómo vendes:</span>{''.join(f'<a href="{form("cierre", tipo=k)}">{I(v["ico"])}{v["boton"]}</a>' for k, v in VARIANTES.items())}</div>
     <p class="contacto-alt rv">¿Prefieres hablar directo? <a href="{wa('Hola, vengo de la página de dtorh')}" target="_blank" rel="noopener">WhatsApp</a> o <a href="mailto:dtorh.ofc@gmail.com">dtorh.ofc@gmail.com</a></p>
   </div>
 </section>
@@ -567,6 +607,7 @@ HOME = f'''<body class="tono-noche">
 </main>
 {FOOTER}
 {SCRIPTS}<script src="/assets/mapa.js?v=5" defer></script>
+<script src="/assets/portafolio.js?v={V("assets/portafolio.js")}" defer></script>
 
 </body>
 </html>
