@@ -185,3 +185,4 @@ nav.sobre-oscuro:not(.isla) .links a.activo{color:#fff}
 .hoja.mm .mm-red{height:44px;padding:0 16px;gap:8px;font-size:14px;font-weight:500;border-radius:9999px}
 .hoja.mm .mm-red .ic{width:18px;height:18px;color:#fff}
 .hoja.mm .btn{margin-top:0}
+.hoja.mm .btn{box-shadow:none}
