@@ -196,3 +196,8 @@ nav.sobre-oscuro:not(.isla) .links a.activo{color:#fff}
 /* tarjeta de precio: el botón no tapa el texto de abajo */
 .precio .btn{box-shadow:none}
 .precio .letra{margin-top:14px;line-height:1.45}
+/* la tarjeta de precio crece con su contenido: garantía, botón y aviso siempre juntos y dentro */
+.precio{height:auto;padding-bottom:clamp(24px,3.2vw,36px)}
+.precio .garantia{margin-top:22px}
+.precio .btn{position:relative;z-index:1;width:100%;white-space:normal;text-align:center;min-height:52px;height:auto;padding-top:12px;padding-bottom:12px}
+.precio .letra{position:relative;z-index:1;margin-bottom:0}

@@ -103,13 +103,10 @@
     /* ---------- 3 · Arranque 360: el paquete se arma al entrar ---------- */
     var arr = document.getElementById('arranque');
     if (arr){
-      var t3 = g.timeline({ scrollTrigger: { trigger: arr.querySelector('.oferta'), start: 'top 78%', once: true } });
-      t3.from(arr.querySelectorAll('.tipo-neg'), { opacity: 0, y: 14, duration: .5, ease: 'power3.out' })
-        .from(arr.querySelectorAll('.grupo .gt'), { opacity: 0, x: -10, duration: .4, stagger: .08, ease: 'power3.out' }, '-=.2')
-        .from(arr.querySelectorAll('.grupo li'), { opacity: 0, y: 10, duration: .45, stagger: .035, ease: 'power3.out' }, '<.05')
-        .from(arr.querySelectorAll('.incluye .pie span'), { opacity: 0, y: 8, duration: .35, stagger: .08 }, '-=.2')
-        .from(arr.querySelectorAll('.precio > *:not(.garantia)'), { opacity: 0, y: 16, duration: .5, stagger: .07, ease: 'power3.out' }, .25)
-        .fromTo(arr.querySelector('.garantia'), { scale: .96, opacity: 0 }, { scale: 1, opacity: 1, duration: .5, ease: 'expo.out' }, '-=.25');
+      /* solo movimiento, nunca opacidad: si la animación no corre, todo queda visible y en su lugar */
+      var t3 = g.timeline({ scrollTrigger: { trigger: arr.querySelector('.oferta'), start: 'top 85%', once: true } });
+      t3.from(arr.querySelectorAll('.grupo li'), { y: 10, duration: .5, stagger: .03, ease: 'power3.out', clearProps: 'transform' })
+        .from(arr.querySelectorAll('.precio > *'), { y: 14, duration: .5, stagger: .05, ease: 'power3.out', clearProps: 'transform' }, .1);
     }
 
     /* ---------- 4 · Cómo funciona: cada paso muestra su flujo mientras está a la vista ---------- */
