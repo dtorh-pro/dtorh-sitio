@@ -203,3 +203,10 @@ nav.sobre-oscuro:not(.isla) .links a.activo{color:#fff}
 .precio .letra{position:relative;z-index:1;margin-bottom:0}
 .precio .btn{width:100%;white-space:normal;text-align:center;line-height:1.3;min-height:52px}
 .precio .letra{position:relative;z-index:1;margin-top:16px}
+/* el bloque Arranque 360 nunca es más ancho que la pantalla (antes el selector lo empujaba en celulares de 360 px) */
+.oferta > *{min-width:0}
+@media(max-width:960px){.oferta{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){
+  .tipo-opc{display:flex;width:100%;overflow:visible}
+  .tipo-opc button{flex:1 1 0;min-width:0;justify-content:center;text-align:center;white-space:normal;line-height:1.2;padding:9px 6px;font-size:13px}
+}
