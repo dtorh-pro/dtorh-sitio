@@ -127,7 +127,8 @@ nav.sobre-oscuro:not(.isla) .links a.activo{color:#fff}
 .hoja.mm{display:block!important;inset:0;left:0;right:0;top:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;opacity:1;transform:none;visibility:hidden;pointer-events:none;transition:visibility 0s .55s;color:#fff;overflow:hidden}
 .menu-abierto .hoja.mm{visibility:visible;pointer-events:auto;transition-delay:0s}
 .mm-fondo{position:absolute;inset:0;background:#0b0d1a;clip-path:circle(0px at var(--ox,92%) var(--oy,40px));transition:clip-path .55s cubic-bezier(.65,0,.25,1);will-change:clip-path;contain:strict}
-.mm-fondo::after{content:"";position:absolute;inset:0;opacity:.6;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:56px 56px}
+/* fondo liso de noche con la marca como sello de agua (sin cuadrículas genéricas) */
+.mm-fondo::after{content:"dtorh";position:absolute;right:-.06em;bottom:-.22em;font-weight:600;letter-spacing:-.06em;line-height:1;font-size:clamp(140px,34vw,460px);color:rgba(255,255,255,.035);pointer-events:none;white-space:nowrap}
 .menu-abierto .mm-fondo{clip-path:circle(150vmax at var(--ox,92%) var(--oy,40px))}
 .mm-wrap{position:relative;height:100%;max-width:1240px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr);grid-template-rows:1fr auto;gap:24px clamp(24px,5vw,72px);padding:clamp(96px,14vh,130px) clamp(20px,5vw,64px) clamp(22px,4vh,36px);opacity:0;transition:opacity .3s ease}
 .menu-abierto .mm-wrap{opacity:1;transition-delay:.12s}
