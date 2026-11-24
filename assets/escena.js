@@ -22,6 +22,7 @@
     var hero = document.querySelector('.hero'), h1 = hero && hero.querySelector('h1');
     if (hero && h1){
       var letras = Split ? Split.create(h1, { type: 'words,chars' }).chars : [h1];
+      g.set(letras, { opacity: 1 });
       var focoB = hero.querySelector('.foco-txt b');
       var focoLetras = Split && focoB ? Split.create(focoB, { type: 'words,chars', mask: 'words' }).chars : [focoB];
       var corto = innerWidth < 700;
@@ -30,8 +31,8 @@
         scrollTrigger: { trigger: hero, start: 'top top', end: corto ? '+=95%' : '+=120%', pin: true, scrub: .6, anticipatePin: 1 }
       });
       tl.to(letras, { yPercent: -110, opacity: 0, rotate: function(i){ return (i % 2 ? 1 : -1) * 6; }, stagger: { each: .012 }, ease: 'power2.in', duration: .45 }, 0)
-        .to(hero.querySelectorAll('.brace, .lead, .buscador, .chips, .sellos'), { y: -50, opacity: 0, stagger: .035, duration: .3 }, 0)
-        .to(hero.querySelectorAll('.leyenda, .contador'), { opacity: 0, duration: .15 }, 0)
+        .fromTo(hero.querySelectorAll('.brace, .lead, .buscador, .chips, .sellos'), { y: 0, opacity: 1 }, { y: -50, opacity: 0, stagger: .035, duration: .3, immediateRender: false }, 0)
+        .fromTo(hero.querySelectorAll('.leyenda, .contador'), { opacity: 1 }, { opacity: 0, duration: .15, immediateRender: false }, 0)
         .to(hero.querySelector('.capa-mapa'), { scale: corto ? 1.6 : 1.85, duration: 1 }, 0)
         .fromTo(hero.querySelector('.foco-pin'), { scale: 0, y: -90, opacity: 0 }, { scale: 1, y: 0, opacity: 1, ease: 'back.out(2.2)', duration: .25 }, .42)
         .fromTo(hero.querySelector('.foco-anillo'), { scale: .3, opacity: 0 }, { scale: 1, opacity: 1, ease: 'power2.out', duration: .3 }, .47)
@@ -48,11 +49,14 @@
       document.querySelectorAll('main h2.rv').forEach(function(h){
         if (h.closest('.hero')) return;
         h.classList.remove('rv'); h.classList.add('in');
-        var s = Split.create(h, { type: 'lines,words', mask: 'lines', linesClass: 'parte-linea' });
-        g.from(s.words, {
-          yPercent: 110, rotate: 4, duration: .9, ease: 'power4.out', stagger: .045,
-          scrollTrigger: { trigger: h, start: 'top 86%', once: true }
-        });
+        var visto = false;
+        Split.create(h, { type: 'lines,words', mask: 'lines', linesClass: 'parte-linea', autoSplit: true, onSplit: function(self){
+          if (visto) return;   /* ya se armó: al cambiar el tamaño solo se reacomoda */
+          return g.from(self.words, {
+            yPercent: 110, duration: .9, ease: 'power4.out', stagger: .045,
+            scrollTrigger: { trigger: h, start: 'top 86%', once: true, onEnter: function(){ visto = true; } }
+          });
+        } });
       });
     }
 
