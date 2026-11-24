@@ -101,7 +101,8 @@
    Superficies sólidas o con velo de tinta, sin degradados ni brillos.
    ===================================================================== */
 /* botón: "Menú" + dos líneas que se cruzan en X */
-.menu-btn{display:inline-flex!important;align-items:center;justify-content:center;gap:10px;width:auto;padding:0 15px 0 16px;font:inherit;font-size:14px;font-weight:500}
+.menu-btn{align-items:center;justify-content:center;gap:10px;width:auto;padding:0 15px 0 16px;font:inherit;font-size:14px;font-weight:500}
+@media(max-width:900px){.menu-btn{display:inline-flex!important}}
 .mb-ic{position:relative;width:16px;height:10px;display:block}
 .mb-ic i{position:absolute;left:0;right:0;height:1.8px;border-radius:2px;background:currentColor;transition:transform .5s var(--ease)}
 .mb-ic i:first-child{top:0}.mb-ic i:last-child{bottom:0}
@@ -123,13 +124,13 @@ nav.sobre-oscuro:not(.isla) .links a.activo{color:#fff}
 .menu-abierto .float,.menu-abierto .guia{opacity:0!important;pointer-events:none!important}
 
 /* la hoja: se abre en círculo desde el botón */
-.hoja.mm{display:block!important;inset:0;left:0;right:0;top:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;opacity:1;transform:none;visibility:hidden;pointer-events:none;transition:visibility 0s .75s;color:#fff;overflow:hidden}
+.hoja.mm{display:block!important;inset:0;left:0;right:0;top:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;opacity:1;transform:none;visibility:hidden;pointer-events:none;transition:visibility 0s .55s;color:#fff;overflow:hidden}
 .menu-abierto .hoja.mm{visibility:visible;pointer-events:auto;transition-delay:0s}
-.mm-fondo{position:absolute;inset:0;background:rgba(11,13,26,.94);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);clip-path:circle(0px at var(--ox,92%) var(--oy,40px));transition:clip-path .75s cubic-bezier(.7,0,.2,1)}
+.mm-fondo{position:absolute;inset:0;background:#0b0d1a;clip-path:circle(0px at var(--ox,92%) var(--oy,40px));transition:clip-path .55s cubic-bezier(.65,0,.25,1);will-change:clip-path;contain:strict}
 .mm-fondo::after{content:"";position:absolute;inset:0;opacity:.6;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:56px 56px}
 .menu-abierto .mm-fondo{clip-path:circle(150vmax at var(--ox,92%) var(--oy,40px))}
 .mm-wrap{position:relative;height:100%;max-width:1240px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr);grid-template-rows:1fr auto;gap:24px clamp(24px,5vw,72px);padding:clamp(96px,14vh,130px) clamp(20px,5vw,64px) clamp(22px,4vh,36px);opacity:0;transition:opacity .3s ease}
-.menu-abierto .mm-wrap{opacity:1;transition-delay:.18s}
+.menu-abierto .mm-wrap{opacity:1;transition-delay:.12s}
 
 /* las rutas */
 .mm-rutas{position:relative;align-self:center;display:grid;gap:clamp(2px,1vh,8px);padding-left:4px}
@@ -186,3 +187,8 @@ nav.sobre-oscuro:not(.isla) .links a.activo{color:#fff}
 .hoja.mm .mm-red .ic{width:18px;height:18px;color:#fff}
 .hoja.mm .btn{margin-top:0}
 .hoja.mm .btn{box-shadow:none}
+
+/* cambio de página con fundido (Chrome, Edge y Safari recientes; los demás navegan normal) */
+@view-transition{navigation:auto}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.28s;animation-timing-function:ease}
+@media (prefers-reduced-motion:reduce){@view-transition{navigation:none}}

@@ -39,9 +39,9 @@
     var actual = hoja.querySelector('.mm-a[aria-current="page"]') || rutas[0];
     mostrar(actual); rutas.forEach(function(x){ x.classList.remove('ver'); });
     if (g && !quieto){
-      g.fromTo(hoja.querySelectorAll('.mm-t'), { yPercent: 105 }, { yPercent: 0, duration: .8, stagger: .055, ease: 'expo.out', delay: .22, overwrite: true });
-      g.fromTo(hoja.querySelectorAll('.mm-n'), { opacity: 0 }, { opacity: 1, duration: .5, stagger: .055, delay: .35, overwrite: true });
-      g.fromTo(hoja.querySelectorAll('.mm-vista, .mm-pie'), { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: .6, stagger: .08, ease: 'power3.out', delay: .45, overwrite: true });
+      g.fromTo(hoja.querySelectorAll('.mm-t'), { yPercent: 105 }, { yPercent: 0, duration: .6, stagger: .04, ease: 'expo.out', delay: .14, overwrite: true });
+      g.fromTo(hoja.querySelectorAll('.mm-n'), { opacity: 0 }, { opacity: 1, duration: .4, stagger: .04, delay: .2, overwrite: true });
+      g.fromTo(hoja.querySelectorAll('.mm-vista, .mm-pie'), { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: .45, stagger: .06, ease: 'power3.out', delay: .28, overwrite: true });
     }
   }
   if (hoja) new MutationObserver(function(){
@@ -56,6 +56,30 @@
     if (e.shiftKey && i <= 0){ e.preventDefault(); foc[foc.length - 1].focus(); }
     else if (!e.shiftKey && i === foc.length - 1){ e.preventDefault(); foc[0].focus(); }
   });
+
+  /* ---------- 3b · enlaces rápidos ----------
+     - "Inicio" estando en el inicio: cierra el menú y sube, sin recargar.
+     - Precarga la página de destino al acercar el cursor o tocar (en todos los navegadores). */
+  rutas.forEach(function(a){
+    a.addEventListener('click', function(e){
+      var u = new URL(a.href, location.href);
+      if (u.pathname === location.pathname && !u.hash){
+        e.preventDefault(); if (mb && abierto) mb.click();
+        if (window.dtorhLenis) window.dtorhLenis.scrollTo(0, { duration: .8 }); else scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  });
+  var hechas = {};
+  function precargar(e){
+    var a = e.target.closest && e.target.closest('a[href]'); if (!a) return;
+    var u = new URL(a.href, location.href);
+    if (u.origin !== location.origin || u.pathname === location.pathname || hechas[u.pathname]) return;
+    hechas[u.pathname] = 1;
+    var l = d.createElement('link'); l.rel = 'prefetch'; l.href = u.pathname; d.head.appendChild(l);
+  }
+  d.addEventListener('pointerover', precargar, { passive: true });
+  d.addEventListener('touchstart', precargar, { passive: true });
+  d.addEventListener('focusin', precargar);
 
   /* ---------- 4 · la píldora de la barra: marca dónde estás ---------- */
   var links = d.getElementById('links'), ind = d.getElementById('ind');

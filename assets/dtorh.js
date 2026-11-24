@@ -20,7 +20,11 @@
   function irA(dest, extra){
     var el = typeof dest === 'string' ? document.querySelector(dest) : dest;
     if (!el && dest !== 0) return;
-    if (lenis) lenis.scrollTo(el || 0, Object.assign({ offset: -76, duration: 1.4 }, extra || {}));
+    if (lenis){
+      /* la duración depende de la distancia: cerca es casi inmediato, lejos nunca pasa de 1 s */
+      var y0 = lenis.scroll, meta = el ? el.getBoundingClientRect().top + y0 - 76 : 0, dist = Math.abs(meta - y0);
+      lenis.scrollTo(el || 0, Object.assign({ offset: -76, duration: Math.min(1, .35 + dist / 7000), easing: function(t){ return t === 1 ? 1 : 1 - Math.pow(2, -10 * t); } }, extra || {}));
+    }
     else if (el) el.scrollIntoView({ behavior: quieto ? 'auto' : 'smooth' }); else scrollTo(0,0);
   }
   /* enlaces a secciones de esta misma página */

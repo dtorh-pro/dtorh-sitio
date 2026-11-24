@@ -243,6 +243,7 @@
       ctx.font = '500 11.5px "Inter Tight", system-ui, sans-serif';
       var w = ctx.measureText(et.txt).width + 34, x = et.b.x + 13, yy = et.b.y - 30;
       if (x + w > W - 8) x = et.b.x - 13 - w;
+      if (yy < 92) continue;   /* nunca debajo de la barra de navegación */
       ctx.globalAlpha = a;
       ctx.fillStyle = 'rgba(20,22,42,.92)'; ctx.strokeStyle = 'rgba(255,255,255,.14)'; ctx.lineWidth = 1;
       ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(x, yy, w, 24, 8); else ctx.rect(x, yy, w, 24); ctx.fill(); ctx.stroke();
@@ -250,9 +251,9 @@
       ctx.fillStyle = '#fff'; ctx.fillText(et.txt, x+22, yy+16.2);
       ctx.globalAlpha = 1;
     }
-    raf = (visible && !document.hidden && !quieto) ? requestAnimationFrame(cuadro) : 0;
+    raf = (visible && !document.hidden && !quieto && !document.body.classList.contains('menu-abierto')) ? requestAnimationFrame(cuadro) : 0;
   }
-  function andar(){ if (capa && !raf && visible && !document.hidden && !quieto){ antes = performance.now(); raf = requestAnimationFrame(cuadro); } }
+  function andar(){ if (capa && !raf && visible && !document.hidden && !quieto && !document.body.classList.contains('menu-abierto')){ antes = performance.now(); raf = requestAnimationFrame(cuadro); } }
 
   function iniciar(){ armar(); if (quieto) cuadro(performance.now()); else andar(); }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(iniciar); else iniciar();
@@ -264,6 +265,8 @@
   }, 200); });
   document.addEventListener('visibilitychange', andar);
   if ('IntersectionObserver' in window) new IntersectionObserver(function(en){ visible = en[0].isIntersecting; andar(); }).observe(hero);
+  /* con el menú abierto el mapa descansa; al cerrarlo sigue */
+  new MutationObserver(function(){ andar(); }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
   function aMapa(e){ var b = cv.getBoundingClientRect(); return [ (e.clientX - b.left) * (W / b.width), (e.clientY - b.top) * (H / b.height) ]; }
   hero.addEventListener('pointermove', function(e){ if (e.pointerType !== 'mouse') return; var p = aMapa(e); raton.x = p[0]; raton.y = p[1]; raton.dentro = !e.target.closest('form,.chips,a,button'); });
   hero.addEventListener('pointerleave', function(){ raton.dentro = false; });

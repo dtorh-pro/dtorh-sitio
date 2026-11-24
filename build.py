@@ -629,7 +629,7 @@ HOME = f'''<body class="tono-noche">
 
 </main>
 {FOOTER}
-{SCRIPTS}<script src="/assets/mapa.js?v=5" defer></script>
+{SCRIPTS}<script src="/assets/mapa.js?v={V("assets/mapa.js")}" defer></script>
 <script src="/assets/portafolio.js?v={V("assets/portafolio.js")}" defer></script>
 
 </body>
