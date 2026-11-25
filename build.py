@@ -697,7 +697,7 @@ var PROYECTOS = [
     rubro: 'Snacks saludables y productos fit',
     ciudad: 'Barranquilla',
     etapa: 2,
-    resumen: 'Tienda con los 104 productos reales del catálogo y 24 a granel: la bolsa se llena mientras bajas, pasillos que se recorren de lado, ideas según la hora del día, buscador instantáneo y pedido sumado que llega listo por WhatsApp.',
+    resumen: 'Portada de presentación con su historia y su cocina, pasillos que avanzan de lado con el scroll y catálogo aparte con más de 100 productos reales, granel por gramo, buscador instantáneo y pedido sumado que llega listo por WhatsApp.',
     piezas: ['Catálogo real con fotos', 'Granel por gramo', 'Pedido por WhatsApp', 'Hecha para celular'],
     url: '/fit-snack-market/'
   }},

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Catálogo · FIT Snack Market</title>
+<meta name="description" content="Snacks saludables, productos fit y marcas naturales en un solo lugar: más de 100 productos y frutos secos a granel en el C.C. Miramar Plaza, Barranquilla. Pide por WhatsApp.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#FAF6ED">
+<meta name="color-scheme" content="only light">
+<link rel="canonical" href="https://dtorh.click/fit-snack-market/catalogo/">
+<link rel="icon" href="/fit-snack-market/img/logo-96.webp" type="image/webp">
+<meta property="og:title" content="FIT Snack Market · Nutre tu mejor versión">
+<meta property="og:description" content="Snacks saludables, productos fit y marcas naturales en un solo lugar. Barranquilla.">
+<meta property="og:image" content="https://dtorh.click/fit-snack-market/img/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;600;700;800&family=Figtree:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap">
+<link rel="preload" as="image" href="/fit-snack-market/img/logo.webp">
+<link rel="stylesheet" href="/fit-snack-market/fit.css?v=3">
+</head>
+<body>
+<a class="skip" href="#catalogo">Ir al catálogo</a>
+<div class="prog" id="prog" aria-hidden="true"></div>
+<div class="demo">Diseño de <a href="https://dtorh.click/laboratorio/">dtorh™</a> · productos y precios del catálogo de la tienda (nov-2026) · domicilios y medios de pago por confirmar</div>
+
+<header class="top" id="top">
+  <div class="wrap bar">
+    <a class="brand" href="/fit-snack-market/" aria-label="FIT Snack Market, inicio">
+      <img src="/fit-snack-market/img/logo-96.webp" width="42" height="42" alt="">
+      <span><b>FIT SNACK</b><small>MARKET</small></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Secciones">
+      <span class="pill" aria-hidden="true"></span>
+      <a href="/fit-snack-market/">Inicio</a><a href="#catalogo" class="on">Catálogo</a><a href="#granel">A granel</a><a href="/fit-snack-market/#visitanos">Visítanos</a>
+    </nav>
+    <div class="tools">
+      <button class="sbtn" id="openFind" type="button" aria-label="Buscar productos" aria-haspopup="dialog">
+        <svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar producto</span><kbd>/</kbd>
+      </button>
+      <button class="ibtn bagbtn" id="openBag" type="button" aria-haspopup="dialog">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M5 8h14l-1.1 11.1a2 2 0 0 1-2 1.9H8.1a2 2 0 0 1-2-1.9L5 8Z"/><path d="M9 8V7a3 3 0 0 1 6 0v1"/></svg>
+        <span class="lb">Tu bolsa</span><span class="n" id="bagN">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="inicio">
+  <!-- CATÁLOGO -->
+  <section class="sec cat-page" id="catalogo" aria-labelledby="catT">
+    <div class="wrap">
+      <div class="sec-h">
+        <div><nav class="crumbs" aria-label="Ruta"><a href="/fit-snack-market/">Inicio</a> <span aria-hidden="true">/</span> <span>Catálogo</span></nav><h1 id="catT" class="cat-h1" data-split>El catálogo, <span class="lt">con su precio.</span></h1></div>
+        <p>Busca por nombre, marca o antojo. Agrega a tu bolsa y al final nos llega tu pedido listo por WhatsApp.</p>
+      </div>
+      <div class="cat-bar" id="catBar">
+        <div class="tabs" id="tabs" role="tablist" aria-label="Pasillos"><span class="ind" id="ind" aria-hidden="true"></span></div>
+        <div class="filt">
+          <label class="srch" for="q"><span class="vh">Buscar en el catálogo</span>
+            <svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="q" type="search" placeholder="Busca: granola, kéfir, proteína, almendra…" autocomplete="off" enterkeyhint="search">
+            <button class="clr" id="qClr" type="button" aria-label="Borrar búsqueda" hidden>×</button>
+          </label>
+          <span class="sel"><label for="sort" class="vh">Ordenar</label><select id="sort"><option value="cat">Orden de la tienda</option><option value="asc">Precio: menor a mayor</option><option value="desc">Precio: mayor a menor</option><option value="az">Nombre A–Z</option></select></span>
+          <div class="occ" id="occ" role="group" aria-label="Ocasión"></div>
+        </div>
+      </div>
+      <div class="note" id="note" aria-live="polite"></div>
+      <div id="results"></div>
+    </div>
+  </section>
+
+  <!-- GRANEL -->
+  <section class="sec bulk" id="granel" aria-labelledby="grT">
+    <div class="wrap">
+      <div class="sec-h">
+        <div><span class="eyebrow">A granel</span><h2 id="grT" data-split>Lleva la cantidad <span class="lt">que necesitas.</span></h2></div>
+        <p>Frutos secos, semillas y especias con precio por gramo. Arma tu bolsa y mira cómo se llena: el precio se calcula solo.</p>
+      </div>
+      <div class="b-grid">
+        <div>
+          <div class="b-tabs" role="tablist" aria-label="Tipo de granel">
+            <button class="chip" role="tab" aria-selected="true" data-bt="nueces" type="button">Frutos secos y semillas</button>
+            <button class="chip" role="tab" aria-selected="false" data-bt="especias" type="button">Especias y aromáticas</button>
+          </div>
+          <div class="b-list" id="bList"></div>
+        </div>
+        <aside class="b-side" aria-label="Tu bolsa a granel">
+          <div class="sack"><svg viewBox="0 0 200 244" id="sack" role="img" aria-label="Bolsa a granel"><defs><clipPath id="sackClip"><path d="M24 40H176L186 234H14Z"/></clipPath></defs><path d="M24 40H176L186 234H14Z" fill="#F1E6C8"/><g clip-path="url(#sackClip)" id="sackLayers"></g><path d="M24 40H176L186 234H14Z" fill="none" stroke="#B78C54" stroke-width="3"/><path d="M20 22H180L176 40H24Z" fill="#C9A16A"/><path d="M20 22H180" stroke="#9C7342" stroke-width="3"/><text x="100" y="140" text-anchor="middle" font-family="Outfit,sans-serif" font-weight="800" font-size="15" fill="#3E4E2B" opacity=".55" id="sackEmpty">tu bolsa</text></svg></div>
+          <div class="b-sum"><span id="bGrams">0 g</span><b id="bTotal">$0</b></div>
+          <ul class="b-lines" id="bLines"></ul>
+          <button class="btn block" id="bAdd" type="button" disabled>Agregar a mi pedido</button>
+          <p class="fine">Precio por gramo del catálogo. En tienda se pesa y se confirma el valor final.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="f-grid">
+      <div><img src="/fit-snack-market/img/logo.webp" width="96" height="96" alt="FIT Snack Market" loading="lazy"><p class="tl">Nutre tu mejor versión</p></div>
+      <div><h4>Tienda</h4><ul><li><a href="/fit-snack-market/#pasillos">Pasillos</a></li><li><a href="/fit-snack-market/catalogo/">Catálogo</a></li><li><a href="/fit-snack-market/catalogo/#granel">A granel</a></li><li><a href="/fit-snack-market/#dudas">Dudas</a></li></ul></div>
+      <div><h4>Contacto</h4><ul><li><a href="#" data-wa="Hola FIT Snack Market." target="_blank" rel="noopener">WhatsApp</a></li><li><a href="https://www.instagram.com/fitsnackmarket" target="_blank" rel="noopener">Instagram</a></li><li><a href="/fit-snack-market/#visitanos">C.C. Miramar Plaza, local 211</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 FIT Snack Market · Barranquilla</span><span>Sitio por <a href="https://dtorh.click">dtorh™</a></span></div>
+  </div>
+</footer>
+
+<!-- barra inferior en celular -->
+<div class="mbar" id="mbar"><button type="button" id="mbarBtn"><span class="n" id="mbN">0</span><span class="t"><b>Ver tu bolsa</b><small id="mbS">productos</small></span><span class="go tnum" id="mbT">$0 →</span></button></div>
+
+<div class="scrim" id="scrim"></div>
+
+<!-- bolsa y pedido -->
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dT" aria-hidden="true" data-lenis-prevent>
+  <span class="grab" aria-hidden="true"></span>
+  <div class="d-h"><button class="back" id="dBack" type="button" hidden>← Bolsa</button><h2 id="dT">Tu bolsa</h2><button class="x" type="button" data-close aria-label="Cerrar">×</button></div>
+  <div class="d-b" id="dBody"></div>
+  <div class="d-f" id="dFoot"></div>
+</aside>
+
+<!-- ficha de producto -->
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="shT" aria-hidden="true" data-lenis-prevent></div>
+
+<!-- buscador -->
+<div class="finder" id="finder" role="dialog" aria-modal="true" aria-label="Buscar productos" aria-hidden="true" data-lenis-prevent>
+  <div class="fi-in">
+    <svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="fq" type="search" placeholder="¿Qué buscas? Ej. kéfir, almendra, sin azúcar" autocomplete="off" enterkeyhint="search" role="combobox" aria-expanded="true" aria-controls="fr" aria-autocomplete="list">
+    <button class="x" type="button" data-close aria-label="Cerrar">×</button>
+  </div>
+  <div class="fi-r" id="fr" role="listbox" aria-label="Resultados"></div>
+  <div class="fi-k"><span><kbd>↑</kbd> <kbd>↓</kbd> moverse</span><span><kbd>Enter</kbd> abrir</span><span><kbd>Esc</kbd> cerrar</span></div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="/fit-snack-market/datos.js?v=3"></script>
+<script src="/assets/vendor/gsap-3.15.1.min.js" defer></script>
+<script src="/assets/vendor/ScrollTrigger-3.15.1.min.js" defer></script>
+<script src="/assets/vendor/SplitText-3.15.1.min.js" defer></script>
+<script src="/assets/lenis.min.js?v=1.3.26" defer></script>
+<script src="/fit-snack-market/fit.js?v=3" defer></script>
+</body>
+</html>
