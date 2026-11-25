@@ -833,3 +833,7 @@ body.mm-open .mbar{opacity:0;pointer-events:none}
 @media (min-width:901px){.mmenu{display:none}}
 @media (prefers-reduced-motion:reduce){.mmenu,.mmenu.on{transition:none}}
 @media (max-width:380px){.tools{gap:.3rem}.mbtn{width:42px;height:42px;padding:0 11px}.top .wrap{padding-inline:12px}}
+
+/* v8 · logos oficiales con tamaño óptico */
+.mq-t span img{height:calc(var(--h,40px) * var(--mqs,1));opacity:1}
+@media (max-width:600px){.mq-t{--mqs:.78}}

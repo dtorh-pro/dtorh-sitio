@@ -43,7 +43,8 @@ var OCC = [
   {id:'llevar',n:'Para llevar',why:'que caben en el bolso: oficina, universidad o paseo.'},
   {id:'cocina',n:'Cocina natural',why:'para cocinar en casa con ingredientes naturales.'},
   {id:'descanso',n:'Descansar mejor',why:'para la noche: suplementos y bebidas para descansar.'},
-  {id:'menos',n:'Menos azúcar',why:'endulzados con stevia, yacón o monk fruit, o sin dulce.'}
+  {id:'menos',n:'Menos azúcar',why:'endulzados con stevia, yacón o monk fruit, o sin dulce.'},
+  {id:'bienestar',n:'Bienestar',why:'vitaminas, colágeno y suplementos para cuidarte todos los días.'}
 ];
 var OC = {}; OCC.forEach(function(o){OC[o.id]=o;});
 var ITEMS = D.items.filter(function(it){return !it.x;}).map(function(it,i){
@@ -540,7 +541,7 @@ function openSheet(id){
   var it=BYID[id]; if(!it) return; sheetId=id; sheetQ=qty(id)||1;
   var c=CAT[it.c]||{}, idea=it.c==='cafe'?(it.s==='Cafetería'?'Se prepara al momento en la barra de café de la tienda.':it.s==='Despensa'?'Para darle sabor a tus comidas en casa.':'Bien fría, para acompañar tu snack.'):IDEA[it.c];
   var desc=(it.s||c.n)+(it.b?' de '+it.b:'')+(it.z?', presentación de '+it.z:'')+'. '+(idea||'');
-  var tags=it.t.map(function(t){return '<span>'+esc(OC[t].n)+'</span>';}).join('');
+  var tags=(it.t||[]).filter(function(t){return OC[t];}).map(function(t){return '<span>'+esc(OC[t].n)+'</span>';}).join('');
   var sh=$('#sheet');
   sh.innerHTML='<span class="grab" aria-hidden="true"></span><div class="sp" data-c="'+it.c+'"><div class="spi">'+pic(it,false,'big')+'</div>'+(it.sf?'<div class="vw" role="group" aria-label="Vista de la imagen"><button type="button" data-vw="cut" aria-pressed="true">Producto</button><button type="button" data-vw="foto" aria-pressed="false">Foto de la marca</button></div>':'')+'</div><div class="si"><button class="x" type="button" data-close aria-label="Cerrar">×</button>'+
     '<span class="eyebrow">'+esc(it.b||c.n)+'</span><h3 id="shT">'+esc(it.n)+'</h3><p class="meta">'+esc([it.z,it.s].filter(Boolean).join(' · '))+'</p>'+
