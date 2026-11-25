@@ -881,3 +881,13 @@ body.mm-open .mbar{opacity:0;pointer-events:none}
 @media (max-width:600px){.car .mini{width:136px}}
 .mini .mbr{font:700 .62rem/1 var(--f-b);letter-spacing:.12em;text-transform:uppercase;color:var(--olive);margin-bottom:-.15rem}
 .mini div.i{flex:1}.mini .mlink,.mini .rw{margin-top:auto}
+
+/* v12 · video de la cocina en "Nuestra historia" (carga solo cuando se ve) */
+.st-vid video{display:block;width:100%;aspect-ratio:1;object-fit:cover;border-radius:28px;background:#E8D9BC}
+.st-rec{position:absolute;top:16px;left:16px;display:flex;align-items:center;gap:.45rem;background:rgba(46,58,33,.82);color:var(--cream);border-radius:999px;padding:.4rem .8rem;font:700 .74rem var(--f-b);letter-spacing:.04em}
+.st-rec i{width:8px;height:8px;border-radius:50%;background:#E2574C;animation:rec 1.4s ease-in-out infinite}
+@keyframes rec{50%{opacity:.25}}
+.st-vid figcaption{display:flex;flex-wrap:wrap;gap:.2rem .6rem;align-items:center;right:16px;border-radius:18px}
+.st-vid figcaption a{color:var(--olive);text-decoration:none;white-space:nowrap}
+.st-vid figcaption a:hover{text-decoration:underline}
+@media (max-width:900px){.st-vid video{aspect-ratio:1.1}}

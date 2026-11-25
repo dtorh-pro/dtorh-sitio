@@ -969,7 +969,7 @@ function init(){
   function navPill(){ var p=$('#nav .pill'); if(!p) return; if(!cur){ p.style.opacity=0; return; } p.style.opacity=1; p.style.width=cur.offsetWidth+'px'; p.style.transform='translateX('+cur.offsetLeft+'px)'; }
   navPill();
   if(io && links.length){ var nio=new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting){ var i=secs.indexOf(en.target); links.forEach(function(a,k){a.classList.toggle('on',k===i);}); cur=links[i]; navPill(); } }); },{rootMargin:'-45% 0px -50% 0px'}); secs.forEach(function(s){ if(s) nio.observe(s); }); }
-  mobileMenu(); pauseOffscreen();
+  mobileMenu(); pauseOffscreen(); storyVideo();
   motion();
 }
 /* ---------- MENÚ MÓVIL: "las etiquetas" — una bolsa kraft sube desde abajo y de la rama cuelgan
@@ -1051,6 +1051,17 @@ function pauseOffscreen(){
   if(!('IntersectionObserver' in window)) return;
   var po=new IntersectionObserver(function(es){ es.forEach(function(e){ e.target.classList.toggle('paused',!e.isIntersecting); }); });
   $$('main > section, .foot').forEach(function(s){ po.observe(s); });
+}
+/* video de la cocina: no descarga nada hasta que la sección se acerca a la pantalla, y se pausa al salir */
+function storyVideo(){
+  var v=$('#stVid'); if(!v) return;
+  if(reduce){ v.removeAttribute('loop'); return; }
+  if(!('IntersectionObserver' in window)){ v.preload='auto'; v.play().catch(function(){}); return; }
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){
+    if(e.isIntersecting){ if(v.preload!=='auto'){ v.preload='auto'; v.load(); } var p=v.play(); if(p&&p.catch) p.catch(function(){}); }
+    else v.pause();
+  }); },{rootMargin:'200px 0px',threshold:.15});
+  io.observe(v);
 }
 var stT; function refreshST(){ if(!window.ScrollTrigger) return; clearTimeout(stT); stT=setTimeout(function(){ ScrollTrigger.refresh(); },180); }
 function motion(){
