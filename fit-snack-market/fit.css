@@ -728,3 +728,18 @@ mark{background:var(--sand);color:inherit;border-radius:3px;padding:0 1px}
 .sheet .spi img{object-fit:contain!important;aspect-ratio:1;max-width:100%;max-height:100%}
 @media (max-width:760px){.sheet .sp{height:min(46svh,380px)}}
 .card .pic img{object-fit:contain;background:#fff}
+
+/* v6: ficha con todo su contenido, collage sin fotos tapadas */
+@media (min-width:761px){
+  .sheet{height:min(86vh,680px);grid-template-rows:100%}
+  .sheet .si{overflow-y:auto;min-height:0;overscroll-behavior:contain}
+  .sheet .sp{height:100%}
+}
+.cb-pics{position:static;height:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.cb-pics img{position:static;width:100%!important;aspect-ratio:1;object-fit:contain;background:#fff;border-radius:18px;border:0;box-shadow:0 18px 36px -24px rgba(0,0,0,.6);transform:none!important}
+.cb-pics img:nth-child(2n){transform:translateY(14px)!important}
+.cb-pics img:nth-child(n+4){display:none}
+@media (min-width:901px){.cb-pics{grid-template-columns:repeat(3,minmax(0,1fr))}.cb-pics img:nth-child(n+4){display:block}}
+.a-card .pics img{object-fit:contain;background:#fff}
+.cb-pics{align-items:start}
+.cb-pics img{height:auto!important;align-self:start}

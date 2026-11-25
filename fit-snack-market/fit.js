@@ -6,7 +6,7 @@ var D = window.FIT_DATA || {items:[],granel:{nueces:[],especias:[]}};
 var WA = '573011637788';
 var IMG = '/fit-snack-market/img/';
 var HOME = '/fit-snack-market/', CATP = '/fit-snack-market/catalogo/';
-var APERTURA = false; // true cuando la tienda abra: muestra abierto/cerrado según el horario
+var APERTURA = true; // true cuando la tienda abra: muestra abierto/cerrado según el horario
 var IS_CAT = !!document.getElementById('results');
 var IS_HOME = document.body.classList.contains('home');
 var ILL = window.FIT_ILL || {};
@@ -299,9 +299,20 @@ function gardenMotion(){
     return function(){ st.kill(); tl.kill(); gsap.set(leaves,{clearProps:'all'}); };
   });
   mm.add('(max-width:900px)',function(){
+    var start=.55;
     stem.style.strokeDashoffset=L;
-    gsap.to(stem,{strokeDashoffset:0,duration:2.2,ease:'power2.inOut',delay:.3});
-    gsap.from(leaves,{scale:0,transformOrigin:'0% 50%',duration:.7,ease:'power3.out',stagger:.09,delay:.6});
+    var early=leaves.filter(function(l){return +l.dataset.t<=start;}), late=leaves.filter(function(l){return +l.dataset.t>start;});
+    gsap.to(stem,{strokeDashoffset:L*(1-start),duration:1.6,ease:'power2.out',delay:.3});
+    gsap.from(early,{scale:0,transformOrigin:'0% 50%',duration:.7,ease:'power3.out',stagger:.08,delay:.5});
+    gsap.set(late,{scale:0,transformOrigin:'0% 50%'});
+    var tl=gsap.timeline({defaults:{ease:'none'}});
+    tl.fromTo(stem,{strokeDashoffset:L*(1-start)},{strokeDashoffset:0,duration:1,immediateRender:false},0);
+    late.forEach(function(l){ var t=+l.dataset.t; tl.to(l,{scale:+l.dataset.s,duration:.15,ease:'power2.out'},(t-start)/(1-start)*.8); });
+    nuts.forEach(function(n,i){ tl.to(n,{yPercent:(i%2?-1:1)*(30+i*6),xPercent:(i%3-1)*25,rotation:(i%2?-20:20),duration:1},0); });
+    tl.to('.g-disc',{rotation:-8,scale:.96,duration:1},0);
+    tl.fromTo('#bfHero',{xPercent:0,yPercent:0},{xPercent:420,yPercent:-520,rotation:12,duration:1,ease:'sine.inOut'},0);
+    var st=ScrollTrigger.create({trigger:'#gArt',start:'top 20%',end:'bottom top',scrub:.5,animation:tl});
+    return function(){ st.kill(); tl.kill(); };
   });
 }
 /* mariposa guía: se posa en cada sección */
@@ -367,7 +378,7 @@ function hl(s){ s=esc(s); if(!hlRe) return s; return s.replace(hlRe,'<mark>$1</m
 var goal=null, seed=1;
 function rnd(s){ return function(){ s=(s*9301+49297)%233280; return s/233280; }; }
 function pickFor(tag,n,sd){
-  var r=rnd(sd), pool=ITEMS.filter(function(x){return x.t.indexOf(tag)>-1;}).map(function(x){return {x:x,k:r()+(x.sf?0:x.img?.5:.9)};}).sort(function(a,b){return a.k-b.k;}).map(function(o){return o.x;});
+  var r=rnd(sd), pool=ITEMS.filter(function(x){return x.t.indexOf(tag)>-1;}).map(function(x){return {x:x,k:r()+(x.img?0:.9)};}).sort(function(a,b){return a.k-b.k;}).map(function(o){return o.x;});
   var out=[],brands={};
   pool.forEach(function(x){ if(out.length<n && !brands[x.b||x.s]){ brands[x.b||x.s]=1; out.push(x);} });
   pool.forEach(function(x){ if(out.length<n && out.indexOf(x)<0) out.push(x); });
@@ -502,7 +513,7 @@ function observeReveal(scope){ $$('.reveal:not(.in)',scope).forEach(function(el)
 var IDEA={cremas:'Úntala en pan, arepa o pancakes, o mézclala con yogurt y fruta.',pan:'Para el desayuno o la merienda; acompáñalo con una crema para untar.',snacks:'Cabe en el bolso: para la oficina, la universidad o después de entrenar.',arepas:'Para el desayuno o la merienda. Pregunta en la tienda cómo prepararla.',lacteos:'Combínalo con granola o fruta para un desayuno rápido.',cafe:'',bienestar:'Lee la etiqueta antes de consumirlo y, si tienes una condición de salud, consulta a tu médico.'};
 function related(it,n,excl){
   excl=excl||{};
-  return ITEMS.filter(function(x){return x.id!==it.id && !excl[x.id] && x.sf;}).map(function(x){
+  return ITEMS.filter(function(x){return x.id!==it.id && !excl[x.id] && x.img;}).map(function(x){
     var sc=x.t.filter(function(t){return it.t.indexOf(t)>-1;}).length*2+(x.c!==it.c?1.5:0)+(x.b!==it.b?.5:0)+((x.i*7+it.i)%5)/10; return {x:x,sc:sc};
   }).sort(function(a,b){return b.sc-a.sc;}).slice(0,n).map(function(o){return o.x;});
 }
@@ -766,7 +777,7 @@ function init(){
   if($('#aTrack')) buildAisles();
   if($('#goals')) buildGoals();
   var kg=$('#kGrid'); if(kg){ kg.innerHTML=['arepa-cocinada-de-queso','arepa-cocinada-de-chicharron','deditos-de-mozzarella','deditos-de-yuca-origen','cafe-de-especialidad','capuchino-de-especialidad'].map(function(id){return BYID[id];}).filter(Boolean).map(cardH).join(''); }
-  var cp=$('#cbPics'); if(cp){ cp.innerHTML=['chocolate-284-g','kefir-sandia-y-fresa-220-ml','granola-clasica-de-vainilla-300-g','iso-whey-proteina-952-g','pistachio-cubes'].map(function(id){var it=BYID[id]; return it?'<img src="'+src(it,0,false)+'" width="400" height="400" alt="" loading="lazy">':'';}).join(''); }
+  var cp=$('#cbPics'); if(cp){ cp.innerHTML=['chocolate-284-g','kefir-sandia-y-fresa-220-ml','granola-clasica-de-vainilla-300-g','iso-whey-proteina-952-g','crema-de-almendras','pistachio-cubes'].map(function(id){var it=BYID[id]; return it?'<img src="'+src(it,0,false)+'" width="400" height="400" alt="" loading="lazy">':'';}).join(''); }
   if(IS_CAT){
     buildTabs(); renderBulk(); paintSack();
     try{ var u=new URL(location.href), c=u.searchParams.get('c'), q=u.searchParams.get('q'), o=u.searchParams.get('o'), g=u.searchParams.get('g');
