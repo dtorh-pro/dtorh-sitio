@@ -388,7 +388,7 @@ function cardH(it,k){
     (IS_HOME ? '<div class="row np"><button class="more" type="button" data-open="'+it.id+'">Ver producto <span aria-hidden="true">→</span></button></div></article>' : '<div class="row"><span class="pr">'+fmt(it.p)+'</span><span data-ctl="'+it.id+'">'+ctl(it.id)+'</span></div></article>');
 }
 function miniH(it){
-  return '<div class="mini"><button class="open" type="button" data-open="'+it.id+'"><span class="pic" data-c="'+it.c+'">'+pic(it)+'</span></button><div class="i"><b>'+esc(it.n)+'</b>'+(IS_HOME?'<button class="mlink" type="button" data-open="'+it.id+'">Ver producto →</button></div></div>':'<div class="rw"><strong>'+fmt(it.p)+'</strong><span data-ctl-mini="'+it.id+'">'+(qty(it.id)?'<span class="add" style="background:var(--leaf)" aria-label="En tu bolsa">✓</span>':'<button class="add" type="button" data-add="'+it.id+'" aria-label="Agregar '+esc(it.n)+'"><svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>')+'</span></div></div></div>');
+  return '<div class="mini"><button class="open" type="button" data-open="'+it.id+'"><span class="pic" data-c="'+it.c+'">'+pic(it)+'</span></button><div class="i">'+(it.b&&it.b!=='FIT Snack Market'&&it.b!=='Barra de café'?'<small class="mbr">'+esc(it.b)+'</small>':'')+'<b>'+esc(it.n)+'</b>'+(IS_HOME?'<button class="mlink" type="button" data-open="'+it.id+'">Ver producto →</button></div></div>':'<div class="rw"><strong>'+fmt(it.p)+'</strong><span data-ctl-mini="'+it.id+'">'+(qty(it.id)?'<span class="add" style="background:var(--leaf)" aria-label="En tu bolsa">✓</span>':'<button class="add" type="button" data-add="'+it.id+'" aria-label="Agregar '+esc(it.n)+'"><svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>')+'</span></div></div></div>');
 }
 var hlRe=null;
 function hl(s){ s=esc(s); if(!hlRe) return s; return s.replace(hlRe,'<mark>$1</mark>'); }
@@ -530,11 +530,91 @@ function observeReveal(scope){ $$('.reveal:not(.in)',scope).forEach(function(el)
 
 /* ---------- FICHA DE PRODUCTO ---------- */
 var IDEA={cremas:'Úntala en pan, arepa o pancakes, o mézclala con yogurt y fruta.',pan:'Para el desayuno o la merienda; acompáñalo con una crema para untar.',snacks:'Cabe en el bolso: para la oficina, la universidad o después de entrenar.',arepas:'Para el desayuno o la merienda. Pregunta en la tienda cómo prepararla.',lacteos:'Combínalo con granola o fruta para un desayuno rápido.',cafe:'',bienestar:'Lee la etiqueta antes de consumirlo y, si tienes una condición de salud, consulta a tu médico.'};
+/* "Combínalo con": maridajes pensados como lo haría quien atiende la tienda (no por azar).
+   Cada subcategoría tiene sus compañeros naturales, en orden de prioridad. */
+var PAIR={
+  'Arepas y deditos':['Cafetería','Bebidas','Despensa','Kéfir'],
+  'Panes y galletas':['Cremas para untar','Cafetería','Yogurt griego','Bebidas vegetales'],
+  'Cremas para untar':['Panes y galletas','Granolas y repostería fit','Cafetería','Yogurt griego'],
+  'Granolas y repostería fit':['Yogurt griego','Kéfir','Cremas para untar','Bebidas vegetales'],
+  'Kéfir':['Granolas y repostería fit','Antojos caseros','Barras y bocados','Panes y galletas'],
+  'Yogurt griego':['Granolas y repostería fit','Cremas para untar','Barras y bocados','Despensa'],
+  'Postres Greekö':['Cafetería','Barras y bocados','Panes y galletas'],
+  'Bebidas vegetales':['Granolas y repostería fit','Tés funcionales','Cafetería','Cremas para untar'],
+  'Cafetería':['Panes y galletas','Arepas y deditos','Antojos caseros','Barras y bocados','Turrones y barras'],
+  'Bebidas':['Arepas y deditos','Salados','Barras y bocados','Antojos caseros'],
+  'Despensa':['Arepas y deditos','Panes y galletas','Salados'],
+  'Antojos caseros':['Cafetería','Kéfir','Bebidas vegetales','Tés funcionales'],
+  'Barras y bocados':['Bebidas','Deportivos','Kéfir','Cafetería'],
+  'Salados':['Bebidas','Despensa','Kéfir'],
+  'Turrones y barras':['Cafetería','Tés funcionales','Bebidas'],
+  'Deportivos':['Bebidas vegetales','Barras y bocados','Kéfir','Granolas y repostería fit'],
+  'Suplementos':['Tés funcionales','Bienestar','Yogurt griego','Kéfir'],
+  'Bienestar':['Bebidas vegetales','Tés funcionales','Cafetería','Kéfir'],
+  'Tés funcionales':['Bebidas vegetales','Bienestar','Panes y galletas','Turrones y barras']
+};
+/* casos puntuales que van mejor con otro grupo que el de su subcategoría */
+var PAIR_ID={'miel-de-abeja':['Yogurt griego','Granolas y repostería fit','Panes y galletas','Tés funcionales'],
+  'paquete-de-arepas-congeladas':['Despensa','Cafetería','Bebidas','Kéfir']};
+/* los primeros, a mano: lo que de verdad se pide junto en la tienda */
+var PAIR_TOP={
+  'melatonina-3-mg-120-softgels':['te-deluxe-golden-milk','super-magnesium-400-mg-100-softgel','leche-de-almendra','deleitte-leche-de-almendras-500-g'],
+  'super-magnesium-400-mg-100-softgel':['melatonina-3-mg-120-softgels','te-deluxe-golden-milk','omega-3-fish-oil-1-200-mg-100-soft'],
+  'Arepas y deditos':['cafe-de-especialidad','te-400-ml','capuchino','aji-con-picante-organico','kefir-sabor-natural-220-ml','chimichurri-organico','soda-lata-310-ml','cafe'],
+  'Salados':['te-400-ml','soda-bretana','aji-con-picante-organico','kefir-sabor-natural-220-ml'],
+  'Cremas para untar':['pan-trenza-de-arroz','pancakes-sabor-a-brownie-300-g','capuchino-de-especialidad']
+};
+var PAIR_NO={'melatonina-3-mg-120-softgels':['te-deluxe-matcha-latte','te-deluxe-matcha-ceremonial','te-deluxe-benefit-plus','cafe','cafe-de-especialidad','capuchino','capuchino-de-especialidad'],
+  'super-magnesium-400-mg-100-softgel':['te-deluxe-matcha-latte','te-deluxe-matcha-ceremonial'],
+  'Kéfir':['harina-de-almendra-250-g'],'Yogurt griego':['harina-de-almendra-250-g'],'Cafetería':['paquete-de-arepas-congeladas'],'Bebidas vegetales':['harina-de-almendra-250-g'],'Deportivos':['harina-de-almendra-250-g'],
+  'Arepas y deditos':['miel-de-abeja','cafe-en-bolsa','albahaca-organica'],'Salados':['miel-de-abeja','cafe-en-bolsa','albahaca-organica']};
 function related(it,n,excl){
-  excl=excl||{};
-  return ITEMS.filter(function(x){return x.id!==it.id && !excl[x.id] && x.img;}).map(function(x){
-    var sc=x.t.filter(function(t){return it.t.indexOf(t)>-1;}).length*2+(x.c!==it.c?1.5:0)+(x.b!==it.b?.5:0)+((x.i*7+it.i)%5)/10; return {x:x,sc:sc};
-  }).sort(function(a,b){return b.sc-a.sc;}).slice(0,n).map(function(o){return o.x;});
+  excl=Object.assign({},excl||{}); n=n||8;
+  (PAIR_NO[it.s]||[]).concat(PAIR_NO[it.id]||[]).forEach(function(id){ excl[id]=1; });
+  var groups=PAIR_ID[it.id]||PAIR[it.s]||[], lists=groups.map(function(s){
+    return ITEMS.filter(function(x){return x.s===s && x.id!==it.id && !excl[x.id] && x.img;})
+      .sort(function(a,b){return ((a.i*7+it.i)%11)-((b.i*7+it.i)%11);});
+  }), out=[], seen={};
+  (PAIR_TOP[it.id]||PAIR_TOP[it.s]||[]).forEach(function(id){ var x=BYID[id]; if(x && !x.x && x.img && x.id!==it.id && !excl[id] && out.length<n){ seen[id]=1; out.push(x); } });
+  /* turno: primero el compañero principal, luego se alterna para que haya variedad */
+  for(var r=0; out.length<n && r<12; r++){
+    lists.forEach(function(l,gi){ var take=gi===0?2:1; for(var k=0;k<take && out.length<n;k++){ var x=l.shift(); if(x && !seen[x.id]){ seen[x.id]=1; out.push(x); } } });
+    if(lists.every(function(l){return !l.length;})) break;
+  }
+  if(out.length<n){
+    ITEMS.filter(function(x){return x.id!==it.id && !excl[x.id] && !seen[x.id] && x.img && x.c!==it.c;}).map(function(x){
+      return {x:x,sc:x.t.filter(function(t){return it.t.indexOf(t)>-1;}).length+((x.i*7+it.i)%5)/10};
+    }).sort(function(a,b){return b.sc-a.sc;}).slice(0,n-out.length).forEach(function(o){ out.push(o.x); });
+  }
+  return out;
+}
+/* carrusel de "Combínalo con": flechas, arrastre con el mouse, barra de avance y entrada animada */
+function upsH(list,title){
+  return '<div class="ups car"><div class="car-h"><h4>'+(title||'Combínalo con')+'</h4><span class="car-b"><button type="button" class="car-p" aria-label="Anterior" disabled><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><button type="button" class="car-n" aria-label="Siguiente"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button></span></div>'+
+    '<div class="row" tabindex="0" aria-label="'+(title||'Combínalo con')+'">'+list.map(miniH).join('')+'</div><div class="car-bar" aria-hidden="true"><i></i></div></div>';
+}
+function carWire(root,quiet){
+  $$('.car',root).forEach(function(c){
+    if(c.dataset.w) return; c.dataset.w=1;
+    var row=c.querySelector('.row'), p=c.querySelector('.car-p'), nx=c.querySelector('.car-n'), bar=c.querySelector('.car-bar i');
+    function upd(){ var max=row.scrollWidth-row.clientWidth; p.disabled=row.scrollLeft<4; nx.disabled=row.scrollLeft>max-4; var w=Math.max(.18,row.clientWidth/row.scrollWidth); bar.style.width=(w*100)+'%'; bar.style.transform='translateX('+(max>0?row.scrollLeft/max*(1/w-1)*100:0)+'%)'; c.classList.toggle('nomore',max<4); }
+    function go(d){ var card=row.querySelector('.mini'); var stepW=card?card.getBoundingClientRect().width+10:160; row.scrollBy({left:d*stepW*Math.max(1,Math.floor(row.clientWidth/stepW)),behavior:reduce?'auto':'smooth'}); }
+    p.addEventListener('click',function(){go(-1);}); nx.addEventListener('click',function(){go(1);});
+    row.addEventListener('scroll',upd,{passive:true});
+    row.addEventListener('keydown',function(e){ if(e.key==='ArrowRight'){e.preventDefault();go(1);} if(e.key==='ArrowLeft'){e.preventDefault();go(-1);} });
+    /* arrastrar con el mouse (en táctil ya funciona el dedo) */
+    var down=false, sx=0, sl=0, moved=false;
+    row.addEventListener('pointerdown',function(e){ if(e.pointerType!=='mouse') return; down=true; moved=false; sx=e.clientX; sl=row.scrollLeft; row.classList.add('drag'); });
+    addEventListener('pointermove',function(e){ if(!down) return; var dx=e.clientX-sx; if(Math.abs(dx)>4) moved=true; row.scrollLeft=sl-dx; });
+    addEventListener('pointerup',function(){ if(!down) return; down=false; row.classList.remove('drag'); });
+    row.addEventListener('click',function(e){ if(moved){ e.preventDefault(); e.stopPropagation(); moved=false; } },true);
+    upd(); setTimeout(upd,350);
+    if(window.gsap && !reduce && !quiet){
+      gsap.fromTo(row.querySelectorAll('.mini'),{x:46,opacity:0},{x:0,opacity:1,duration:.7,ease:'power3.out',stagger:.06,delay:.15});
+      /* pista de que hay más: la fila se asoma un poco a la derecha y vuelve */
+      if(row.scrollWidth>row.clientWidth+8) gsap.fromTo(row,{scrollLeft:0},{scrollLeft:56,duration:.55,ease:'power2.out',delay:.95,yoyo:true,repeat:1,repeatDelay:.15});
+    }
+  });
 }
 var sheetQ=1, sheetId=null, lastFocus=null;
 function openSheet(id){
@@ -550,8 +630,8 @@ function openSheet(id){
     (tags?'<div><p class="fine" style="margin-bottom:.4rem">Ideal para</p><div class="tags">'+tags+'</div></div>':'')+
     '<p class="desc">'+esc(desc)+'</p>'+
     '<a class="ask" target="_blank" rel="noopener" href="'+waLink('Hola FIT Snack Market, tengo una pregunta sobre '+it.n+(it.b?' ('+it.b+')':'')+'.')+'"><svg class="ic" viewBox="0 0 24 24"><path d="M4.5 19.5l1.2-3.6a8 8 0 1 1 2.9 2.6l-4.1 1Z"/></svg><span><b>¿Tienes una duda de este producto?</b><small>Pregunta por WhatsApp: ingredientes, disponibilidad, sabores.</small></span></a>'+
-    '<div class="ups"><h4>Combínalo con</h4><div class="row">'+related(it,6).map(miniH).join('')+'</div></div></div>';
-  openLayer('sheet'); var si=sh.querySelector('.si'); if(si) si.scrollTop=0; sh.scrollTop=0;
+    upsH(related(it,8))+'</div>';
+  openLayer('sheet'); var si=sh.querySelector('.si'); if(si) si.scrollTop=0; sh.scrollTop=0; carWire(sh);
   try{ var u=new URL(location.href); u.searchParams.set('p',id); history.replaceState(null,'',u.pathname+u.search+u.hash);}catch(e){}
 }
 function sheetSync(){ var it=BYID[sheetId]; if(!$('#shQ')) return; $('#shQ').textContent=sheetQ; $('#shT2').textContent=fmt(it.p*sheetQ); }
@@ -603,11 +683,12 @@ function renderBag(){
   }
   var inBag={}; L.forEach(function(l){ if(l.it) inBag[l.it.id]=1; });
   var base=L.filter(function(l){return l.it;}).map(function(l){return l.it;})[0];
-  var ups=base?related(base,6,inBag):pickFor('antojo',6,seed);
+  var ups=base?related(base,8,inBag):pickFor('antojo',8,seed);
   body.innerHTML=L.map(function(l){
     return '<div class="ln"><span class="th">'+thumb(l)+'</span><span><b>'+esc(l.n)+'</b><small>'+esc(l.sub)+'</small></span><span class="r"><strong>'+fmt(l.tot)+'</strong>'+
       (l.gb?'<button class="linkb" type="button" data-rm="'+l.k+'">Quitar</button>':'<span class="stp"><button type="button" data-dec="'+l.k+'" aria-label="Quitar uno">−</button><output>'+l.q+'</output><button type="button" data-inc="'+l.k+'" aria-label="Agregar uno">+</button></span>')+'</span></div>';
-  }).join('')+(ups.length?'<div class="ups"><h4>Combínalo con</h4><div class="row">'+ups.map(miniH).join('')+'</div></div>':'');
+  }).join('')+(ups.length?upsH(ups):'');
+  carWire(body,true);
   foot.innerHTML='<div class="tot"><span>Subtotal · '+bagCount()+(bagCount()===1?' producto':' productos')+'</span><b>'+fmt(bagTotal())+'</b></div><button class="btn block" type="button" id="toForm">Finalizar pedido <span class="arr" aria-hidden="true">→</span></button><p class="fine" style="margin-top:.6rem;text-align:center">El domicilio y el total final te los confirman por WhatsApp.</p>';
 }
 var F=store.get(KEYF,{name:'',mode:'dom',addr:'',hood:'',when:'asap',pay:'',note:''});
