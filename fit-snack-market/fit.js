@@ -833,56 +833,58 @@ function init(){
   mobileMenu(); pauseOffscreen();
   motion();
 }
-/* ---------- MENÚ MÓVIL: "la rama" — se abre en círculo desde el botón, la rama crece y cada sección brota ---------- */
+/* ---------- MENÚ MÓVIL: "las etiquetas" — una bolsa kraft sube desde abajo y de la rama cuelgan
+   etiquetas de tienda (como las que FIT pone en sus frascos). Propio de FIT: no se parece a otro menú. ---------- */
 function mobileMenu(){
   var tools=$('.top .tools'); if(!tools) return;
   var items=IS_HOME?[
-    ['#pasillos','Pasillos','Ocho pasillos, un solo lugar','granel'],
-    ['#historia','Nuestra historia','Cómo nació FIT','arepas'],
-    ['#cocina','De nuestra cocina','Arepas, deditos y café','cafe'],
-    ['#para-ti','Para ti','Ideas según tu momento','snacks'],
-    [CATP,'Catálogo','Más de 100 productos','cremas'],
-    ['#dudas','Dudas','Lo que más preguntan','lacteos'],
-    ['#visitanos','Visítanos','C.C. Miramar Plaza, local 211','bienestar']
+    ['#pasillos','Pasillos','8 pasillos','granel','k1'],
+    ['#historia','Nuestra historia','Cómo nació FIT','arepas','k2'],
+    ['#cocina','De la cocina','Arepas y café','cafe','k3'],
+    ['#para-ti','Para ti','Según tu momento','snacks','k4'],
+    [CATP,'Ver el catálogo','Más de 100 productos','cremas','big'],
+    ['#dudas','Dudas','Lo que más preguntan','lacteos','k2'],
+    ['#visitanos','Visítanos','Miramar Plaza, local 211','bienestar','k1']
   ]:[
-    [HOME,'Inicio','Volver a la portada','cremas'],
-    ['#catalogo','Catálogo','Busca, filtra y arma tu bolsa','snacks'],
-    ['#granel','A granel','Frutos secos por gramo','granel'],
-    [HOME+'#dudas','Dudas','Lo que más preguntan','lacteos'],
-    [HOME+'#visitanos','Visítanos','C.C. Miramar Plaza, local 211','bienestar']
+    [HOME,'Inicio','La portada','cremas','k1'],
+    ['#granel','A granel','Por gramo','granel','k3'],
+    ['#catalogo','Todo el catálogo','Busca, filtra y arma tu bolsa','snacks','big'],
+    [HOME+'#dudas','Dudas','Lo que más preguntan','lacteos','k2'],
+    [HOME+'#visitanos','Visítanos','Miramar Plaza, local 211','bienestar','k4']
   ];
   var btn=doc.createElement('button'); btn.type='button'; btn.className='mbtn'; btn.id='mBtn';
   btn.setAttribute('aria-label','Abrir menú'); btn.setAttribute('aria-expanded','false'); btn.setAttribute('aria-controls','mMenu');
-  btn.innerHTML='<span class="l1"></span><span class="l2"></span><span class="l3"></span>';
+  btn.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path class="st" d="M12 21V9"/><path class="la" d="M12 13C8.5 13 6 10.8 6 7.5 9.5 7.5 12 9.7 12 13Z"/><path class="lb" d="M12 11c0-3.3 2.5-5.5 6-5.5 0 3.3-2.5 5.5-6 5.5Z"/><path class="x1" d="M6 6l12 12"/><path class="x2" d="M18 6 6 18"/></svg>';
   tools.appendChild(btn);
-  var m=doc.createElement('div'); m.className='mmenu'; m.id='mMenu'; m.setAttribute('role','dialog'); m.setAttribute('aria-modal','true'); m.setAttribute('aria-label','Menú'); m.setAttribute('aria-hidden','true'); m.setAttribute('data-lenis-prevent','');
-  m.innerHTML='<svg class="mm-branch" viewBox="0 0 120 800" aria-hidden="true"><path class="stem" data-gap=".07" data-sc=".5" d="M70 800C40 700 90 620 60 520S20 360 64 270 40 110 80 0" fill="none" stroke="#3E4E2B" stroke-width="3.2" stroke-linecap="round"/><g class="lv"></g></svg>'+
-    '<div class="mm-in"><p class="mm-ey eyebrow">Menú</p><ol class="mm-list">'+items.map(function(it,i){
-      return '<li><a href="'+it[0]+'" data-mm><span class="no">'+String(i+1).padStart(2,'0')+'</span><span class="ic">'+(ILL[it[3]]||'')+'</span><span class="tx"><b>'+it[1]+'</b><small>'+it[2]+'</small></span><span class="ar" aria-hidden="true">→</span></a></li>'; }).join('')+'</ol>'+
-    '<div class="mm-foot"><p class="status mm-st" id="mmStatus"><i></i><span></span></p><div class="mm-ctas"><a class="btn" data-wa="Hola FIT Snack Market, quiero hacer un pedido." target="_blank" rel="noopener" href="#"><svg class="ic" viewBox="0 0 24 24"><path d="M4.5 19.5l1.2-3.6a8 8 0 1 1 2.9 2.6l-4.1 1Z"/><path d="M9.5 9c.3 1.6 2.2 3.8 4.6 4.6l.9-1.1 1.8.9c-.3 1-1 1.6-2 1.6-2.9-.2-5.9-3.2-6.1-6.1 0-1 .6-1.7 1.6-2l.9 1.8L9.5 9Z"/></svg>Pedir por WhatsApp</a><a class="btn ghost" href="https://www.instagram.com/fitsnackmarket" target="_blank" rel="noopener">Instagram</a></div><p class="script mm-tl">Nutre tu mejor versión</p></div></div>'+
-    '<span class="bf mm-bf" aria-hidden="true">'+(ILL.mariposa||'')+'</span>';
+  var m=doc.createElement('div'); m.className='mbag'; m.id='mMenu'; m.setAttribute('role','dialog'); m.setAttribute('aria-modal','true'); m.setAttribute('aria-label','Menú'); m.setAttribute('aria-hidden','true'); m.setAttribute('data-lenis-prevent','');
+  var rot=[-3,2.5,-1.5,3,-2,1.5,-2.5];
+  m.innerHTML='<div class="mb-in"><svg class="mb-rama" viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true"><path class="stem" data-gap=".09" data-sc=".42" d="M-10 30C60 8 120 46 200 26S330 6 410 30" fill="none" stroke="#3E4E2B" stroke-width="3" stroke-linecap="round"/><g class="lv"></g></svg>'+
+    '<p class="mb-hi">¿A dónde vamos?</p><ul class="mb-tags">'+items.map(function(it,i){
+      return '<li class="'+it[4]+'" style="--r:'+rot[i%rot.length]+'deg"><a href="'+it[0]+'" data-mm><span class="hole" aria-hidden="true"></span><span class="ic">'+(ILL[it[3]]||'')+'</span><b>'+it[1]+'</b><small>'+it[2]+'</small></a></li>'; }).join('')+'</ul>'+
+    '<div class="mb-foot"><p class="status" id="mmStatus"><i></i><span></span></p><a class="btn" data-wa="Hola FIT Snack Market, quiero hacer un pedido." target="_blank" rel="noopener" href="#"><svg class="ic" viewBox="0 0 24 24"><path d="M4.5 19.5l1.2-3.6a8 8 0 1 1 2.9 2.6l-4.1 1Z"/><path d="M9.5 9c.3 1.6 2.2 3.8 4.6 4.6l.9-1.1 1.8.9c-.3 1-1 1.6-2 1.6-2.9-.2-5.9-3.2-6.1-6.1 0-1 .6-1.7 1.6-2l.9 1.8L9.5 9Z"/></svg>Pedir por WhatsApp</a><a class="ig" href="https://www.instagram.com/fitsnackmarket" target="_blank" rel="noopener">@fitsnackmarket</a></div></div>';
   doc.body.appendChild(m);
-  leafify(m.querySelector('.mm-branch'),m.querySelector('.mm-branch .lv'));
+  leafify(m.querySelector('.mb-rama'),m.querySelector('.mb-rama .lv'));
   $$('[data-wa]',m).forEach(function(a){ a.href=waLink(a.dataset.wa); });
-  var open=false, tl=null, stem=m.querySelector('.stem'), L=+stem.dataset.len;
+  var open=false, tl=null, stem=m.querySelector('.mb-rama .stem'), L=+stem.dataset.len;
   function paint(){ var s=storeState(), el=$('#mmStatus'); el.classList.toggle('closed',!s.open); el.innerHTML='<i></i><span>'+s.t+' <small>· '+s.s+'</small></span>'; }
-  function setOrigin(){ var r=btn.getBoundingClientRect(); m.style.setProperty('--ox',(r.left+r.width/2)+'px'); m.style.setProperty('--oy',(r.top+r.height/2)+'px'); }
+  function place(){ var t=$('.top'); m.style.setProperty('--mt',Math.max(0,Math.round(t.getBoundingClientRect().bottom))+'px'); }
   function show(){
-    if(open) return; open=true; paint(); setOrigin(); if(layer) closeLayer(true);
+    if(open) return; open=true; paint(); place(); if(layer) closeLayer(true);
     m.classList.add('on'); m.setAttribute('aria-hidden','false'); btn.classList.add('x'); btn.setAttribute('aria-expanded','true'); btn.setAttribute('aria-label','Cerrar menú');
     doc.body.classList.add('lock','mm-open'); if(lenis) lenis.stop();
+    m.querySelector('.mb-in').scrollTop=0;
     if(window.gsap && !reduce){
       if(tl) tl.kill();
+      var tags=m.querySelectorAll('.mb-tags li');
       stem.style.strokeDasharray=L;
       tl=gsap.timeline();
-      tl.fromTo(stem,{strokeDashoffset:L},{strokeDashoffset:0,duration:1.1,ease:'power2.out'},.12)
-        .fromTo(m.querySelectorAll('.mm-branch .lf'),{scale:0},{scale:function(i,el){return +el.dataset.s;},transformOrigin:'0% 50%',duration:.45,ease:'back.out(2)',stagger:.04},.3)
-        .fromTo(m.querySelectorAll('.mm-ey,.mm-list li'),{y:28,opacity:0},{y:0,opacity:1,duration:.6,ease:'power3.out',stagger:.055},.18)
-        .fromTo(m.querySelectorAll('.mm-list .ic'),{scale:.4,rotation:-25},{scale:1,rotation:0,duration:.6,ease:'back.out(2)',stagger:.055},.25)
-        .fromTo(m.querySelector('.mm-foot'),{y:24,opacity:0},{y:0,opacity:1,duration:.6,ease:'power3.out'},.45)
-        .fromTo(m.querySelector('.mm-bf'),{x:-140,y:260,rotation:-30,opacity:0},{x:0,y:0,rotation:0,opacity:1,duration:1.2,ease:'power2.out'},.35);
+      tl.fromTo(stem,{strokeDashoffset:L},{strokeDashoffset:0,duration:.9,ease:'power2.out'},.15)
+        .fromTo(m.querySelectorAll('.mb-rama .lf'),{scale:0},{scale:function(i,el){return +el.dataset.s;},transformOrigin:'0% 50%',duration:.4,ease:'back.out(2)',stagger:.03},.3)
+        .fromTo(m.querySelector('.mb-hi'),{y:14,opacity:0},{y:0,opacity:1,duration:.5,ease:'power3.out'},.2)
+        .fromTo(tags,{y:-26,opacity:0,rotation:function(i){return rot[i%rot.length]*-4;}},{y:0,opacity:1,rotation:function(i){return rot[i%rot.length];},duration:1.1,ease:'elastic.out(1,.55)',stagger:.06,transformOrigin:'50% 0%'},.28)
+        .fromTo(m.querySelector('.mb-foot'),{y:20,opacity:0},{y:0,opacity:1,duration:.5,ease:'power3.out'},.55);
     }
-    setTimeout(function(){ var f=m.querySelector('a'); if(f) f.focus({preventScroll:true}); },80);
+    setTimeout(function(){ var f=m.querySelector('a'); if(f) f.focus({preventScroll:true}); },120);
   }
   function hide(go){
     if(!open) return; open=false;
@@ -891,6 +893,7 @@ function mobileMenu(){
     if(!go) btn.focus({preventScroll:true});
   }
   btn.addEventListener('click',function(){ open?hide():show(); });
+  addEventListener('resize',function(){ if(open) place(); });
   m.addEventListener('click',function(e){
     var a=e.target.closest('[data-mm]'); if(!a) return;
     var h=a.getAttribute('href');
