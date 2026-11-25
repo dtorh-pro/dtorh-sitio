@@ -1,0 +1,47 @@
+/* FIT Snack Market · ilustraciones propias (trazo oliva, rellenos planos de la paleta del logo). dtorh™ */
+(function(){
+var K='#2E3A21';
+function svg(inner,vb){ return '<svg viewBox="'+(vb||'0 0 48 48')+'" aria-hidden="true"><g fill="none" stroke="'+K+'" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+inner+'</g></svg>'; }
+function mound(c,dots){ return '<path d="M6 39c3-10 10-17 18-17s15 7 18 17Z" fill="'+c+'"/><path d="M4 39h40"/>'+(dots||'<path d="M18 31h.01M26 28h.01M30 34h.01M21 36h.01" stroke-width="2.4"/>'); }
+var I={
+  /* frutos secos y semillas */
+  'Almendra':'<path d="M24 5c7.5 6 11.5 15.5 9.4 24.6C32 36.3 27.7 41 24 43c-3.7-2-8-6.7-9.4-13.4C12.5 20.5 16.5 11 24 5Z" fill="#D7AE7E"/><path d="M24 11c-1.8 7-2.2 15-.6 25"/><path d="M19.5 19l1.2.8M28 24l1.2.8M19 30l1.2.8M27.5 33l1 .7"/>',
+  'Nuez nogal':'<path d="M7 25c0-9.4 7.6-17 17-17s17 7.6 17 17-7.6 16-17 16S7 34.4 7 25Z" fill="#C29462"/><path d="M24 9v31"/><path d="M15 15c3.5 2 3.5 5.5 0 7.5s0 6.5 4.5 8.5M33 15c-3.5 2-3.5 5.5 0 7.5s0 6.5-4.5 8.5M12 27c2 3 4 4 6 4.5M36 27c-2 3-4 4-6 4.5"/>',
+  'Marañón':'<path d="M33.5 7.5c7.5 5.2 7.4 18.2-1.2 25.4-7.6 6.4-18.8 6.2-22.6-.6-1.7-3 1.2-5.8 4.1-4 5.3 3.2 11.4 2.1 14.6-3.1 2.7-4.4 2.8-9 1.7-12.3-1-3 1.3-6.4 3.4-5.4Z" fill="#EBD6A8"/><path d="M33 13c2.4 5.6 1 11.8-3.6 16"/>',
+  'Pistacho':'<path d="M24 5c8.3 0 13.5 8.4 13.5 19S32.3 43 24 43 10.5 34.6 10.5 24 15.7 5 24 5Z" fill="#E8DCB5"/><path d="M24 11c4.6 1.4 7.5 6.6 7.5 13S28.6 35.6 24 37c-4.6-1.4-7.5-6.6-7.5-13S19.4 12.4 24 11Z" fill="#9DB45F"/><path d="M24 15c-1.2 5-1.2 13 0 18"/>',
+  'Maní con sal':'<path d="M24 4c6.2 0 9.5 4.2 9.5 9.3 0 3-2 5.2-2 8.2s3.3 5.2 3.3 9.4C34.8 38 30 43 24 43s-10.8-5-10.8-12.1c0-4.2 3.3-6.4 3.3-9.4s-2-5.2-2-8.2C14.5 8.2 17.8 4 24 4Z" fill="#D9B27C"/><path d="M17 13l4 3M23 11l4 3M18 29l4 3M25 27l4 3M20 35l4 3"/>',
+  'Arándanos':'<circle cx="17" cy="28" r="8.5" fill="#8E2F45"/><circle cx="31" cy="27" r="8" fill="#A63C52"/><circle cx="24" cy="15" r="7.5" fill="#8E2F45"/><path d="M22 13l2 2 2-2M15 26l2 2 2-2M29 25l2 2 2-2"/>',
+  'Chía':'<ellipse cx="15" cy="18" rx="4.2" ry="3.2" fill="#5B5850" transform="rotate(-20 15 18)"/><ellipse cx="29" cy="14" rx="3.8" ry="2.9" fill="#8A857A" transform="rotate(25 29 14)"/><ellipse cx="23" cy="27" rx="4.4" ry="3.3" fill="#8A857A"/><ellipse cx="34" cy="29" rx="3.8" ry="2.9" fill="#5B5850" transform="rotate(-30 34 29)"/><ellipse cx="14" cy="34" rx="3.6" ry="2.8" fill="#8A857A" transform="rotate(15 14 34)"/><ellipse cx="27" cy="38" rx="3.8" ry="2.9" fill="#5B5850"/>',
+  'Linaza':'<path d="M13 12c4 1 6 4 5.5 8-3.5 0-6.3-3.6-5.5-8Z" fill="#9C6A36"/><path d="M30 9c3.4 2.2 4.4 5.6 3 9.2-3.2-.8-5-4.8-3-9.2Z" fill="#8B5A2B"/><path d="M22 23c4 .6 6.2 3.6 6 7.6-3.6.2-6.6-3.2-6-7.6Z" fill="#8B5A2B"/><path d="M34 27c3.6 1.6 5 4.8 4 8.6-3.4-.4-5.4-4.2-4-8.6Z" fill="#9C6A36"/><path d="M11 30c4 .4 6.3 3.4 6.2 7.4-3.6.3-6.7-3-6.2-7.4Z" fill="#9C6A36"/>',
+  'Semilla de calabaza':'<path d="M24 5c7.6 5.2 9.8 13.6 7.6 22.6C30.2 33.8 27 38.3 24 43c-3-4.7-6.2-9.2-7.6-15.4C14.2 18.6 16.4 10.2 24 5Z" fill="#7FA04A"/><path d="M24 10c5 4.4 6.4 11 4.8 17.6-1 4.4-2.8 7.6-4.8 10.6-2-3-3.8-6.2-4.8-10.6C17.6 21 19 14.4 24 10Z" fill="#A3BE6A"/>',
+  'Semilla de girasol':'<path d="M24 5c6.4 4.6 9 12.6 7.4 21.6C30 34 27.4 39 24 43c-3.4-4-6-9-7.4-16.4C15 17.6 17.6 9.6 24 5Z" fill="#3F3B36"/><path d="M24 9v31M20 13c-1 7-1 16 1.5 24M28 13c1 7 1 16-1.5 24" stroke="#E8E1CF"/>',
+  /* especias */
+  'Achiote':'<circle cx="16" cy="20" r="4.6" fill="#B23A22"/><circle cx="27" cy="16" r="4.2" fill="#C44A2A"/><circle cx="33" cy="27" r="4.6" fill="#B23A22"/><circle cx="21" cy="31" r="4.4" fill="#C44A2A"/><circle cx="13" cy="33" r="3.8" fill="#B23A22"/><circle cx="30" cy="38" r="3.6" fill="#C44A2A"/>',
+  'Achiote molido':mound('#C24B2E'),
+  'Anís estrellado':'<path d="M24 5l4 11 11-4-6 10 10 6-12 1 2 12-9-8-9 8 2-12-12-1 10-6-6-10 11 4Z" fill="#7A4A2E"/><circle cx="24" cy="25" r="3" fill="#5C3520"/>',
+  'Canela en astilla':'<path d="M10 13l26 22a3 3 0 0 1-4 4L6 17a3 3 0 0 1 4-4Z" fill="#A86A3C"/><path d="M16 9l26 22a3 3 0 0 1-4 4L12 13a3 3 0 0 1 4-4Z" fill="#BD7E4A"/><path d="M13 16a3 3 0 0 0 1.4-4M19 12a3 3 0 0 0 1.4-4"/>',
+  'Clavito de olor':'<path d="M18 16l6 22M27 14l-3 24M34 18l-9 20"/><circle cx="17" cy="12" r="4" fill="#5A3324"/><circle cx="28" cy="10" r="4" fill="#4A2A1C"/><circle cx="36" cy="15" r="3.6" fill="#5A3324"/>',
+  'Comino entero':'<path d="M10 16c4-3 9-3 12 0-4 3-9 3-12 0Z" fill="#A08350"/><path d="M26 12c4-3 9-3 12 0-4 3-9 3-12 0Z" fill="#8C7344"/><path d="M14 28c4-3 9-3 12 0-4 3-9 3-12 0Z" fill="#8C7344"/><path d="M28 32c4-3 9-3 12 0-4 3-9 3-12 0Z" fill="#A08350"/><path d="M12 38c3-2 7-2 9 0-2.5 2-6.5 2-9 0Z" fill="#A08350"/>',
+  'Cúrcuma':mound('#E0A126'),
+  'Flor de Jamaica':'<path d="M24 24c-2-8 0-15 0-15s5 6 0 15Zm0 0c6-6 13-6 13-6s-4 7-13 6Zm0 0c8 2 11 9 11 9s-8 1-11-9Zm0 0c-1 8-8 12-8 12s-2-8 8-12Zm0 0c-7-4-12-2-12-2s3 8 12 2Z" fill="#9E2346"/><circle cx="24" cy="24" r="2.6" fill="#5E1027"/>',
+  'Jengibre molido':mound('#D8B46A'),
+  'Laurel molido':'<path d="M9 39C9 22 21 9 39 9c0 18-13 30-30 30Z" fill="#7E8A4E"/><path d="M11 37L36 12M18 30l-1-6M24 24l-1-6M30 18l-1-5M18 30l6 1M24 24l6 1M30 18l5 1"/>',
+  'Páprika molida':mound('#C0452A'),
+  'Pimienta de olor':'<circle cx="17" cy="19" r="5.2" fill="#6B4430"/><circle cx="30" cy="17" r="5" fill="#5C3B28"/><circle cx="24" cy="30" r="5.4" fill="#6B4430"/><circle cx="35" cy="31" r="4.6" fill="#5C3B28"/><circle cx="13" cy="32" r="4.4" fill="#5C3B28"/><path d="M16 17h.01M29 15h.01M23 28h.01" stroke="#FAF6ED" stroke-width="2"/>',
+  'Pimienta negra':'<circle cx="16" cy="18" r="4" fill="#2F2A26"/><circle cx="26" cy="14" r="3.8" fill="#3A3430"/><circle cx="34" cy="22" r="4" fill="#2F2A26"/><circle cx="22" cy="26" r="4.2" fill="#3A3430"/><circle cx="13" cy="31" r="3.6" fill="#2F2A26"/><circle cx="30" cy="33" r="4" fill="#3A3430"/><circle cx="21" cy="38" r="3.4" fill="#2F2A26"/>',
+  'Romero':'<path d="M14 42C20 30 26 18 36 6"/><path d="M17 36l-6-2M19 32l7 1M21 27l-6-3M24 23l7 0M26 18l-6-3M29 14l6-1M31 10l-5-3M20 34" stroke="#5F7247" stroke-width="2.6"/>',
+  /* pasillos */
+  'cremas':'<path d="M14 13h20v5H14z" fill="#526539"/><path d="M13 18h22v19a5 5 0 0 1-5 5H18a5 5 0 0 1-5-5Z" fill="#E9D3A6"/><path d="M17 25h14v8H17z" fill="#FAF6ED"/><path d="M37 6l-8 13" stroke-width="2.2"/><path d="M37 4.5c2 .6 2.6 2.6 1.2 4.4" fill="#FAF6ED"/>',
+  'pan':'<path d="M7 27c0-8.3 7.6-14 17-14s17 5.7 17 14v9a3 3 0 0 1-3 3H10a3 3 0 0 1-3-3Z" fill="#D9A866"/><path d="M16 19l3 5M23 17l3 5M30 19l3 5"/><path d="M7 31h34"/>',
+  'snacks':'<path d="M7 20l27-9 7 17-27 9Z" fill="#D7B27A"/><circle cx="17" cy="22" r="2.4" fill="#8B5A2B"/><circle cx="26" cy="20" r="2" fill="#9DB45F"/><circle cx="23" cy="27" r="2.2" fill="#8E2F45"/><circle cx="32" cy="25" r="2" fill="#8B5A2B"/>',
+  'arepas':'<ellipse cx="24" cy="27" rx="17" ry="11" fill="#F0DFAE"/><path d="M7 27v3c0 6 7.6 11 17 11s17-5 17-11v-3"/><path d="M15 23l6 8M22 20l7 9M30 20l5 7" stroke="#B5803F" stroke-width="2.2"/>',
+  'lacteos':'<path d="M20 5h8v6l3.5 5V39a3 3 0 0 1-3 3h-9a3 3 0 0 1-3-3V16l3.5-5Z" fill="#FFFDF7"/><path d="M16.5 22h15v11h-15z" fill="#B5BC8F"/><path d="M20 11h8"/>',
+  'cafe':'<path d="M9 19h24v8a10 10 0 0 1-10 10h-4A10 10 0 0 1 9 27Z" fill="#FAF6ED"/><path d="M33 22h2.5a4.5 4.5 0 0 1 0 9H32"/><path d="M5 41h34" /><path d="M16 7c-1.6 2 1.6 3.6 0 6M22 6c-1.6 2 1.6 3.6 0 6M28 7c-1.6 2 1.6 3.6 0 6"/><path d="M11 21h20" stroke="#8B5A2B" stroke-width="2.4"/>',
+  'bienestar':'<path d="M13 15h16v4H13z" fill="#526539"/><path d="M12 19h18v20a3 3 0 0 1-3 3H15a3 3 0 0 1-3-3Z" fill="#E1E6CB"/><path d="M16 27h10M16 32h7"/><path d="M33 31c0-8 5-13 11-13 0 7-4 13-11 13Z" fill="#7E9B4E"/><path d="M33 31l7-8"/>',
+  'granel':'<g transform="translate(2 4) scale(.56) rotate(-20 24 24)">'+'<path d="M24 5c7.5 6 11.5 15.5 9.4 24.6C32 36.3 27.7 41 24 43c-3.7-2-8-6.7-9.4-13.4C12.5 20.5 16.5 11 24 5Z" fill="#D7AE7E"/><path d="M24 11c-1.8 7-2.2 15-.6 25"/>'+'</g><g transform="translate(19 2) scale(.56)"><path d="M7 25c0-9.4 7.6-17 17-17s17 7.6 17 17-7.6 16-17 16S7 34.4 7 25Z" fill="#C29462"/><path d="M24 9v31M15 15c3.5 2 3.5 5.5 0 7.5s0 6.5 4.5 8.5M33 15c-3.5 2-3.5 5.5 0 7.5s0 6.5-4.5 8.5"/></g><g transform="translate(14 20) scale(.56) rotate(30 24 24)"><path d="M24 5c8.3 0 13.5 8.4 13.5 19S32.3 43 24 43 10.5 34.6 10.5 24 15.7 5 24 5Z" fill="#E8DCB5"/><path d="M24 11c4.6 1.4 7.5 6.6 7.5 13S28.6 35.6 24 37c-4.6-1.4-7.5-6.6-7.5-13S19.4 12.4 24 11Z" fill="#9DB45F"/></g><g transform="translate(26 22) scale(.5) rotate(-35 24 24)"><path d="M33.5 7.5c7.5 5.2 7.4 18.2-1.2 25.4-7.6 6.4-18.8 6.2-22.6-.6-1.7-3 1.2-5.8 4.1-4 5.3 3.2 11.4 2.1 14.6-3.1 2.7-4.4 2.8-9 1.7-12.3-1-3 1.3-6.4 3.4-5.4Z" fill="#EBD6A8"/></g>'
+};
+var ILL={}; Object.keys(I).forEach(function(k){ ILL[k]=svg(I[k]); });
+/* mariposa del logo, en línea, con alas que aletean */
+ILL.mariposa='<svg viewBox="0 0 60 44" aria-hidden="true"><g fill="#FFFDF7" stroke="'+K+'" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><g class="wl"><path d="M29 22C22 8 10 2 4 6c-5 4 1 14 10 16-8 2-11 9-7 13 5 5 15-1 22-13Z"/><path d="M27 19C21 12 14 8 9 9M26 24c-6 4-11 7-14 7" stroke="#96A26E"/></g><g class="wr"><path d="M31 22C38 8 50 2 56 6c5 4-1 14-10 16 8 2 11 9 7 13-5 5-15-1-22-13Z"/><path d="M33 19c6-7 13-11 18-10M34 24c6 4 11 7 14 7" stroke="#96A26E"/></g><path d="M30 13v20" stroke-width="2.4"/><path d="M30 13c-2-5-5-8-8-9M30 13c2-5 5-8 8-9" stroke-width="1.2" fill="none"/></g></svg>';
+window.FIT_ILL=ILL;
+})();

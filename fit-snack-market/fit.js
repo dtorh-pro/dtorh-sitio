@@ -8,6 +8,8 @@ var IMG = '/fit-snack-market/img/';
 var HOME = '/fit-snack-market/', CATP = '/fit-snack-market/catalogo/';
 var APERTURA = false; // true cuando la tienda abra: muestra abierto/cerrado según el horario
 var IS_CAT = !!document.getElementById('results');
+var IS_HOME = document.body.classList.contains('home');
+var ILL = window.FIT_ILL || {};
 var KEY = 'fitsm-bolsa-v2', KEYF = 'fitsm-datos-v1';
 var doc = document, root = doc.documentElement;
 var $ = function(s,r){return (r||doc).querySelector(s);};
@@ -254,18 +256,78 @@ function heroMotion(){
   paintTicket([]);
 }
 
+/* ---------- JARDÍN (portada) ---------- */
+var FRUITS=[{c:'granel',n:'Frutos secos',t:.2,s:1},{c:'cremas',n:'Cremas y granolas',t:.34,s:-1},{c:'pan',n:'Panadería',t:.48,s:1},{c:'lacteos',n:'Lácteos y kéfir',t:.62,s:-1},{c:'cafe',n:'Café de barra',t:.76,s:1},{c:'bienestar',n:'Bienestar',t:.9,s:-1}];
+var LEAF='<path d="M0 0C14-17 52-21 72-5c4 3 4 9 0 12C52 24 14 18 0 0Z" fill="#7E9B4E" stroke="#2E3A21" stroke-width="2.2" stroke-linejoin="round"/><path d="M6 1C28 2 50 3 66 3" fill="none" stroke="#2E3A21" stroke-width="1.6" stroke-linecap="round" opacity=".55"/>';
+var LEAF2='<path d="M0 0C14-17 52-21 72-5c4 3 4 9 0 12C52 24 14 18 0 0Z" fill="#96A26E" stroke="#2E3A21" stroke-width="2.2" stroke-linejoin="round"/><path d="M6 1C28 2 50 3 66 3" fill="none" stroke="#2E3A21" stroke-width="1.6" stroke-linecap="round" opacity=".55"/>';
+var garden=null;
+function buildGarden(){
+  var stem=$('#gStem'); if(!stem) return;
+  var L=stem.getTotalLength(), g=$('#gLeaves'), h='', leaves=[], k=0;
+  for(var t=.06;t<=.985;t+=.062){
+    var p=stem.getPointAtLength(L*t), q=stem.getPointAtLength(Math.min(L,L*t+2)), ang=Math.atan2(q.y-p.y,q.x-p.x)*180/Math.PI, side=(k%2?1:-1), sc=(1.25-.62*t);
+    h+='<g transform="translate('+p.x.toFixed(1)+' '+p.y.toFixed(1)+') rotate('+(ang+side*58).toFixed(1)+')"><g class="lf" data-t="'+t.toFixed(3)+'" transform="scale('+sc.toFixed(2)+')">'+(k%3?LEAF:LEAF2)+'</g></g>';
+    k++;
+  }
+  g.innerHTML=h;
+  var box=$('#gArt'), fr=$('#gFruits');
+  fr.innerHTML=FRUITS.map(function(f){
+    var p=stem.getPointAtLength(L*f.t), q=stem.getPointAtLength(L*f.t+2), dx=q.x-p.x, dy=q.y-p.y, m=Math.hypot(dx,dy)||1, nx=-dy/m*f.s, ny=dx/m*f.s;
+    var x=(p.x+nx*120)/640*100, y=(p.y+ny*120)/720*100;
+    x=Math.max(9,Math.min(91,x)); y=Math.max(7,Math.min(93,y));
+    return '<a class="gf" href="'+CATP+(f.c==='granel'?'#granel':'?c='+f.c)+'" data-t="'+f.t+'" style="left:'+x.toFixed(1)+'%;top:'+y.toFixed(1)+'%"><span class="gm">'+(ILL[f.c]||'')+'</span><span class="gn">'+esc(f.n)+'</span></a>';
+  }).join('');
+  $('#bfHero').innerHTML=ILL.mariposa||'';
+  garden={stem:stem,L:L};
+}
+function gardenMotion(){
+  if(!garden) return;
+  var L=garden.L, stem=garden.stem, start=.46;
+  stem.style.strokeDasharray=L; stem.style.strokeDashoffset=L*(1-start);
+  var leaves=$$('#gLeaves .lf'), fruits=$$('#gFruits .gf');
+  if(reduce || !window.gsap || !window.ScrollTrigger){ stem.style.strokeDashoffset=0; return; }
+  if(window.SplitText){ try{ var w=new SplitText('#h1',{type:'words',mask:'words'}).words; gsap.from(w,{yPercent:110,duration:1.1,ease:'power4.out',stagger:.08,delay:.1}); }catch(e){} }
+  leaves.forEach(function(l){ if(+l.dataset.t>start) gsap.set(l,{scale:0,transformOrigin:'0% 50%'}); });
+  fruits.forEach(function(f){ if(+f.dataset.t>start) gsap.set(f,{opacity:0,scale:.6}); });
+  gsap.from(leaves.filter(function(l){return +l.dataset.t<=start;}),{scale:0,transformOrigin:'0% 50%',duration:.9,ease:'power3.out',stagger:.08,delay:.25});
+  gsap.from(fruits.filter(function(f){return +f.dataset.t<=start;}),{opacity:0,scale:.6,duration:.8,ease:'power3.out',stagger:.1,delay:.6});
+  var tl=gsap.timeline({defaults:{ease:'none'}});
+  tl.to(stem,{strokeDashoffset:0,duration:1},0);
+  leaves.forEach(function(l){ var t=+l.dataset.t; if(t>start) tl.to(l,{scale:+(l.getAttribute('transform').match(/scale\(([\d.]+)/)||[0,1])[1],duration:.12,ease:'power2.out'},(t-start)/(1-start)*.92); });
+  fruits.forEach(function(f){ var t=+f.dataset.t; if(t>start) tl.to(f,{opacity:1,scale:1,duration:.12,ease:'power2.out'},Math.min(.95,(t-start)/(1-start)*.92+.05)); });
+  tl.fromTo('#bfHero',{xPercent:0,yPercent:0,rotation:-8},{xPercent:180,yPercent:-260,rotation:8,duration:1,ease:'sine.inOut'},0);
+  ScrollTrigger.create({trigger:'#hero',start:function(){return 'top '+hh()+'px';},end:'bottom bottom',scrub:.6,animation:tl,onUpdate:function(st){ $('#hint').style.opacity=st.progress>.03?0:1; }});
+}
+/* mariposa guía: se posa en cada sección */
+function butterflyGuide(){
+  if(!window.gsap || !window.ScrollTrigger || reduce || !ILL.mariposa) return;
+  var bf=doc.createElement('span'); bf.className='bf bf-guide'; bf.innerHTML=ILL.mariposa; bf.setAttribute('aria-hidden','true');
+  var cur=null;
+  function moveTo(t){
+    if(cur===t) return;
+    var src=cur?bf.getBoundingClientRect():(($('#bfHero')||t).getBoundingClientRect());
+    t.appendChild(bf); var dst=bf.getBoundingClientRect(); cur=t;
+    bf.classList.add('flying');
+    gsap.fromTo(bf,{x:src.left-dst.left,y:src.top-dst.top,rotation:-10},{x:0,y:0,rotation:0,duration:1.1,ease:'power2.inOut',onComplete:function(){bf.classList.remove('flying');}});
+  }
+  $$('[data-perch]').forEach(function(t){
+    var sec=t.closest('section')||t;
+    ScrollTrigger.create({trigger:sec,start:'top 65%',end:'bottom 35%',onEnter:function(){moveTo(t);},onEnterBack:function(){moveTo(t);}});
+  });
+}
+
 /* ---------- PASILLOS ---------- */
 function buildAisles(){
   var tr=$('#aTrack'); if(!tr) return;
   tr.innerHTML=CATS.map(function(c,i){
     var its=ITEMS.filter(function(x){return x.c===c.id;});
     var picsH;
-    if(c.id==='granel'){ picsH='<span class="gx">'+GRANEL.slice(0,6).map(function(g){return '<i style="background:'+g.col+'"></i>';}).join('')+'</span>'; }
+    if(c.id==='granel'){ picsH='<span class="gx">'+['Almendra','Nuez nogal','Pistacho','Marañón','Arándanos','Semilla de calabaza'].map(function(n){return '<i>'+(ILL[n]||'')+'</i>';}).join('')+'</span>'; }
     else { var a=its.filter(function(x){return x.img;}); picsH=[a[0],a[Math.floor(a.length/2)],a[a.length-1]].filter(Boolean).map(function(x){return '<img src="'+src(x,0,false)+'" width="400" height="400" alt="" loading="lazy" decoding="async">';}).join(''); }
     var n=c.id==='granel'?GRANEL.length:its.length;
     var min=c.id==='granel'?Math.min.apply(null,GRANEL.map(function(g){return g.pg;})):Math.min.apply(null,its.map(function(x){return x.p;}));
     return '<a class="a-card" href="'+CATP+(c.id==='granel'?'#granel':'?c='+c.id)+'" data-cat="'+c.id+'" style="background:'+c.bg+';color:'+c.fg+';--goc:'+c.bg+'">'+
-      '<span class="no">'+String(i+1).padStart(2,'0')+' / 08</span><h3>'+esc(c.n)+'</h3><p class="sub">'+esc(c.s)+'</p>'+
+      '<span class="no">'+String(i+1).padStart(2,'0')+' / 08</span><span class="a-ic">'+(ILL[c.id]||'')+'</span><h3>'+esc(c.n)+'</h3><p class="sub">'+esc(c.s)+'</p>'+
       '<div class="pics">'+picsH+'</div>'+
       '<div class="ft"><span><b>'+n+' productos</b><small>desde '+fmt(min)+(c.id==='granel'?' el gramo':'')+'</small></span><span class="go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></div></a>';
   }).join('');
@@ -287,7 +349,7 @@ function cardH(it,k){
     '<button class="open" type="button" data-open="'+it.id+'" aria-label="Ver '+esc(it.n)+'">'+
     '<span class="pic" data-c="'+it.c+'">'+badge+pic(it)+'</span>'+
     '<span class="body"><span class="br">'+esc(it.b||it.s||'')+'</span><span class="nm">'+hl(it.n)+'</span><span class="sz">'+esc(it.z||it.s||'')+'</span></span></button>'+
-    '<div class="row"><span class="pr">'+fmt(it.p)+'</span><span data-ctl="'+it.id+'">'+ctl(it.id)+'</span></div></article>';
+    (IS_HOME ? '<div class="row np"><button class="more" type="button" data-open="'+it.id+'">Ver producto <span aria-hidden="true">→</span></button></div></article>' : '<div class="row"><span class="pr">'+fmt(it.p)+'</span><span data-ctl="'+it.id+'">'+ctl(it.id)+'</span></div></article>');
 }
 function miniH(it){
   return '<div class="mini"><button class="open" type="button" data-open="'+it.id+'" style="all:unset;cursor:pointer;display:block"><span class="pic" data-c="'+it.c+'" style="display:block">'+pic(it)+'</span></button><div class="i"><b>'+esc(it.n)+'</b><div class="rw"><strong>'+fmt(it.p)+'</strong><span data-ctl-mini="'+it.id+'">'+(qty(it.id)?'<span class="add" style="background:var(--leaf)" aria-label="En tu bolsa">✓</span>':'<button class="add" type="button" data-add="'+it.id+'" aria-label="Agregar '+esc(it.n)+'"><svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>')+'</span></div></div></div>';
@@ -351,6 +413,7 @@ function buildTabs(){
   t.insertAdjacentHTML('beforeend',h);
   $('#occ').innerHTML=OCC.map(function(o){return '<button class="chip" type="button" data-occ-f="'+o.id+'" aria-pressed="false">'+esc(o.n)+'</button>';}).join('');
 }
+function fBadge(){ var n=(S.q?1:0)+(S.occ?1:0)+(S.sort!=='cat'?1:0), b=$('#fBadge'); if(b){ b.textContent=n; b.hidden=!n; } }
 function occCounts(){
   $$('#occ .chip').forEach(function(b){
     var o=b.dataset.occF, n=ITEMS.filter(function(x){return (S.c==='all'||x.c===S.c) && x.t.indexOf(o)>-1;}).length;
@@ -370,7 +433,7 @@ function renderCatalog(animate){
     var html='';
     if(gm.length && (S.c==='all')){
       html+='<div class="grp"><div class="grp-h"><h3>A granel</h3><small>precio por gramo</small></div><div class="grid">'+gm.map(function(g){
-        return '<article class="card reveal"><button class="open" type="button" data-gjump="'+g.id+'"><span class="pic"><span class="gtile" style="--c:'+g.col+'"><b>'+fmt(g.pg)+'</b><small>el gramo</small></span></span><span class="body"><span class="br">A granel</span><span class="nm">'+hl(g.n)+'</span><span class="sz">'+fmt(g.pg)+' el gramo</span></span></button><div class="row"><span class="pr">'+fmt(g.pg*100)+' <small>/100 g</small></span><button class="add" type="button" data-gjump="'+g.id+'"><span class="t">Elegir</span><svg class="ic" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></button></div></article>';
+        return '<article class="card reveal"><button class="open" type="button" data-gjump="'+g.id+'"><span class="pic"><span class="gtile">'+(ILL[g.n]||'')+'</span></span><span class="body"><span class="br">A granel</span><span class="nm">'+hl(g.n)+'</span><span class="sz">'+fmt(g.pg)+' el gramo</span></span></button><div class="row"><span class="pr">'+fmt(g.pg*100)+' <small>/100 g</small></span><button class="add" type="button" data-gjump="'+g.id+'"><span class="t">Elegir</span><svg class="ic" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></button></div></article>';
       }).join('')+'</div></div>';
     }
     if(!arr.length && !gm.length && !q){
@@ -385,7 +448,7 @@ function renderCatalog(animate){
     } else {
       html+='<div class="grid">'+arr.map(cardH).join('')+'</div>';
     }
-    $('#results').innerHTML=html; occCounts();
+    $('#results').innerHTML=html; occCounts(); fBadge();
     var label=(S.c==='all'?'todo el catálogo':(CAT[S.c]||{}).n)+(S.occ?' · '+OC[S.occ].n.toLowerCase():'');
     var any=S.q||S.occ||S.c!=='all'||S.sort!=='cat';
     $('#note').innerHTML='<span><b>'+(arr.length+gm.length)+'</b> '+((arr.length+gm.length)===1?'resultado':'resultados')+' en '+esc(label)+(q?' para “'+esc(q)+'”':'')+'</span>'+(any?'<button class="linkb" type="button" data-reset>Quitar filtros</button>':'');
@@ -492,7 +555,7 @@ function trap(e){
 }
 
 /* ---------- BOLSA Y PEDIDO ---------- */
-function thumb(l){ if(l.gb){ var g=GRANEL.filter(function(x){return x.n===l.gb[0][0];})[0]; return '<span class="gdot" style="background:'+(g?g.col:'#C9A16A')+'"></span>'; } return pic(l.it); }
+function thumb(l){ if(l.gb){ var g=GRANEL.filter(function(x){return x.n===l.gb[0][0];})[0]; return '<span class="gth">'+(ILL[l.gb[0][0]]||ILL.granel)+'</span>'; } return pic(l.it); }
 function renderBag(){
   view='bag'; $('#dT').textContent='Tu bolsa'; $('#dBack').hidden=true;
   var L=bagLines(), body=$('#dBody'), foot=$('#dFoot');
@@ -570,7 +633,7 @@ var gsel={}, gorder=[], gtab='nueces';
 function renderBulk(){
   $('#bList').innerHTML=GRANEL.filter(function(g){return g.k===gtab;}).map(function(g){
     var q=gsel[g.id]||0;
-    return '<div class="b-it'+(q?' on':'')+'" id="'+g.id+'"><span class="sw"><i style="background:'+g.col+'"></i></span><span class="tx"><b>'+esc(g.n)+'</b><small>'+fmt(g.pg)+' el gramo · '+(g.step*2)+' g = '+fmt(g.pg*g.step*2)+'</small></span><span class="stp"><button type="button" data-gd="'+g.id+'" aria-label="Menos '+esc(g.n)+'"'+(q?'':' disabled style="opacity:.35"')+'>−</button><output>'+(q?q+' g':'0 g')+'</output><button type="button" data-gi="'+g.id+'" aria-label="Más '+esc(g.n)+'">+</button></span></div>';
+    return '<div class="b-it'+(q?' on':'')+'" id="'+g.id+'"><span class="sw">'+(ILL[g.n]||'')+'</span><span class="tx"><b>'+esc(g.n)+'</b><small>'+fmt(g.pg)+' el gramo · '+(g.step*2)+' g = '+fmt(g.pg*g.step*2)+'</small></span><span class="stp"><button type="button" data-gd="'+g.id+'" aria-label="Menos '+esc(g.n)+'"'+(q?'':' disabled style="opacity:.35"')+'>−</button><output>'+(q?q+' g':'0 g')+'</output><button type="button" data-gi="'+g.id+'" aria-label="Más '+esc(g.n)+'">+</button></span></div>';
   }).join('');
 }
 function paintSack(){
@@ -625,7 +688,7 @@ function renderFind(){
   fRes=g.map(function(x){return {g:x};}).concat(a.map(function(x){return {it:x};}));
   if(!fRes.length){ box.innerHTML='<div class="fi-none"><p>No encontramos “'+esc(q)+'” en el catálogo.</p><a class="btn sm" target="_blank" rel="noopener" href="'+waLink('Hola FIT Snack Market, ¿tienen '+q+'?')+'">¿Lo tienen? Preguntar por WhatsApp</a></div>'; return; }
   box.innerHTML='<p class="lbl">'+fRes.length+(fRes.length===1?' resultado':' resultados')+'</p>'+fRes.map(function(r,i){
-    if(r.g) return '<div class="res" role="option" id="fr'+i+'" aria-selected="false" data-gjump="'+r.g.id+'"><span class="th"><span class="gdot" style="background:'+r.g.col+'"></span></span><span><b>'+hl(r.g.n)+'</b><small>A granel · '+fmt(r.g.pg)+' el gramo</small></span><span class="pr">'+fmt(r.g.pg*100)+'<br><small>100 g</small></span></div>';
+    if(r.g) return '<div class="res" role="option" id="fr'+i+'" aria-selected="false" data-gjump="'+r.g.id+'"><span class="th gth">'+(ILL[r.g.n]||'')+'</span><span><b>'+hl(r.g.n)+'</b><small>A granel · '+fmt(r.g.pg)+' el gramo</small></span><span class="pr">'+fmt(r.g.pg*100)+'<br><small>100 g</small></span></div>';
     var it=r.it; return '<div class="res" role="option" id="fr'+i+'" aria-selected="false" data-open="'+it.id+'"><span class="th">'+pic(it)+'</span><span><b>'+hl(it.n)+'</b><small>'+esc([it.b,it.z].filter(Boolean).join(' · ')||(CAT[it.c]||{}).n)+'</small></span><span class="pr">'+fmt(it.p)+'</span></div>';
   }).join('')+'<p class="lbl" style="padding-top:1rem"><button class="linkb" type="button" data-seeq="'+esc(q)+'">Ver todos en el catálogo</button></p>';
 }
@@ -668,6 +731,7 @@ doc.addEventListener('click',function(e){
   if(t.closest('#reroll')){ seed+=13; setGoal(goal); return; }
   if(t.closest('[data-reset]')){ resetCat(); return; }
   if(t.closest('[data-allcat]')){ setCat('all',false); return; }
+  if((el=t.closest('#fToggle'))){ var p=$('#fPanel'), op=p.hidden; p.hidden=!op; el.setAttribute('aria-expanded',op?'true':'false'); if(op) setTimeout(function(){ $('#q').focus({preventScroll:true}); },50); refreshST(); return; }
   if((el=t.closest('[data-bt]'))){ gtab=el.dataset.bt; $$('[data-bt]').forEach(function(b){b.setAttribute('aria-selected',b===el?'true':'false');}); renderBulk(); return; }
   if((el=t.closest('[data-gi]'))){ gStep(el.dataset.gi,1); return; }
   if((el=t.closest('[data-gd]'))){ gStep(el.dataset.gd,-1); return; }
@@ -692,6 +756,7 @@ function openFinder(){ openLayer('finder'); $('#fq').value=''; renderFind(); }
 function init(){
   paintStatus(); setInterval(paintStatus,60000);
   if($('#drops')) buildHero();
+  if($('#gArt')) buildGarden();
   if($('#aTrack')) buildAisles();
   if($('#goals')) buildGoals();
   var kg=$('#kGrid'); if(kg){ kg.innerHTML=['arepa-cocinada-de-queso','arepa-cocinada-de-chicharron','deditos-de-mozzarella','deditos-de-yuca-origen','cafe-de-especialidad','capuchino-de-especialidad'].map(function(id){return BYID[id];}).filter(Boolean).map(cardH).join(''); }
@@ -739,7 +804,7 @@ function motion(){
     if(window.Lenis && fine && !reduce){
       try{ lenis=new Lenis({lerp:.1,smoothWheel:true,syncTouch:false,autoRaf:false}); lenis.on('scroll',ScrollTrigger.update); gsap.ticker.add(function(t){lenis.raf(t*1000);}); gsap.ticker.lagSmoothing(0); }catch(e){ lenis=null; }
     }
-    if($('#drops')) heroMotion(); aislesMotion();
+    if($('#drops')) heroMotion(); if($('#gArt')) gardenMotion(); aislesMotion(); if(IS_HOME) butterflyGuide();
     if(!reduce){
       // títulos que se arman por palabras
       if(window.SplitText) $$('[data-split]').forEach(function(h){ try{ var sp=new SplitText(h,{type:'words',mask:'words'}); gsap.from(sp.words,{yPercent:110,duration:.9,ease:'power4.out',stagger:.06,scrollTrigger:{trigger:h,start:'top 88%',once:true}}); }catch(e){} });

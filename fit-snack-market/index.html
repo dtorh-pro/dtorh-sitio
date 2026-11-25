@@ -17,10 +17,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;600;700;800&family=Figtree:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap">
 <link rel="preload" as="image" href="/fit-snack-market/img/logo.webp">
-<link rel="stylesheet" href="/fit-snack-market/fit.css?v=3">
+<link rel="stylesheet" href="/fit-snack-market/fit.css?v=4">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"HealthFoodStore","name":"FIT Snack Market","slogan":"Nutre tu mejor versión","address":{"@type":"PostalAddress","streetAddress":"C.C. Miramar Plaza, 2.º piso, local 211","addressLocality":"Barranquilla","addressRegion":"Atlántico","addressCountry":"CO"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"08:30","closes":"20:30"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Sunday","opens":"08:30","closes":"18:00"}],"sameAs":["https://www.instagram.com/fitsnackmarket"],"priceRange":"$1.000 – $240.000"}</script>
 </head>
-<body>
+<body class="home">
 <a class="skip" href="/fit-snack-market/catalogo/">Ir al catálogo</a>
 <div class="prog" id="prog" aria-hidden="true"></div>
 <div class="demo">Diseño de <a href="https://dtorh.click/laboratorio/">dtorh™</a> · productos y precios del catálogo de la tienda (nov-2026) · domicilios y medios de pago por confirmar</div>
@@ -48,45 +48,35 @@
 </header>
 
 <main id="inicio">
-  <!-- HERO: la bolsa se llena mientras bajas -->
-  <section class="hero" id="hero" aria-label="Presentación">
+  <!-- HERO: jardín botánico — la rama del logo crece mientras bajas -->
+  <section class="hero garden" id="hero" aria-label="Presentación">
     <div class="hero-pin">
-      <div class="wrap hero-grid">
+      <div class="wrap g-grid">
         <div class="hero-copy">
           <p class="status" id="heroStatus" aria-live="polite"><i></i><span>C.C. Miramar Plaza · Barranquilla</span></p>
-          <h1 class="h1" id="h1">Todo lo fit, <span class="lt">en una sola bolsa.</span></h1>
-          <p class="tagline">Nutre tu mejor versión</p>
-          <p class="lead">Snacks saludables, productos fit y marcas naturales en un solo lugar<span class="lg">: <b>más de 100 productos</b>, granel por gramo y cocina de la casa</span>. Pide por WhatsApp o pasa por la tienda.</p>
+          <p class="g-eyebrow">Mini market saludable</p>
+          <h1 class="g-h1" id="h1"><span class="g-a">Nutre tu</span> <span class="g-b">mejor versión</span></h1>
+          <p class="lead">Snacks saludables, marcas naturales y cocina de casa, reunidos en un solo lugar del C.C. Miramar Plaza.</p>
           <div class="ctas">
-            <a class="btn" href="/fit-snack-market/catalogo/">Ver el catálogo <span class="arr" aria-hidden="true">→</span></a>
-            <a class="btn ghost" href="#" data-wa="Hola FIT Snack Market, quiero hacer un pedido." target="_blank" rel="noopener">
+            <a class="btn" href="#pasillos">Conoce la tienda <span class="arr" aria-hidden="true">↓</span></a>
+            <a class="btn ghost" href="#" data-wa="Hola FIT Snack Market, quiero saber más de la tienda." target="_blank" rel="noopener">
               <svg class="ic" viewBox="0 0 24 24"><path d="M4.5 19.5l1.2-3.6a8 8 0 1 1 2.9 2.6l-4.1 1Z"/><path d="M9.5 9c.3 1.6 2.2 3.8 4.6 4.6l.9-1.1 1.8.9c-.3 1-1 1.6-2 1.6-2.9-.2-5.9-3.2-6.1-6.1 0-1 .6-1.7 1.6-2l.9 1.8L9.5 9Z"/></svg>
-              Pedir por WhatsApp</a>
+              Escríbenos</a>
           </div>
-          <ul class="facts">
-            <li><b class="tnum">+100</b> productos</li>
-            <li><b>24</b> a granel</li>
-            <li><b>19</b> marcas</li>
-          </ul>
         </div>
-        <div class="stage" id="stage" aria-hidden="true">
-          <span class="bg"></span>
-          <div class="bagb"><svg viewBox="0 0 300 280" preserveAspectRatio="none"><path d="M10 0H290L300 280H0Z" fill="#B78C54"/><path d="M10 0H290L292 34H8Z" fill="#9C7342"/></svg></div>
-          <div class="drops" id="drops"></div>
-          <div class="bagf">
-            <svg viewBox="0 0 300 220" preserveAspectRatio="none"><path d="M0 0H300L292 220H8Z" fill="#C9A16A"/><path d="M0 0H300L299.3 18H.7Z" fill="#D8B583"/><path d="M26 18 33 220M274 18 267 220" stroke="#B78C54" stroke-width="2" vector-effect="non-scaling-stroke" fill="none"/><path d="M8 214H292" stroke="#B78C54" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
-            <span class="lbl"><img src="/fit-snack-market/img/logo.webp" width="160" height="160" alt=""></span>
-          </div>
-          <div class="ticket" id="ticket"><small>Tu bolsa</small><b id="tkTotal">$0</b><span id="tkCount">0 productos</span><span class="ok"><svg class="ic" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="m5 12 4.5 4.5L19 7"/></svg>Lista para pedir</span></div>
+        <div class="g-art" id="gArt" aria-hidden="true">
+          <svg class="g-svg" id="gSvg" viewBox="0 0 640 720"><path id="gStem" d="M560 715C540 610 505 545 440 470S300 365 250 290 190 140 120 40" fill="none" stroke="#3E4E2B" stroke-width="7" stroke-linecap="round"/><g id="gLeaves"></g></svg>
+          <div class="g-fruits" id="gFruits"></div>
+          <span class="bf bf-hero" id="bfHero"></span>
         </div>
       </div>
-      <p class="hint" id="hint"><span class="m"></span>Desliza y llena la bolsa</p>
+      <p class="hint" id="hint"><span class="m"></span>Desliza: la rama crece</p>
     </div>
   </section>
 
   <!-- MARCAS -->
   <section class="brands" aria-label="Marcas que encuentras">
-    <p class="wrap eyebrow">Marcas que encuentras en la tienda</p>
+    <p class="wrap eyebrow">Marcas que elegimos para ti</p>
     <div class="mq" aria-hidden="true"><div class="mq-t">
       <span>Para Nice</span><span>Spiga Foods</span><span>San Martín</span><span>Hatsu</span><span>Qunno</span><span>Nutrelle</span><span>Suvi Fit</span><span>Monkey Break</span><span>Healthy America</span><span>Vitaliah</span><span>FitMe</span><span>De Silvestri</span><span>Silk</span>
       <span>Para Nice</span><span>Spiga Foods</span><span>San Martín</span><span>Hatsu</span><span>Qunno</span><span>Nutrelle</span><span>Suvi Fit</span><span>Monkey Break</span><span>Healthy America</span><span>Vitaliah</span><span>FitMe</span><span>De Silvestri</span><span>Silk</span>
@@ -98,7 +88,7 @@
   <section class="aisles" id="pasillos" aria-labelledby="pasT">
     <div class="a-pin">
       <div class="a-head sec-h">
-        <div><span class="eyebrow">Recorre la tienda</span><h2 id="pasT" data-split>Ocho pasillos, <span class="lt">un solo lugar.</span></h2></div>
+        <div><span class="eyebrow" data-perch>Recorre la tienda</span><h2 id="pasT" data-split>Ocho pasillos, <span class="lt">un solo lugar.</span></h2></div>
         <p class="a-tip"><svg class="ic" viewBox="0 0 24 24"><path d="M12 4v13M6 11l6 6 6-6"/></svg>Sigue bajando: los pasillos avanzan solos. Toca uno para entrar.</p>
       </div>
       <div class="a-track" id="aTrack"></div>
@@ -111,7 +101,7 @@
     <div class="wrap st-grid">
       <figure class="st-pic reveal"><img src="/fit-snack-market/img/arepa-cocinada-de-queso.webp" srcset="/fit-snack-market/img/arepa-cocinada-de-queso-400.webp 400w, /fit-snack-market/img/arepa-cocinada-de-queso.webp 800w" sizes="(max-width:900px) 92vw, 520px" width="800" height="800" alt="Arepa de queso recién horneada de la cocina de FIT Snack Market" loading="lazy"><figcaption>Cocina de pruebas · arepa de queso</figcaption></figure>
       <div class="st-copy">
-        <span class="eyebrow">Nuestra historia</span>
+        <span class="eyebrow" data-perch>Nuestra historia</span>
         <h2 id="hiT" data-split>Comer sano no era lo difícil. <span class="lt">Lo difícil era encontrarlo todo.</span></h2>
         <p class="st-lead">Como familia decidimos cambiar nuestros hábitos: nada de azúcar, menos carbohidratos y mucha comida real. Funcionó. Por eso creamos FIT Snack Market: el lugar que nos hubiera encantado encontrar.</p>
         <ul class="pillars">
@@ -128,7 +118,7 @@
   <section class="sec kitchen" id="cocina" aria-labelledby="koT">
     <div class="wrap">
       <div class="sec-h">
-        <div><span class="eyebrow">De nuestra cocina</span><h2 id="koT" data-split>Recién hecho, <span class="lt">para el antojo de hoy.</span></h2></div>
+        <div><span class="eyebrow" data-perch>De nuestra cocina</span><h2 id="koT" data-split>Recién hecho, <span class="lt">para el antojo de hoy.</span></h2></div>
         <p>Arepas, deditos y café de barra preparados en la tienda.</p>
       </div>
       <div class="k-grid" id="kGrid"></div>
@@ -139,7 +129,7 @@
   <section class="sec" id="para-ti" aria-labelledby="ptT" style="padding-top:0">
     <div class="wrap">
       <div class="sec-h">
-        <div><span class="eyebrow">Para ti</span><h2 id="ptT" data-split>¿Qué se te <span class="lt">antoja hoy?</span></h2></div>
+        <div><span class="eyebrow" data-perch>Para ti</span><h2 id="ptT" data-split>¿Qué se te <span class="lt">antoja hoy?</span></h2></div>
         <p>Elige un momento del día y te mostramos cuatro ideas del catálogo, con su precio.</p>
       </div>
       <div class="goals" id="goals" role="group" aria-label="Momento"></div>
@@ -153,7 +143,7 @@
   <section class="cta-band" aria-labelledby="ctT">
     <div class="wrap cb-grid">
       <div>
-        <span class="eyebrow">Catálogo completo</span>
+        <span class="eyebrow" data-perch>Catálogo completo</span>
         <h2 id="ctT" data-split>Más de 100 productos, <span class="lt">con su precio.</span></h2>
         <p>Busca por nombre, marca o antojo, arma tu bolsa a granel y envía el pedido sumado por WhatsApp.</p>
         <div class="ctas"><a class="btn light" href="/fit-snack-market/catalogo/">Abrir el catálogo <span class="arr" aria-hidden="true">→</span></a><a class="btn ghost" href="/fit-snack-market/catalogo/#granel">Armar bolsa a granel</a></div>
@@ -166,7 +156,7 @@
   <section class="sec" id="pedir" aria-labelledby="hwT">
     <div class="wrap how">
       <div class="how-l">
-        <span class="eyebrow">Cómo pedir</span>
+        <span class="eyebrow" data-perch>Cómo pedir</span>
         <h2 id="hwT" style="font-size:clamp(2rem,4.6vw,3.6rem);font-weight:800;letter-spacing:-.035em;margin-top:.7rem" data-split>Tres pasos <span class="lt" style="font-weight:300;color:var(--olive)">y listo.</span></h2>
         <p>Sin crear cuenta ni descargar nada. Tu bolsa queda guardada en este celular aunque cierres la página.</p>
       </div>
@@ -182,7 +172,7 @@
   <section class="sec" id="dudas" aria-labelledby="fqT" style="padding-top:0">
     <div class="wrap faq">
       <div class="faq-l">
-        <span class="eyebrow">Dudas</span>
+        <span class="eyebrow" data-perch>Dudas</span>
         <h2 id="fqT" style="font-size:clamp(2rem,4.6vw,3.6rem);font-weight:800;letter-spacing:-.035em;margin-top:.7rem" data-split>Antes de pedir, <span class="lt" style="font-weight:300;color:var(--olive)">lo que más preguntan.</span></h2>
         <p>¿No está tu pregunta? Escríbenos y te responde una persona de la tienda.</p>
         <a class="btn ghost" href="#" data-wa="Hola FIT Snack Market, tengo una pregunta." target="_blank" rel="noopener">Preguntar por WhatsApp</a>
@@ -203,7 +193,7 @@
   <section class="sec visit" id="visitanos" aria-labelledby="viT">
     <div class="wrap v-grid">
       <div>
-        <span class="eyebrow">Visítanos</span>
+        <span class="eyebrow" data-perch>Visítanos</span>
         <h2 id="viT" data-split>Te esperamos <span class="lt">en el 2.º piso.</span></h2>
         <p class="addr"><b>C.C. Miramar Plaza · local 211</b><br>Barranquilla, Atlántico</p>
         <p class="status" id="visitStatus"><i></i><span>Horario</span></p>
@@ -258,11 +248,12 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="/fit-snack-market/datos.js?v=3"></script>
+<script src="/fit-snack-market/datos.js?v=4"></script>
+<script src="/fit-snack-market/ilustraciones.js?v=1"></script>
 <script src="/assets/vendor/gsap-3.15.1.min.js" defer></script>
 <script src="/assets/vendor/ScrollTrigger-3.15.1.min.js" defer></script>
 <script src="/assets/vendor/SplitText-3.15.1.min.js" defer></script>
 <script src="/assets/lenis.min.js?v=1.3.26" defer></script>
-<script src="/fit-snack-market/fit.js?v=3" defer></script>
+<script src="/fit-snack-market/fit.js?v=4" defer></script>
 </body>
 </html>
