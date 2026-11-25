@@ -846,3 +846,14 @@ body.mm-open .mbar{opacity:0;pointer-events:none}
 /* v8 · logos oficiales con tamaño óptico */
 .mq-t span img{height:calc(var(--h,40px) * var(--mqs,1));opacity:1}
 @media (max-width:600px){.mq-t{--mqs:.78}}
+
+/* v10 · bolsa a granel que se llena con frutos secos ilustrados */
+.sack .pc{transition:transform .75s cubic-bezier(.34,1.45,.5,1),opacity .35s;transform-box:view-box}
+.sack .pc use{overflow:visible}
+.sack svg.wob{animation:wob .6s cubic-bezier(.3,1.6,.5,1)}
+@keyframes wob{0%{transform:none}30%{transform:scale(1.025,.975) translateY(2px)}60%{transform:scale(.99,1.01)}100%{transform:none}}
+.sack svg{transform-origin:50% 100%;overflow:visible}
+@media (prefers-reduced-motion:reduce){.sack .pc{transition:none}.sack svg.wob{animation:none}}
+#sackBands path{animation:bandIn .5s ease both}
+@keyframes bandIn{from{opacity:0}}
+@media (max-width:900px){.b-side{grid-template-columns:150px 1fr}.sack{width:150px}}

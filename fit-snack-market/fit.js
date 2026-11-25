@@ -672,17 +672,75 @@ function renderBulk(){
     return '<div class="b-it'+(q?' on':'')+'" id="'+g.id+'"><span class="sw">'+(ILL[g.n]||'')+'</span><span class="tx"><b>'+esc(g.n)+'</b><small>'+fmt(g.pg)+' el gramo · '+(g.step*2)+' g = '+fmt(g.pg*g.step*2)+'</small></span><span class="stp"><button type="button" data-gd="'+g.id+'" aria-label="Menos '+esc(g.n)+'"'+(q?'':' disabled style="opacity:.35"')+'>−</button><output>'+(q?q+' g':'0 g')+'</output><button type="button" data-gi="'+g.id+'" aria-label="Más '+esc(g.n)+'">+</button></span></div>';
   }).join('');
 }
+/* La bolsa se llena de verdad: cada gramo cae como frutos secos (o grano de especia) ilustrados
+   que se apilan de abajo hacia arriba, con un montículo irregular. Las piezas nuevas caen por la boca
+   de la bolsa y rebotan; las que ya estaban se quedan quietas. */
+var sackKeys={}, sackDefs=false;
+function srand(n){ var x=Math.sin(n*127.1+311.7)*43758.5453; return x-Math.floor(x); }
+function sackSym(){
+  if(sackDefs) return; sackDefs=true;
+  var defs=$('#sack defs'); if(!defs) return;
+  var s='';
+  GRANEL.forEach(function(g){
+    if(g.k!=='nueces') return;
+    var raw=ILL[g.n]||''; var inner=raw.replace(/^<svg[^>]*>/,'').replace(/<\/svg>\s*$/,'');
+    if(inner) s+='<symbol id="pc-'+g.id+'" viewBox="0 0 48 48">'+inner+'</symbol>';
+  });
+  defs.insertAdjacentHTML('beforeend',s);
+}
 function paintSack(){
-  var tot=0, grams=0, L=[];
-  gorder.forEach(function(id){ var q=gsel[id]; if(!q) return; var g=GBY[id]; tot+=q*g.pg; grams+=q; L.push(g); });
-  var cap=Math.max(1000,grams), H=194, y=234, s='';
-  gorder.forEach(function(id){ var q=gsel[id]; if(!q) return; var g=GBY[id], h=q/cap*H; y-=h; s+='<rect class="lay" x="0" y="'+y.toFixed(1)+'" width="200" height="'+(h+.6).toFixed(1)+'" fill="'+g.col+'"/>'; });
-  $('#sackLayers').innerHTML=s; $('#sackEmpty').style.display=grams?'none':'';
+  var tot=0, grams=0;
+  gorder.forEach(function(id){ var q=gsel[id]; if(!q) return; tot+=q*GBY[id].pg; grams+=q; });
+  sackSym();
+  var per=Math.max(10,Math.ceil(grams/110/5)*5);          /* gramos por pieza: hasta ~110 piezas grandes */
+  var pieces=[];
+  gorder.forEach(function(id){ var q=gsel[id]; if(!q) return; var n=Math.max(1,Math.round(q/per)); for(var k=0;k<n;k++) pieces.push({id:id,k:k}); });
+  /* acomodo: filas desde el fondo, el ancho sigue la forma trapezoidal de la bolsa */
+  var out=[], row=0, i=0, y0=222, rh=14.5, span={};
+  while(i<pieces.length){
+    var y=y0-row*rh; var t=(234-y)/194, L=14+10*t+9, R=186-10*t-9;
+    var cols=Math.max(1,Math.floor((R-L)/17)), step=(R-L)/cols;
+    for(var c=0;c<cols && i<pieces.length;c++,i++){
+      var p=pieces[i], seed=i*7.3+row;
+      var x=L+step*(c+.5)+(srand(seed)-.5)*6+(row%2?step/2.4:0);
+      x=Math.min(R,Math.max(L,x));
+      var yy=y+(srand(seed+3)-.5)*5; out.push({key:p.id+'#'+p.k,id:p.id,x:x,y:yy,r:Math.round((srand(seed+9)-.5)*120),s:.92+srand(seed+5)*.28}); var sp=span[p.id]||(span[p.id]={lo:999,hi:-999}); sp.lo=Math.min(sp.lo,yy); sp.hi=Math.max(sp.hi,yy);
+    }
+    row++;
+  }
+  window.__sackFresh=0; (function(){ var c=0; gorder.forEach(function(id){ var q=gsel[id]; if(!q) return; var n=Math.max(1,Math.round(q/per)); for(var k=0;k<n;k++) if(!sackKeys[id+'#'+k]) c++; }); window.__sackFresh=c; })();
+  /* masa de cada producto (debajo de las piezas): banda con borde superior ondulado, en su color */
+  var bands=$('#sackBands'); if(!bands){ bands=document.createElementNS('http://www.w3.org/2000/svg','g'); bands.id='sackBands'; $('#sackLayers').appendChild(bands); }
+  var bh='', prevTop=240;
+  gorder.forEach(function(id,j){ var sp=span[id]; if(!sp) return; var top=sp.lo-4, bot=prevTop; var d='M0 '+bot.toFixed(1)+'V'+top.toFixed(1);
+    for(var k=0;k<=10;k++){ var xx=k*20, yy=top+Math.sin(k*1.7+j*2)*2.6; d+='L'+xx+' '+yy.toFixed(1); } d+='V'+bot.toFixed(1)+'Z';
+    bh+='<path d="'+d+'" fill="'+GBY[id].col+'" opacity=".42"/>'; prevTop=top+3; });
+  setTimeout(function(){ bands.innerHTML=bh; }, reduce?0:(window.__sackFresh?Math.min(window.__sackFresh,40)*14+520:0));
+  var lay=$('#sackLayers'), seen={}, fresh=[];
+  out.forEach(function(o,idx){
+    seen[o.key]=1;
+    var el=sackKeys[o.key], g=GBY[o.id];
+    var tf='translate('+o.x.toFixed(1)+'px,'+o.y.toFixed(1)+'px) rotate('+o.r+'deg) scale('+o.s.toFixed(2)+')';
+    if(!el){
+      el=document.createElementNS('http://www.w3.org/2000/svg','g'); el.setAttribute('class','pc');
+      el.innerHTML=g.k==='nueces'?'<use href="#pc-'+o.id+'" x="-12" y="-12" width="24" height="24"/>':
+        '<ellipse rx="'+(4.6+srand(idx)*2).toFixed(1)+'" ry="'+(3.4+srand(idx+1)*1.4).toFixed(1)+'" fill="'+g.col+'" stroke="#2E3A21" stroke-width=".7"/>';
+      el.style.transform='translate('+o.x.toFixed(1)+'px,-30px) rotate('+(o.r-160)+'deg) scale('+o.s.toFixed(2)+')';
+      lay.appendChild(el); sackKeys[o.key]=el; fresh.push([el,tf]);
+    } else el.style.transform=tf;
+  });
+  Object.keys(sackKeys).forEach(function(k){ if(!seen[k]){ var el=sackKeys[k]; el.classList.add('out'); el.style.opacity='0'; setTimeout(function(){ el.remove(); },400); delete sackKeys[k]; } });
+  if(fresh.length){
+    lay.getBoundingClientRect();
+    fresh.forEach(function(f,j){ var el=f[0]; el.style.transitionDelay=(reduce?0:Math.min(j,40)*14)+'ms'; requestAnimationFrame(function(){ requestAnimationFrame(function(){ el.style.transform=f[1]; }); }); });
+  }
+  $('#sackEmpty').style.display=grams?'none':'';
   $('#bGrams').textContent=grams?grams+' g en tu bolsa':'Tu bolsa está vacía';
   $('#bTotal').textContent=fmt(tot);
   $('#bLines').innerHTML=gorder.filter(function(id){return gsel[id];}).map(function(id){ var g=GBY[id]; return '<li><span><i style="background:'+g.col+'"></i>'+esc(g.n)+' '+gsel[id]+' g</span><span>'+fmt(gsel[id]*g.pg)+'</span></li>'; }).join('');
   $('#bAdd').disabled=!grams;
   $('#bAdd').innerHTML=grams?'Agregar a mi pedido · '+fmt(tot):'Agregar a mi pedido';
+  var sk=$('#sack'); if(sk && fresh.length && !reduce){ sk.classList.remove('wob'); void sk.getBoundingClientRect(); sk.classList.add('wob'); }
 }
 function gStep(id,dir){
   var g=GBY[id]; var q=Math.max(0,Math.min(2000,(gsel[id]||0)+dir*g.step));
