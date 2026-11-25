@@ -933,3 +933,5 @@ body.mm-open .mbar{opacity:0;pointer-events:none}
 @media (hover:hover){.ss-hint::before{content:"Pasa el mouse para pausar · "}}
 @media (prefers-reduced-motion:reduce){.ss,.ss.on{transition:none}.ss.on img,.ss.on .ss-cap>*{animation:none}}
 .ss-bars i{display:block;min-width:0;max-height:3px;padding:0;margin:0}
+.ss-card{aspect-ratio:4/5}@media (max-width:900px){.ss-card{aspect-ratio:4/5}}
+.ss-stack span{bottom:58px}
