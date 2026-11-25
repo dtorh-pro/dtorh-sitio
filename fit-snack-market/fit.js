@@ -42,7 +42,7 @@ var OCC = [
   {id:'entreno',n:'Después de entrenar',why:'con proteína o para recargar después del ejercicio.'},
   {id:'llevar',n:'Para llevar',why:'que caben en el bolso: oficina, universidad o paseo.'},
   {id:'cocina',n:'Cocina natural',why:'para cocinar en casa con ingredientes naturales.'},
-  {id:'descanso',n:'Descansar mejor',why:'para la noche: tés funcionales, golden milk y suplementos.'},
+  {id:'descanso',n:'Descansar mejor',why:'para la noche: suplementos y bebidas para descansar.'},
   {id:'menos',n:'Menos azúcar',why:'endulzados con stevia, yacón o monk fruit, o sin dulce.'}
 ];
 var OC = {}; OCC.forEach(function(o){OC[o.id]=o;});
@@ -256,47 +256,53 @@ function heroMotion(){
   paintTicket([]);
 }
 
-/* ---------- JARDÍN (portada) ---------- */
-var FRUITS=[{c:'granel',n:'Frutos secos',t:.2,s:1},{c:'cremas',n:'Cremas y granolas',t:.34,s:-1},{c:'pan',n:'Panadería',t:.48,s:1},{c:'lacteos',n:'Lácteos y kéfir',t:.62,s:-1},{c:'cafe',n:'Café de barra',t:.76,s:1},{c:'bienestar',n:'Bienestar',t:.9,s:-1}];
+/* ---------- JARDÍN (portada): logo + rama que crece + frutos secos que flotan ---------- */
+var NUTS=[['Almendra',6,18,13],['Nuez nogal',80,8,14],['Pistacho',90,44,11],['Marañón',2,58,13],['Arándanos',22,90,10],['Semilla de calabaza',74,86,10],['Maní con sal',44,2,10],['Anís estrellado',94,74,9],['Canela en astilla',16,40,8]];
 var LEAF='<path d="M0 0C14-17 52-21 72-5c4 3 4 9 0 12C52 24 14 18 0 0Z" fill="#7E9B4E" stroke="#2E3A21" stroke-width="2.2" stroke-linejoin="round"/><path d="M6 1C28 2 50 3 66 3" fill="none" stroke="#2E3A21" stroke-width="1.6" stroke-linecap="round" opacity=".55"/>';
-var LEAF2='<path d="M0 0C14-17 52-21 72-5c4 3 4 9 0 12C52 24 14 18 0 0Z" fill="#96A26E" stroke="#2E3A21" stroke-width="2.2" stroke-linejoin="round"/><path d="M6 1C28 2 50 3 66 3" fill="none" stroke="#2E3A21" stroke-width="1.6" stroke-linecap="round" opacity=".55"/>';
+var LEAF2=LEAF.replace('#7E9B4E','#96A26E');
 var garden=null;
 function buildGarden(){
   var stem=$('#gStem'); if(!stem) return;
-  var L=stem.getTotalLength(), g=$('#gLeaves'), h='', leaves=[], k=0;
-  for(var t=.06;t<=.985;t+=.062){
-    var p=stem.getPointAtLength(L*t), q=stem.getPointAtLength(Math.min(L,L*t+2)), ang=Math.atan2(q.y-p.y,q.x-p.x)*180/Math.PI, side=(k%2?1:-1), sc=(1.25-.62*t);
-    h+='<g transform="translate('+p.x.toFixed(1)+' '+p.y.toFixed(1)+') rotate('+(ang+side*58).toFixed(1)+')"><g class="lf" data-t="'+t.toFixed(3)+'" transform="scale('+sc.toFixed(2)+')">'+(k%3?LEAF:LEAF2)+'</g></g>';
+  var L=stem.getTotalLength(), h='', k=0;
+  for(var t=.05;t<=.99;t+=.058){
+    var p=stem.getPointAtLength(L*t), q=stem.getPointAtLength(Math.min(L,L*t+2)), ang=Math.atan2(q.y-p.y,q.x-p.x)*180/Math.PI, side=(k%2?1:-1), sc=(1.2-.55*t);
+    h+='<g transform="translate('+p.x.toFixed(1)+' '+p.y.toFixed(1)+') rotate('+(ang+side*58).toFixed(1)+')"><g class="lf" data-t="'+t.toFixed(3)+'" data-s="'+sc.toFixed(2)+'" transform="scale('+sc.toFixed(2)+')">'+(k%3?LEAF:LEAF2)+'</g></g>';
     k++;
   }
-  g.innerHTML=h;
-  var box=$('#gArt'), fr=$('#gFruits');
-  fr.innerHTML=FRUITS.map(function(f){
-    var p=stem.getPointAtLength(L*f.t), q=stem.getPointAtLength(L*f.t+2), dx=q.x-p.x, dy=q.y-p.y, m=Math.hypot(dx,dy)||1, nx=-dy/m*f.s, ny=dx/m*f.s;
-    var x=(p.x+nx*120)/640*100, y=(p.y+ny*120)/720*100;
-    x=Math.max(9,Math.min(91,x)); y=Math.max(7,Math.min(93,y));
-    return '<a class="gf" href="'+CATP+(f.c==='granel'?'#granel':'?c='+f.c)+'" data-t="'+f.t+'" style="left:'+x.toFixed(1)+'%;top:'+y.toFixed(1)+'%"><span class="gm">'+(ILL[f.c]||'')+'</span><span class="gn">'+esc(f.n)+'</span></a>';
-  }).join('');
+  $('#gLeaves').innerHTML=h;
+  $('#gNuts').innerHTML=NUTS.map(function(n,i){ return '<span class="gn2" style="left:'+n[1]+'%;top:'+n[2]+'%;width:'+n[3]+'%"><span class="fl" style="animation-delay:-'+(i*1.3)+'s;animation-duration:'+(6+i%4)+'s">'+(ILL[n[0]]||'')+'</span></span>'; }).join('');
   $('#bfHero').innerHTML=ILL.mariposa||'';
   garden={stem:stem,L:L};
 }
 function gardenMotion(){
   if(!garden) return;
-  var L=garden.L, stem=garden.stem, start=.46;
-  stem.style.strokeDasharray=L; stem.style.strokeDashoffset=L*(1-start);
-  var leaves=$$('#gLeaves .lf'), fruits=$$('#gFruits .gf');
+  var L=garden.L, stem=garden.stem, start=.5;
+  stem.style.strokeDasharray=L;
+  var leaves=$$('#gLeaves .lf'), nuts=$$('#gNuts .gn2');
   if(reduce || !window.gsap || !window.ScrollTrigger){ stem.style.strokeDashoffset=0; return; }
-  if(window.SplitText){ try{ var w=new SplitText('#h1',{type:'words',mask:'words'}).words; gsap.from(w,{yPercent:110,duration:1.1,ease:'power4.out',stagger:.08,delay:.1}); }catch(e){} }
-  leaves.forEach(function(l){ if(+l.dataset.t>start) gsap.set(l,{scale:0,transformOrigin:'0% 50%'}); });
-  fruits.forEach(function(f){ if(+f.dataset.t>start) gsap.set(f,{opacity:0,scale:.6}); });
-  gsap.from(leaves.filter(function(l){return +l.dataset.t<=start;}),{scale:0,transformOrigin:'0% 50%',duration:.9,ease:'power3.out',stagger:.08,delay:.25});
-  gsap.from(fruits.filter(function(f){return +f.dataset.t<=start;}),{opacity:0,scale:.6,duration:.8,ease:'power3.out',stagger:.1,delay:.6});
-  var tl=gsap.timeline({defaults:{ease:'none'}});
-  tl.to(stem,{strokeDashoffset:0,duration:1},0);
-  leaves.forEach(function(l){ var t=+l.dataset.t; if(t>start) tl.to(l,{scale:+(l.getAttribute('transform').match(/scale\(([\d.]+)/)||[0,1])[1],duration:.12,ease:'power2.out'},(t-start)/(1-start)*.92); });
-  fruits.forEach(function(f){ var t=+f.dataset.t; if(t>start) tl.to(f,{opacity:1,scale:1,duration:.12,ease:'power2.out'},Math.min(.95,(t-start)/(1-start)*.92+.05)); });
-  tl.fromTo('#bfHero',{xPercent:0,yPercent:0,rotation:-8},{xPercent:180,yPercent:-260,rotation:8,duration:1,ease:'sine.inOut'},0);
-  ScrollTrigger.create({trigger:'#hero',start:function(){return 'top '+hh()+'px';},end:'bottom bottom',scrub:.6,animation:tl,onUpdate:function(st){ $('#hint').style.opacity=st.progress>.03?0:1; }});
+  if(window.SplitText){ try{ var w=new SplitText('#h1',{type:'words'}).words; gsap.from(w,{opacity:0,y:24,duration:.9,ease:'power3.out',stagger:.07,delay:.1}); }catch(e){} }
+  gsap.from('.g-disc',{scale:.86,opacity:0,duration:1.1,ease:'power3.out',delay:.15});
+  gsap.from(nuts,{opacity:0,scale:.5,duration:.9,ease:'power3.out',stagger:.06,delay:.4});
+  var mm=gsap.matchMedia();
+  mm.add('(min-width:901px)',function(){
+    stem.style.strokeDashoffset=L*(1-start);
+    var early=leaves.filter(function(l){return +l.dataset.t<=start;}), late=leaves.filter(function(l){return +l.dataset.t>start;});
+    gsap.from(early,{scale:0,transformOrigin:'0% 50%',duration:.9,ease:'power3.out',stagger:.07,delay:.3});
+    gsap.set(late,{scale:0,transformOrigin:'0% 50%'});
+    var tl=gsap.timeline({defaults:{ease:'none'}});
+    tl.to(stem,{strokeDashoffset:0,duration:1},0);
+    late.forEach(function(l){ var t=+l.dataset.t; tl.to(l,{scale:+l.dataset.s,duration:.14,ease:'power2.out'},(t-start)/(1-start)*.88); });
+    nuts.forEach(function(n,i){ tl.to(n,{yPercent:(i%2?-1:1)*(40+i*8),xPercent:(i%3-1)*30,duration:1},0); });
+    tl.to('.g-disc',{rotation:-6,scale:1.03,duration:1},0);
+    tl.fromTo('#bfHero',{xPercent:0,yPercent:0},{xPercent:260,yPercent:-330,rotation:10,duration:1,ease:'sine.inOut'},0);
+    var st=ScrollTrigger.create({trigger:'#hero',start:function(){return 'top '+hh()+'px';},end:'bottom bottom',scrub:.6,animation:tl,onUpdate:function(s){ $('#hint').style.opacity=s.progress>.03?0:1; }});
+    return function(){ st.kill(); tl.kill(); gsap.set(leaves,{clearProps:'all'}); };
+  });
+  mm.add('(max-width:900px)',function(){
+    stem.style.strokeDashoffset=L;
+    gsap.to(stem,{strokeDashoffset:0,duration:2.2,ease:'power2.inOut',delay:.3});
+    gsap.from(leaves,{scale:0,transformOrigin:'0% 50%',duration:.7,ease:'power3.out',stagger:.09,delay:.6});
+  });
 }
 /* mariposa guía: se posa en cada sección */
 function butterflyGuide(){
@@ -807,7 +813,7 @@ function motion(){
     if($('#drops')) heroMotion(); if($('#gArt')) gardenMotion(); aislesMotion(); if(IS_HOME) butterflyGuide();
     if(!reduce){
       // títulos que se arman por palabras
-      if(window.SplitText) $$('[data-split]').forEach(function(h){ try{ var sp=new SplitText(h,{type:'words',mask:'words'}); gsap.from(sp.words,{yPercent:110,duration:.9,ease:'power4.out',stagger:.06,scrollTrigger:{trigger:h,start:'top 88%',once:true}}); }catch(e){} });
+      if(window.SplitText) $$('[data-split]').forEach(function(h){ try{ var sp=new SplitText(h,{type:'words'}); gsap.from(sp.words,{opacity:0,y:26,duration:.8,ease:'power3.out',stagger:.05,scrollTrigger:{trigger:h,start:'top 88%',once:true}}); }catch(e){} });
       // cómo pedir: las tarjetas se apilan
       var st=$$('#stack .st');
       st.forEach(function(card,i){ var nx=st[i+1]; if(!nx) return; gsap.to(card,{scale:.94,ease:'none',scrollTrigger:{trigger:nx,start:'top 85%',end:'top 30%',scrub:true}}); });

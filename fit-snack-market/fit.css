@@ -648,22 +648,24 @@ mark{background:var(--sand);color:inherit;border-radius:3px;padding:0 1px}
 .ln .th .gdot,.res .th .gdot{border-radius:12px}
 .drop.pt .tile{border-radius:18px}
 
-/* --- v4: jardín botánico --- */
-.garden{height:230vh;height:230svh}
-.g-grid{height:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(1rem,3vw,3rem)}
-.g-eyebrow{font:700 .78rem/1 var(--f-b);letter-spacing:.2em;text-transform:uppercase;color:var(--olive)}
-.g-h1{font-family:var(--f-s);font-weight:700;color:var(--olive-deep);line-height:.92;letter-spacing:-.01em;font-size:clamp(3.6rem,8.6vw,8rem)}
-.g-h1 .g-a{display:block;color:var(--olive)}
-.g-h1 .g-b{display:block}
-.garden .lead{max-width:30rem}
-.g-art{position:relative;height:min(86%,700px);aspect-ratio:640/720;justify-self:center;max-width:100%}
-.g-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.g-fruits{position:absolute;inset:0}
-.gf{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:.45rem;text-decoration:none;color:var(--olive-deep);will-change:transform}
-.gm{width:clamp(78px,8.5vw,112px);aspect-ratio:1;border-radius:50%;background:var(--paper);border:2px solid var(--olive-deep);display:grid;place-items:center;box-shadow:0 14px 26px -18px rgba(46,58,33,.55);transition:transform .35s var(--ease),background-color .25s}
-.gm svg{width:62%;height:62%}
-.gn{font:700 .8rem/1.1 var(--f-b);background:var(--cream);padding:.25rem .55rem;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
-.gf:hover .gm{transform:translateY(-4px) rotate(-4deg);background:var(--sand)}
+/* --- v5: el logo en su jardín --- */
+.garden{height:185vh;height:185svh}
+.g-grid{height:100%;display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);align-items:center;gap:clamp(1rem,3vw,3.5rem)}
+.g-title{font-size:clamp(2.6rem,5.2vw,4.9rem);font-weight:800;letter-spacing:-.04em;line-height:1.02;color:var(--olive-deep)}
+.g-title .hl{position:relative;display:inline-block;color:var(--leaf);white-space:nowrap}
+.g-title .hl svg{position:absolute;left:0;right:0;bottom:-.14em;width:100%;height:.3em;overflow:visible}
+.g-title .hl path{fill:none;stroke:var(--kraft);stroke-width:5;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.garden .tagline{font-size:clamp(1.7rem,2.6vw,2.3rem)}
+.garden .lead{max-width:31rem}
+.g-art{position:relative;width:min(100%,620px);aspect-ratio:1;justify-self:center}
+.g-svg{position:absolute;inset:-4%;width:108%;height:108%;overflow:visible}
+.g-disc{position:absolute;left:19%;top:19%;width:62%;aspect-ratio:1;border-radius:50%;background:#FBF8F1;border:1px solid var(--line);box-shadow:0 40px 70px -44px rgba(46,58,33,.55),0 0 0 14px rgba(255,253,247,.6);overflow:hidden;z-index:2}
+.g-disc img{width:100%;height:100%;object-fit:cover}
+.g-nuts{position:absolute;inset:0;z-index:3;pointer-events:none}
+.gn2{position:absolute;aspect-ratio:1;display:block}
+.gn2 .fl{display:block;width:100%;height:100%;animation:floaty 7s ease-in-out infinite}
+.gn2 svg{width:100%;height:100%;filter:drop-shadow(0 8px 8px rgba(46,58,33,.18))}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-10px) rotate(6deg)}}
 .bf{display:block;width:58px;pointer-events:none}
 .bf svg{width:100%;height:auto;overflow:visible}
 .bf .wl,.bf .wr{transform-box:fill-box;animation:flapL 1.6s ease-in-out infinite}
@@ -672,19 +674,18 @@ mark{background:var(--sand);color:inherit;border-radius:3px;padding:0 1px}
 .bf.flying .wl,.bf.flying .wr{animation-duration:.32s}
 @keyframes flapL{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.45)}}
 @keyframes flapR{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.45)}}
-.bf-hero{position:absolute;left:8%;top:44%;width:64px;z-index:3}
+.bf-hero{position:absolute;left:4%;top:74%;width:60px;z-index:4}
 [data-perch]{position:relative}
-.bf-guide{position:absolute;left:calc(100% + 10px);top:-18px;width:40px;z-index:5}
+.bf-guide{position:absolute;left:calc(100% + 12px);top:-20px;width:40px;z-index:5}
 @media (max-width:900px){
-  .garden{height:200vh;height:200svh}
-  .g-grid{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);align-content:start;padding-top:clamp(.8rem,3vh,1.8rem);gap:.4rem}
-  .g-h1{font-size:clamp(3.2rem,15vw,4.6rem)}
-  .garden .lead{font-size:.95rem}
-  .g-art{width:min(100%,calc(100svh - var(--hh) - 330px),440px);height:auto;min-width:250px;align-self:center}
-  .gm{width:62px}.gn{font-size:.68rem}
-  .bf-hero{width:46px}
+  .garden{height:auto}
+  .garden .hero-pin{position:relative;top:auto;height:auto;overflow:visible}
+  .g-grid{grid-template-columns:minmax(0,1fr);gap:1.2rem;padding-block:1.4rem 3rem}
+  .g-art{order:-1;width:min(84vw,380px)}
+  .g-title{font-size:clamp(2.1rem,9vw,3.2rem)}
+  .garden .hint{display:none}
+  .bf-hero{width:44px}
 }
-@media (max-width:900px) and (max-height:700px){.garden .lead{display:none}.g-eyebrow{display:none}}
 /* tarjetas en portada: sin precio */
 .row.np{padding-top:.2rem}
 .more{border:0;background:none;padding:.35rem 0;color:var(--olive-deep);font-weight:700;font-size:.9rem;display:inline-flex;gap:.35rem}
@@ -717,3 +718,13 @@ mark{background:var(--sand);color:inherit;border-radius:3px;padding:0 1px}
 @media (max-width:700px){.fbtn .lb{display:none}.fbtn{width:46px;padding:0;justify-content:center;position:relative}.fbtn b{position:absolute;top:-4px;right:-4px}}
 .cat-page .sec-h{margin-bottom:1rem}
 .cat-h1{font-size:clamp(2rem,4.4vw,3.4rem)}
+
+.a-head{margin-bottom:clamp(1.2rem,3.2vh,2.2rem)!important;gap:.8rem 2rem}
+.a-head h2{margin-top:.8rem}
+.a-tip{margin-top:.2rem;line-height:1.45}
+@media (max-width:900px){.a-head h2{font-size:clamp(1.8rem,7.4vw,2.4rem)}.a-card{height:min(54svh,420px)}.a-pin{justify-content:center;gap:0}}
+/* ficha: la foto siempre completa */
+.sheet .spi{background:#fff}
+.sheet .spi img{object-fit:contain!important;aspect-ratio:1;max-width:100%;max-height:100%}
+@media (max-width:760px){.sheet .sp{height:min(46svh,380px)}}
+.card .pic img{object-fit:contain;background:#fff}
