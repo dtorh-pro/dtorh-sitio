@@ -891,3 +891,45 @@ body.mm-open .mbar{opacity:0;pointer-events:none}
 .st-vid figcaption a{color:var(--olive);text-decoration:none;white-space:nowrap}
 .st-vid figcaption a:hover{text-decoration:underline}
 @media (max-width:900px){.st-vid video{aspect-ratio:1.1}}
+
+/* v13 · "Nuestra historia" como historias de la tienda (fotos reales, interactivo) */
+.st-story{position:relative;padding:14px 14px 0 0}
+.ss-stack span{position:absolute;inset:14px 14px 58px 0;border-radius:28px;background:#E8DCC2;border:1px solid var(--line);transform:rotate(3.2deg) translate(10px,6px);transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.ss-stack span+span{background:#DDE6C8;transform:rotate(-2.4deg) translate(-6px,10px)}
+.st-story.bump .ss-stack span{animation:ssStack .7s cubic-bezier(.2,.8,.2,1)}
+@keyframes ssStack{40%{transform:rotate(5deg) translate(16px,4px)}}
+.ss-card{position:relative;aspect-ratio:1;border-radius:28px;overflow:hidden;background:#2E3A21;box-shadow:0 30px 50px -36px rgba(46,58,33,.6);outline:none;isolation:isolate}
+.ss-card:focus-visible{box-shadow:0 0 0 3px var(--cream),0 0 0 5px var(--olive)}
+.ss-list{list-style:none;margin:0;padding:0;position:absolute;inset:0}
+.ss{position:absolute;inset:0;opacity:0;visibility:hidden;transform:scale(1.04);transition:opacity .6s ease,transform .8s cubic-bezier(.2,.8,.2,1),visibility 0s linear .7s}
+.ss.on{opacity:1;visibility:visible;transform:none;transition:opacity .6s ease,transform .8s cubic-bezier(.2,.8,.2,1),visibility 0s}
+.ss.outL{transform:translateX(-6%) scale(1.02)}.ss.outR{transform:translateX(6%) scale(1.02)}
+.ss img{width:100%;height:100%;object-fit:cover;border-radius:0!important;aspect-ratio:auto!important}
+.ss.on img{animation:ssKen 4.6s ease-out both}
+@keyframes ssKen{from{transform:scale(1.1) translate(1.5%,1%)}to{transform:scale(1)}}
+.st-story.held .ss.on img{animation-play-state:paused}
+.ss::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(30,38,22,.5) 0,transparent 22%,transparent 52%,rgba(30,38,22,.82) 100%);pointer-events:none}
+.ss-cap{position:absolute;left:18px;right:18px;bottom:16px;z-index:2;color:#FBF6E9;display:flex;flex-direction:column;align-items:flex-start;gap:.15rem}
+.ss-cap b{font:700 clamp(1.7rem,3.6vw,2.3rem)/1 var(--f-s)}
+.ss-cap span{font-size:.9rem;opacity:.92}
+.ss-cap a{margin-top:.55rem;background:#FBF6E9;color:var(--olive-deep);text-decoration:none;font:700 .82rem var(--f-d);padding:.5rem .9rem;border-radius:999px;transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.ss-cap a:hover{transform:translateY(-2px)}
+.ss.on .ss-cap>*{animation:ssUp .6s cubic-bezier(.2,.8,.2,1) both}
+.ss.on .ss-cap span{animation-delay:.08s}.ss.on .ss-cap a{animation-delay:.16s}
+@keyframes ssUp{from{opacity:0;transform:translateY(14px)}}
+.ss-bars{position:absolute;top:14px;left:14px;right:14px;z-index:3;display:flex;gap:5px}
+.ss-bars i{flex:1;height:3px;border-radius:3px;background:rgba(251,246,233,.38);overflow:hidden}
+.ss-bars b{display:block;height:100%;background:#FBF6E9;transform-origin:0 50%;transform:scaleX(0)}
+.ss-tag{position:absolute;top:28px;left:14px;z-index:3;display:flex;align-items:center;gap:.4rem;color:#FBF6E9;font:700 .72rem var(--f-b);letter-spacing:.04em}
+.ss-tag i{width:20px;height:20px;border-radius:50%;background:url(/fit-snack-market/img/logo-96.webp) center/cover,#FBF6E9;border:1.5px solid #FBF6E9}
+.ss-nav{position:absolute;top:18%;bottom:30%;z-index:2;width:34%;background:none;border:0;cursor:pointer;padding:0}
+.ss-nav.prev{left:0;cursor:w-resize}.ss-nav.next{right:0;cursor:e-resize}
+.ss-nav:focus-visible{outline:2px solid #FBF6E9;outline-offset:-6px;border-radius:20px}
+.ss-foot{position:static!important;display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-top:.9rem;padding:0 .2rem;background:none!important;border:0!important;font-size:.8rem;color:var(--muted)}
+.ss-n{font:600 .8rem var(--f-b);font-variant-numeric:tabular-nums}.ss-n b{color:var(--olive-deep);font-size:1rem}
+.ss-hint{flex:1;text-align:center}
+.ss-foot a{color:var(--olive);font-weight:700;text-decoration:none}
+@media (max-width:900px){.st-story{padding:10px 10px 0 0}.ss-card{aspect-ratio:1}}
+@media (hover:hover){.ss-hint::before{content:"Pasa el mouse para pausar · "}}
+@media (prefers-reduced-motion:reduce){.ss,.ss.on{transition:none}.ss.on img,.ss.on .ss-cap>*{animation:none}}
+.ss-bars i{display:block;min-width:0;max-height:3px;padding:0;margin:0}

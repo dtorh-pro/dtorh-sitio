@@ -969,7 +969,7 @@ function init(){
   function navPill(){ var p=$('#nav .pill'); if(!p) return; if(!cur){ p.style.opacity=0; return; } p.style.opacity=1; p.style.width=cur.offsetWidth+'px'; p.style.transform='translateX('+cur.offsetLeft+'px)'; }
   navPill();
   if(io && links.length){ var nio=new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting){ var i=secs.indexOf(en.target); links.forEach(function(a,k){a.classList.toggle('on',k===i);}); cur=links[i]; navPill(); } }); },{rootMargin:'-45% 0px -50% 0px'}); secs.forEach(function(s){ if(s) nio.observe(s); }); }
-  mobileMenu(); pauseOffscreen(); storyVideo();
+  mobileMenu(); pauseOffscreen(); storyGallery();
   motion();
 }
 /* ---------- MENÚ MÓVIL: "las etiquetas" — una bolsa kraft sube desde abajo y de la rama cuelgan
@@ -1052,16 +1052,47 @@ function pauseOffscreen(){
   var po=new IntersectionObserver(function(es){ es.forEach(function(e){ e.target.classList.toggle('paused',!e.isIntersecting); }); });
   $$('main > section, .foot').forEach(function(s){ po.observe(s); });
 }
-/* video de la cocina: no descarga nada hasta que la sección se acerca a la pantalla, y se pausa al salir */
-function storyVideo(){
-  var v=$('#stVid'); if(!v) return;
-  if(reduce){ v.removeAttribute('loop'); return; }
-  if(!('IntersectionObserver' in window)){ v.preload='auto'; v.play().catch(function(){}); return; }
-  var io=new IntersectionObserver(function(es){ es.forEach(function(e){
-    if(e.isIntersecting){ if(v.preload!=='auto'){ v.preload='auto'; v.load(); } var p=v.play(); if(p&&p.catch) p.catch(function(){}); }
-    else v.pause();
-  }); },{rootMargin:'200px 0px',threshold:.15});
-  io.observe(v);
+/* "Nuestra historia": fotos reales de la tienda como historias — barras de avance, avance solo,
+   toque a los lados, deslizar, teclado; se pausa al tocar/pasar el mouse y fuera de pantalla */
+function storyGallery(){
+  var root=$('#stStory'); if(!root) return;
+  var card=root.querySelector('.ss-card'), slides=$$('.ss',root), bars=$$('.ss-bars i',root), num=root.querySelector('.ss-n b');
+  var n=slides.length, cur=0, DUR=4200, t0=0, acc=0, playing=false, hold=false, visible=false, raf=0;
+  function warm(i){ var im=slides[(i+n)%n].querySelector('img'); if(im.dataset.src){ im.srcset=im.dataset.srcset; im.src=im.dataset.src; im.removeAttribute('data-src'); } if(im.loading==='lazy') im.loading='eager'; }
+  function show(i,dir){
+    i=(i+n)%n; if(i===cur && dir!==0) return;
+    var prev=slides[cur]; prev.classList.remove('on'); prev.classList.add(dir<0?'outR':'outL');
+    setTimeout(function(){ prev.classList.remove('outL','outR'); },700);
+    cur=i; var s=slides[cur]; s.classList.remove('outL','outR'); s.classList.add('on');
+    bars.forEach(function(b,k){ b.classList.toggle('ssd',k<cur); b.querySelector('b').style.transform='scaleX('+(k<cur?1:0)+')'; });
+    num.textContent=String(cur+1).padStart(2,'0'); acc=0; t0=performance.now();
+    warm(cur+1); root.classList.remove('bump'); void root.offsetWidth; root.classList.add('bump');
+  }
+  function tick(now){
+    if(playing && !hold){ var p=Math.min(1,(acc+now-t0)/DUR); bars[cur].querySelector('b').style.transform='scaleX('+p+')'; if(p>=1){ show(cur+1,1); } }
+    raf=requestAnimationFrame(tick);
+  }
+  function play(){ if(playing||reduce) return; playing=true; t0=performance.now(); if(!raf) raf=requestAnimationFrame(tick); }
+  function pause(){ if(!playing) return; acc+=performance.now()-t0; playing=false; }
+  function holdOn(){ if(hold) return; hold=true; if(playing){ acc+=performance.now()-t0; } root.classList.add('held'); }
+  function holdOff(){ if(!hold) return; hold=false; t0=performance.now(); root.classList.remove('held'); }
+  root.querySelector('.ss-nav.prev').addEventListener('click',function(){ show(cur-1,-1); });
+  root.querySelector('.ss-nav.next').addEventListener('click',function(){ show(cur+1,1); });
+  card.addEventListener('keydown',function(e){ if(e.key==='ArrowRight'){e.preventDefault();show(cur+1,1);} if(e.key==='ArrowLeft'){e.preventDefault();show(cur-1,-1);} });
+  card.addEventListener('mouseenter',holdOn); card.addEventListener('mouseleave',holdOff);
+  card.addEventListener('focusin',holdOn); card.addEventListener('focusout',holdOff);
+  /* deslizar con el dedo (y mantener presionado para pausar, como en Instagram) */
+  var sx=0, sy=0, st=0, moved=false;
+  card.addEventListener('touchstart',function(e){ var t=e.touches[0]; sx=t.clientX; sy=t.clientY; st=Date.now(); moved=false; holdOn(); },{passive:true});
+  card.addEventListener('touchmove',function(e){ var t=e.touches[0]; if(Math.abs(t.clientX-sx)>12) moved=true; },{passive:true});
+  card.addEventListener('touchend',function(e){ var t=e.changedTouches[0], dx=t.clientX-sx, dy=t.clientY-sy; holdOff();
+    if(Math.abs(dx)>40 && Math.abs(dx)>Math.abs(dy)){ show(cur+(dx<0?1:-1),dx<0?1:-1); }
+  },{passive:true});
+  /* el carrusel solo corre cuando se ve */
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){ es.forEach(function(e){ visible=e.isIntersecting; if(visible){ warm(0); warm(1); play(); } else pause(); }); },{threshold:.35}).observe(root);
+  } else play();
+  bars[0].querySelector('b').style.transform='scaleX(0)';
 }
 var stT; function refreshST(){ if(!window.ScrollTrigger) return; clearTimeout(stT); stT=setTimeout(function(){ ScrollTrigger.refresh(); },180); }
 function motion(){
