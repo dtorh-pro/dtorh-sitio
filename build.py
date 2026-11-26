@@ -188,6 +188,7 @@ SCRIPTS = ('<script src="/assets/lenis.min.js?v=1.3.26" defer></script>\n'
   + '<script src="/assets/escena.js?v=' + V('assets/escena.js') + '" defer></script>\n'
   + '<script src="/assets/menu.js?v=' + V('assets/menu.js') + '" defer></script>\n'
   + '<script src="/assets/medir.js?v=' + V('assets/medir.js') + '" defer></script>\n'
+  + '<script src="/assets/chat.js?v=' + V('assets/chat.js') + '" defer></script>\n'
   + '<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon=\'{"token": "c61f2bddfe9c47a0b9a67eb3e39e592b"}\'></script>\n')
 
 LD = '''<script type="application/ld+json">
@@ -777,7 +778,7 @@ PRIV = f'''<body class="tono-claro">
     <ul>
       <li><b>Formulario de los 3 hallazgos:</b> tu nombre, tu WhatsApp, el nombre y los datos públicos de tu negocio y lo que nos cuentes. Los usamos solo para preparar tus hallazgos, contactarte y, si quieres, hacerte una propuesta. Se registran en el sistema de dtorh (alojado en Cloudflare) y en una hoja privada de Google como respaldo.</li>
       <li><b>Si aceptas una propuesta:</b> tu nombre, documento, celular y correo para el acuerdo y la cuenta de cobro, y el material que nos envíes (fotos, productos, horario), que se guarda en el Google Drive de dtorh. Los pagos en línea los procesa Wompi (Bancolombia): dtorh nunca ve los datos de tu tarjeta.</li>
-      <li><b>Mensajes por WhatsApp, Instagram o Facebook</b> (también cuando comentas una publicación con la palabra clave y te escribimos por mensaje privado): te responde primero un <b>asistente con inteligencia artificial</b> de dtorh, que siempre se presenta como tal, y una persona del equipo cuando lo pides o hace falta. Guardamos el texto de la conversación (los últimos 60 mensajes), tu nombre de perfil y lo que nos cuentes de tu negocio, para responderte, darte seguimiento y, si quieres, prepararte una propuesta. No usamos tus mensajes para nada más.</li>
+      <li><b>Mensajes por WhatsApp, Instagram, Facebook o el chat de esta página</b> (también cuando comentas una publicación con la palabra clave y te escribimos por mensaje privado): te responde primero un <b>asistente con inteligencia artificial</b> de dtorh, que siempre se presenta como tal, y una persona del equipo cuando lo pides o hace falta. En el chat de esta página no usamos cookies: tu navegador guarda un código al azar para seguir la conversación. Guardamos el texto de la conversación (los últimos 60 mensajes), tu nombre de perfil y lo que nos cuentes de tu negocio, para responderte, darte seguimiento y, si quieres, prepararte una propuesta. No usamos tus mensajes para nada más.</li>
       <li><b>Conteo de visitas sin cookies (Cloudflare Web Analytics):</b> cuenta cuántas personas visitan cada página y desde qué tipo de dispositivo, de forma anónima. No usa cookies ni te identifica.</li>
       <li><b>Medición con cookies de Meta (píxel):</b> solo si aceptas en el aviso. Sirve para saber qué publicaciones y anuncios nos traen clientes y para mostrar anuncios de dtorh a personas parecidas. Si no aceptas, no se carga nada de Meta en tu visita.</li>
     </ul>
