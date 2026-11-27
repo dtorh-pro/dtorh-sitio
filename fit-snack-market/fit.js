@@ -969,7 +969,7 @@ function init(){
   function navPill(){ var p=$('#nav .pill'); if(!p) return; if(!cur){ p.style.opacity=0; return; } p.style.opacity=1; p.style.width=cur.offsetWidth+'px'; p.style.transform='translateX('+cur.offsetLeft+'px)'; }
   navPill();
   if(io && links.length){ var nio=new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting){ var i=secs.indexOf(en.target); links.forEach(function(a,k){a.classList.toggle('on',k===i);}); cur=links[i]; navPill(); } }); },{rootMargin:'-45% 0px -50% 0px'}); secs.forEach(function(s){ if(s) nio.observe(s); }); }
-  mobileMenu(); pauseOffscreen(); storyGallery();
+  mobileMenu(); pauseOffscreen(); storyGallery(); tourVideo();
   motion();
 }
 /* ---------- MENÚ MÓVIL: "las etiquetas" — una bolsa kraft sube desde abajo y de la rama cuelgan
@@ -979,6 +979,7 @@ function mobileMenu(){
   var items=IS_HOME?[
     ['#pasillos','Pasillos','8 pasillos','granel','k1'],
     ['#historia','Nuestra historia','Cómo nació FIT','arepas','k2'],
+    ['#recorrido','Recorrido','La tienda en video','cafe','k3'],
     ['#cocina','De la cocina','Arepas y café','cafe','k3'],
     ['#para-ti','Para ti','Según tu momento','snacks','k4'],
     [CATP,'Ver el catálogo','Más de 100 productos','cremas','big'],
@@ -1093,6 +1094,30 @@ function storyGallery(){
     new IntersectionObserver(function(es){ es.forEach(function(e){ visible=e.isIntersecting; if(visible){ warm(0); warm(1); play(); } else pause(); }); },{threshold:.35}).observe(root);
   } else play();
   bars[0].querySelector('b').style.transform='scaleX(0)';
+}
+/* Recorrido en video: carga solo al acercarse, paradas sincronizadas con el video, el arco se abre al hacer scroll */
+function tourVideo(){
+  var v=$('#trVid'); if(!v) return;
+  var btns=$$('#trCh button'), bar=$('#trBar'), play=$('#trPlay'), arch=$('#trArch'), user=false;
+  ['n1','n2','n3','n4'].forEach(function(c,i){ var el=$('.tr-nut.'+c); if(el) el.innerHTML=ILL[['Almendra','Nuez nogal','Pistacho','Anís estrellado'][i]]||''; });
+  function sync(){ var t=v.currentTime, k=0; btns.forEach(function(b,i){ if(t>=+b.dataset.t-.05) k=i; }); btns.forEach(function(b,i){ b.classList.toggle('on',i===k); }); if(v.duration) bar.style.transform='scaleX('+(t/v.duration)+')'; }
+  v.addEventListener('timeupdate',sync);
+  (function loop(){ if(!v.paused) sync(); requestAnimationFrame(loop); })();
+  var loaded=false; function load(){ if(!loaded){ loaded=true; v.preload='auto'; v.load(); } }
+  function go(){ load(); var p=v.play(); if(p&&p.catch) p.catch(function(){}); play.classList.remove('paused'); play.setAttribute('aria-label','Pausar video'); }
+  function stop(){ v.pause(); play.classList.add('paused'); play.setAttribute('aria-label','Reproducir video'); }
+  btns.forEach(function(b){ b.addEventListener('click',function(){ load(); var t=+b.dataset.t; var seek=function(){ v.currentTime=t+.02; go(); sync(); }; if(v.readyState>0) seek(); else v.addEventListener('loadedmetadata',seek,{once:true}); user=false; }); });
+  play.addEventListener('click',function(){ if(v.paused){ user=false; go(); } else { user=true; stop(); } });
+  if(reduce){ stop(); } 
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ if(!user && !reduce) go(); } else if(!v.paused){ v.pause(); } }); },{rootMargin:'150px 0px',threshold:.2}).observe(arch);
+  }
+  if(window.gsap && window.ScrollTrigger && !reduce){
+    gsap.fromTo(arch,{clipPath:'inset(18% 14% 0% 14% round 999px 999px 26px 26px)',scale:.92},{clipPath:'inset(0% 0% 0% 0% round 999px 999px 26px 26px)',scale:1,ease:'none',scrollTrigger:{trigger:'#recorrido',start:'top 85%',end:'top 20%',scrub:.6}});
+    gsap.from('.tr-loc',{x:-40,opacity:0,rotation:-12,duration:.9,ease:'back.out(1.6)',scrollTrigger:{trigger:'#recorrido',start:'top 55%'}});
+    gsap.from('#trCh li',{y:18,opacity:0,duration:.6,ease:'power3.out',stagger:.06,scrollTrigger:{trigger:'#trCh',start:'top 85%'}});
+    $$('.tr-nut').forEach(function(n,i){ gsap.to(n,{yPercent:(i%2?-1:1)*60,rotation:(i%2?-30:30),ease:'none',scrollTrigger:{trigger:'#recorrido',start:'top bottom',end:'bottom top',scrub:1}}); });
+  }
 }
 var stT; function refreshST(){ if(!window.ScrollTrigger) return; clearTimeout(stT); stT=setTimeout(function(){ ScrollTrigger.refresh(); },180); }
 function motion(){
