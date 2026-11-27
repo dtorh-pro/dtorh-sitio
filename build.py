@@ -168,7 +168,7 @@ FOOTER = f'''<footer>
       <a href="{IG}" target="_blank" rel="noopener" aria-label="Instagram de dtorh">{I('instagram')}@dtorh.click</a>
       <a href="{FB}" target="_blank" rel="noopener" aria-label="Facebook de dtorh">{I('facebook')}/dtorh.click</a>
     </div>
-    <div class="pie-serv"><a href="/servicios/arranque-360/">Arranque 360</a><a href="/servicios/perfil-de-empresa-google/">Google completo</a><a href="/servicios/pagina-web-con-catalogo/">Web con catálogo</a><a href="/servicios/whatsapp-business-catalogo/">WhatsApp que vende</a><a href="/servicios/mejorar-pagina-web/">Web más rápida</a><a href="/servicios/instagram-facebook-negocio/">Redes en orden</a></div>
+    <div class="pie-serv"><a href="/servicios/arranque-360/">Arranque 360</a><a href="/servicios/perfil-de-empresa-google/">Google completo</a><a href="/servicios/pagina-web-con-catalogo/">Web con catálogo</a><a href="/servicios/whatsapp-business-catalogo/">WhatsApp que vende</a><a href="/servicios/mejorar-pagina-web/">Web más rápida</a><a href="/servicios/renovar-pagina-web/">Web renovada</a><a href="/servicios/instagram-facebook-negocio/">Redes en orden</a></div>
     <p class="fine">{{ Los datos que nos compartas se usan solo para contactarte y preparar una propuesta. Puedes pedir que los eliminemos cuando quieras escribiendo a dtorh.ofc@gmail.com. Ley 1581 de 2012. <a href="/privacidad/">Privacidad y cookies</a> }}</p>
     <div class="base"><span>© <span id="anio">2026</span> dtorh™ · Estudio digital · Barranquilla, Colombia</span><a href="#top">Volver arriba ↑</a></div>
   </div>

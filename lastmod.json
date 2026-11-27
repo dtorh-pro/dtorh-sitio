@@ -1,46 +1,50 @@
 {
  "/": {
-  "h": "0b1150db9b1ee178e484ba23c99bb1f177f253c0",
+  "h": "0a8d27a763c18647c5b52630c7c13ac697ff52b7",
   "f": "2026-11-26"
  },
  "/servicios/": {
-  "h": "5acfc5f17b3cb99e17bf1a700ae1301f3186b6fb",
+  "h": "ab1fe0b8f4cfc9bdf1756bbb07b284092fad00e5",
   "f": "2026-11-26"
  },
  "/como-trabajamos/": {
-  "h": "cd5c479de801db7b35f90d8107ff00cdfa947d7a",
+  "h": "5319567d612887d40f34b755ef58286e1dec88b2",
   "f": "2026-11-26"
  },
  "/laboratorio/": {
-  "h": "dddeb8c4996e8f3c42f20776e02a52a849b79312",
+  "h": "bbbf6a9c74a6886bb5a5c048654160b3ca8f9d78",
   "f": "2026-11-26"
  },
  "/privacidad/": {
-  "h": "e20f0ae5fdf23b51bccf4823e56312fab3f233b6",
+  "h": "52ddc74f62cc984fe700beb3bdb5394a8e8e6056",
   "f": "2026-11-26"
  },
  "/servicios/arranque-360/": {
-  "h": "424391f237c96efb62f996509452d1589187044a",
+  "h": "87445f84570438f5bd51d019476604e2d20fc084",
   "f": "2026-11-26"
  },
  "/servicios/perfil-de-empresa-google/": {
-  "h": "8a5bec009b47d5d274851db89711e2620a67f71d",
+  "h": "697ce1de4fbe295e86125d012bc48d4474dbf992",
   "f": "2026-11-26"
  },
  "/servicios/pagina-web-con-catalogo/": {
-  "h": "e44a278873e666d118bb35ee3d789f6347bdd2f1",
+  "h": "ad7f056c88b912b52b51d7add95e1d22b3c5f7a3",
   "f": "2026-11-26"
  },
  "/servicios/whatsapp-business-catalogo/": {
-  "h": "4097a9c3de4927d06871cf3c14018a0254299883",
+  "h": "0097bd4dc040865662bd8f7ad96dbfd25ed4797a",
   "f": "2026-11-26"
  },
  "/servicios/mejorar-pagina-web/": {
-  "h": "03bded4ed1e040cd9ec8eec7db6f59e5f3444256",
+  "h": "6fba1479f87aa91c52e88b70840a3dc96646ecc5",
   "f": "2026-11-26"
  },
  "/servicios/instagram-facebook-negocio/": {
-  "h": "359f48425372037e21bf90da4c27cccaa9865fdc",
+  "h": "ca58b06bdd147faaa5b6e283cd14b4dc80846409",
+  "f": "2026-11-26"
+ },
+ "/servicios/renovar-pagina-web/": {
+  "h": "1336af4dc78ba095a668263c8abcb18d53864a47",
   "f": "2026-11-26"
  }
 }
