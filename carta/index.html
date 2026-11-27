@@ -1934,7 +1934,7 @@ window.CARTAS.almendro = {
     var prop = window.CARTA_PROPUESTA;
     if (!DEMO && prop) {
       el.hidden = false; el.className = 'propuesta';
-      el.innerHTML = '<div class="demo-in"><p class="demo-marca"><strong>Demo para ' + esc(R.nombre) + '</strong> · hecha por dtorh™ con su carta real</p>' +
+      el.innerHTML = '<div class="demo-in"><p class="demo-marca"><strong>Demo para ' + esc(R.nombre) + '</strong> · preparada por dtorh™ con su carta real · no es la página oficial del negocio</p>' +
         '<a class="demo-cta" href="' + esc(prop.url) + '" target="_blank" rel="noopener">' + esc(prop.texto || 'Activar mi carta') + '</a>' +
         (prop.nota ? '<p class="prop-nota">' + esc(prop.nota) + '</p>' : '') + '</div>';
       return;

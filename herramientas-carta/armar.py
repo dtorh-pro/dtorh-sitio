@@ -7,6 +7,8 @@ Toma clientes/<slug>.json y publica en el sitio:
   cartas/<slug>/qr.svg               QR general
 
 Uso: python3 herramientas-carta/armar.py pescaye [--mesas 12]
+     Demo en el taller (27-nov-2026): python3 herramientas-carta/armar.py pescaye --taller ../conoce-tu-equipo
+       → publica en <taller>/dtorhdemo/<slug>/ con la dirección https://desarrollador.click/dtorhdemo/<slug>/
 Requiere segno (QR, licencia BSD, sin dependencias): pip install segno
 """
 import argparse, html, json, os, re, sys
@@ -156,13 +158,18 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('slug')
     ap.add_argument('--mesas', type=int, default=12)
+    ap.add_argument('--taller', help='carpeta del repositorio del taller (desarrollador.click): la demo va a dtorhdemo/<slug>/')
     a = ap.parse_args()
     ruta = os.path.join(AQUI, 'clientes', a.slug + '.json')
     R = json.load(open(ruta, encoding='utf-8'))
     if R.get('_revisar'):
         print('Ojo, hay puntos por revisar en el JSON:', *R['_revisar'], sep='\n  ')
-    url = '%s/cartas/%s/' % (DOMINIO, R['slug'])
-    dest = os.path.join(RAIZ, 'cartas', R['slug'])
+    if a.taller:
+        url = 'https://desarrollador.click/dtorhdemo/%s/' % R['slug']
+        dest = os.path.join(os.path.abspath(a.taller), 'dtorhdemo', R['slug'])
+    else:
+        url = '%s/cartas/%s/' % (DOMINIO, R['slug'])
+        dest = os.path.join(RAIZ, 'cartas', R['slug'])
     for sub in ('', 'imprimir', 'mesas'):
         os.makedirs(os.path.join(dest, sub), exist_ok=True)
     escribir = lambda p, t: open(os.path.join(dest, p), 'w', encoding='utf-8').write(t)

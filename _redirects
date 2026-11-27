@@ -2,3 +2,5 @@
 /trabajos/*  /laboratorio/  301
 /cotejo     https://cual.click/  301
 /cotejo/*   https://cual.click/  301
+/cartas/pescaye    https://desarrollador.click/dtorhdemo/pescaye/  301
+/cartas/pescaye/*  https://desarrollador.click/dtorhdemo/pescaye/:splat  301

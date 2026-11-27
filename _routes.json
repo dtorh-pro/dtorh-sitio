@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "include": ["/*"],
+  "exclude": ["/cartas/*", "/carta/*", "/assets/*", "/fonts/*", "/img/*", "/favicon.svg", "/favicon-32.png", "/apple-touch-icon.png", "/icon-512.png", "/og.jpg"]
+}
