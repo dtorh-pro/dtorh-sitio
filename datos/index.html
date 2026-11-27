@@ -459,6 +459,7 @@ footer a{color:inherit}
   if (params.get('nombre') && !$('nombre').value) $('nombre').value = params.get('nombre').slice(0,80);
   if (params.get('ciudad') && !$('ciudad').value) $('ciudad').value = params.get('ciudad').slice(0,90);
   if (params.get('vende') && !$('vende').value) $('vende').value = params.get('vende').slice(0,140);
+  if (params.get('wa') && !$('whatsapp').value) $('whatsapp').value = params.get('wa').replace(/\D/g,'').slice(-10); // viene del chat de WhatsApp con el agente
   function marcar(sel, v){
     var c = [].slice.call(document.querySelectorAll(sel + ' .chip')).filter(function(x){ return x.getAttribute('data-v') === v; })[0];
     if (c) c.setAttribute('aria-pressed','true');
