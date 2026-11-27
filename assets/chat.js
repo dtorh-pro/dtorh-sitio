@@ -58,11 +58,11 @@
   boton.innerHTML = '<span class="dc-ll" aria-hidden="true">{ }</span><b>Pregúntale al estudio</b><i aria-hidden="true"></i><span class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Abrir el chat con el asistente de dtorh</span>';
   var panel = document.createElement('section');
   panel.className = 'dc-panel'; panel.id = 'dc-panel'; panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-label', 'Chat con el asistente de dtorh'); panel.setAttribute('aria-hidden', 'true');
-  panel.innerHTML = '<div class="dc-cab"><div class="dc-av" aria-hidden="true">{ }</div><div><h2>Asistente de dtorh™</h2><p><i aria-hidden="true"></i>IA del estudio · responde en segundos</p></div><button type="button" class="dc-x" aria-label="Cerrar el chat">×</button></div>'
+  panel.innerHTML = '<div class="dc-cab"><div class="dc-av" aria-hidden="true">{ }</div><div><h2>Asistente de dtorh™</h2><p><i aria-hidden="true"></i>En línea · responde en segundos</p></div><button type="button" class="dc-x" aria-label="Cerrar el chat">×</button></div>'
     + '<div class="dc-hilo" aria-live="polite" data-lenis-prevent></div>'
     + '<div class="dc-sug"></div>'
     + '<form class="dc-form"><label for="dc-txt" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Escribe tu mensaje</label><textarea id="dc-txt" rows="1" maxlength="800" placeholder="Escribe aquí…" enterkeyhint="send"></textarea><input type="text" name="sitio_web" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true"><button class="dc-env" type="submit" aria-label="Enviar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></form>'
-    + '<p class="dc-pie">Te atiende un asistente con IA; una persona del equipo cuando lo pidas. <a href="/privacidad/">Privacidad</a> · <a href="' + WA + '" target="_blank" rel="noopener">Seguir por WhatsApp</a></p>';
+    + '<p class="dc-pie">Te atiende el asistente de dtorh™; una persona del equipo cuando lo pidas. <a href="/privacidad/">Privacidad</a> · <a href="' + WA + '" target="_blank" rel="noopener">Seguir por WhatsApp</a></p>';
   document.body.appendChild(boton); document.body.appendChild(panel);
 
   var hilo = panel.querySelector('.dc-hilo'), sug = panel.querySelector('.dc-sug'), form = panel.querySelector('.dc-form'), txt = panel.querySelector('textarea'), env = panel.querySelector('.dc-env');
@@ -73,7 +73,7 @@
   function enlazar(t){ return esc(t).replace(/(https:\/\/[^\s<]+[^\s<.,;:!?)])/g, '<a href="$1" target="_blank" rel="noopener">$1</a>').replace(/\b(dtorh\.click\/[\w\-\/#]*)/g, function(m, u, i, s){ return /href="|>https:\/\//.test(s.slice(Math.max(0, i - 9), i)) ? m : '<a href="https://' + u + '" target="_blank" rel="noopener">' + u + '</a>'; }); }
   function pintar(espera){
     var h = '';
-    if (!msgs.length) h += '<div class="dc-m a"><p>Hola, soy el asistente con IA de dtorh™. Cuéntame de tu negocio o pregúntame lo que necesites: precios, tiempos o qué te conviene.</p></div>';
+    if (!msgs.length) h += '<div class="dc-m a"><p>Hola, soy el asistente de dtorh™ 😊 Cuéntame de tu negocio o pregúntame lo que necesites: precios, tiempos o qué te conviene.</p></div>';
     msgs.forEach(function(m, i){ h += '<div class="dc-m ' + (m.r === 'c' ? 'c' : 'a') + (i >= vistos && !quieto ? ' nuevo' : '') + '"><p>' + enlazar(m.t) + '</p></div>'; });
     if (espera) h += '<div class="dc-m a dc-esc" aria-label="El asistente está escribiendo"><p><i></i><i></i><i></i></p></div>';
     hilo.innerHTML = h; vistos = msgs.length;
